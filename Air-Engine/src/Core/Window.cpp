@@ -16,11 +16,13 @@ namespace engine {
 		}
 
 		Window::~Window() {
-
+			DestroyWindow((HWND)mWindow);
 		}
 
 		
 		bool Window::Initialize() {
+			mShouldClose = false;
+
 			WNDCLASS wndClass = { };
 
 			int length = strlen(mName) + 1;
@@ -43,10 +45,19 @@ namespace engine {
 			if (mWindow == NULL) {
 				return 0;
 			}
-
-			ShowWindow((HWND)mWindow, 10);
+			ShowWindow((HWND)mWindow, 10);;
 
 			return 1;
+		}
+
+		void Window::Update() {
+			MSG msg;
+			if (!(mShouldClose = (GetMessage(&msg, (HWND)mWindow, 0, 0) == 0))) {
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+
+			return;
 		}
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {

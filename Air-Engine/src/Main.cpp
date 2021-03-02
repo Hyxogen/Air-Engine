@@ -14,8 +14,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     window->Initialize();
 
-    while (true) {
-
+    while (!window->ShouldClose()) {
+        window->Update();
     }
 
     delete window;
