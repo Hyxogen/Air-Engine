@@ -4,8 +4,6 @@
 #include <windows.h>
 #include "Core/Window.hpp"
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     using namespace engine;
     using namespace core;

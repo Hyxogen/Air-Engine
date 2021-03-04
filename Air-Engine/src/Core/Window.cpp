@@ -1,8 +1,6 @@
 #include "Window.hpp"
 #include <windows.h>
 
-
-
 namespace engine {
 	namespace core {
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -19,7 +17,7 @@ namespace engine {
 			DestroyWindow((HWND)mWindow);
 		}
 
-		
+
 		bool Window::Initialize() {
 			mShouldClose = false;
 
@@ -52,15 +50,28 @@ namespace engine {
 
 		void Window::Update() {
 			MSG msg;
-			if (!(mShouldClose = (GetMessage(&msg, (HWND)mWindow, 0, 0) == 0))) {
+			if (GetMessage(&msg, (HWND)mWindow, 0, 0) > 0) {
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
+			} else {
+				mShouldClose = true;
 			}
 
 			return;
 		}
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+			switch (uMsg) {
+			case WM_CLOSE:
+				PostQuitMessage(0);
+				return 0;
+			case WM_QUIT:
+				PostQuitMessage(0);
+				return 0;
+			case WM_DESTROY:
+				PostQuitMessage(0);
+				return 0;
+			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		}
 	}

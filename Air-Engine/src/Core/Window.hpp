@@ -8,7 +8,7 @@ namespace engine {
 			int mWidth, mHeight;
 			const char* mName;
 			void* mWindow;
-			bool mShouldClose;
+			bool mShouldClose = false;
 
 		public:
 
