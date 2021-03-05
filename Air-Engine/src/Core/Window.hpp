@@ -1,4 +1,9 @@
 #pragma once
+/*
+SetVisibility() values
+*/
+#define AIR_W_SHOW SW_SHOW
+#define AIR_W_HIDE SW_HIDE
 
 namespace engine {
 	namespace core {
@@ -20,17 +25,14 @@ namespace engine {
 
 			void Update();
 
-			inline bool ShouldClose() const { return mShouldClose; }
+			void SetVisibility(short visibilty);
 
 			/*
-			Window object z'n eigen loop geven
-			 + Interface regelt alles
-			 - Betekent dat de rest afhangt van de window op dit moment
-
-			Functie geven voor het updaten van de window (zoals GLFW)
-			 + Implementatie bepaalt waar en wanneer de window update
-			 - Wordt niet 'automatisch' geregeld
+			Informs the program the window should close and stops the updates
 			*/
+			void Close();
+
+			inline bool ShouldClose() const { return mShouldClose; }
 		};
 
 	}

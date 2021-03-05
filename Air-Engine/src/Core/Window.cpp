@@ -43,7 +43,6 @@ namespace engine {
 			if (mWindow == NULL) {
 				return 0;
 			}
-			ShowWindow((HWND)mWindow, 10);;
 
 			return 1;
 		}
@@ -58,6 +57,14 @@ namespace engine {
 			}
 
 			return;
+		}
+
+		void Window::SetVisibility(short visibility) {
+			ShowWindow((HWND)mWindow, visibility);
+		}
+
+		void Window::Close() {
+			mShouldClose = true;
 		}
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {

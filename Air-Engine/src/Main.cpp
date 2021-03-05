@@ -11,6 +11,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     Window* window = new Window(500, 500, "New window");
 
     window->Initialize();
+    window->SetVisibility(AIR_W_SHOW);
 
     while (!window->ShouldClose()) {
         window->Update();
