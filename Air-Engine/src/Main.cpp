@@ -3,6 +3,7 @@
 #endif 
 #include <windows.h>
 #include "Core/Window.hpp"
+#include <GL/GL.h>
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     using namespace engine;
@@ -10,7 +11,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     Window* window = new Window(500, 500, "New window");
 
-    window->Initialize();
+    if (!window->Initialize()) {
+        return -1;
+    }
     window->SetVisibility(AIR_W_SHOW);
 
     while (!window->ShouldClose()) {
@@ -21,3 +24,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     return 0;
 }
+
+/*
+Window class een soort OpenGL context geven
++ Makkelijk weggestopt
+- Is niet window's verantwoordlijkheid
+
+Basic window interface maken maar ook OpenGLWindow classes
++ Verantwoordlijkheid verbeterd
+- Te ingewikkeld?
+*/

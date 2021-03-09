@@ -1,4 +1,9 @@
 #pragma once
+
+#include <windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
 /*
 SetVisibility() values
 */
@@ -12,7 +17,9 @@ namespace engine {
 
 			int mWidth, mHeight;
 			const char* mName;
-			void* mWindow;
+			HWND mWindow;
+			HDC mHDC;
+			HGLRC mHRC;
 			bool mShouldClose = false;
 
 		public:
@@ -33,6 +40,8 @@ namespace engine {
 			void Close();
 
 			inline bool ShouldClose() const { return mShouldClose; }
+
+			//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		};
 
 	}
