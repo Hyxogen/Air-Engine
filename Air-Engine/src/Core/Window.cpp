@@ -1,4 +1,8 @@
+#include <GL/glew.h>
+#include <GL/wglew.h>
 #include "Window.hpp"
+#include <stdlib.h>
+
 
 namespace engine {
 	namespace core {
@@ -45,27 +49,13 @@ namespace engine {
 			if (mWindow == NULL) {
 				return 0;
 			}
+			InitOpenGL();
+			
+			return 1;
+		}
 
-			PIXELFORMATDESCRIPTOR test =
-			{
-				sizeof(PIXELFORMATDESCRIPTOR),
-				1,
-				PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    // Flags
-				PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
-				32,                   // Colordepth of the framebuffer.
-				0, 0, 0, 0, 0, 0,
-				0,
-				0,
-				0,
-				0, 0, 0, 0,
-				24,                   // Number of bits for the depthbuffer
-				8,                    // Number of bits for the stencilbuffer
-				0,                    // Number of Aux buffers in the framebuffer.
-				PFD_MAIN_PLANE,
-				0,
-				0, 0, 0 
-			};
-
+		int Window::InitOpenGL() {
+			//This is a dummy pixelformat
 			PIXELFORMATDESCRIPTOR pfd;
 			//https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
 			// Get DC
@@ -89,20 +79,48 @@ namespace engine {
 				return -1;
 			}
 			SetPixelFormat(mHDC, pfn, &pfd);
-			
-			//DescribePixelFormat(mHDC, pfn, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
-
-			//ReleaseDC((HWND)mWindow, hdc);
+			//TODO pointer functions laden
 
 			mHRC = wglCreateContext(mHDC);
 			wglMakeCurrent(mHDC, mHRC);
-			return 1;
+			
+			if (glewInit()) {				
+				return -1;
+			}
+
+			GLint contextAttribs[] =
+			{
+				// Here we ask for OpenGL 2.1
+				WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+				WGL_CONTEXT_MINOR_VERSION_ARB, 0,
+				// Uncomment this for forward compatibility mode
+				//WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+				// Uncomment this for Compatibility profile
+				//WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
+				// We are using Core profile here
+				WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
+				0
+			};
+
+			HGLRC advContext = wglCreateContextAttribsARB(mHDC, NULL, contextAttribs);
+
+			wglDeleteContext(mHRC);
+
+			mHRC = advContext;
+
+			wglMakeCurrent(mHDC, mHRC);
+
+			GLint major;
+			char* version = (char*) glGetString(GL_VERSION);
+
+			return 0;
 		}
 
 		void Window::Update() {
 			//UpdateWindow(mWindow);
 			SwapBuffers(mHDC);
 			glClear(GL_COLOR_BUFFER_BIT);
+			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 			glBegin(GL_TRIANGLES);
 			glColor3f(1.0f, 0.0f, 0.0f);
 			glVertex2i(0, 1);

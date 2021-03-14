@@ -3,7 +3,7 @@
 #endif 
 #include <windows.h>
 #include "Core/Window.hpp"
-#include <GL/GL.h>
+
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     using namespace engine;

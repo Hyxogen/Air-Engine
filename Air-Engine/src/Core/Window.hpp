@@ -1,8 +1,7 @@
 #pragma once
 
+
 #include <windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
 
 /*
 SetVisibility() values
@@ -22,8 +21,9 @@ namespace engine {
 			HGLRC mHRC;
 			bool mShouldClose = false;
 
-		public:
+			int InitOpenGL();
 
+		public:
 			Window(int width, int height, const char* name);
 
 			~Window();
