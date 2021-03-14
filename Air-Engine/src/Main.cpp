@@ -2,14 +2,14 @@
 #define UNICODE
 #endif 
 #include <windows.h>
-#include "Core/Window.hpp"
+#include "Core/WindowsWindow.hpp"
 
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     using namespace engine;
     using namespace core;
 
-    Window* window = new Window(500, 500, "New window");
+    WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
 
     if (!window->Initialize()) {
         return -1;
