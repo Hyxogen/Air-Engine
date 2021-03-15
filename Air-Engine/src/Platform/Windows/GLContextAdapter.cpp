@@ -10,7 +10,7 @@ namespace platform {
 		}
 
 		GLContextAdapter::~GLContextAdapter() {
-			wglMakeCurrent(mWindow->getHDC(), NULL);
+			wglMakeCurrent(mWindow->GetHDC(), NULL);
 			wglDeleteContext(mContext);
 		}
 
@@ -64,7 +64,6 @@ namespace platform {
 			GLint major;
 			char* version = (char*)glGetString(GL_VERSION);
 			
-
 			return 0;
 		}
 

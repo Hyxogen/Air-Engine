@@ -15,7 +15,7 @@ namespace platform {
 
 		WindowsWindow::~WindowsWindow() {
 			wglMakeCurrent(NULL, NULL);
-			ReleaseDC(mWindow, mHDC);
+			ReleaseDC(mWindow, GetHDC());
 			wglDeleteContext(mHRC);
 			DestroyWindow(mWindow);
 		}
@@ -29,8 +29,6 @@ namespace platform {
 			mShouldClose = false;
 
 			WNDCLASS wndClass = { };
-
-
 			HINSTANCE instance = GetModuleHandleA(0);
 
 			wndClass.lpfnWndProc = (WNDPROC)WindowProc;
@@ -46,13 +44,13 @@ namespace platform {
 			if (mWindow == NULL) {
 				return 0;
 			}
-			
+
 			return 1;
 		}
 
 		void WindowsWindow::Update() {
 			//UpdateWindow(mWindow);
-			SwapBuffers(mHDC);
+			SwapBuffers(GetHDC());
 			
 			MSG msg;
 			if (GetMessage(&msg, mWindow, 0, 0) > 0) {

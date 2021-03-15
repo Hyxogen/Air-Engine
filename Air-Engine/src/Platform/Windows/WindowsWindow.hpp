@@ -15,7 +15,6 @@ namespace platform {
 		class WindowsWindow : public engine::core::Window {
 
 			HWND mWindow;
-			HDC mHDC;
 			HGLRC mHRC;
 			bool mShouldClose = false;
 
@@ -38,7 +37,7 @@ namespace platform {
 
 			inline bool ShouldClose() const { return mShouldClose; }
 
-			inline HDC getHDC() const { return GetDC(mWindow); }
+			inline HDC GetHDC() const { return GetDC(mWindow); }
 
 			inline HWND getWindowHandle() const { return mWindow; }
 			//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
