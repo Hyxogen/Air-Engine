@@ -26,14 +26,20 @@ namespace platform {
 			SetPixelFormat(hdc, pixelFormat, &pfd);
 			mContext = wglCreateContext(hdc);
 			wglMakeCurrent(hdc, mContext);
-
+			
 			GLint error = glewInit();
 
-			if (error) {				
+			if (error) {
 				return 1;
 			}
 
-#ifdef ADAP_ADANCED
+			HGLRC check = wglGetCurrentContext();
+
+			if (wglGetCurrentContext() == NULL) {
+				return 1;
+			}
+
+
 			GLint contextAttribs[] =
 			{
 				WGL_CONTEXT_MAJOR_VERSION_ARB, GetVersionMajor(),
@@ -54,7 +60,11 @@ namespace platform {
 			mContext = advContext;
 
 			wglMakeCurrent(hdc, mContext);
-#endif
+
+			GLint major;
+			char* version = (char*)glGetString(GL_VERSION);
+			
+
 			return 0;
 		}
 

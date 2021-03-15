@@ -12,7 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     using namespace windows;
 
     WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
-    GLContextAdapter* contextAdapter = new GLContextAdapter(window);
+    GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
 
     if (!window->Initialize()) {
         return -1;
@@ -24,9 +24,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     window->SetVisibility(AIR_W_SHOW);
 
+    GLenum err;
+
     while (!window->ShouldClose()) {
-        glClear(GL_COLOR_BUFFER_BIT);
+       
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
         glBegin(GL_TRIANGLES);
         glColor3f(1.0f, 0.0f, 0.0f);
         glVertex2i(0, 1);
@@ -36,6 +39,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         glVertex2i(1, -1);
         glEnd();
         glFlush();
+        if ((err = glGetError()) != GL_NO_ERROR) {
+            break;
+        }
         window->Update();
     }
 
