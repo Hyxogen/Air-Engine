@@ -9,11 +9,9 @@ namespace engine {
 			int mWidth, mHeight;
 			const wchar_t* mTitle;
 			
-			Window();
+			Window(const wchar_t* title, int width, int height) : mTitle(title), mWidth(width), mHeight(height) {}
 
-			Window(const wchar_t* title, int width, int height);
-
-			virtual ~Window() = 0;
+			virtual ~Window() {};
 
 			virtual bool Initialize() = 0;
 		};

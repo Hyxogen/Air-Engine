@@ -219,13 +219,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\Window.hpp" />
-    <ClInclude Include="src\Core\WindowsWindow.hpp" />
+    <ClInclude Include="src\Engine\Core\IO\Window.hpp" />
+    <ClInclude Include="src\Platform\OpenGL\GLHandler.hpp" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Window.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Core\WindowsWindow.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\GLHandler.cpp" />
+    <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp" />
+    <ClCompile Include="src\Platform\Windows\GLContextAdapter.hpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
