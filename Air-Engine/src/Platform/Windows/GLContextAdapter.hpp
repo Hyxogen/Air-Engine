@@ -19,6 +19,7 @@ namespace platform {
 			bool Initialize();
 
 		protected:
+			//Ik denk dat deze functie toch ergens anders heen moet sinds deze class niet veranderd moet worden mocht ik een andere pixel descriptor willen
 			PIXELFORMATDESCRIPTOR GetPixelDescriptor() const;
 
 			inline unsigned short GetVersionMajor() const { return mMajorVersion; }

@@ -13,6 +13,8 @@ namespace engine {
 
 			virtual ~Window() {};
 
+			virtual void SetVisibility(short visibility) = 0;
+
 			virtual bool Initialize() = 0;
 		};
 

@@ -14,7 +14,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
     GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
 
-    if (!window->Initialize()) {
+    if (window->Initialize()) {
         return -1;
     }
 
@@ -27,7 +27,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     GLenum err;
 
     while (!window->ShouldClose()) {
-       
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         glBegin(GL_TRIANGLES);

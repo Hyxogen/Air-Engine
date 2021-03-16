@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GL/wglew.h>
-#include "WindowsWindow.hpp"
 #include <stdlib.h>
+#include "WindowsWindow.hpp"
 
 
 namespace platform {
@@ -14,17 +14,10 @@ namespace platform {
 		}
 
 		WindowsWindow::~WindowsWindow() {
-			wglMakeCurrent(NULL, NULL);
 			ReleaseDC(mWindow, GetHDC());
-			wglDeleteContext(mHRC);
 			DestroyWindow(mWindow);
 		}
 
-		/*
-		TODO aanpassen wat deze functie returnt
-		0 voor geen errors
-		1 voor wel etc.
-		*/
 		bool WindowsWindow::Initialize() {
 			mShouldClose = false;
 
@@ -42,16 +35,14 @@ namespace platform {
 				NULL, NULL, instance, NULL);
 
 			if (mWindow == NULL) {
-				return 0;
+				return 1;
 			}
 
-			return 1;
+			return 0;
 		}
 
 		void WindowsWindow::Update() {
-			//UpdateWindow(mWindow);
-			SwapBuffers(GetHDC());
-			
+			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 			MSG msg;
 			if (GetMessage(&msg, mWindow, 0, 0) > 0) {
 				TranslateMessage(&msg);

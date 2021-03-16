@@ -10,7 +10,7 @@ namespace platform {
 		}
 
 		GLContextAdapter::~GLContextAdapter() {
-			wglMakeCurrent(mWindow->GetHDC(), NULL);
+			wglMakeCurrent(NULL, NULL);
 			wglDeleteContext(mContext);
 		}
 

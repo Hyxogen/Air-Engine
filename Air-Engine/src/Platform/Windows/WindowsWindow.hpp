@@ -14,8 +14,8 @@ namespace platform {
 
 		class WindowsWindow : public engine::core::Window {
 
+		protected:
 			HWND mWindow;
-			HGLRC mHRC;
 			bool mShouldClose = false;
 
 		public:
