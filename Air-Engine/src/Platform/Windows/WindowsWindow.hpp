@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "..\..\Engine\Core\IO\Window.hpp"
 #include <windows.h>
 
 /*
@@ -9,38 +9,37 @@ SetVisibility() values
 #define AIR_W_SHOW SW_SHOW
 #define AIR_W_HIDE SW_HIDE
 
-namespace engine {
-	namespace core {
+namespace platform {
+	namespace windows {
 
-		class Window {
+		class WindowsWindow : public engine::core::Window {
 
-			int mWidth, mHeight;
-			const char* mName;
+		protected:
 			HWND mWindow;
-			HDC mHDC;
-			HGLRC mHRC;
 			bool mShouldClose = false;
 
-			int InitOpenGL();
-
 		public:
-			Window(int width, int height, const char* name);
+			WindowsWindow(int width, int height, const wchar_t* title);
 
-			~Window();
-
-			bool Initialize();
+			virtual ~WindowsWindow();
 
 			void Update();
+			
+			void Close();
+			
+			bool Initialize() override;
 
 			void SetVisibility(short visibilty);
 
 			/*
 			Informs the program the window should close and stops the updates
 			*/
-			void Close();
 
 			inline bool ShouldClose() const { return mShouldClose; }
 
+			inline HDC GetHDC() const { return GetDC(mWindow); }
+
+			inline HWND getWindowHandle() const { return mWindow; }
 			//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		};
 
