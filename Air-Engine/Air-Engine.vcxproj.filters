@@ -21,6 +21,7 @@
     <ClInclude Include="src\Engine\Core\IO\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\Console.hpp">
     <ClInclude Include="src\Engine\Core\Util\Logger.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -38,6 +39,7 @@
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\Console.cpp">
     <ClCompile Include="src\Engine\Core\Util\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

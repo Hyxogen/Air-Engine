@@ -1,9 +1,15 @@
 #ifndef UNICODE
 #define UNICODE
 #endif 
+#include <stdio.h>
+#include <io.h>
+#include <fcntl.h>
+#include <windows.h>
+#include <iostream>
 #include <GL/glew.h>
 #include "Platform\Windows\WindowsWindow.hpp"
 #include "Platform/Windows/GLContextAdapter.hpp"
+#include "Platform/Windows/Console.hpp"
 #include "Engine/Core/Util/Logger.hpp"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
@@ -15,6 +21,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
     GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
+    Console* console = new Console();
 
     if (window->Initialize()) {
         return -1;
@@ -24,6 +31,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         return -1;
     }
 
+    if (console->Initialize()) {
+        return -1;
+    }
     window->SetVisibility(AIR_W_SHOW);
 
     Logger::GetCoreLogger()->Log(AIR_INFO, 0, "Test");
@@ -48,6 +58,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         window->Update();
     }
 
+    delete console;
     delete contextAdapter;
     delete window;
 
