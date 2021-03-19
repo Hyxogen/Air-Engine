@@ -21,6 +21,9 @@
     <ClInclude Include="src\Engine\Core\IO\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\Console.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

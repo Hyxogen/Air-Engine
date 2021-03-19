@@ -220,10 +220,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\IO\Window.hpp" />
+    <ClInclude Include="src\Platform\Windows\Console.hpp" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Platform\Windows\Console.cpp" />
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp" />
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.hpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
