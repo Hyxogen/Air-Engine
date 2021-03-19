@@ -46,7 +46,7 @@ namespace platform {
 		}
 
 		bool Console::SetTitle(const wchar_t* title) {
-			return SetConsoleTitle(title) != 0;
+			return SetConsoleTitle(title) == 0;
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace platform {
 			//Returns false on no errors
 			bool Initialize();
 
+			//Return false on no errors
 			bool SetTitle(const wchar_t* title);
 
 			inline const wchar_t* GetTitle() const { return mTitle; }
