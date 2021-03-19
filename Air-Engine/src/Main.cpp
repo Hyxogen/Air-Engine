@@ -4,12 +4,14 @@
 #include <GL/glew.h>
 #include "Platform\Windows\WindowsWindow.hpp"
 #include "Platform/Windows/GLContextAdapter.hpp"
+#include "Engine/Core/Util/Logger.hpp"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     using namespace engine;
     using namespace core;
     using namespace platform;
     using namespace windows;
+    using namespace util;
 
     WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
     GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
@@ -23,6 +25,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     }
 
     window->SetVisibility(AIR_W_SHOW);
+
+    Logger::GetCoreLogger()->Log(AIR_INFO, 0, "Test");
 
     GLenum err;
 

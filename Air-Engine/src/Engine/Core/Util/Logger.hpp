@@ -1,5 +1,11 @@
 #pragma once
 
+#define AIR_TRACE 4
+#define AIR_INFO 3
+#define AIR_WARN 2
+#define AIR_ERROR 1
+#define AIR_CRITICAL 0
+
 namespace engine {
 	namespace util {
 
@@ -8,12 +14,12 @@ namespace engine {
 			unsigned int mChannelMask = 0;
 			const char* mPrefix;
 
-			const static Logger* CORE_LOGGER;
+			static Logger* CORE_LOGGER;
 
 		public:
 			Logger(const char* mPrefix = "");
 
-			void Log(unsigned int verbosity, unsigned int channel, const char* data...);
+			void Log(unsigned int verbosity, unsigned int channel, const char* data...) const;
 
 			void SetVerbosity(unsigned int verbosity);
 
@@ -23,9 +29,16 @@ namespace engine {
 
 			inline unsigned int GetChannelMask() const { return mChannelMask; }
 
-		private:
-			static Logger* GetCoreLogger();
+			static const Logger* GetCoreLogger();
 		};
 
 	}
 }
+
+/*
+#define AIR_CORE_TRACE(...) engine::util::Logger::GetCoreLogger().Log(AIR_TRACE, 0, __VA_ARGS__);
+#define AIR_CORE_INFO(...) engine::util::Logger::GetCoreLogger().Log(AIR_INFO, 0, __VA_ARGS__);
+#define AIR_CORE_WARN(...) engine::util::Logger::GetCoreLogger().Log(AIR_WARN, 0, __VA_ARGS__);
+#define AIR_CORE_ERROR(...) engine::util::Logger::GetCoreLogger().Log(AIR_ERROR, 0, __VA_ARGS__);
+#define AIR_CORE_CRITICAL(...) engine::util::Logger::GetCoreLogger().Log(AIR_CRITICAL, 0, __VA_ARGS__);
+*/

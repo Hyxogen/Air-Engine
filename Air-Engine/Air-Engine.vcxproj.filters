@@ -38,5 +38,8 @@
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Util\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
