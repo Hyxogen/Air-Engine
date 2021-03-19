@@ -220,6 +220,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\IO\Window.hpp" />
+    <ClInclude Include="src\Engine\Core\Util\Logger.hpp" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
