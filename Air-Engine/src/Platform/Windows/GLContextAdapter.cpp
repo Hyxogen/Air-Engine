@@ -2,6 +2,7 @@
 #include <GL/wglew.h>
 #include "GLContextAdapter.hpp"
 #include "WindowsWindow.hpp"
+#include "../../Engine/Core/Util/Logger/Logger.hpp"
 
 namespace platform {
 	namespace windows {
@@ -10,17 +11,20 @@ namespace platform {
 		}
 
 		GLContextAdapter::~GLContextAdapter() {
+			AIR_CORE_LOG_INFO("Destroying OpenGL context");
 			wglMakeCurrent(NULL, NULL);
 			wglDeleteContext(mContext);
 		}
 
 		bool GLContextAdapter::Initialize() {
+			AIR_CORE_LOG_INFO("Initializing OpenGL context adapter");
 			HDC hdc = GetDC(mWindow->getWindowHandle());
 
 			PIXELFORMATDESCRIPTOR pfd = GetPixelDescriptor();
 
 			int pixelFormat = ChoosePixelFormat(hdc, &pfd);
 			if (pixelFormat == 0) {
+				AIR_CORE_LOG_ERROR("Failed to find pixel format");
 				return 1;
 			}
 			SetPixelFormat(hdc, pixelFormat, &pfd);
@@ -36,6 +40,7 @@ namespace platform {
 			HGLRC check = wglGetCurrentContext();
 
 			if (wglGetCurrentContext() == NULL) {
+				AIR_CORE_LOG_ERROR("Failed to create OpenGL context");
 				return 1;
 			}
 
@@ -60,10 +65,10 @@ namespace platform {
 			mContext = advContext;
 
 			wglMakeCurrent(hdc, mContext);
-
-			GLint major;
-			char* version = (char*)glGetString(GL_VERSION);
+			const char* version = (char*)glGetString(GL_VERSION);
 			
+			AIR_CORE_LOG_INFO("Succesfully created OpenGL context");
+			AIR_CORE_LOG_INFO(version);
 			return 0;
 		}
 

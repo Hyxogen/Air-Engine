@@ -2,7 +2,7 @@
 #include <GL/wglew.h>
 #include <stdlib.h>
 #include "WindowsWindow.hpp"
-
+#include "../../Engine/Core/Util/Logger/Logger.hpp"
 
 namespace platform {
 	namespace windows {
@@ -14,11 +14,14 @@ namespace platform {
 		}
 
 		WindowsWindow::~WindowsWindow() {
+			AIR_CORE_LOG_INFO("Destroying windows window");
 			ReleaseDC(mWindow, GetHDC());
 			DestroyWindow(mWindow);
+			AIR_CORE_LOG_INFO("Succesfully destroyed window");
 		}
 
 		bool WindowsWindow::Initialize() {
+			AIR_CORE_LOG_INFO("Initializing WindowsWindow");
 			mShouldClose = false;
 
 			WNDCLASS wndClass = { };
@@ -35,9 +38,11 @@ namespace platform {
 				NULL, NULL, instance, NULL);
 
 			if (mWindow == NULL) {
+				AIR_CORE_LOG_ERROR("Failed to create window handle");
 				return 1;
 			}
 
+			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;
 		}
 

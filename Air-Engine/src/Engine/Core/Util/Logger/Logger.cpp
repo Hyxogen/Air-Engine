@@ -10,16 +10,23 @@ namespace engine {
 
 		}
 
-		void Logger::Log(unsigned int verbosity, unsigned int channel, const char* data...) const {
-			printf("[%s] [%i]	%s\n", mPrefix, verbosity, data);
+		void Logger::Log(Severity severity, const char* data) const {
+			if (severity.mLevel > mVerbosity) 
+				return;
+			printf("[%s] [%s]	%s\n", mPrefix, severity.mName, data);
 		}
 
-		const Logger* Logger::GetCoreLogger() {
+		Logger* Logger::GetCoreLogger() {
 			if (CORE_LOGGER == nullptr) {
 				CORE_LOGGER = new Logger("CORE");
 			}
 
 			return CORE_LOGGER;
 		}
+
+		void Logger::SetVerbosity(unsigned int level) {
+			mVerbosity = level;
+		}
 	}
 }
+
