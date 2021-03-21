@@ -30,7 +30,7 @@ namespace engine {
 
 			inline unsigned int GetVerbosity() const { return mVerbosity; }
 
-			static const Logger* GetCoreLogger();
+			static Logger* GetCoreLogger();
 		};
 
 	}
@@ -41,7 +41,7 @@ namespace engine {
 #define AIR_CORE_LOG_WARN(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_WARN, x)
 #define AIR_CORE_LOG_ERROR(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_ERROR, x)
 #define AIR_CORE_LOG_CRITICAL(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_CRITICAL, x)
-#define AIR_CORE_VERBOSITY(x) engine::util::Logger::GetCoreLogger()->SetVerbosity(x)
+#define AIR_CORE_VERBOSITY(x) engine::util::Logger::GetCoreLogger()->SetVerbosity(x.mLevel)
 
 #define AIR_CORE_ERR_IF(s, x) if(s) {AIR_CORE_LOG_ERROR(x);}
 /*
