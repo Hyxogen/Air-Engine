@@ -26,7 +26,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
     GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
 
-    AIR_CORE_LOG_ERROR("Err");
     AIR_CORE_ERR_IF(window->Initialize(), "Failed to initialize window");
     AIR_CORE_ERR_IF(contextAdapter->Initialize(), "Failed to setup OpenGL context");
 
