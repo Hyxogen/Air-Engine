@@ -10,8 +10,10 @@ namespace engine {
 
 		}
 
-		void Logger::Log(unsigned int verbosity, unsigned int channel, const char* data...) const {
-			printf("[%s] [%i]	%s\n", mPrefix, verbosity, data);
+		void Logger::Log(Severity severity, const char* data) const {
+			if (severity.mLevel > mVerbosity) 
+				return;
+			printf("[%s] [%s]	%s\n", mPrefix, severity.mName, data);
 		}
 
 		const Logger* Logger::GetCoreLogger() {
@@ -23,3 +25,4 @@ namespace engine {
 		}
 	}
 }
+

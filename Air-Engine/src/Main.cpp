@@ -10,7 +10,7 @@
 #include "Platform\Windows\WindowsWindow.hpp"
 #include "Platform/Windows/GLContextAdapter.hpp"
 #include "Platform/Windows/Console.hpp"
-#include "Engine/Core/Util/Logger.hpp"
+#include "Engine/Core/Util/Logger/Logger.hpp"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     using namespace engine;
@@ -18,28 +18,27 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     using namespace platform;
     using namespace windows;
     using namespace util;
-
-    WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
-    GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
     Console* console = new Console();
-
-    if (window->Initialize()) {
-        return -1;
-    }
-
-    if (contextAdapter->Initialize()) {
-        return -1;
-    }
-
     if (console->Initialize()) {
         return -1;
     }
-    window->SetVisibility(AIR_W_SHOW);
 
-    Logger::GetCoreLogger()->Log(AIR_INFO, 0, "Test");
+    WindowsWindow* window = new WindowsWindow(500, 500, L"Test");
+    GLContextAdapter* contextAdapter = new GLContextAdapter(window, 3, 0);
+
+    AIR_CORE_ERR_IF(true, "True");
+
+    AIR_CORE_LOG_INFO("Initializing window...");
+    AIR_CORE_ERR_IF(window->Initialize(), "Failed to initialize window");
+
+    AIR_CORE_LOG_INFO("Initializing OpenGL context adapter...");
+    AIR_CORE_ERR_IF(contextAdapter->Initialize(), "Failed to setup OpenGL context");
+
+    window->SetVisibility(AIR_W_SHOW);
 
     GLenum err;
 
+    AIR_CORE_LOG_INFO("Starting main loop...");
     while (!window->ShouldClose()) {
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
@@ -57,6 +56,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         }
         window->Update();
     }
+    AIR_CORE_LOG_INFO("Shutting down engine...");
 
     delete console;
     delete contextAdapter;
