@@ -16,7 +16,7 @@ namespace engine {
 		}
 
 		bool Application::Run() {
-			while (true) {
+			while (!mWindow->ShouldClose()) {
 				mWindow->Update();
 			}
 			return true;

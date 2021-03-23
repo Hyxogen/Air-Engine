@@ -18,6 +18,8 @@ namespace engine {
 
 			virtual void Update() = 0;
 
+			virtual bool ShouldClose() const = 0;
+
 			virtual void SetVisibility(short visibility) = 0;
 
 			inline int GetWidth() const { return mWidth; }
