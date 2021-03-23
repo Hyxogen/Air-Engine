@@ -2,7 +2,7 @@
 #include <GL/wglew.h>
 #include "GLContextAdapter.hpp"
 #include "WindowsWindow.hpp"
-#include "../../Engine/Core/Util/Logger/Logger.hpp"
+#include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
 	namespace windows {

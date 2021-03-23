@@ -1,6 +1,7 @@
 #ifndef UNICODE
 #define UNICODE
 #endif 
+#ifdef AIR_BUILD_EXECUTABLE
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
@@ -59,7 +60,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     return 0;
 }
-
+#endif
 /*
 Ik denk toch niet dat de window class opengl functionaliteit moet regelen, gewoon een opengl helper class maken die dmv een WindowsWindow een opengl context kan maken
 

@@ -1,19 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\Engine\Core\Util\Logger\Logger.cpp" />
+    <ClCompile Include="src\Engine\Util\Logger\Logger.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Platform\Windows\Console.cpp" />
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp" />
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.hpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\Engine\Core\Util\Logger\Severity.cpp" />
+    <ClCompile Include="src\Engine\Util\Logger\Severity.cpp" />
+    <ClCompile Include="src\Engine\Core\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Engine\Core\IO\Window.hpp" />
+    <ClInclude Include="src\Engine\IO\Window.hpp" />
     <ClInclude Include="src\Platform\Windows\Console.hpp" />
-    <ClInclude Include="src\Engine\Core\Util\Logger\Logger.hpp" />
+    <ClInclude Include="src\Engine\Util\Logger\Logger.hpp" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
-    <ClInclude Include="src\Engine\Core\Util\Logger\Severity.hpp" />
+    <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
+    <ClInclude Include="src\Engine\Core\Application.hpp" />
+    <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
+    <ClInclude Include="src\Air.h" />
   </ItemGroup>
 </Project>
