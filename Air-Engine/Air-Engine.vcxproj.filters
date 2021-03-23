@@ -18,5 +18,6 @@
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Engine\Core\Application.hpp" />
     <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
+    <ClInclude Include="src\Air.h" />
   </ItemGroup>
 </Project>

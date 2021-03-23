@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef AIR_PLATFORM_WINDOWS
 #include <windows.h>
 
 engine::core::Application* CreateApplication();
@@ -10,3 +11,4 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	delete application;
 	return 0;
 }
+#endif

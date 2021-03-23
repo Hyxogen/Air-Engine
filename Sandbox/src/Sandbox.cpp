@@ -1,5 +1,4 @@
-#include "../../Air-Engine/src/Engine/Core/Application.hpp"
-#include "../../Air-Engine/src/Engine/Core/Entrypoint.hpp"
+#include <Air.h>
 
 class Sandbox : public engine::core::Application {
 public:
