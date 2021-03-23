@@ -11,11 +11,16 @@ namespace engine {
 			
 			Window(const wchar_t* title, int width, int height) : mTitle(title), mWidth(width), mHeight(height) {}
 
+		public:
 			virtual ~Window() {};
 
 			virtual void SetVisibility(short visibility) = 0;
 
 			virtual bool Initialize() = 0;
+
+			inline int GetWidth() const { return mWidth; }
+
+			inline int GetHeight() const { return mHeight; }
 		};
 
 	}
