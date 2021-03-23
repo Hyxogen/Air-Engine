@@ -8,7 +8,7 @@ namespace engine {
 		protected:
 			int mWidth, mHeight;
 			const wchar_t* mTitle;
-			
+
 			Window(const wchar_t* title, int width, int height) : mTitle(title), mWidth(width), mHeight(height) {}
 
 		public:
