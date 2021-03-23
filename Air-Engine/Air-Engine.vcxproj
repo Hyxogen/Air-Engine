@@ -223,6 +223,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\Application.hpp" />
+    <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
     <ClInclude Include="src\Engine\IO\Window.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Platform\Windows\Console.hpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\Application.cpp" />
     <ClCompile Include="src\Engine\Util\Logger\Logger.cpp" />
     <ClCompile Include="src\Engine\Util\Logger\Severity.cpp" />
     <ClCompile Include="src\Main.cpp" />

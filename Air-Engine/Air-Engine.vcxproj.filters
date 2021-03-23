@@ -8,6 +8,7 @@
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.hpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Engine\Util\Logger\Severity.cpp" />
+    <ClCompile Include="src\Engine\Core\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\IO\Window.hpp" />
@@ -16,5 +17,6 @@
     <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Engine\Core\Application.hpp" />
+    <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
   </ItemGroup>
 </Project>

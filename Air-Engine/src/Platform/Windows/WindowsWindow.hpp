@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\Engine\Core\IO\Window.hpp"
+#include "..\..\Engine\IO\Window.hpp"
 #include <windows.h>
 
 /*
