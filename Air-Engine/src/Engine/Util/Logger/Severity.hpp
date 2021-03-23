@@ -11,7 +11,7 @@ namespace engine {
 			static const Severity SV_ERROR;
 			static const Severity SV_CRITICAL;
 
-			const char const* mName;
+			const char* const mName;
 			const unsigned int mLevel;
 
 			Severity(const char* mName, unsigned int level);
