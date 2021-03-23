@@ -17,7 +17,7 @@ namespace engine {
 
 		bool Application::Run() {
 			while (true) {
-
+				mWindow->Update();
 			}
 			return true;
 		}

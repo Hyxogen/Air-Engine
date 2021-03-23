@@ -14,9 +14,11 @@ namespace engine {
 		public:
 			virtual ~Window() {};
 
-			virtual void SetVisibility(short visibility) = 0;
-
 			virtual bool Initialize() = 0;
+
+			virtual void Update() = 0;
+
+			virtual void SetVisibility(short visibility) = 0;
 
 			inline int GetWidth() const { return mWidth; }
 
