@@ -48,7 +48,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -222,15 +222,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Engine\Core\IO\Window.hpp" />
-    <ClInclude Include="src\Engine\Core\Util\Logger\Severity.hpp" />
+    <ClInclude Include="src\Engine\Core\Application.hpp" />
+    <ClInclude Include="src\Engine\IO\Window.hpp" />
+    <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Platform\Windows\Console.hpp" />
-    <ClInclude Include="src\Engine\Core\Util\Logger\Logger.hpp" />
+    <ClInclude Include="src\Engine\Util\Logger\Logger.hpp" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\Core\Util\Logger\Logger.cpp" />
-    <ClCompile Include="src\Engine\Core\Util\Logger\Severity.cpp" />
+    <ClCompile Include="src\Engine\Util\Logger\Logger.cpp" />
+    <ClCompile Include="src\Engine\Util\Logger\Severity.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Platform\Windows\Console.cpp" />
     <ClCompile Include="src\Platform\Windows\GLContextAdapter.cpp" />
