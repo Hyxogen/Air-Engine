@@ -162,7 +162,7 @@
       </FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;DEBUG;_WINDOWS;GLEW_STATIC;AIR_PLATFORM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;DEBUG;_WINDOWS;GLEW_STATIC;AIR_PLATFORM_WINDOWS;ASSERTIONS_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <Optimization>Disabled</Optimization>
     </ClCompile>
@@ -224,6 +224,7 @@
   <ItemGroup>
     <ClInclude Include="src\Air.h" />
     <ClInclude Include="src\Engine\Core\Application.hpp" />
+    <ClInclude Include="src\Engine\Core\Assert.hpp" />
     <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
     <ClInclude Include="src\Engine\IO\Window.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />

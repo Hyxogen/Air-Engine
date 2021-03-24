@@ -1,11 +1,13 @@
 #include "Application.hpp"
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
+#include "Assert.hpp"
 
 namespace engine {
 	namespace core {
 
 		Application::Application() {
+			ASSERT(false);
 			if (!Initialize())
 				Run();
 		}
