@@ -226,6 +226,9 @@
     <ClInclude Include="src\Engine\Core\Application.hpp" />
     <ClInclude Include="src\Engine\Core\Assert.hpp" />
     <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
+    <ClInclude Include="src\Engine\Events\Event.hpp" />
+    <ClInclude Include="src\Engine\Events\EventDispatcher.hpp" />
+    <ClInclude Include="src\Engine\Events\EventListener.hpp" />
     <ClInclude Include="src\Engine\IO\Window.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Platform\Windows\Console.hpp" />
