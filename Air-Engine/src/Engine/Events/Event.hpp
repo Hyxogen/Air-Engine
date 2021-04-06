@@ -4,10 +4,8 @@ namespace engine {
 	namespace events {
 
 		class Event {
-		protected:
-			Event();
 		public:
-			const unsigned int mID;
+			virtual unsigned int GetID() const = 0;
 		};
 
 } }
