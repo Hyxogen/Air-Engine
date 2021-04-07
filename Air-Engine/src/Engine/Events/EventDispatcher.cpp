@@ -1,4 +1,5 @@
 #include "EventDispatcher.hpp"
+#include "Event.hpp"
 
 namespace engine {
 	namespace events {

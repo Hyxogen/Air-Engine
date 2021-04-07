@@ -3,8 +3,12 @@
 #include <unordered_map>
 #include <vector>
 #include <typeindex>
-#include "Event.hpp"
 #include "../Core/Assert.hpp"
+
+namespace engine {
+	namespace events {
+		class Event;
+} }
 
 typedef void (*LISTENER_FUNCTION)(const engine::events::Event*);
 
