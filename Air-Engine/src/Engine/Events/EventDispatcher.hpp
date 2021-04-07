@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <typeindex>
 #include "Event.hpp"
@@ -12,7 +12,7 @@ namespace engine {
 	namespace events {
 
 		class EventDispatcher {
-			std::map<std::type_index, std::vector<LISTENER_FUNCTION>*>* mFunctions;
+			std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>* mFunctions;
 
 		public:
 			EventDispatcher();
@@ -21,7 +21,7 @@ namespace engine {
 
 			template<class T>
 			void RegisterListener(LISTENER_FUNCTION function) {
-				std::map<std::type_index, std::vector<LISTENER_FUNCTION>*>::iterator it = mFunctions->find(typeid(T));
+				std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>::iterator it = mFunctions->find(typeid(T));
 				if (it == mFunctions->end())
 					mFunctions->emplace(typeid(T), new std::vector<LISTENER_FUNCTION>);
 
