@@ -15,5 +15,14 @@ namespace engine {
 
 			delete mFunctions;
 		}
+
+		void EventDispatcher::DispatchEvent(const Event* event) const {
+			std::map<std::type_index, std::vector<LISTENER_FUNCTION>*>::iterator it = mFunctions->find(typeid((*event)));
+			if (it == mFunctions->end()) return;
+
+			std::vector<LISTENER_FUNCTION>::iterator func_it;
+			for (func_it = it->second->begin(); func_it != it->second->end(); ++func_it)
+				(*func_it)(event);
+		}
 	}
 }
