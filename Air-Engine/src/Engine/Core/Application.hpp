@@ -7,6 +7,11 @@ namespace platform {
 }
 
 namespace engine {
+
+	namespace events {
+		class EventDispatcher;
+	}
+
 	namespace core {
 
 		class Window;
@@ -14,6 +19,7 @@ namespace engine {
 		class Application {
 		protected:
 			Window* mWindow;
+			events::EventDispatcher* mDispatcher;
 			platform::windows::Console* mConsole;
 
 		public:
