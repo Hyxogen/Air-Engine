@@ -2,18 +2,20 @@
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
 #include "Assert.hpp"
+#include "../Events/EventDispatcher.hpp"
+
 
 namespace engine {
 	namespace core {
 
 		Application::Application() {
-			ASSERT(false);
 			if (!Initialize())
 				Run();
 		}
 
 		Application::~Application() {
 			delete mWindow;
+			delete mDispatcher;
 		}
 
 		bool Application::Initialize() {
@@ -25,6 +27,9 @@ namespace engine {
 			mWindow->Initialize();
 
 			mWindow->SetVisibility(AIR_W_SHOW);
+			mDispatcher = new events::EventDispatcher();
+
+			delete mDispatcher;
 			return false;
 		}
 

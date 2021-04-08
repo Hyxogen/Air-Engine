@@ -9,6 +9,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Engine\Util\Logger\Severity.cpp" />
     <ClCompile Include="src\Engine\Core\Application.cpp" />
+    <ClCompile Include="src\Engine\Events\EventDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\IO\Window.hpp" />
@@ -20,5 +21,7 @@
     <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
     <ClInclude Include="src\Air.h" />
     <ClInclude Include="src\Engine\Core\Assert.hpp" />
+    <ClInclude Include="src\Engine\Events\Event.hpp" />
+    <ClInclude Include="src\Engine\Events\EventDispatcher.hpp" />
   </ItemGroup>
 </Project>
