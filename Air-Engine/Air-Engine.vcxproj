@@ -228,8 +228,6 @@
     <ClInclude Include="src\Engine\Core\Entrypoint.hpp" />
     <ClInclude Include="src\Engine\Events\Event.hpp" />
     <ClInclude Include="src\Engine\Events\EventDispatcher.hpp" />
-    <ClInclude Include="src\Engine\Events\FooEvent.hpp" />
-    <ClInclude Include="src\Engine\Events\TestEvent.hpp" />
     <ClInclude Include="src\Engine\IO\Window.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Platform\Windows\Console.hpp" />
@@ -239,8 +237,6 @@
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp" />
     <ClCompile Include="src\Engine\Events\EventDispatcher.cpp" />
-    <ClCompile Include="src\Engine\Events\FooEvent.cpp" />
-    <ClCompile Include="src\Engine\Events\TestEvent.cpp" />
     <ClCompile Include="src\Engine\Util\Logger\Logger.cpp" />
     <ClCompile Include="src\Engine\Util\Logger\Severity.cpp" />
     <ClCompile Include="src\Main.cpp" />
