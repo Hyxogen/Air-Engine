@@ -19,6 +19,8 @@ namespace engine {
 	namespace core {
 
 		class Application {
+			static Application* sAPPLICATION;
+
 		protected:
 			io::Window* mWindow;
 			events::EventDispatcher* mDispatcher;
@@ -37,6 +39,8 @@ namespace engine {
 			void Update();
 
 			inline io::Window* GetWindow() const { return mWindow; }
+
+			static Application* GetApplication() { return sAPPLICATION; }
 		};
 
 		Application* CreateApplication();

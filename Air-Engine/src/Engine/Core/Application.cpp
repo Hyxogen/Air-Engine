@@ -8,7 +8,10 @@
 namespace engine {
 	namespace core {
 
+		Application* Application::sAPPLICATION;
+
 		Application::Application() {
+			sAPPLICATION = this;
 			if (!Initialize())
 				Run();
 		}
