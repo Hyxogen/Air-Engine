@@ -12,7 +12,7 @@ SetVisibility() values
 namespace platform {
 	namespace windows {
 
-		class WindowsWindow : public engine::core::Window {
+		class WindowsWindow : public engine::io::Window {
 
 		protected:
 			HWND mWindow;

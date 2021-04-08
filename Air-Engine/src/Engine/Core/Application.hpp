@@ -12,13 +12,15 @@ namespace engine {
 		class EventDispatcher;
 	}
 
-	namespace core {
-
+	namespace io {
 		class Window;
+	}
+
+	namespace core {
 
 		class Application {
 		protected:
-			Window* mWindow;
+			io::Window* mWindow;
 			events::EventDispatcher* mDispatcher;
 			platform::windows::Console* mConsole;
 
@@ -34,7 +36,7 @@ namespace engine {
 
 			void Update();
 
-			inline Window* GetWindow() const { return mWindow; }
+			inline io::Window* GetWindow() const { return mWindow; }
 		};
 
 		Application* CreateApplication();

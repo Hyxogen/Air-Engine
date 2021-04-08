@@ -1,7 +1,7 @@
 #pragma once
 
 namespace engine {
-	namespace core {
+	namespace io {
 
 		class Window {
 
