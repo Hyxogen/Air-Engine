@@ -1,29 +1,31 @@
 #include "EventDispatcher.hpp"
-#include "Event.hpp"
 
 namespace engine {
 	namespace events {
 
 		EventDispatcher::EventDispatcher() {
-			mFunctions = new std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>();
+			m_Listeners = new std::unordered_map<unsigned int, std::vector<const EventListener&>&>&();
 		}
 
 		EventDispatcher::~EventDispatcher() {
-			std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>::iterator it = mFunctions->begin();
+			std::unordered_map<unsigned int, std::vector<const EventListener&>&>::iterator it = m_Listeners.begin();
 
-			for (it = mFunctions->begin(); it != mFunctions->end(); ++it)
+			//Checken of dit door alle elementen heen gaat
+			while ((it++) != m_Listeners.end()) {
 				delete it->second;
+			}
 
-			delete mFunctions;
+			delete m_Listeners;
 		}
 
-		void EventDispatcher::DispatchEvent(const Event* event) const {
-			std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>::iterator it = mFunctions->find(typeid((*event)));
-			if (it == mFunctions->end()) return;
+		void EventDispatcher::Register(unsigned int event, const EventListener& listener) {
+			std::unordered_map<unsigned int, std::vector<const EventListener&>&>::iterator key = m_Listeners.find(event);
 
-			std::vector<LISTENER_FUNCTION>::iterator func_it;
-			for (func_it = it->second->begin(); func_it != it->second->end(); ++func_it)
-				(*func_it)(event);
+			if (key == m_Listeners.end())
+				key = m_Listeners.emplace(event, new std::vector<const EventListener&>()).first;
+
+			key->second.push_back(listener);
 		}
+
 	}
 }
