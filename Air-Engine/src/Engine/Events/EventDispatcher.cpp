@@ -27,5 +27,13 @@ namespace engine {
 			key->second.push_back(listener);
 		}
 
+		void EventDispatcher::Remove(unsigned int event, const EventListener& listener) {
+			std::unordered_map<unsigned int, std::vector<const EventListener&>&>::iterator key = m_Listeners.find(event);
+
+			if (key == m_Listeners.end())
+				return;
+
+			//TODO: Finish function
+		}
 	}
 }

@@ -18,6 +18,8 @@ namespace engine {
 
 			void Register(unsigned int event, const EventListener& listener);
 
+			void Remove(unsigned int event, const EventListener& listener);
+
 			void Dispatch(Event& event);
 		};
 
