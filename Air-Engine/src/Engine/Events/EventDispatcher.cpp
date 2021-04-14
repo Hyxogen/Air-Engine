@@ -53,7 +53,8 @@ namespace engine {
 
 			//Checken of dit door alles loopt
 			while ((it++) != key->second.end()) {
-				((EventListener*)*it)->OnEvent(event);
+				if (((EventListener*)*it)->OnEvent(event))
+					break;
 			}
 		}
 	}
