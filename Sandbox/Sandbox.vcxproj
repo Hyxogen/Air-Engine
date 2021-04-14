@@ -146,6 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Sandbox.cpp" />
+    <ClCompile Include="src\TestEvent.cpp" />
+    <ClCompile Include="src\TestEventHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\TestEvent.hpp" />
+    <ClInclude Include="src\TestEventHandler.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
