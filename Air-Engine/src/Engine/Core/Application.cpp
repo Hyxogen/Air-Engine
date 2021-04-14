@@ -14,6 +14,7 @@ namespace engine {
 
 		Application::~Application() {
 			delete mWindow;
+			delete mDispatcher;
 		}
 
 		bool Application::Initialize() {
@@ -27,7 +28,6 @@ namespace engine {
 			mWindow->SetVisibility(AIR_W_SHOW);
 			mDispatcher = new events::EventDispatcher();
 
-			delete mDispatcher;
 			return false;
 		}
 
