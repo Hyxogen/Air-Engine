@@ -9,13 +9,11 @@ namespace engine {
 	namespace core {
 
 		Application::Application() {
-			if (!Initialize())
-				Run();
+			ASSERT(!Initialize());
 		}
 
 		Application::~Application() {
 			delete mWindow;
-			delete mDispatcher;
 		}
 
 		bool Application::Initialize() {
