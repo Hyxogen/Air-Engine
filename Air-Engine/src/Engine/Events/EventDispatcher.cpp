@@ -52,7 +52,7 @@ namespace engine {
 			std::vector<const EventListener*>::iterator it = key->second.begin();
 
 			//Checken of dit door alles loopt
-			while ((it++) != key->second.end()) {
+			for (it = key->second.begin(); it != key->second.end(); ++it) {
 				if (((EventListener*)*it)->OnEvent(event))
 					break;
 			}
