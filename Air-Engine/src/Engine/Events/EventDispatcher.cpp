@@ -13,7 +13,6 @@ namespace engine {
 		EventDispatcher::~EventDispatcher() {
 			std::unordered_map<unsigned int, std::vector<const EventListener*>&>::iterator it;
 
-			//Checken of dit door alle elementen heen gaat
 			for (it = m_Listeners.begin(); it != m_Listeners.end(); ++it) {
 				delete& it->second;
 			}
@@ -51,7 +50,6 @@ namespace engine {
 
 			std::vector<const EventListener*>::iterator it = key->second.begin();
 
-			//Checken of dit door alles loopt
 			for (it = key->second.begin(); it != key->second.end(); ++it) {
 				if (((EventListener*)*it)->OnEvent(event))
 					break;
