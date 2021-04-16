@@ -229,6 +229,7 @@
     <ClInclude Include="src\Engine\Events\Event.hpp" />
     <ClInclude Include="src\Engine\Events\EventDispatcher.hpp" />
     <ClInclude Include="src\Engine\IO\Window.hpp" />
+    <ClInclude Include="src\Engine\Util\HashUtils.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Severity.hpp" />
     <ClInclude Include="src\Platform\Windows\Console.hpp" />
     <ClInclude Include="src\Engine\Util\Logger\Logger.hpp" />
