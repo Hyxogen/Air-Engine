@@ -1,5 +1,5 @@
 workspace "Air-Engine"
-	architecture "x32"
+	architecture  "x32"
 
 	configurations {
 		"Debug",
@@ -27,6 +27,11 @@ project "Air-Engine"
 		"Dependencies/glew/include"
 	}
 
+	links {
+		"opengl32",
+		"Dependencies/glew/lib/Debug/Win32/glew32sd.lib"
+	}
+
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
@@ -35,7 +40,10 @@ project "Air-Engine"
 		defines {
 			"GLEW_STATIC",
 			"AIR_PLATFORM_WINDOWS",
-			"AIR_TEST"
+			"AIR_TEST",
+			"WIN32",
+			"_DEBUG",
+			"_WINDOWS"
 		}
 
 	filter "configurations:Debug"
@@ -74,8 +82,8 @@ project "Sandbox"
 		"%{prj.name}/src/**.cpp"
 	}
 
-	includedirs {
-		"Dependencies/glew/include"
+	links {
+		"Air-Engine"
 	}
 
 	filter "system:windows"
@@ -85,7 +93,10 @@ project "Sandbox"
 
 		defines {
 			"GLEW_STATIC",
-			"AIR_PLATFORM_WINDOWS"
+			"AIR_PLATFORM_WINDOWS",
+			"WIN32",
+			"_DEBUG",
+			"_CONSOLE"
 		}
 
 		includedirs {
