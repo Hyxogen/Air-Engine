@@ -23,6 +23,7 @@
     <ClInclude Include="src\Engine\Core\Assert.hpp" />
     <ClInclude Include="src\Engine\Events\Event.hpp" />
     <ClInclude Include="src\Engine\Events\EventDispatcher.hpp" />
+    <ClInclude Include="src\Engine\Events\EventListener.hpp" />
     <ClInclude Include="src\Engine\Util\HashUtils.hpp" />
   </ItemGroup>
 </Project>

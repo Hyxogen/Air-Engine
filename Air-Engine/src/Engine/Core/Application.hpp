@@ -37,6 +37,8 @@ namespace engine {
 			void Update();
 
 			inline io::Window* GetWindow() const { return mWindow; }
+
+			inline events::EventDispatcher* GetDispatcher() const { return mDispatcher; }
 		};
 
 		Application* CreateApplication();

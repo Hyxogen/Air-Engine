@@ -9,8 +9,7 @@ namespace engine {
 	namespace core {
 
 		Application::Application() {
-			if (!Initialize())
-				Run();
+			ASSERT(!Initialize());
 		}
 
 		Application::~Application() {
@@ -29,7 +28,6 @@ namespace engine {
 			mWindow->SetVisibility(AIR_W_SHOW);
 			mDispatcher = new events::EventDispatcher();
 
-			delete mDispatcher;
 			return false;
 		}
 
