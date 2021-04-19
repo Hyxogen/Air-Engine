@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ASSERTIONS_ENABLED
+#ifdef AIR_ASSERTIONS_ENABLED
 #ifdef AIR_PLATFORM_WINDOWS
 #define ASSERT(expr) \
 	if (expr) {} \
