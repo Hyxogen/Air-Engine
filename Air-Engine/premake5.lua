@@ -26,6 +26,14 @@ project "Air-Engine"
 	}
 
 	filter "configurations:Debug"
+		optimize "Off"
+		symbols "Full"
+
+		defines {
+			"_DEBUG",
+			"AIR_BUILD_DEBUG"
+		}
+
 		libdirs {
 			"Dependencies/glew-2.1.0/lib/Debug"
 		}
@@ -35,6 +43,12 @@ project "Air-Engine"
 		}
 
 	filter "configurations:Release"
+		optimize "On"
+		
+		defines {
+			"AIR_BUILD_RELEASE"
+		}
+
 		libdirs {
 			"Dependencies/glew-2.1.0/lib/RelWithDebInfo"
 		}
@@ -43,6 +57,13 @@ project "Air-Engine"
 			"glew32.lib"
 		}
 	filter "configurations:Distribution"
+		optimize "Full"
+		symbols "Off"
+		
+		defines {
+			"AIR_BUILD_DISTR"
+		}
+
 		libdirs {
 			"Dependencies/glew-2.1.0/lib/Release"
 		}
