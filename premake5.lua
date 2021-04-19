@@ -23,7 +23,7 @@ workspace "Air-Engine"
 		}
 
 	filter "configurations:Distribution"
-		symbols "Full"
+		symbols "Off"
 		optimize "Full"
 
 		defines {
