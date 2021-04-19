@@ -9,9 +9,9 @@ project "Air-Engine"
 	objdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}/int")
 
 	files {
-		"**.h",
-		"**.hpp",
-		"**.cpp"
+		"src/**.h",
+		"src/**.hpp",
+		"src/**.cpp"
 	}
 
 	defines {
