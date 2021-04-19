@@ -15,7 +15,6 @@ workspace "Air-Engine"
 		}
 
 	filter "configurations:Release"
-		symbols "Full"
 		optimize "On"
 
 		defines {
