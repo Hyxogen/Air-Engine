@@ -56,10 +56,7 @@ project "Sandbox"
 
 		defines {
 			"GLEW_STATIC",
-			"AIR_PLATFORM_WINDOWS",
-			"WIN32",
-			"_DEBUG",
-			"_CONSOLE"
+			"AIR_PLATFORM_WINDOWS"
 		}
 
 		includedirs {
@@ -122,8 +119,5 @@ project "Air-Engine"
 		defines {
 			"GLEW_STATIC",
 			"AIR_PLATFORM_WINDOWS",
-			"AIR_TEST",
-			"WIN32",
-			"_DEBUG",
-			"_WINDOWS"
+			"AIR_TEST"
 		}
