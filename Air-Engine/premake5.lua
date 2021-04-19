@@ -4,8 +4,8 @@ project "Air-Engine"
 	cppdialect "C++17"
 	staticruntime "On"
 
-	targetdir ("%{wks.location}/" .. outputdir .. "/bin/%{prj.name}}")
-	objdir ("%{wks.location}/" .. outputdir .. "/int/%{prj.name}}")
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}")
+	objdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}/int")
 
 	files {
 		"**.h",

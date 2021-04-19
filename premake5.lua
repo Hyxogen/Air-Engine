@@ -30,7 +30,7 @@ workspace "Air-Engine"
 			"AIR_DISTRIBUTION"
 		}
 
-outputdir = "%{cfg.buildcfg}/%{cfg.system}/%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}/%{cfg.system}/%{cfg.architecture}/"
 
 project "Sandbox"
 	location "Sandbox"
