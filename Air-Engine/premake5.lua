@@ -32,7 +32,8 @@ project "Air-Engine"
 
 		defines {
 			"_DEBUG",
-			"AIR_BUILD_DEBUG"
+			"AIR_BUILD_DEBUG",
+			"AIR_ASSERTIONS_ENABLED"
 		}
 
 		libdirs {
