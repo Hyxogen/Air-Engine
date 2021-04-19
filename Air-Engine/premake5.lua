@@ -18,7 +18,7 @@ project "Air-Engine"
 	}
 
 	includedirs {
-		"%{wks.location}/Dependencies/glew-2.1.0/include"
+		"Dependencies/glew-2.1.0/include"
 	}
 
 	links {
@@ -27,7 +27,7 @@ project "Air-Engine"
 
 	filter "configurations:Debug"
 		libdirs {
-			"%{wks.location}/Dependencies/glew-2.1.0/lib/Debug"
+			"Dependencies/glew-2.1.0/lib/Debug"
 		}
 
 		links {
@@ -36,7 +36,7 @@ project "Air-Engine"
 
 	filter "configurations:Release"
 		libdirs {
-			"%{wks.location}/Dependencies/glew-2.1.0/lib/RelWithDebInfo"
+			"Dependencies/glew-2.1.0/lib/RelWithDebInfo"
 		}
 
 		links {
@@ -44,7 +44,7 @@ project "Air-Engine"
 		}
 	filter "configurations:Distribution"
 		libdirs {
-			"%{wks.location}/Dependencies/glew-2.1.0/lib/Release"
+			"Dependencies/glew-2.1.0/lib/Release"
 		}
 
 		links {
