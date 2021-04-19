@@ -11,7 +11,8 @@ workspace "Air-Engine"
 		symbols "Full"
 
 		defines {
-			"AIR_DEBUG"
+			"AIR_DEBUG",
+			"_DEBUG"
 		}
 
 	filter "configurations:Release"
@@ -63,61 +64,5 @@ project "Sandbox"
 			"Air-Engine/src/"
 		}
 
-project "Air-Engine"
-	location "Air-Engine"
-	kind "StaticLib"
-	language "C++"
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin/int/" .. outputdir .. "/%{prj.name}")
-
-	files {
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.hpp",
-		"%{prj.name}/src/**.cpp"
-	}
-
-	includedirs {
-		"Dependencies/glew-2.1.0/include"
-	}
-
-	links {
-		"opengl32"
-	}
-
-	filter "configurations:Debug"
-		libdirs {
-			"Dependencies/glew-2.1.0/lib/Debug"
-		}
-
-		links {
-			"glew32d.lib"
-		}
-
-	filter "configurations:Release"
-		libdirs {
-			"Dependencies/glew-2.1.0/lib/RelWithDebInfo"
-		}
-
-		links {
-			"glew32.lib"
-		}
-	filter "configurations:Distribution"
-		libdirs {
-			"Dependencies/glew-2.1.0/lib/Release"
-		}
-
-		links {
-			"glew32.lib"
-		}
-
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
-		systemversion "latest"
-
-		defines {
-			"GLEW_STATIC",
-			"AIR_PLATFORM_WINDOWS",
-			"AIR_TEST"
-		}
+filter {}
+include "Air-Engine"
