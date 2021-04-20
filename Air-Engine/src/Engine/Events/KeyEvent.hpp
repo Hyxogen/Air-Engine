@@ -27,14 +27,14 @@ namespace engine {
 
 		class KeyDownEvent : public KeyEvent {
 		protected:
-			unsigned short m_RepeatCount;
+			bool m_Repeat;
 
 		public:
-			KeyDownEvent(io::Window* window, io::KeyCode keyCode, unsigned short repeatCount) : KeyEvent(window, keyCode), m_RepeatCount(repeatCount) {}
+			KeyDownEvent(io::Window* window, io::KeyCode keyCode, bool repeat) : KeyEvent(window, keyCode), m_Repeat(repeat) {}
 
 			unsigned int GetID() const override { return Hash("EVENT_KEY_DOWN", 15) }
 
-			inline unsigned short GetRepeatCount() const { return m_RepeatCount; }
+			inline bool IsRepeat() const { return m_Repeat; }
 		};
 
 		class KeyReleaseEvent : public KeyEvent {

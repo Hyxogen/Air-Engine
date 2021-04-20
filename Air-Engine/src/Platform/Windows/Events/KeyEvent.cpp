@@ -1,17 +1,29 @@
-#include "KeyEvent.h"
+#include "KeyEvent.hpp"
 
 #include "../WindowsWindow.hpp"
+#include "../../../Engine/IO/KeyCodes.hpp"
 
 namespace platform {
 	namespace windows {
 
-		KeyEvent::KeyEvent(WindowsWindow* window, unsigned int event, unsigned int wParam) : mWindow(window), mEvent(event), mParam(wParam) {
+		WindowsKeyEvent::WindowsKeyEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
+			m_Window = window;
+			m_KeyCode = static_cast<engine::io::KeyCode>(wParam);
 			
+			m_Event = event;
+			m_WParam = wParam;
+			m_LParam = lParam;
 		}
 
-		unsigned int KeyEvent::GetID() const {
-			return 1;
-		}
+		WindowsKeyDownEvent::WindowsKeyDownEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam, bool repeat) {
+			m_Window = window;
+			m_KeyCode = static_cast<engine::io::KeyCode>(wParam);
 
+			m_Event = event;
+			m_WParam = wParam;
+			m_LParam = lParam;
+
+			m_Repeat = (lParam & (1 << 30)) == true;
+		}
 	}
 }
