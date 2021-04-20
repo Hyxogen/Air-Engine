@@ -24,6 +24,8 @@ namespace engine {
 		public:
 			inline io::KeyCode GetKeyCode() const { return m_KeyCode; }
 
+			inline io::Window* GetWindow() const { return m_Window; }
+
 			virtual unsigned int GetID() const = 0;
 		};
 
