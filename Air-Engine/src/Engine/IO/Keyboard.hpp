@@ -15,5 +15,5 @@ namespace engine {
 			virtual bool GetKeyToggled(int keyCode) const = 0;
 
 			inline Window* GetWindow() const { return mWindow; }
-		}
+		};
 } }
