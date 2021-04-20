@@ -11,8 +11,12 @@ namespace engine {
 		class Keyboard : public events::EventListener {
 		protected:
 			Window* m_Window;
+
+			unsigned int* m_Keys;
 		public:
 			Keyboard(Window* window);
+
+			virtual ~Keyboard();
 
 			virtual bool GetKeyDown(int keyCode) const;
 
