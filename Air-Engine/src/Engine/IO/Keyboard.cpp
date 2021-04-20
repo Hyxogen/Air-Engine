@@ -1,6 +1,5 @@
 #include "Keyboard.hpp"
 
-#include <memory.h>
 #include "../Core/Application.hpp"
 #include "../Events/KeyEvent.hpp"
 #include "../Util/HashUtils.hpp"
@@ -24,8 +23,8 @@ namespace engine {
 			delete m_Keys;
 		}
 
-		bool Keyboard::GetKeyDown(int keyCode) const {
-			return false;
+		bool Keyboard::GetKeyDown(KeyCode keyCode) const {
+			return m_Keys[(unsigned int) keyCode] >= 1;
 		}
 
 		bool Keyboard::GetKeyToggled(int keyCode) const {

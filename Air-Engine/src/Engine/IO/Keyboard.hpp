@@ -1,5 +1,7 @@
 #pragma once
 
+#include "KeyCodes.hpp"
+
 #include "../Events/Event.hpp"
 #include "../Events/EventListener.hpp"
 
@@ -18,7 +20,7 @@ namespace engine {
 
 			virtual ~Keyboard();
 
-			virtual bool GetKeyDown(int keyCode) const;
+			virtual bool GetKeyDown(KeyCode keyCode) const;
 
 			virtual bool GetKeyToggled(int keyCode) const;
 
