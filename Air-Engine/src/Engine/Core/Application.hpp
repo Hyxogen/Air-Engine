@@ -14,6 +14,7 @@ namespace engine {
 
 	namespace io {
 		class Window;
+		class Keyboard;
 	}
 
 	namespace core {
@@ -25,6 +26,8 @@ namespace engine {
 			io::Window* mWindow;
 			events::EventDispatcher* mDispatcher;
 			platform::windows::Console* mConsole;
+
+			io::Keyboard* m_Keyboard;
 
 		public:
 			Application();

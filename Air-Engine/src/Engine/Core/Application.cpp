@@ -1,24 +1,32 @@
 #include "Application.hpp"
+#include "Assert.hpp"
+
+#include "../Events/EventDispatcher.hpp"
+#include "../IO/Keyboard.hpp"
+
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
-#include "Assert.hpp"
-#include "../Events/EventDispatcher.hpp"
 
 namespace engine {
 	namespace core {
 
-		Application* Application::sAPPLICATION;
+		Application* Application::sAPPLICATION = nullptr;
 
 		Application::Application() {
+			ASSERT(sAPPLICATION == nullptr);
+			sAPPLICATION = this;
 			ASSERT(!Initialize());
 		}
 
 		Application::~Application() {
 			delete mWindow;
 			delete mDispatcher;
+			delete m_Keyboard;
 		}
 
 		bool Application::Initialize() {
+			mDispatcher = new events::EventDispatcher();
+
 			mConsole = new platform::windows::Console();
 			if (mConsole->Initialize())
 				return true;
@@ -27,7 +35,8 @@ namespace engine {
 			mWindow->Initialize();
 
 			mWindow->SetVisibility(AIR_W_SHOW);
-			mDispatcher = new events::EventDispatcher();
+
+			m_Keyboard = new io::Keyboard(mWindow);
 
 			return false;
 		}
