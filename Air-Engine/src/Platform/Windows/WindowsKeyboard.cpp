@@ -6,7 +6,7 @@
 namespace platform {
 	namespace windows {
 
-		WindowsKeyboard::WindowsKeyboard(WindowsWindow* window) : engine::io::Keyboard(window) {
+		WindowsKeyboard::WindowsKeyboard(WindowsWindow* window) : engine::io::Keyboard(nullptr) {
 			
 		}
 
