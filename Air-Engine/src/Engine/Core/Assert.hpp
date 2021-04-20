@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ASSERTIONS_ENABLED
+#ifdef AIR_ASSERTIONS_ENABLED
 #ifdef AIR_PLATFORM_WINDOWS
 #define ASSERT(expr) \
 	if (expr) {} \
@@ -21,4 +21,6 @@ template<class T1, class T2> struct Can_copy {
 		void(*p)(T1, T2) = Constraints;
 	}
 };
+#else
+#define ASSERT(expr) expr
 #endif

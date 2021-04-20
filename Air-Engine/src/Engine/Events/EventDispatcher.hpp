@@ -2,39 +2,27 @@
 
 #include <unordered_map>
 #include <vector>
-#include <typeindex>
-#include "../Core/Assert.hpp"
 
 namespace engine {
 	namespace events {
+
 		class Event;
-} }
-
-typedef void (*LISTENER_FUNCTION)(const engine::events::Event*);
-
-namespace engine {
-	namespace events {
+		class EventListener;
 
 		class EventDispatcher {
-			std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>* mFunctions;
+			std::unordered_map<unsigned int, std::vector<const EventListener*>&>& m_Listeners;
 
 		public:
 			EventDispatcher();
 
 			~EventDispatcher();
 
-			template<class T>
-			void RegisterListener(LISTENER_FUNCTION function) {
-				Can_copy<T*, Event*>();
-				std::unordered_map<std::type_index, std::vector<LISTENER_FUNCTION>*>::iterator it = mFunctions->find(typeid(T));
-				if (it == mFunctions->end())
-					mFunctions->emplace(typeid(T), new std::vector<LISTENER_FUNCTION>);
+			void Register(unsigned int event, const EventListener* listener);
 
-				it = mFunctions->find(typeid(T));
-				it->second->push_back(function);
-			}
+			void Remove(unsigned int event, const EventListener* listener);
 
-			void DispatchEvent(const Event* event) const;
+			void Dispatch(Event& event) const;
 		};
 
-} }
+	}
+}

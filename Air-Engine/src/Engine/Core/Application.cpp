@@ -4,16 +4,13 @@
 #include "Assert.hpp"
 #include "../Events/EventDispatcher.hpp"
 
-
 namespace engine {
 	namespace core {
 
 		Application* Application::sAPPLICATION;
 
 		Application::Application() {
-			sAPPLICATION = this;
-			if (!Initialize())
-				Run();
+			ASSERT(!Initialize());
 		}
 
 		Application::~Application() {
@@ -32,7 +29,6 @@ namespace engine {
 			mWindow->SetVisibility(AIR_W_SHOW);
 			mDispatcher = new events::EventDispatcher();
 
-			delete mDispatcher;
 			return false;
 		}
 

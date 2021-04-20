@@ -41,8 +41,6 @@ namespace engine {
 			inline io::Window* GetWindow() const { return mWindow; }
 
 			inline events::EventDispatcher* GetDispatcher() const { return mDispatcher; }
-
-			static Application* GetApplication() { return sAPPLICATION; }
 		};
 
 		Application* CreateApplication();
