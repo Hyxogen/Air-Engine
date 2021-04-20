@@ -32,7 +32,7 @@ namespace engine {
 		public:
 			KeyDownEvent(io::Window* window, io::KeyCode keyCode, bool repeat) : KeyEvent(window, keyCode), m_Repeat(repeat) {}
 
-			unsigned int GetID() const override { return Hash("EVENT_KEY_DOWN", 15) }
+			unsigned int GetID() const override { return Hash("EVENT_KEY_DOWN", 15); }
 
 			inline bool IsRepeat() const { return m_Repeat; }
 		};
@@ -41,7 +41,7 @@ namespace engine {
 		public:
 			KeyReleaseEvent(io::Window* window, io::KeyCode keyCode) : KeyEvent(window, keyCode) {}
 
-			unsigned int GetID() const override { return Hash("EVENT_KEY_RELEASE", 18) }
+			unsigned int GetID() const override { return Hash("EVENT_KEY_RELEASE", 18); }
 		};
 	}
 }
