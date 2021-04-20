@@ -14,8 +14,10 @@ namespace engine {
 
 		class KeyEvent : public Event {
 		protected:
-			io::Window* m_Window;
+			io::Window* m_Window = nullptr;
 			io::KeyCode m_KeyCode;
+
+			KeyEvent() {}
 
 			KeyEvent(io::Window* window, io::KeyCode keyCode) : m_Window(window), m_KeyCode(keyCode) {}
 
@@ -29,6 +31,7 @@ namespace engine {
 		protected:
 			bool m_Repeat;
 
+			KeyDownEvent() {}
 		public:
 			KeyDownEvent(io::Window* window, io::KeyCode keyCode, bool repeat) : KeyEvent(window, keyCode), m_Repeat(repeat) {}
 
@@ -38,6 +41,9 @@ namespace engine {
 		};
 
 		class KeyReleaseEvent : public KeyEvent {
+		protected:
+			
+			KeyReleaseEvent();
 		public:
 			KeyReleaseEvent(io::Window* window, io::KeyCode keyCode) : KeyEvent(window, keyCode) {}
 
