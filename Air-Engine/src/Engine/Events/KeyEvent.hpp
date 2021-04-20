@@ -45,7 +45,7 @@ namespace engine {
 		class KeyReleaseEvent : public KeyEvent {
 		protected:
 			
-			KeyReleaseEvent();
+			KeyReleaseEvent() {}
 		public:
 			KeyReleaseEvent(io::Window* window, io::KeyCode keyCode) : KeyEvent(window, keyCode) {}
 
