@@ -90,7 +90,10 @@ namespace platform {
 			}
 			else if (uMsg == WM_KEYUP) {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
-
+				//Since the event handler is not buffer, does this even need to be on the heap?
+				WindowsKeyReleaseEvent* keyEvent = new WindowsKeyReleaseEvent(window, uMsg, wParam, lParam);
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(*keyEvent);
+				delete keyEvent;
 				return 0;
 			}
 			else if (uMsg == WM_LBUTTONDOWN || uMsg == WM_LBUTTONUP || uMsg == WM_MBUTTONDOWN || uMsg == WM_MBUTTONUP || uMsg == WM_RBUTTONDOWN || uMsg == WM_RBUTTONUP || uMsg == WM_XBUTTONDOWN ||
