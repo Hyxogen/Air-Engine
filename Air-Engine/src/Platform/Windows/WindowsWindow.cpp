@@ -47,6 +47,8 @@ namespace platform {
 				return 1;
 			}
 
+			SetWindowLongPtr(mWindow, GWLP_USERDATA, (LONG_PTR)this);
+
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;
 		}
