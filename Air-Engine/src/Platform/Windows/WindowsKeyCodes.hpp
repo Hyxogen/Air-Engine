@@ -3,7 +3,7 @@
 namespace platform {
 	namespace windows {
 
-		enum class KeyCode : int {
+		enum class KeyCode : unsigned int {
 			ZERO			= 0x30,
 			ONE				= 0x31,
 			TWO				= 0x32,
