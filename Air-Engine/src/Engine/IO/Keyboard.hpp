@@ -14,9 +14,9 @@ namespace engine {
 		public:
 			Keyboard(Window* window);
 
-			virtual bool GetKeyDown(int keyCode) const = 0;
+			virtual bool GetKeyDown(int keyCode) const;
 
-			virtual bool GetKeyToggled(int keyCode) const = 0;
+			virtual bool GetKeyToggled(int keyCode) const;
 
 			inline Window* GetWindow() const { return m_Window; }
 
