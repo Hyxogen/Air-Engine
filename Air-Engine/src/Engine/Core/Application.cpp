@@ -4,7 +4,6 @@
 #include "Assert.hpp"
 #include "../Events/EventDispatcher.hpp"
 
-
 namespace engine {
 	namespace core {
 
