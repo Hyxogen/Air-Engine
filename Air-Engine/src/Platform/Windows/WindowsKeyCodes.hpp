@@ -40,7 +40,10 @@ namespace platform {
 			W				= 0x57,
 			X				= 0x58,
 			Y				= 0x59,
-			Z				= 0x5A
+			Z				= 0x5A,
+
+			//Make sure to update this to the max value that is possible
+			NONE			= 0x60
 		};
 	}
 }
