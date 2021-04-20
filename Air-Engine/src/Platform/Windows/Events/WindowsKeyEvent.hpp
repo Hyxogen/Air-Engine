@@ -12,6 +12,7 @@ namespace platform {
 			bool m_Repeat;
 
 		public:
+			//Repeat parameter is not needed
 			WindowsKeyDownEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam, bool repeat = false);
 
 			inline unsigned int GetEvent() const { return m_Event; }

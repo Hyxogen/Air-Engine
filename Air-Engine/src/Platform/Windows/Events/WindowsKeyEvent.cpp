@@ -15,7 +15,7 @@ namespace platform {
 			m_WParam = wParam;
 			m_LParam = lParam;
 
-			m_Repeat = (lParam & (1 << 30)) == true;
+			m_Repeat = (lParam & (1 << 30)) == 1;
 		}
 
 		WindowsKeyReleaseEvent::WindowsKeyReleaseEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {

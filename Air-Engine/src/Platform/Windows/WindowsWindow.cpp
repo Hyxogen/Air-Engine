@@ -1,7 +1,12 @@
 #include <GL/glew.h>
 #include <GL/wglew.h>
 #include <stdlib.h>
+
 #include "WindowsWindow.hpp"
+#include "Events/WindowsKeyEvent.hpp"
+
+#include "../../Engine/Core/Application.hpp"
+#include "../../Engine/Events/EventDispatcher.hpp"
 #include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
@@ -68,17 +73,31 @@ namespace platform {
 		}
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-			switch (uMsg) {
-			case WM_CLOSE:
+			WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+
+			if (uMsg == WM_CLOSE || uMsg == WM_QUIT || uMsg == WM_DESTROY) {
 				PostQuitMessage(0);
 				return 0;
-			case WM_QUIT:
-				PostQuitMessage(0);
+			}
+			else if (uMsg == WM_KEYDOWN) {
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				WindowsKeyDownEvent* keyEvent = new WindowsKeyDownEvent(window, uMsg, wParam, lParam);
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(*keyEvent);
+				delete keyEvent;
 				return 0;
-			case WM_DESTROY:
-				PostQuitMessage(0);
+			}
+			else if (uMsg == WM_KEYUP) {
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+
 				return 0;
-			case WM_PAINT:
+			}
+			else if (uMsg == WM_LBUTTONDOWN || uMsg == WM_LBUTTONUP || uMsg == WM_MBUTTONDOWN || uMsg == WM_MBUTTONUP || uMsg == WM_RBUTTONDOWN || uMsg == WM_RBUTTONUP || uMsg == WM_XBUTTONDOWN ||
+				uMsg == WM_XBUTTONUP) {
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+
+				return 0;
+			}
+			else if (uMsg == WM_PAINT) {
 				return 0;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
