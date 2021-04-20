@@ -5,13 +5,19 @@
 #include "../Util/HashUtils.hpp"
 
 namespace engine {
+
+	namespace io {
+		class Window;
+	}
+
 	namespace events {
 
 		class KeyEvent : public Event {
 		protected:
+			io::Window* m_Window;
 			io::KeyCode m_KeyCode;
 
-			KeyEvent(io::KeyCode keyCode) : m_KeyCode(keyCode) {}
+			KeyEvent(io::Window* window, io::KeyCode keyCode) : m_Window(window), m_KeyCode(keyCode) {}
 
 		public:
 			inline io::KeyCode GetKeyCode() const { return m_KeyCode; }
@@ -24,7 +30,7 @@ namespace engine {
 			unsigned short m_RepeatCount;
 
 		public:
-			KeyDownEvent(io::KeyCode keyCode, unsigned short repeatCount) : KeyEvent(keyCode), m_RepeatCount(repeatCount) {}
+			KeyDownEvent(io::Window* window, io::KeyCode keyCode, unsigned short repeatCount) : KeyEvent(window, keyCode), m_RepeatCount(repeatCount) {}
 
 			unsigned int GetID() const override { return Hash("EVENT_KEY_DOWN", 15) }
 
@@ -33,7 +39,7 @@ namespace engine {
 
 		class KeyReleaseEvent : public KeyEvent {
 		public:
-			KeyReleaseEvent(io::KeyCode keyCode) : KeyEvent(keyCode) {}
+			KeyReleaseEvent(io::Window* window, io::KeyCode keyCode) : KeyEvent(window, keyCode) {}
 
 			unsigned int GetID() const override { return Hash("EVENT_KEY_RELEASE", 18) }
 		};
