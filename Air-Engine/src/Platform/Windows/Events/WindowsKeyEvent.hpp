@@ -9,7 +9,7 @@ namespace platform {
 		protected:
 			unsigned int m_Event, m_WParam;
 			unsigned long m_LParam;
-			const bool m_Repeat;
+			bool m_Repeat;
 
 		public:
 			WindowsKeyDownEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam, bool repeat = false);
