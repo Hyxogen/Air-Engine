@@ -22,7 +22,7 @@ namespace engine {
 
 			virtual bool GetKeyDown(KeyCode keyCode) const;
 
-			virtual bool GetKeyToggled(int keyCode) const;
+			virtual bool GetKeyToggled(KeyCode keyCode) const;
 
 			inline Window* GetWindow() const { return m_Window; }
 

@@ -27,7 +27,7 @@ namespace engine {
 			return m_Keys[(unsigned int) keyCode] >= 1;
 		}
 
-		bool Keyboard::GetKeyToggled(int keyCode) const {
+		bool Keyboard::GetKeyToggled(KeyCode keyCode) const {
 			return false;
 		}
 
