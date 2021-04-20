@@ -9,6 +9,7 @@ namespace engine {
 		class Window;
 
 		class Keyboard : public events::EventListener {
+		protected:
 			Window* m_Window;
 		public:
 			Keyboard(Window* window);
@@ -17,8 +18,9 @@ namespace engine {
 
 			virtual bool GetKeyToggled(int keyCode) const = 0;
 
-			inline Window* GetWindow() const { return mWindow; }
+			inline Window* GetWindow() const { return m_Window; }
 
 			virtual bool OnEvent(events::Event& event);
 		};
-} }
+	}
+}
