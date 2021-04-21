@@ -4,6 +4,7 @@
 
 #include "WindowsWindow.hpp"
 #include "Events/WindowsKeyEvent.hpp"
+#include "Events/WindowsMouseEvent.hpp"
 
 #include "../../Engine/Core/Application.hpp"
 #include "../../Engine/Events/EventDispatcher.hpp"
@@ -37,7 +38,7 @@ namespace platform {
 			wndClass.lpszClassName = mTitle;
 
 			RegisterClass(&wndClass);
-			
+
 			mWindow = CreateWindowEx(CS_OWNDC, mTitle, mTitle, WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 				NULL, NULL, instance, NULL);
@@ -59,7 +60,8 @@ namespace platform {
 			if (GetMessage(&msg, mWindow, 0, 0) > 0) {
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
-			} else {
+			}
+			else {
 				mShouldClose = true;
 			}
 
@@ -93,9 +95,12 @@ namespace platform {
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(keyEvent);
 				return 0;
 			}
-			else if (uMsg == WM_LBUTTONDOWN || uMsg == WM_LBUTTONUP || uMsg == WM_MBUTTONDOWN || uMsg == WM_MBUTTONUP || uMsg == WM_RBUTTONDOWN || uMsg == WM_RBUTTONUP || uMsg == WM_XBUTTONDOWN ||
-				uMsg == WM_XBUTTONUP) {
+			else if (uMsg == WM_LBUTTONDOWN || uMsg == WM_MBUTTONDOWN || uMsg == WM_RBUTTONDOWN || uMsg == WM_XBUTTONDOWN) {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				WindowsMouseButtonDownEvent mouseEvent(window, uMsg, wParam, lParam);
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+			}
+			else if (uMsg == WM_LBUTTONUP || uMsg == WM_MBUTTONUP || uMsg == WM_RBUTTONUP || uMsg == WM_XBUTTONUP) {
 
 				return 0;
 			}

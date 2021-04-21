@@ -14,7 +14,7 @@ namespace engine {
 
 		class MouseEvent : public Event {
 		protected:
-			io::Window m_Window* = nullptr;
+			io::Window* m_Window = nullptr;
 			io::MouseCode m_MouseCode = io::MouseCode::NONE;
 
 			MouseEvent() {}
@@ -23,6 +23,8 @@ namespace engine {
 
 		public:
 			inline io::MouseCode GetMouseCode() const { return m_MouseCode; }
+
+			inline io::Window* GetWindow() const { return m_Window; }
 		};
 
 		class MouseButtonDownEvent : public MouseEvent {
