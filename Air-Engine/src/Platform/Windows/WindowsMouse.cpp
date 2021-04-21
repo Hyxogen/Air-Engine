@@ -7,6 +7,8 @@
 #include "../../Engine/Core/Application.hpp"
 #include "../../Engine/Events/EventDispatcher.hpp"
 
+#include <windows.h>
+
 namespace platform {
 	namespace windows {
 
@@ -24,7 +26,7 @@ namespace platform {
 		}
 
 		bool WindowsMouse::HasScrollWheel() const {
-			return false;
+			return GetSystemMetrics(SM_MOUSEWHEELPRESENT);
 		}
 
 		unsigned int WindowsMouse::GetScrollDelta() const {
