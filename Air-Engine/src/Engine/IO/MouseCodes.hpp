@@ -16,7 +16,9 @@ namespace engine {
 			RIGHT			= platform::windows::MouseCode::RIGHT,
 
 			XONE			= platform::windows::MouseCode::XONE,
-			XTWO			= platform::windows::MouseCode::XTWO
+			XTWO			= platform::windows::MouseCode::XTWO,
+
+			NONE			= platform::windows::MouseCode::NONE
 			#endif
 		};
 

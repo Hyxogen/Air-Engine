@@ -2,7 +2,9 @@
 #include "Assert.hpp"
 
 #include "../Events/EventDispatcher.hpp"
+
 #include "../../Platform/Windows/WindowsKeyboard.hpp"
+#include "../../Platform/Windows/WindowsMouse.hpp"
 
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
@@ -24,6 +26,7 @@ namespace engine {
 			delete mWindow;
 			delete mDispatcher;
 			delete m_Keyboard;
+			delete m_Mouse;
 		}
 
 		bool Application::Initialize() {
@@ -39,7 +42,8 @@ namespace engine {
 			mWindow->SetVisibility(AIR_W_SHOW);
 
 			m_Keyboard = (io::Keyboard*) new platform::windows::WindowsKeyboard((platform::windows::WindowsWindow*)mWindow);
-			
+			m_Mouse = io::Mouse::Create(mWindow);
+
 			return false;
 		}
 

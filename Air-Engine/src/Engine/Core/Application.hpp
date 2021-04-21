@@ -15,6 +15,7 @@ namespace engine {
 	namespace io {
 		class Window;
 		class Keyboard;
+		class Mouse;
 	}
 
 	namespace core {
@@ -28,6 +29,7 @@ namespace engine {
 			platform::windows::Console* mConsole;
 
 			io::Keyboard* m_Keyboard;
+			io::Mouse* m_Mouse;
 
 		public:
 			Application();
