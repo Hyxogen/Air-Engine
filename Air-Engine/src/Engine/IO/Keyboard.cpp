@@ -27,6 +27,7 @@ namespace engine {
 			return m_Keys[(unsigned int) keyCode] >= 1;
 		}
 
+		//The best way to implement this is probably to create a child class for each operating system and have them override this function
 		bool Keyboard::GetKeyToggled(KeyCode keyCode) const {
 			return false;
 		}
