@@ -6,6 +6,8 @@
 #include "../../Engine/Events/EventDispatcher.hpp"
 #include "../../Engine/Events/KeyEvent.hpp"
 
+#include <windows.h>
+
 namespace platform {
 	namespace windows {
 
@@ -27,7 +29,7 @@ namespace platform {
 		}
 
 		bool WindowsKeyboard::GetKeyToggled(engine::io::KeyCode keyCode) const {
-			return false;
+			return (GetKeyState((int) keyCode) & (short) 0b1) == (short) 1;
 		}
 
 		bool WindowsKeyboard::OnEvent(engine::events::Event& event) {

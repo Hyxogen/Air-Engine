@@ -50,6 +50,7 @@ namespace engine {
 			Y				= platform::windows::KeyCode::Y,
 			Z				= platform::windows::KeyCode::Z,
 
+			CAPS_LOCK		= platform::windows::KeyCode::CAPS_LOCK,
 			//This is meant to represent no character and also being the max value
 			NONE			= platform::windows::KeyCode::NONE
 			#endif

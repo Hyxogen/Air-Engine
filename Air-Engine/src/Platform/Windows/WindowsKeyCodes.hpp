@@ -42,6 +42,7 @@ namespace platform {
 			Y				= 0x59,
 			Z				= 0x5A,
 
+			CAPS_LOCK		= 0x14,
 			//Make sure to update this to the max value that is possible
 			NONE			= 0x60
 		};

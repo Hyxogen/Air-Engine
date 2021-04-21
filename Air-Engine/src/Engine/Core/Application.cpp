@@ -7,6 +7,8 @@
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
 
+#include "../Util/Logger/Logger.hpp"
+
 namespace engine {
 	namespace core {
 
