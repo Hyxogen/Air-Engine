@@ -2,7 +2,7 @@
 #include "Assert.hpp"
 
 #include "../Events/EventDispatcher.hpp"
-#include "../IO/Keyboard.hpp"
+#include "../../Platform/Windows/WindowsKeyboard.hpp"
 
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
@@ -36,8 +36,8 @@ namespace engine {
 
 			mWindow->SetVisibility(AIR_W_SHOW);
 
-			m_Keyboard = new io::Keyboard(mWindow);
-
+			m_Keyboard = (io::Keyboard*) new platform::windows::WindowsKeyboard((platform::windows::WindowsWindow*)mWindow);
+			
 			return false;
 		}
 

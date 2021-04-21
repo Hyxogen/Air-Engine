@@ -2,31 +2,22 @@
 
 #include "KeyCodes.hpp"
 
-#include "../Events/Event.hpp"
-#include "../Events/EventListener.hpp"
-
 namespace engine {
 	namespace io {
 
 		class Window;
 
-		class Keyboard : public events::EventListener {
+		class Keyboard {
 		protected:
 			Window* m_Window;
-
-			unsigned int* m_Keys;
 		public:
-			Keyboard(Window* window);
+			Keyboard(Window* window) : m_Window(window) {}
 
-			virtual ~Keyboard();
+			virtual bool GetKeyDown(KeyCode keyCode) const = 0;
 
-			virtual bool GetKeyDown(KeyCode keyCode) const;
-
-			virtual bool GetKeyToggled(KeyCode keyCode) const;
+			virtual bool GetKeyToggled(KeyCode keyCode) const = 0;
 
 			inline Window* GetWindow() const { return m_Window; }
-
-			virtual bool OnEvent(events::Event& event);
 		};
 	}
 }

@@ -2,6 +2,7 @@
 
 //Ik ben benieuwd of het mij lukt om dit ook forward te declaren
 #include "../../Engine/IO/Keyboard.hpp"
+#include "../../Engine/Events/EventListener.hpp"
 
 namespace engine {
 	namespace events {
@@ -14,17 +15,19 @@ namespace platform {
 
 		class WindowsWindow;
 
-		class WindowsKeyboard : public engine::io::Keyboard {
-
+		class WindowsKeyboard : public engine::io::Keyboard, public engine::events::EventListener {
+		protected:
+			unsigned int* m_Keys;
 		public:
 			WindowsKeyboard(WindowsWindow* window);
 
-			virtual bool GetKeyDown(int keyCode) const;
+			virtual ~WindowsKeyboard();
 
-			virtual bool GetKeyToggled(int keyCode) const;
+			virtual bool GetKeyDown(engine::io::KeyCode keyCode) const;
 
-		private:
-			void OnKeyEvent(engine::events::Event* keyDownEvent);
+			virtual bool GetKeyToggled(engine::io::KeyCode keyCode) const;
+
+			virtual bool OnEvent(engine::events::Event& event);
 		};
 
 	}

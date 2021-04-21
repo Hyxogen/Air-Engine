@@ -22,5 +22,5 @@ template<class T1, class T2> struct Can_copy {
 	}
 };
 #else
-#define ASSERT(expr) expr
+#define ASSERT(expr)
 #endif

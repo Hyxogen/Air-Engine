@@ -15,7 +15,7 @@ namespace engine {
 		class KeyEvent : public Event {
 		protected:
 			io::Window* m_Window = nullptr;
-			io::KeyCode m_KeyCode;
+			io::KeyCode m_KeyCode = io::KeyCode::NONE;
 
 			KeyEvent() {}
 
@@ -31,7 +31,7 @@ namespace engine {
 
 		class KeyDownEvent : public KeyEvent {
 		protected:
-			bool m_Repeat;
+			bool m_Repeat = false;
 
 			KeyDownEvent() {}
 		public:
