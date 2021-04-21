@@ -11,7 +11,7 @@
 namespace platform {
 	namespace windows {
 
-		WindowsKeyboard::WindowsKeyboard(WindowsWindow* window) : engine::io::Keyboard((engine::io::Window*) window) {
+		WindowsKeyboard::WindowsKeyboard(engine::io::Window* window) : engine::io::Keyboard(window) {
 			m_Keys = new unsigned int[platform::windows::KeyCode::NONE];
 
 			memset(m_Keys, 0, sizeof(unsigned int) * (unsigned int)KeyCode::NONE);

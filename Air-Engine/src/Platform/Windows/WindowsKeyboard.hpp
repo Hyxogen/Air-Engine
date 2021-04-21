@@ -8,18 +8,21 @@ namespace engine {
 	namespace events {
 		class Event;
 	}
+
+	namespace io {
+		class Window;
+	}
 }
 
 namespace platform {
-	namespace windows {
 
-		class WindowsWindow;
+	namespace windows {
 
 		class WindowsKeyboard : public engine::io::Keyboard, public engine::events::EventListener {
 		protected:
 			unsigned int* m_Keys;
 		public:
-			WindowsKeyboard(WindowsWindow* window);
+			WindowsKeyboard(engine::io::Window* window);
 
 			virtual ~WindowsKeyboard();
 
