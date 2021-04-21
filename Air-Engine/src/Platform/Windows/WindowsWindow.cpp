@@ -101,6 +101,9 @@ namespace platform {
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
 			}
 			else if (uMsg == WM_LBUTTONUP || uMsg == WM_MBUTTONUP || uMsg == WM_RBUTTONUP || uMsg == WM_XBUTTONUP) {
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				WindowsMouseButtonDownEvent mouseEvent(window, uMsg, wParam, lParam);
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
 
 				return 0;
 			}

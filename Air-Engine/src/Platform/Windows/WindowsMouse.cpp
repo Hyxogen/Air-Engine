@@ -11,8 +11,16 @@ namespace platform {
 	namespace windows {
 
 		WindowsMouse::WindowsMouse(engine::io::Window* window) : Mouse(window) {
+			m_Buttons = new bool[(unsigned int)MouseCode::NONE];
+
+			memset(m_Buttons, 0, sizeof(bool) * (unsigned int)MouseCode::NONE);
+
 			engine::core::Application::GetApplication()->GetDispatcher()->Register(Hash("EVENT_MOUSE_BUTTON_DOWN", 24), this);
 			engine::core::Application::GetApplication()->GetDispatcher()->Register(Hash("EVENT_MOUSE_BUTTON_RELEASE", 27), this);
+		}
+
+		WindowsMouse::~WindowsMouse() {
+			delete m_Buttons;
 		}
 
 		bool WindowsMouse::HasScrollWheel() const {
@@ -32,16 +40,19 @@ namespace platform {
 		}
 
 		bool WindowsMouse::GetButtonDown(engine::io::MouseCode mouseCode) const {
-			return false;
+			return m_Buttons[(unsigned int) mouseCode];
 		}
 
 		bool WindowsMouse::OnEvent(engine::events::Event& event) {
 			engine::events::MouseEvent& mouseEvent = (engine::events::MouseEvent&)event;
 
 			if (mouseEvent.GetWindow() != m_Window) return false;
-
+				
 			if (mouseEvent.GetID() == Hash("EVENT_MOUSE_BUTTON_DOWN", 24)) {
-				return false;
+				m_Buttons[(unsigned int)mouseEvent.GetMouseCode()] = true;
+			}
+			else {
+				m_Buttons[(unsigned int)mouseEvent.GetMouseCode()] = false;
 			}
 			return false;
 		}

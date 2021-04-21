@@ -8,8 +8,12 @@ namespace platform {
 
 		//Have a separate class for handling mouse events? Like WindowsMouseEventHandler?
 		class WindowsMouse : public engine::io::Mouse, public engine::events::EventListener {
+		protected:
+			bool* m_Buttons;
 		public:
 			WindowsMouse(engine::io::Window* window);
+
+			~WindowsMouse();
 
 			virtual bool HasScrollWheel() const;
 
