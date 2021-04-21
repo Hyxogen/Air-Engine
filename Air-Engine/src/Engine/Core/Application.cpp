@@ -12,11 +12,11 @@
 namespace engine {
 	namespace core {
 
-		Application* Application::sAPPLICATION = nullptr;
+		Application* Application::s_Application = nullptr;
 
 		Application::Application() {
-			ASSERT(sAPPLICATION == nullptr);
-			sAPPLICATION = this;
+			ASSERT(s_Application == nullptr);
+			s_Application = this;
 			ASSERT(!Initialize());
 		}
 
