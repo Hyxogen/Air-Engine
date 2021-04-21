@@ -9,7 +9,9 @@ namespace platform {
 			RIGHT				= 0x3,
 
 			XONE				= 0x4,
-			XTWO				= 0x5
+			XTWO				= 0x5,
+
+			NONE				= 0x5
 		};
 
 	}
