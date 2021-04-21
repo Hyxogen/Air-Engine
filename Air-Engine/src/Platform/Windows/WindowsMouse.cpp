@@ -3,7 +3,7 @@
 namespace platform {
 	namespace windows {
 
-		WindowsMouse::WindowsMouse(engine::io::Window* window) {
+		WindowsMouse::WindowsMouse(engine::io::Window* window) : Mouse(window) {
 		}
 
 		bool WindowsMouse::HasScrollWheel() const {
