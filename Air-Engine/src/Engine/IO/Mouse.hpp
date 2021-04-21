@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MouseCodes.hpp"
+
 namespace engine {
 	namespace io {
 
@@ -19,7 +21,7 @@ namespace engine {
 
 			virtual int GetYCoord() const = 0;
 
-			virtual bool GetButtonDown() const = 0;
+			virtual bool GetButtonDown(MouseCode mouseCode) const = 0;
 
 			inline Window* GetWindow() const { return m_Window; }
 
