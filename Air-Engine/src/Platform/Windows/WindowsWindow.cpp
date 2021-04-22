@@ -77,7 +77,9 @@ namespace platform {
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 			if (uMsg == WM_CLOSE || uMsg == WM_QUIT || uMsg == WM_DESTROY) {
-				PostQuitMessage(0);
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				window->Close();
+				PostQuitMessage(0);				
 				return 0;
 			}
 			else {
