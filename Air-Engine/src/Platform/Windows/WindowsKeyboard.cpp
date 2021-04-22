@@ -42,13 +42,13 @@ namespace platform {
 			unsigned int id = keyEvent.GetID();
 
 			if (keyEvent.GetID() == Hash("EVENT_KEY_DOWN", 15)) {
-				ASSERT(((unsigned int)keyEvent.GetKeyCode()) < (unsigned int)KeyCode::NONE);
+				ASSERT(((unsigned int)keyEvent.GetKeyCode()) <= (unsigned int)KeyCode::NONE);
 
 				m_Keys[(unsigned int)keyEvent.GetKeyCode()] += 1;
 				return false;
 			}
 			else if (keyEvent.GetID() == Hash("EVENT_KEY_RELEASE", 18)) {
-				ASSERT(((unsigned int)keyEvent.GetKeyCode()) < (unsigned int)KeyCode::NONE);
+				ASSERT(((unsigned int)keyEvent.GetKeyCode()) <= (unsigned int)KeyCode::NONE);
 
 				m_Keys[(unsigned int)keyEvent.GetKeyCode()] = 0;
 				return false;
