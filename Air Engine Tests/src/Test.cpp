@@ -1,7 +1,15 @@
 #include "pch.h"
 
-TEST(TestOne, TestYes) {
+TEST(TestOne, TestTrue) {
+	ASSERT_EQ(true, false);
+}
+
+TEST(TestOne, TestFalse) {
 	ASSERT_EQ(true, true);
+}
+
+TEST(TestOne, TestOther) {
+	ASSERT_EQ(true, 3);
 }
 
 int main(int argc, char** argv) {

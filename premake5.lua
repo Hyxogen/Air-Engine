@@ -9,17 +9,6 @@ workspace "Air-Engine"
 
 outputdir = "%{cfg.buildcfg}/%{cfg.system}/%{cfg.architecture}/"
 
-project "googletest"
-	kind "StaticLib"
-	files {
-		"Vendor/googletest/googletest/src/gtest-all"
-	}
-
-	includedirs {
-		"Vendor/googletest/googletest/include",
-		"Vendor/googletest/googletest"
-	}
-
 filter {}
 include "Sandbox"
 include "Air-Engine"
