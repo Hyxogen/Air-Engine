@@ -2,6 +2,7 @@
 
 #include "Events/WindowsMouseEvent.hpp"
 
+#include "../../Engine/Util/Logger/Logger.hpp"
 #include "../../Engine/Core/Assert.hpp"
 #include "../../Engine/Util/HashUtils.hpp"
 #include "../../Engine/Core/Application.hpp"
@@ -19,6 +20,7 @@ namespace platform {
 
 			engine::core::Application::GetApplication()->GetDispatcher()->Register(Hash("EVENT_MOUSE_BUTTON_DOWN", 24), this);
 			engine::core::Application::GetApplication()->GetDispatcher()->Register(Hash("EVENT_MOUSE_BUTTON_RELEASE", 27), this);
+			engine::core::Application::GetApplication()->GetDispatcher()->Register(Hash("EVENT_MOUSE_MOVE", 17), this);
 		}
 
 		WindowsMouse::~WindowsMouse() {
@@ -49,12 +51,15 @@ namespace platform {
 			engine::events::MouseEvent& mouseEvent = (engine::events::MouseEvent&)event;
 
 			if (mouseEvent.GetWindow() != m_Window) return false;
-				
-			if (mouseEvent.GetID() == Hash("EVENT_MOUSE_BUTTON_DOWN", 24)) {
-				m_Buttons[(unsigned int)mouseEvent.GetMouseCode()] = true;
+			
+			if (mouseEvent.GetID() == Hash("EVENT_MOUSE_MOVE", 17)) {
+				AIR_CORE_LOG_TRACE("EVENT_MOUSE_MOVE");
+			}
+			else if (mouseEvent.GetID() == Hash("EVENT_MOUSE_BUTTON_DOWN", 24)) {
+				m_Buttons[(unsigned int)((engine::events::MouseButtonEvent&)mouseEvent).GetMouseCode()] = true;
 			}
 			else {
-				m_Buttons[(unsigned int)mouseEvent.GetMouseCode()] = false;
+				m_Buttons[(unsigned int)((engine::events::MouseButtonEvent&)mouseEvent).GetMouseCode()] = false;
 			}
 			return false;
 		}

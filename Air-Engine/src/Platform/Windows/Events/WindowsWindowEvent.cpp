@@ -13,6 +13,7 @@
 namespace platform {
 	namespace windows {
 
+		//An event shouldn't handle events
 		WindowsWindowEvent::WindowsWindowEvent(WindowsWindow* window, unsigned int event, unsigned int wParam, unsigned long lParam)
 			: m_Window(window), m_Event(event), m_WParam(wParam), m_LParam(lParam) {
 
@@ -30,6 +31,10 @@ namespace platform {
 			}
 			else if (event == WM_LBUTTONUP || event == WM_MBUTTONUP || event == WM_RBUTTONUP || event == WM_XBUTTONUP) {
 				WindowsMouseButtonReleaseEvent mouseEvent((engine::io::Window*)window, event, wParam, lParam);
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+			}
+			else if (event == WM_MOUSEMOVE) {
+				WindowsMouseMoveEvent mouseEvent((engine::io::Window*)window, event, wParam, lParam);
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
 			}
 		}

@@ -3,7 +3,7 @@
 #include <windows.h>
 
 namespace platform {
-	namespace windows { 
+	namespace windows {
 
 		WindowsMouseButtonDownEvent::WindowsMouseButtonDownEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
 			m_Window = window;
@@ -22,7 +22,7 @@ namespace platform {
 				return engine::io::MouseCode::NONE;
 			}
 		}
-		
+
 		WindowsMouseButtonReleaseEvent::WindowsMouseButtonReleaseEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
 			m_Window = window;
 			m_MouseCode = GetMouseCode(event);
@@ -31,7 +31,7 @@ namespace platform {
 			m_WParam = wParam;
 			m_LParam = lParam;
 		}
-		
+
 		engine::io::MouseCode WindowsMouseButtonReleaseEvent::GetMouseCode(unsigned int event) const {
 			switch (event) {
 			case WM_LBUTTONDOWN:
@@ -39,6 +39,14 @@ namespace platform {
 			default:
 				return engine::io::MouseCode::NONE;
 			}
+		}
+
+		WindowsMouseMoveEvent::WindowsMouseMoveEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
+			m_Window = window;
+
+			m_Event = event;
+			m_WParam = wParam;
+			m_LParam = lParam;
 		}
 	}
 }
