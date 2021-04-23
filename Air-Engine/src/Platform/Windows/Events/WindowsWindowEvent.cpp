@@ -16,7 +16,7 @@ namespace platform {
 		//An event shouldn't handle events
 		WindowsWindowEvent::WindowsWindowEvent(WindowsWindow* window, unsigned int event, unsigned int wParam, unsigned long lParam)
 			: m_Window(window), m_Event(event), m_WParam(wParam), m_LParam(lParam) {
-
+/*
 			if (event == WM_KEYDOWN) {
 				WindowsKeyDownEvent keyEvent((engine::io::Window*)window, event, wParam, lParam);
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(keyEvent);
@@ -37,7 +37,7 @@ namespace platform {
 				WindowsMouseMoveEvent mouseEvent((engine::io::Window*)window, event, wParam, lParam);
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
 			}
-		}
+		*/}
 
 		unsigned int WindowsWindowEvent::GetID() const {
 			return Hash("EVENT_WINDOWS_WINDOW", 21);

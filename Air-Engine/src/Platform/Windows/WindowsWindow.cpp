@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "WindowsWindow.hpp"
+#include "WindowsWindowEventHandler.hpp"
 #include "Events/WindowsWindowEvent.hpp"
 
 #include "../../Engine/Core/Application.hpp"
@@ -22,6 +23,7 @@ namespace platform {
 			AIR_CORE_LOG_INFO("Destroying windows window");
 			ReleaseDC(mWindow, GetHDC());
 			DestroyWindow(mWindow);
+			delete m_EventHandler;
 			AIR_CORE_LOG_INFO("Succesfully destroyed window");
 		}
 
@@ -48,6 +50,8 @@ namespace platform {
 			}
 
 			SetWindowLongPtr(mWindow, GWLP_USERDATA, (LONG_PTR)this);
+
+			m_EventHandler = new WindowsWindowEventHandler(this);
 
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;

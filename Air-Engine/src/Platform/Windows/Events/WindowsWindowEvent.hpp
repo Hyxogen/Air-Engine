@@ -22,6 +22,8 @@ namespace platform {
 
 			inline unsigned int GetLParam() const { return m_LParam; }
 
+			inline WindowsWindow* GetWindow() const { return m_Window; }
+
 			virtual unsigned int GetID() const;
 		};
 

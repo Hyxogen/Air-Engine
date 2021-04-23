@@ -12,11 +12,14 @@ SetVisibility() values
 namespace platform {
 	namespace windows {
 
+		class WindowsWindowEventHandler;
+
 		class WindowsWindow : public engine::io::Window {
 
 		protected:
 			HWND mWindow;
 			bool mShouldClose = false;
+			WindowsWindowEventHandler* m_EventHandler;
 
 		public:
 			WindowsWindow(int width, int height, const wchar_t* title);
