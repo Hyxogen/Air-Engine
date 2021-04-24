@@ -89,6 +89,9 @@ namespace platform {
 			else {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 				WindowsWindowEvent event(window, uMsg, wParam, lParam);
+				if (event.GetEvent() == WM_LBUTTONDOWN || event.GetEvent() == WM_MBUTTONDOWN || event.GetEvent() == WM_RBUTTONDOWN || event.GetEvent() == WM_XBUTTONDOWN) {
+					int i = 0;
+				}
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(event);
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);

@@ -9,7 +9,11 @@ namespace platform {
 
 		WindowsKeyDownEvent::WindowsKeyDownEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam, bool repeat) {
 			m_Window = window;
-			m_KeyCode = static_cast<engine::io::KeyCode>(wParam);
+
+			if (wParam >= (unsigned int) engine::io::KeyCode::NONE)
+				m_KeyCode = engine::io::KeyCode::NONE;
+			else
+				m_KeyCode = static_cast<engine::io::KeyCode>(wParam);
 
 			m_Event = event;
 			m_WParam = wParam;
