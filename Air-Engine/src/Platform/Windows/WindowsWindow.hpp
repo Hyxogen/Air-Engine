@@ -19,6 +19,7 @@ namespace platform {
 		protected:
 			HWND mWindow;
 			bool mShouldClose = false;
+			//This should not be in this class
 			WindowsWindowEventHandler* m_EventHandler;
 
 		public:

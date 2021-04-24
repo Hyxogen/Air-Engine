@@ -10,6 +10,7 @@ namespace platform {
 		class WindowsMouse : public engine::io::Mouse, public engine::events::EventListener {
 		protected:
 			bool* m_Buttons;
+			int m_X, m_Y;
 		public:
 			WindowsMouse(engine::io::Window* window);
 

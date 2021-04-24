@@ -1,6 +1,6 @@
 #include "WindowsMouseEvent.hpp"
 
-#include <windows.h>
+#include <Windows.h>
 
 namespace platform {
 	namespace windows {
@@ -47,6 +47,17 @@ namespace platform {
 			m_Event = event;
 			m_WParam = wParam;
 			m_LParam = lParam;
+
+			m_X = GetX(lParam);
+			m_Y = GetY(lParam);
+		}
+
+		int WindowsMouseMoveEvent::GetX(unsigned long lParam) const {
+			return LOWORD(lParam);
+		}
+
+		int WindowsMouseMoveEvent::GetY(unsigned long lParam) const {
+			return HIWORD(lParam);
 		}
 	}
 }

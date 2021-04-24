@@ -6,6 +6,9 @@
 #include "../../Engine/Events/EventDispatcher.hpp"
 #include "../../Engine/Events/KeyEvent.hpp"
 
+#include "../../Engine/Util/Logger/Logger.hpp"
+
+
 #include <windows.h>
 
 namespace platform {

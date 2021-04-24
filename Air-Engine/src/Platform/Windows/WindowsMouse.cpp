@@ -13,7 +13,7 @@
 namespace platform {
 	namespace windows {
 
-		WindowsMouse::WindowsMouse(engine::io::Window* window) : Mouse(window) {
+		WindowsMouse::WindowsMouse(engine::io::Window* window) : Mouse(window), m_X(0), m_Y(0) {
 			m_Buttons = new bool[(unsigned int)MouseCode::NONE];
 
 			memset(m_Buttons, 0, sizeof(bool) * (unsigned int)MouseCode::NONE);
@@ -53,7 +53,8 @@ namespace platform {
 			if (mouseEvent.GetWindow() != m_Window) return false;
 			
 			if (mouseEvent.GetID() == Hash("EVENT_MOUSE_MOVE", 17)) {
-				AIR_CORE_LOG_TRACE("EVENT_MOUSE_MOVE");
+				m_X = ((engine::events::MouseMoveEvent&)mouseEvent).GetX();
+				m_Y = ((engine::events::MouseMoveEvent&)mouseEvent).GetY();
 			}
 			else if (mouseEvent.GetID() == Hash("EVENT_MOUSE_BUTTON_DOWN", 24)) {
 				m_Buttons[(unsigned int)((engine::events::MouseButtonEvent&)mouseEvent).GetMouseCode()] = true;
