@@ -22,7 +22,7 @@ namespace engine {
 			void Remove(unsigned int event, const EventListener* listener);
 
 			//Change events to pointers
-			void Dispatch(Event& event) const;
+			bool Dispatch(Event& event) const;
 		};
 
 	}
