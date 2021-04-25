@@ -83,16 +83,16 @@ namespace platform {
 			if (uMsg == WM_CLOSE || uMsg == WM_QUIT || uMsg == WM_DESTROY) {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 				window->Close();
-				PostQuitMessage(0);				
+				PostQuitMessage(0);
+				return 0;
+			} if (uMsg == WM_GETICON) {
 				return 0;
 			}
 			else {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 				WindowsWindowEvent event(window, uMsg, wParam, lParam);
-				if (event.GetEvent() == WM_LBUTTONDOWN || event.GetEvent() == WM_MBUTTONDOWN || event.GetEvent() == WM_RBUTTONDOWN || event.GetEvent() == WM_XBUTTONDOWN) {
-					int i = 0;
-				}
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(event);
+				if (engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(event))
+					return 0;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		}
