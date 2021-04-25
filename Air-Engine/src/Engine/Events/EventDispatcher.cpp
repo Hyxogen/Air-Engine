@@ -46,7 +46,7 @@ namespace engine {
 		bool EventDispatcher::Dispatch(Event& event) const {
 			std::unordered_map<unsigned int, std::vector<const EventListener*>&>::iterator key = m_Listeners.find(event.GetID());
 
-			if (key == m_Listeners.end()) return;
+			if (key == m_Listeners.end()) return false;
 
 			std::vector<const EventListener*>::iterator it = key->second.begin();
 
