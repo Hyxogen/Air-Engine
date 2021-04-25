@@ -35,7 +35,7 @@ namespace platform {
 				return true;
 			}
 			else if (windowEvent.GetEvent() == WM_MOUSEMOVE) {
-				HandleMouseEvent(windowEvent);
+				//HandleMouseEvent(windowEvent);
 				return true;
 			}
 			return false;
@@ -56,21 +56,8 @@ namespace platform {
 		}
 
 		void WindowsWindowEventHandler::HandleMouseEvent(WindowsWindowEvent& event) {
-			if (event.GetEvent() == WM_LBUTTONDOWN || event.GetEvent() == WM_MBUTTONDOWN || event.GetEvent() == WM_RBUTTONDOWN || event.GetEvent() == WM_XBUTTONDOWN) {
-				WindowsMouseButtonDownEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
-				return;
-			}
-			else if (event.GetEvent() == WM_LBUTTONUP || event.GetEvent() == WM_MBUTTONUP || event.GetEvent() == WM_RBUTTONUP || event.GetEvent() == WM_XBUTTONUP) {
-				WindowsMouseButtonReleaseEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
-				return;
-			}
-			else if (event.GetEvent() == WM_MOUSEMOVE) {
-				WindowsMouseMoveEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
-				return;
-			}
+			WindowsMouseEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
+			engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
 		}
 
 		void WindowsWindowEventHandler::HandleOtherEvent(WindowsWindowEvent& event) {

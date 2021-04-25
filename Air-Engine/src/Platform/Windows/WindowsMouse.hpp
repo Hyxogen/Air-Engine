@@ -9,7 +9,7 @@ namespace platform {
 		//Have a separate class for handling mouse events? Like WindowsMouseEventHandler?
 		class WindowsMouse : public engine::io::Mouse, public engine::events::EventListener {
 		protected:
-			bool* m_Buttons;
+			unsigned int m_ButtonsMask;
 			int m_X, m_Y;
 		public:
 			WindowsMouse(engine::io::Window* window);
@@ -20,11 +20,11 @@ namespace platform {
 
 			virtual unsigned int GetScrollDelta() const;
 
-			virtual int GetXCoord() const;
+			inline int GetXCoord() const { return m_X; }
 
-			virtual int GetYCoord() const;
+			inline int GetYCoord() const { return m_Y; };
 
-			virtual bool GetButtonDown(engine::io::MouseCode mouseCode) const;
+			virtual bool GetButtonDown(unsigned int button) const;
 
 			virtual bool OnEvent(engine::events::Event& event);
 		};

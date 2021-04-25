@@ -1,63 +1,39 @@
 #include "WindowsMouseEvent.hpp"
 
+#include "../WindowsMouseMappings.hpp"
+
 #include <Windows.h>
 
 namespace platform {
 	namespace windows {
+		WindowsMouseEvent::WindowsMouseEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam)
+			: engine::events::MouseEvent(window, GetButtonMask(wParam), GetXCoord(lParam), GetYCoord(lParam)) {
 
-		WindowsMouseButtonDownEvent::WindowsMouseButtonDownEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
-			m_Window = window;
-			m_MouseCode = GetMouseCode(event);
-
-			m_Event = event;
-			m_WParam = wParam;
-			m_LParam = lParam;
 		}
 
-		engine::io::MouseCode WindowsMouseButtonDownEvent::GetMouseCode(unsigned int event) const {
-			switch (event) {
-			case WM_LBUTTONDOWN:
-				return engine::io::MouseCode::LEFT;
-			default:
-				return engine::io::MouseCode::NONE;
-			}
-		}
-
-		WindowsMouseButtonReleaseEvent::WindowsMouseButtonReleaseEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
-			m_Window = window;
-			m_MouseCode = GetMouseCode(event);
-
-			m_Event = event;
-			m_WParam = wParam;
-			m_LParam = lParam;
-		}
-
-		engine::io::MouseCode WindowsMouseButtonReleaseEvent::GetMouseCode(unsigned int event) const {
-			switch (event) {
-			case WM_LBUTTONDOWN:
-				return engine::io::MouseCode::LEFT;
-			default:
-				return engine::io::MouseCode::NONE;
-			}
-		}
-
-		WindowsMouseMoveEvent::WindowsMouseMoveEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam) {
-			m_Window = window;
-
-			m_Event = event;
-			m_WParam = wParam;
-			m_LParam = lParam;
-
-			m_X = GetX(lParam);
-			m_Y = GetY(lParam);
-		}
-
-		int WindowsMouseMoveEvent::GetX(unsigned long lParam) const {
+		int WindowsMouseEvent::GetXCoord(unsigned long lParam) {
 			return LOWORD(lParam);
 		}
 
-		int WindowsMouseMoveEvent::GetY(unsigned long lParam) const {
+		int WindowsMouseEvent::GetYCoord(unsigned long lParam) {
 			return HIWORD(lParam);
+		}
+
+		unsigned int WindowsMouseEvent::GetButtonMask(unsigned int wParam) {
+			unsigned int ret = 0;
+
+			if (wParam & MK_LBUTTON)
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_LBUTTON));
+			if (wParam & MK_MBUTTON)
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_MBUTTON));
+			if (wParam & MK_RBUTTON)
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_RBUTTON));
+			if (wParam & MK_XBUTTON1)
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_XBUTTON1));
+			if (wParam & MK_XBUTTON2)
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_XBUTTON2));
+
+			return ret;
 		}
 	}
 }

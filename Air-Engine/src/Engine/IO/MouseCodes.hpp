@@ -1,25 +1,17 @@
 #pragma once
 
-#ifdef AIR_PLATFORM_WINDOWS
-#include "../../Platform/Windows/WindowsMouseCodes.hpp"
-#else
-#error Air Engine only supports windows at the moment
-#endif
 
 namespace engine {
 	namespace io {
 
-		enum class MouseCode : unsigned int {
-			#ifdef AIR_PLATFORM_WINDOWS
-			LEFT			= platform::windows::MouseCode::LEFT,
-			MIDDLE			= platform::windows::MouseCode::MIDDLE,
-			RIGHT			= platform::windows::MouseCode::RIGHT,
+		enum MouseCode {
+			BUTTON_LEFT			= 0x01,
+			BUTTON_MIDDLE		= 0x02,
+			BUTTON_RIGHT		= 0x03,
+			BUTTON_XONE			= 0x04,
+			BUTTON_XTWO			= 0x05,
 
-			XONE			= platform::windows::MouseCode::XONE,
-			XTWO			= platform::windows::MouseCode::XTWO,
-
-			NONE			= platform::windows::MouseCode::NONE
-			#endif
+			BUTTON_UNKNOWN		= 0x00
 		};
 
 	}

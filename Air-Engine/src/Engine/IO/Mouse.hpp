@@ -21,7 +21,7 @@ namespace engine {
 
 			virtual int GetYCoord() const = 0;
 
-			virtual bool GetButtonDown(MouseCode mouseCode) const = 0;
+			virtual bool GetButtonDown(unsigned int button) const = 0;
 
 			inline Window* GetWindow() const { return m_Window; }
 
