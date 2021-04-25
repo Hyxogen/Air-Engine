@@ -50,7 +50,7 @@ namespace platform {
 
 		unsigned int WindowsKeyMap::GetKeyCode(unsigned int keyCode) {
 			for (unsigned int i = 0; winKeyPairs[i].m_SysCode != engine::io::UNKNOWN; i++) {
-				if (winKeyPairs[i].m_SysCode == keyCode)
+				if (winKeyPairs[i].m_KeyCode == keyCode)
 					return winKeyPairs[i].m_SysCode;
 			}
 			return engine::io::KeyCode::UNKNOWN;
