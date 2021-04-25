@@ -18,11 +18,13 @@ namespace platform {
 			virtual bool OnEvent(engine::events::Event& event);
 
 		protected:
-			void HandleKeyEvent(WindowsWindowEvent& event);
+			bool HandleEvent(WindowsWindowEvent& event);
 
-			void HandleMouseEvent(WindowsWindowEvent& event);
+			bool HandleKeyEvent(WindowsWindowEvent& event);
 
-			void HandleOtherEvent(WindowsWindowEvent& event);
+			bool HandleMouseEvent(WindowsWindowEvent& event);
+
+			bool HandleOtherEvent(WindowsWindowEvent& event);
 		};
 
 	}
