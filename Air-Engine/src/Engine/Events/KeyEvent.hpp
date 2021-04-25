@@ -15,7 +15,7 @@ namespace engine {
 		class KeyEvent : public Event {
 		protected:
 			io::Window* m_Window = nullptr;
-			unsigned int m_KeyCode = io::KeyCode::UNKNOWN;
+			unsigned int m_KeyCode = io::KeyCode::KEY_UNKNOWN;
 
 			KeyEvent() {}
 
