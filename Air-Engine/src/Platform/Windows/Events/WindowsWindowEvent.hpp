@@ -17,11 +17,8 @@ namespace platform {
 			WindowsWindowEvent(WindowsWindow* window, unsigned int event, unsigned int wParam, unsigned long lParam);
 
 			inline unsigned int GetEvent() const { return m_Event; }
-
 			inline unsigned int GetWParam() const { return m_WParam; }
-
 			inline unsigned int GetLParam() const { return m_LParam; }
-
 			inline WindowsWindow* GetWindow() const { return m_Window; }
 
 			virtual unsigned int GetID() const;
