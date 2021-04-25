@@ -31,7 +31,18 @@ namespace engine {
 
 			inline unsigned int GetButtonMask() const { return m_ButtonMask; }
 
-			virtual unsigned int GetID() const { return Hash("EVENT_MOUSE_ANY", 16); }
+			virtual unsigned int GetID() const { return Hash("EVENT_MOUSE_GENERAL", 20); }
+		};
+
+		class MouseScrollEvent : public MouseEvent {
+		protected:
+			int m_ScrollDelta;
+		public:
+			MouseScrollEvent(io::Window* window, unsigned int buttonMask, int x, int y, int scrollDelta) : MouseEvent(window, buttonMask, x, y), m_ScrollDelta(scrollDelta) {}
+
+			inline int GetScrollDelta() const { return m_ScrollDelta; }	
+
+			virtual unsigned int GetID() const { return Hash("EVENT_MOUSE_SCROLL", 19); }
 		};
 	}
 }

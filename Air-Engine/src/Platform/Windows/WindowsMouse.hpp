@@ -10,7 +10,7 @@ namespace platform {
 		class WindowsMouse : public engine::io::Mouse, public engine::events::EventListener {
 		protected:
 			unsigned int m_ButtonsMask;
-			int m_X, m_Y;
+			int m_X, m_Y, m_ScrollDelta;
 		public:
 			WindowsMouse(engine::io::Window* window);
 
@@ -18,7 +18,7 @@ namespace platform {
 
 			virtual bool HasScrollWheel() const;
 
-			virtual unsigned int GetScrollDelta() const;
+			int GetScrollDelta() const { return m_ScrollDelta; }
 
 			inline int GetXCoord() const { return m_X; }
 

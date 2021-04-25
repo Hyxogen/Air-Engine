@@ -15,7 +15,7 @@ namespace engine {
 
 			virtual bool HasScrollWheel() const = 0;
 
-			virtual unsigned int GetScrollDelta() const = 0;
+			virtual int GetScrollDelta() const = 0;
 
 			virtual int GetXCoord() const = 0;
 

@@ -21,7 +21,31 @@ namespace platform {
 
 			static int GetYCoord(unsigned long lParam);
 
+			static int GetScrollDelta(unsigned int wParam);
+
 			static unsigned int GetButtonMask(unsigned int wParam);
+		};
+
+		class WindowsMouseScrollEvent : public engine::events::MouseScrollEvent {
+			unsigned int m_Event, m_WParam;
+			unsigned long m_LParam;
+		public:
+			WindowsMouseScrollEvent(engine::io::Window* window, unsigned int event, unsigned int wParam, unsigned long lParam);
+
+			inline unsigned int GetEvent() const { return m_Event; }
+
+			inline unsigned int GetWParam() const { return m_WParam; }
+
+			inline unsigned long GetLParam() const { return m_LParam; }
+
+			static int GetXCoord(unsigned long lParam);
+
+			static int GetYCoord(unsigned long lParam);
+
+			static int GetScrollDelta(unsigned int wParam);
+
+			static unsigned int GetButtonMask(unsigned int wParam);
+
 		};
 	}
 }

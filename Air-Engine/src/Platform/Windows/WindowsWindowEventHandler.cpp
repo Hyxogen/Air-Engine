@@ -5,7 +5,6 @@
 #include "Events/WindowsMouseEvent.hpp"
 
 #include "../../Engine/Core/Application.hpp"
-#include "../../Engine/Core/Assert.hpp"
 #include "../../Engine/Util/HashUtils.hpp"
 
 #include "../../Engine/Events/Event.hpp"
@@ -35,7 +34,11 @@ namespace platform {
 				return true;
 			}
 			else if (windowEvent.GetEvent() == WM_MOUSEMOVE) {
-				//HandleMouseEvent(windowEvent);
+				HandleMouseEvent(windowEvent);
+				return true;
+			}
+			else if (windowEvent.GetEvent() == WM_MOUSEWHEEL) {
+				HandleMouseEvent(windowEvent);
 				return true;
 			}
 			return false;
@@ -47,17 +50,22 @@ namespace platform {
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(keyEvent);
 				return;
 			}
-			else if (event.GetEvent() == WM_KEYUP) {
+			else {
 				WindowsKeyReleaseEvent keyEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
 				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(keyEvent);
 				return;
 			}
-			ASSERT(false); //This should not trigger
 		}
 
 		void WindowsWindowEventHandler::HandleMouseEvent(WindowsWindowEvent& event) {
-			WindowsMouseEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
-			engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+			if (event.GetEvent() == WM_MOUSEWHEEL) {
+				WindowsMouseScrollEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+			}
+			else {
+				WindowsMouseEvent mouseEvent((engine::io::Window*)event.GetWindow(), event.GetEvent(), event.GetWParam(), event.GetLParam());
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+			}
 		}
 
 		void WindowsWindowEventHandler::HandleOtherEvent(WindowsWindowEvent& event) {
