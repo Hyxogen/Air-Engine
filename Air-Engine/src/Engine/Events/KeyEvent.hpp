@@ -17,8 +17,6 @@ namespace engine {
 			io::Window* m_Window = nullptr;
 			unsigned int m_KeyCode = io::KeyCode::KEY_UNKNOWN;
 
-			KeyEvent() {}
-
 			KeyEvent(io::Window* window, unsigned int keyCode) : m_Window(window), m_KeyCode(keyCode) {}
 
 		public:
@@ -31,11 +29,9 @@ namespace engine {
 
 		class KeyDownEvent : public KeyEvent {
 		protected:
-			bool m_Repeat = false;
-
-			KeyDownEvent() {}
+			bool m_Repeat;
 		public:
-			KeyDownEvent(io::Window* window, unsigned int keyCode, bool repeat) : KeyEvent(window, keyCode), m_Repeat(repeat) {}
+			KeyDownEvent(io::Window* window, unsigned int keyCode, bool repeat = false) : KeyEvent(window, keyCode), m_Repeat(repeat) {}
 
 			unsigned int GetID() const override { return Hash("EVENT_KEY_DOWN", 15); }
 
@@ -43,9 +39,6 @@ namespace engine {
 		};
 
 		class KeyReleaseEvent : public KeyEvent {
-		protected:
-			
-			KeyReleaseEvent() {}
 		public:
 			KeyReleaseEvent(io::Window* window, unsigned int keyCode) : KeyEvent(window, keyCode) {}
 
