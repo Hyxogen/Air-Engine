@@ -3,6 +3,7 @@
 namespace engine {
 	namespace io {
 
+		//Add prefix to keys
 		enum KeyCode {
 			//Non-numpad numbers
 			ZERO			= 0x01,
