@@ -7,16 +7,16 @@ namespace platform {
 	namespace windows {
 
 		WinKeyPair winKeyPairs[] = {
-			{engine::io::KeyCode::KEY_ZERO, 0x30},		//'0' Key
-			{engine::io::KeyCode::KEY_ONE, 0x31},		//'1' Key
-			{engine::io::KeyCode::KEY_TWO, 0x32},		//'2' Key
-			{engine::io::KeyCode::KEY_THREE, 0x32},		//'3' Key
-			{engine::io::KeyCode::KEY_FOUR, 0x32},		//'4' Key
-			{engine::io::KeyCode::KEY_FIVE, 0x32},		//'5' Key
-			{engine::io::KeyCode::KEY_SIX, 0x32},		//'6' Key
-			{engine::io::KeyCode::KEY_SEVEN, 0x32},		//'7' Key
-			{engine::io::KeyCode::KEY_EIGHT, 0x32},		//'8' Key
-			{engine::io::KeyCode::KEY_NINE, 0x32},		//'9' Key
+			{engine::io::KeyCode::KEY_0, 0x30},			//'0' Key
+			{engine::io::KeyCode::KEY_1, 0x31},			//'1' Key
+			{engine::io::KeyCode::KEY_2, 0x32},			//'2' Key
+			{engine::io::KeyCode::KEY_3, 0x32},			//'3' Key
+			{engine::io::KeyCode::KEY_4, 0x32},			//'4' Key
+			{engine::io::KeyCode::KEY_5, 0x32},			//'5' Key
+			{engine::io::KeyCode::KEY_6, 0x32},			//'6' Key
+			{engine::io::KeyCode::KEY_7, 0x32},			//'7' Key
+			{engine::io::KeyCode::KEY_8, 0x32},			//'8' Key
+			{engine::io::KeyCode::KEY_9, 0x32},			//'9' Key
 
 			{engine::io::KeyCode::KEY_A, 0x41},			//'A' Key
 			{engine::io::KeyCode::KEY_B, 0x42},			//'B' Key
