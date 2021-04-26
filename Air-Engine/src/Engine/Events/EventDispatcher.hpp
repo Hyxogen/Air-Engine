@@ -4,15 +4,19 @@
 #include <unordered_map>
 #include <vector>
 
+
 namespace engine {
 	namespace events {
 
 		class Event;
 		class EventListener;
 
+		typedef std::vector<const EventListener*> EventList;
+		typedef std::unordered_map<long long, EventList*> PriorityMap;
+
 		class EventPriorityMap {
 		protected:
-			std::unordered_map<long long, std::vector<const EventListener*>*>* m_PrioMap;
+			PriorityMap* m_PrioMap;
 
 		public:
 			EventPriorityMap();
@@ -33,7 +37,7 @@ namespace engine {
 			/// <returns>A long long with priority in the highest byte and event in the lowest 4 bytes</returns>
 			static long long GetKeyMask(unsigned int event, unsigned char priority);
 		protected:
-			std::vector<const EventListener*>* CreateEntry(unsigned int event, unsigned char priority);
+			EventList* CreateEntry(unsigned int event, unsigned char priority);
 		};
 
 		class EventDispatcher {

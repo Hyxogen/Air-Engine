@@ -11,7 +11,7 @@ namespace engine {
 		}
 
 		EventPriorityMap::~EventPriorityMap() {
-			std::unordered_map<long long, std::vector<const EventListener*>*>::iterator it;
+			PriorityMap::iterator it;
 
 			for (it = m_PrioMap->begin(); it != m_PrioMap->end(); ++it)
 				delete it->second;
@@ -19,7 +19,7 @@ namespace engine {
 		}
 
 		void EventPriorityMap::Add(unsigned int event, const EventListener* listener) {
-			std::vector<const EventListener*>* listeners = GetListeners(event, listener->GetPriority());
+			EventList* listeners = GetListeners(event, listener->GetPriority());
 
 			if (listeners == nullptr)
 				listeners = CreateEntry(event, listener->GetPriority());
@@ -29,7 +29,7 @@ namespace engine {
 		}
 
 		void EventPriorityMap::Remove(unsigned int event, const EventListener* listener) {
-			std::vector<const EventListener*>* listeners = GetListeners(event, listener->GetPriority());
+			EventList* listeners = GetListeners(event, listener->GetPriority());
 			if (listener == nullptr) return;
 
 			for (int i = 0; i < listeners->size(); i++) {
@@ -41,7 +41,7 @@ namespace engine {
 		}
 
 		std::vector<const EventListener*>* EventPriorityMap::GetListeners(unsigned int event, unsigned char priority) const {
-			std::unordered_map<long long, std::vector<const EventListener*>*>::iterator it = m_PrioMap->find(GetKeyMask(event, priority));
+			PriorityMap::iterator it = m_PrioMap->find(GetKeyMask(event, priority));
 
 			if (it == m_PrioMap->end())
 				return nullptr;
@@ -53,8 +53,8 @@ namespace engine {
 			return (((long long) 0 | priority) << ((sizeof(long long) - sizeof(priority)) << 3)) | event;
 		}
 
-		std::vector<const EventListener*>* EventPriorityMap::CreateEntry(unsigned int event, unsigned char priority) {
-			std::vector<const EventListener*>* ret = new std::vector<const EventListener*>;
+		EventList* EventPriorityMap::CreateEntry(unsigned int event, unsigned char priority) {
+			EventList* ret = new EventList();
 			m_PrioMap->emplace(GetKeyMask(event, priority), ret);
 			return ret;
 		}
