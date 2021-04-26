@@ -6,16 +6,16 @@ namespace engine {
 		//Add prefix to keys
 		enum KeyCode {
 			//Non-numpad numbers
-			KEY_ZERO			= 0x01,
-			KEY_ONE				= 0x02,
-			KEY_TWO				= 0x03,
-			KEY_THREE			= 0x04,
-			KEY_FOUR			= 0x05,
-			KEY_FIVE			= 0x06,
-			KEY_SIX				= 0x07,
-			KEY_SEVEN			= 0x08,
-			KEY_EIGHT			= 0x09,
-			KEY_NINE			= 0x0A,
+			KEY_0				= 0x01,
+			KEY_1				= 0x02,
+			KEY_2				= 0x03,
+			KEY_3				= 0x04,
+			KEY_4				= 0x05,
+			KEY_5				= 0x06,
+			KEY_6				= 0x07,
+			KEY_7				= 0x08,
+			KEY_8				= 0x09,
+			KEY_9				= 0x0A,
 
 			//Characters
 			KEY_A				= 0x0B,
