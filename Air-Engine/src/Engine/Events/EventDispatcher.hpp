@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <unordered_map>
 #include <vector>
 
@@ -9,8 +10,12 @@ namespace engine {
 		class Event;
 		class EventListener;
 
+		class EventPriorityMap {
+		protected:
+
+		};
+
 		class EventDispatcher {
-			std::unordered_map<unsigned int, std::vector<const EventListener*>&>& m_Listeners;
 
 		public:
 			EventDispatcher();
@@ -21,7 +26,10 @@ namespace engine {
 
 			void Remove(unsigned int event, const EventListener* listener);
 
-			void Dispatch(Event& event) const;
+			void Dispatch(Event* event) const;
+
+		private:
+			bool InsertEvent(unsigned int event, const EventListener* listener);
 		};
 
 	}
