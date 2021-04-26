@@ -68,6 +68,7 @@ namespace engine {
 
 		bool EventDispatcher::Dispatch(Event* event) const {
 			for (unsigned char i = PRIORITY_MONITOR; i != PRIORITY_LOWEST; i++) {
+			for (unsigned char i = PRIORITY_MONITOR; i != PRIORITY_LOWEST + 1; i++) {
 				if (Execute(m_PriorityMap->GetListeners(event->GetID(), i), event))
 					return true;
 			}
