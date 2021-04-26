@@ -28,6 +28,18 @@ namespace engine {
 			return;
 		}
 
+		void EventPriorityMap::Remove(unsigned int event, const EventListener* listener) {
+			std::vector<const EventListener*>* listeners = GetListeners(event, listener->GetPriority());
+			if (listener == nullptr) return;
+
+			for (int i = 0; i < listeners->size(); i++) {
+				if (listeners->at(i) == listener) {
+					listeners->erase(listeners->begin() + i);
+					return;
+				}
+			}
+		}
+
 		std::vector<const EventListener*>* EventPriorityMap::GetListeners(unsigned int event, unsigned char priority) const {
 			std::unordered_map<long long, std::vector<const EventListener*>*>::iterator it = m_PrioMap->find(GetKeyMask(event, priority));
 
@@ -63,15 +75,7 @@ namespace engine {
 		}
 
 		void EventDispatcher::Remove(unsigned int event, const EventListener* listener) {
-			std::vector<const EventListener*>* listeners = m_PriorityMap->GetListeners(event, listener->GetPriority());
-			if (listener == nullptr) return;
-
-			for (int i = 0; i < listeners->size(); i++) {
-				if (listeners->at(i) == listener) {
-					listeners->erase(listeners->begin() + i);
-					return;
-				}
-			}
+			m_PriorityMap->Remove(event, listener);
 		}
 
 		bool EventDispatcher::Dispatch(Event* event) const {

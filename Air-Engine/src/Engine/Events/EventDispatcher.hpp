@@ -21,6 +21,8 @@ namespace engine {
 
 			void Add(unsigned int event, const EventListener* listener);
 
+			void Remove(unsigned int event, const EventListener* listener);
+
 			std::vector<const EventListener*>* GetListeners(unsigned int event, unsigned char priority) const;
 
 			static long long GetKeyMask(unsigned int event, unsigned char priority);
