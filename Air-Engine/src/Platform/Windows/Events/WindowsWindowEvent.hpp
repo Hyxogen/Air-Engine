@@ -1,5 +1,7 @@
 #pragma once
 
+#include <windows.h>
+
 #include "../../../Engine/Events/Event.hpp"
 
 namespace platform {
@@ -10,19 +12,19 @@ namespace platform {
 		class WindowsWindowEvent : public engine::events::Event {
 		protected:
 			WindowsWindow* m_Window;
-			unsigned int m_Event, m_WParam;
-			unsigned long m_LParam;
+			unsigned int m_Event;
+			WPARAM m_WParam;
+			LPARAM m_LParam;
 
 		public:
-			WindowsWindowEvent(WindowsWindow* window, unsigned int event, unsigned int wParam, unsigned long lParam);
+			WindowsWindowEvent(WindowsWindow* window, unsigned int event, WPARAM wParam, LPARAM lParam);
 
 			inline unsigned int GetEvent() const { return m_Event; }
-			inline unsigned int GetWParam() const { return m_WParam; }
-			inline unsigned int GetLParam() const { return m_LParam; }
+			inline WPARAM GetWParam() const { return m_WParam; }
+			inline LPARAM GetLParam() const { return m_LParam; }
 			inline WindowsWindow* GetWindow() const { return m_Window; }
 
 			virtual unsigned int GetID() const;
 		};
-
 	}
 }
