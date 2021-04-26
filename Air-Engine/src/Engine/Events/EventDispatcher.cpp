@@ -50,10 +50,7 @@ namespace engine {
 		}
 
 		long long EventPriorityMap::GetKeyMask(unsigned int event, unsigned char priority) {
-			long long ret = priority;
-			ret = ret << ((sizeof(long long) - sizeof(priority)) * 8);
-			ret = ret | event;
-			return ret;
+			return (((long long) 0 | priority) << ((sizeof(long long) - sizeof(priority)) << 3)) | event;
 		}
 
 		std::vector<const EventListener*>* EventPriorityMap::CreateEntry(unsigned int event, unsigned char priority) {
