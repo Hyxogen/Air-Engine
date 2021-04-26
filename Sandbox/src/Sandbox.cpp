@@ -9,10 +9,12 @@ public:
 
 	Sandbox() {
 		TestEventHandler handler;
+		SuperImportantHandler impHandler;
 		TestEvent event;
 
 		this->GetDispatcher()->Register(event.GetID(), &handler);
-		this->GetDispatcher()->Dispatch(event);
+		this->GetDispatcher()->Register(event.GetID(), &impHandler);
+		this->GetDispatcher()->Dispatch(&event);
 	}
 
 	~Sandbox() {

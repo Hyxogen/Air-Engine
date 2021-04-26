@@ -4,6 +4,13 @@
 
 class TestEventHandler : public engine::events::EventListener {
 
-	bool OnEvent(engine::events::Event& event);
+	bool OnEvent(engine::events::Event* event);
 
+};
+
+class SuperImportantHandler : public engine::events::EventListener {
+	
+	bool OnEvent(engine::events::Event* event);
+
+	unsigned char GetPriority() const;
 };
