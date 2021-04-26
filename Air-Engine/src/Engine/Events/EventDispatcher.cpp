@@ -63,11 +63,18 @@ namespace engine {
 		}
 
 		void EventDispatcher::Remove(unsigned int event, const EventListener* listener) {
-			//Not implemented at the moment
+			std::vector<const EventListener*>* listeners = m_PriorityMap->GetListeners(event, listener->GetPriority());
+			if (listener == nullptr) return;
+
+			for (int i = 0; i < listeners->size(); i++) {
+				if (listeners->at(i) == listener) {
+					listeners->erase(listeners->begin() + i);
+					return;
+				}
+			}
 		}
 
 		bool EventDispatcher::Dispatch(Event* event) const {
-			for (unsigned char i = PRIORITY_MONITOR; i != PRIORITY_LOWEST; i++) {
 			for (unsigned char i = PRIORITY_MONITOR; i != PRIORITY_LOWEST + 1; i++) {
 				if (Execute(m_PriorityMap->GetListeners(event->GetID(), i), event))
 					return true;
