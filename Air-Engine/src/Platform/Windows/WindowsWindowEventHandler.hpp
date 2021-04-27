@@ -17,7 +17,7 @@ namespace platform {
 		public:
 			WindowsWindowEventHandler(WindowsWindow* window);
 
-			virtual bool OnEvent(engine::events::Event& event);
+			virtual bool OnEvent(engine::events::Event* event);
 
 			static int GetXCoord(LPARAM lParam);
 
@@ -32,13 +32,13 @@ namespace platform {
 			static unsigned int GetKeyCode(WPARAM wParam);
 
 		protected:
-			bool HandleEvent(WindowsWindowEvent& event);
+			bool HandleEvent(WindowsWindowEvent* event);
 
-			bool HandleKeyEvent(WindowsWindowEvent& event);
+			bool HandleKeyEvent(WindowsWindowEvent* event);
 
-			bool HandleMouseEvent(WindowsWindowEvent& event);
+			bool HandleMouseEvent(WindowsWindowEvent* event);
 
-			bool HandleOtherEvent(WindowsWindowEvent& event);
+			bool HandleOtherEvent(WindowsWindowEvent* event);
 		};
 
 	}

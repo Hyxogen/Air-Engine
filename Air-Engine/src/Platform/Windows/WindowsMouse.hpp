@@ -26,7 +26,7 @@ namespace platform {
 
 			virtual bool GetButtonDown(unsigned int button) const;
 
-			virtual bool OnEvent(engine::events::Event& event);
+			virtual bool OnEvent(engine::events::Event* event);
 		};
 
 	}

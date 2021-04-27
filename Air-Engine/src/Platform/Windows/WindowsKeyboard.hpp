@@ -32,7 +32,7 @@ namespace platform {
 
 			virtual bool GetKeyToggled(unsigned int keyCode) const;
 
-			virtual bool OnEvent(engine::events::Event& event);
+			virtual bool OnEvent(engine::events::Event* event);
 		};
 
 	}

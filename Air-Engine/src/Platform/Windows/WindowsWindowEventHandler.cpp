@@ -22,60 +22,60 @@ namespace platform {
 			engine::core::Application::GetApplication()->GetDispatcher()->Register(Hash("EVENT_WINDOWS_WINDOW", 21), this);
 		}
 
-		bool WindowsWindowEventHandler::OnEvent(engine::events::Event& event) {
-			WindowsWindowEvent& windowEvent = (WindowsWindowEvent&)event;
+		bool WindowsWindowEventHandler::OnEvent(engine::events::Event* event) {
+			WindowsWindowEvent* windowEvent = (WindowsWindowEvent*)event;
 
-			if (windowEvent.GetWindow() != m_Window) return false;
+			if (windowEvent->GetWindow() != m_Window) return false;
 
 			return HandleEvent(windowEvent);
 		}
 
-		bool WindowsWindowEventHandler::HandleEvent(WindowsWindowEvent& event) {
-			if (event.GetEvent() == WM_KEYDOWN || event.GetEvent() == WM_KEYUP) {
+		bool WindowsWindowEventHandler::HandleEvent(WindowsWindowEvent* event) {
+			if (event->GetEvent() == WM_KEYDOWN || event->GetEvent() == WM_KEYUP) {
 				HandleKeyEvent(event);
 				return true;
 			}
-			else if (event.GetEvent() == WM_LBUTTONDOWN || event.GetEvent() == WM_MBUTTONDOWN || event.GetEvent() == WM_RBUTTONDOWN || event.GetEvent() == WM_XBUTTONDOWN
-				|| event.GetEvent() == WM_LBUTTONUP || event.GetEvent() == WM_MBUTTONUP || event.GetEvent() == WM_RBUTTONUP || event.GetEvent() == WM_XBUTTONUP) {
+			else if (event->GetEvent() == WM_LBUTTONDOWN || event->GetEvent() == WM_MBUTTONDOWN || event->GetEvent() == WM_RBUTTONDOWN || event->GetEvent() == WM_XBUTTONDOWN
+				|| event->GetEvent() == WM_LBUTTONUP || event->GetEvent() == WM_MBUTTONUP || event->GetEvent() == WM_RBUTTONUP || event->GetEvent() == WM_XBUTTONUP) {
 				return HandleMouseEvent(event);
 			}
-			else if (event.GetEvent() == WM_MOUSEMOVE) {
+			else if (event->GetEvent() == WM_MOUSEMOVE) {
 				return HandleMouseEvent(event);
 			}
-			else if (event.GetEvent() == WM_MOUSEWHEEL) {
+			else if (event->GetEvent() == WM_MOUSEWHEEL) {
 				return HandleMouseEvent(event);
 			}
 			return false;
 		}
 
-		bool WindowsWindowEventHandler::HandleKeyEvent(WindowsWindowEvent& event) {
-			if (event.GetEvent() == WM_KEYDOWN) {
-				engine::events::KeyDownEvent keyEvent((engine::io::Window*)event.GetWindow(), GetKeyCode(event.GetWParam()), IsRepeat(event.GetLParam()));
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(keyEvent);
+		bool WindowsWindowEventHandler::HandleKeyEvent(WindowsWindowEvent* event) {
+			if (event->GetEvent() == WM_KEYDOWN) {
+				engine::events::KeyDownEvent keyEvent((engine::io::Window*)event->GetWindow(), GetKeyCode(event->GetWParam()), IsRepeat(event->GetLParam()));
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&keyEvent);
 				return true;
 			}
 			else {
-				engine::events::KeyReleaseEvent keyEvent((engine::io::Window*)event.GetWindow(), GetKeyCode(event.GetWParam()));
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(keyEvent);
+				engine::events::KeyReleaseEvent keyEvent((engine::io::Window*)event->GetWindow(), GetKeyCode(event->GetWParam()));
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&keyEvent);
 				return true;
 			}
 		}
 
-		bool WindowsWindowEventHandler::HandleMouseEvent(WindowsWindowEvent& event) {
-			if (event.GetEvent() == WM_MOUSEWHEEL) {
+		bool WindowsWindowEventHandler::HandleMouseEvent(WindowsWindowEvent* event) {
+			if (event->GetEvent() == WM_MOUSEWHEEL) {
 				engine::events::MouseScrollEvent mouseEvent(
-					(engine::io::Window*)event.GetWindow(), GetButtonMask(event.GetWParam()), GetXCoord(event.GetLParam()), GetYCoord(event.GetLParam()), GetScrollDelta(event.GetWParam()));
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+					(engine::io::Window*)event->GetWindow(), GetButtonMask(event->GetWParam()), GetXCoord(event->GetLParam()), GetYCoord(event->GetLParam()), GetScrollDelta(event->GetWParam()));
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&mouseEvent);
 				return true;
 			}
 			else {
-				engine::events::MouseEvent mouseEvent((engine::io::Window*)event.GetWindow(), GetButtonMask(event.GetWParam()), GetXCoord(event.GetLParam()), GetYCoord(event.GetLParam()));
-				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(mouseEvent);
+				engine::events::MouseEvent mouseEvent((engine::io::Window*)event->GetWindow(), GetButtonMask(event->GetWParam()), GetXCoord(event->GetLParam()), GetYCoord(event->GetLParam()));
+				engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&mouseEvent);
 				return true;
 			}
 		}
 
-		bool WindowsWindowEventHandler::HandleOtherEvent(WindowsWindowEvent& event) {
+		bool WindowsWindowEventHandler::HandleOtherEvent(WindowsWindowEvent* event) {
 			return false;
 		}
 

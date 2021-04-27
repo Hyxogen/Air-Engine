@@ -4,11 +4,12 @@
 
 #include "WindowsMouseMappings.hpp"
 
-#include "Events/WindowsMouseEvent.hpp"
+#include "Events/WindowsWindowEvent.hpp"
 
 #include "../../Engine/Util/HashUtils.hpp"
 #include "../../Engine/Core/Application.hpp"
 #include "../../Engine/Events/EventDispatcher.hpp"
+#include "../../Engine/Events/MouseEvent.hpp"
 
 namespace platform {
 	namespace windows {
@@ -29,17 +30,17 @@ namespace platform {
 			return (m_ButtonsMask & WindowsButtonMap::GetButtonMask(button)) != 0;
 		}
 
-		bool WindowsMouse::OnEvent(engine::events::Event& event) {
-			engine::events::MouseEvent& mouseEvent = (engine::events::MouseEvent&)event;
+		bool WindowsMouse::OnEvent(engine::events::Event* event) {
+			engine::events::MouseEvent* mouseEvent = (engine::events::MouseEvent*)event;
 
-			if (mouseEvent.GetWindow() != m_Window) return false;
+			if (mouseEvent->GetWindow() != m_Window) return false;
 
-			m_ButtonsMask = mouseEvent.GetButtonMask();
+			m_ButtonsMask = mouseEvent->GetButtonMask();
 			bool down = GetButtonDown(engine::io::BUTTON_RIGHT);
-			m_X = mouseEvent.GetX();
-			m_Y = mouseEvent.GetY();
+			m_X = mouseEvent->GetX();
+			m_Y = mouseEvent->GetY();
 
-			if (event.GetID() == Hash("EVENT_MOUSE_SCROLL", 19))
+			if (event->GetID() == Hash("EVENT_MOUSE_SCROLL", 19))
 				m_ScrollDelta = ((engine::events::MouseScrollEvent&)mouseEvent).GetScrollDelta();
 			return false;
 		}
