@@ -8,8 +8,7 @@ class Sandbox : public engine::core::Application {
 public:
 
 	Sandbox() {
-		TestEventHandler handler;
-		TestEvent event;
+
 	}
 
 	~Sandbox() {

@@ -6,51 +6,119 @@
 namespace engine {
 	namespace events {
 
-		EventDispatcher::EventDispatcher() : m_Listeners(*(new std::unordered_map<unsigned int, std::vector<const EventListener*>&>())){
-			
+		EventPriorityMap::EventPriorityMap() : m_PrioMap(new PriorityMap()) {
+
 		}
 
-		EventDispatcher::~EventDispatcher() {
-			std::unordered_map<unsigned int, std::vector<const EventListener*>&>::iterator it;
+		EventPriorityMap::~EventPriorityMap() {
+			PriorityMap::iterator it;
 
-			for (it = m_Listeners.begin(); it != m_Listeners.end(); ++it) {
-				delete& it->second;
-			}
-
-			delete &m_Listeners;
+			for (it = m_PrioMap->begin(); it != m_PrioMap->end(); ++it)
+				delete it->second;
+			delete m_PrioMap;
 		}
 
-		void EventDispatcher::Register(unsigned int event, const EventListener* listener) {
-			std::unordered_map<unsigned int, std::vector<const EventListener*>&>::iterator key = m_Listeners.find(event);
+		void EventPriorityMap::Add(unsigned int event, const EventListener* listener) {
+			EventList* listeners = GetListeners(event, listener->GetPriority());
 
-			if (key == m_Listeners.end())
-				key = m_Listeners.emplace(event, *(new std::vector<const EventListener*>())).first;
+			if (listeners == nullptr)
+				listeners = CreateEntry(event, listener->GetPriority());
 
-			key->second.push_back(listener);
+			listeners->push_back(listener);
+			return;
 		}
 
-		void EventDispatcher::Remove(unsigned int event, const EventListener* listener) {
-			std::unordered_map<unsigned int, std::vector<const EventListener*>&>::iterator key = m_Listeners.find(event);
+		void EventPriorityMap::Remove(unsigned int event, const EventListener* listener) {
+			EventList* listeners = GetListeners(event, listener->GetPriority());
+			if (listener == nullptr) return;
 
-			if (key == m_Listeners.end())
-				return;
-
-			for (unsigned int i = 0; i < key->second.size(); i++) {
-				if (key->second[i] == listener) {
-					key->second.erase(key->second.begin() + i);
+			for (int i = 0; i < listeners->size(); i++) {
+				if (listeners->at(i) == listener) {
+					listeners->erase(listeners->begin() + i);
 					return;
 				}
 			}
 		}
 
-		bool EventDispatcher::Dispatch(Event& event) const {
-			std::unordered_map<unsigned int, std::vector<const EventListener*>&>::iterator key = m_Listeners.find(event.GetID());
+		EventList* EventPriorityMap::GetListeners(unsigned int event, unsigned char priority) const {
+			PriorityMap::iterator it = m_PrioMap->find(GetKeyMask(event, priority));
 
-			if (key == m_Listeners.end()) return false;
+			if (it == m_PrioMap->end())
+				return nullptr;
+			else
+				return it->second;
+		}
 
-			std::vector<const EventListener*>::iterator it = key->second.begin();
+		EventList EventPriorityMap::GetListenersOrdered(unsigned int event) {
+			EventList ret;
+			PriorityMap::iterator it = m_PrioMap->lower_bound(GetKeyMask(event, PRIORITY_MONITOR));
 
-			for (it = key->second.begin(); it != key->second.end(); ++it) {
+			if (it == m_PrioMap->end())
+				return ret;
+
+			long long max = GetKeyMask(event, PRIORITY_LOWEST);
+			long long key = 0;
+			long long id, priority;
+			int index = 0;
+			for (it; it != m_PrioMap->end(); ++it) {
+				key = it->first;
+				if (key > max) break;
+
+				id = GetEvent(key);
+				priority = GetPriority(key);
+
+				if (id != event) continue;
+
+				ret.insert(ret.begin() + index, it->second->begin(), it->second->end());
+				index = ret.size();
+			}
+			return ret;
+		}
+
+		long long EventPriorityMap::GetKeyMask(unsigned int event, unsigned char priority) {
+			return (((long long)0 | priority) << ((sizeof(long long) - sizeof(priority)) << 3)) | event;
+		}
+
+		unsigned int EventPriorityMap::GetEvent(long long key) {
+			return key & static_cast<long long>(UINT_MAX);
+		}
+
+		unsigned char EventPriorityMap::GetPriority(long long key) {
+			return key & (static_cast<long long>(0xff)) << ((sizeof(long long) - sizeof(unsigned char)) << 3);
+		}
+
+		EventList* EventPriorityMap::CreateEntry(unsigned int event, unsigned char priority) {
+			EventList* ret = new EventList();
+			m_PrioMap->emplace(GetKeyMask(event, priority), ret);
+			return ret;
+		}
+
+		EventDispatcher::EventDispatcher() : m_PriorityMap(new EventPriorityMap()) {
+
+		}
+
+		EventDispatcher::~EventDispatcher() {
+			delete m_PriorityMap;
+		}
+
+		void EventDispatcher::Register(unsigned int event, const EventListener* listener) {
+			m_PriorityMap->Add(event, listener);
+		}
+
+		void EventDispatcher::Remove(unsigned int event, const EventListener* listener) {
+			m_PriorityMap->Remove(event, listener);
+		}
+
+		bool EventDispatcher::Dispatch(Event* event) const {
+			EventList listeners = std::move(m_PriorityMap->GetListenersOrdered(event->GetID()));
+			return Execute(&listeners, event);
+		}
+
+		bool EventDispatcher::Execute(EventList* listeners, Event* event) const {
+			if (listeners == nullptr) return false;
+			EventList::iterator it;
+
+			for (it = listeners->begin(); it != listeners->end(); ++it) {
 				if (((EventListener*)*it)->OnEvent(event))
 					return true;
 			}
