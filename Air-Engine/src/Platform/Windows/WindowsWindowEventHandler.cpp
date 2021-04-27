@@ -32,18 +32,21 @@ namespace platform {
 
 		bool WindowsWindowEventHandler::HandleEvent(WindowsWindowEvent* event) {
 			if (event->GetEvent() == WM_KEYDOWN || event->GetEvent() == WM_KEYUP) {
-				HandleKeyEvent(event);
+				//HandleKeyEvent(event);
 				return true;
 			}
 			else if (event->GetEvent() == WM_LBUTTONDOWN || event->GetEvent() == WM_MBUTTONDOWN || event->GetEvent() == WM_RBUTTONDOWN || event->GetEvent() == WM_XBUTTONDOWN
 				|| event->GetEvent() == WM_LBUTTONUP || event->GetEvent() == WM_MBUTTONUP || event->GetEvent() == WM_RBUTTONUP || event->GetEvent() == WM_XBUTTONUP) {
-				return HandleMouseEvent(event);
+				//return HandleMouseEvent(event);
+				return true;
 			}
 			else if (event->GetEvent() == WM_MOUSEMOVE) {
-				return HandleMouseEvent(event);
+				//return HandleMouseEvent(event);
+				return true;
 			}
 			else if (event->GetEvent() == WM_MOUSEWHEEL) {
-				return HandleMouseEvent(event);
+				//return HandleMouseEvent(event);
+				return true;
 			}
 			return false;
 		}
