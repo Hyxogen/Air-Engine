@@ -29,6 +29,8 @@ namespace engine {
 
 			std::vector<const EventListener*>* GetListeners(unsigned int event, unsigned char priority) const;
 
+			EventList GetListenersOrdered(unsigned int event);
+
 			/// <summary>
 			/// Creates a long long of the event id together with a bitmask for the priority
 			/// </summary>
@@ -36,6 +38,10 @@ namespace engine {
 			/// <param name="priority">a byte representing the priority, see Priority in EventListener.h</param>
 			/// <returns>A long long with priority in the highest byte and event in the lowest 4 bytes</returns>
 			static long long GetKeyMask(unsigned int event, unsigned char priority);
+
+			static unsigned char GetPriority(long long key);
+
+			static unsigned int GetEvent(long long key);
 		protected:
 			EventList* CreateEntry(unsigned int event, unsigned char priority);
 		};

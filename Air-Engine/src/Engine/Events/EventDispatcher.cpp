@@ -49,8 +49,42 @@ namespace engine {
 				return it->second;
 		}
 
+		EventList EventPriorityMap::GetListenersOrdered(unsigned int event) {
+			EventList ret;
+			PriorityMap::iterator it = m_PrioMap->lower_bound(GetKeyMask(event, PRIORITY_MONITOR));
+
+			if (it == m_PrioMap->end())
+				return ret;
+
+			long long max = GetKeyMask(event, PRIORITY_LOWEST);
+			long long key = 0;
+			long long id, priority;
+			int index = 0;
+			for (it; it != m_PrioMap->end(); ++it) {
+				key = it->first;
+				if (key > max) break;
+
+				id = GetEvent(key);
+				priority = GetPriority(key);
+
+				if (id != event) continue;
+
+				ret.insert(ret.begin() + index, it->second->begin(), it->second->end());
+				index = ret.size();
+			}
+			return ret;
+		}
+
 		long long EventPriorityMap::GetKeyMask(unsigned int event, unsigned char priority) {
-			return (((long long) 0 | priority) << ((sizeof(long long) - sizeof(priority)) << 3)) | event;
+			return (((long long)0 | priority) << ((sizeof(long long) - sizeof(priority)) << 3)) | event;
+		}
+
+		unsigned int EventPriorityMap::GetEvent(long long key) {
+			return key & static_cast<long long>(UINT_MAX);
+		}
+
+		unsigned char EventPriorityMap::GetPriority(long long key) {
+			return key & (static_cast<long long>(0xff)) << ((sizeof(long long) - sizeof(unsigned char)) << 3);
 		}
 
 		EventList* EventPriorityMap::CreateEntry(unsigned int event, unsigned char priority) {
