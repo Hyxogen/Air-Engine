@@ -6,7 +6,7 @@
 namespace engine {
 	namespace events {
 
-		EventPriorityMap::EventPriorityMap() : m_PrioMap(new std::unordered_map<long long, std::vector<const EventListener*>*>()) {
+		EventPriorityMap::EventPriorityMap() : m_PrioMap(new PriorityMap()) {
 
 		}
 
