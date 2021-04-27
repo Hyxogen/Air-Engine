@@ -94,7 +94,7 @@ namespace engine {
 		}
 
 		EventDispatcher::EventDispatcher() : m_PriorityMap(new EventPriorityMap()) {
-			
+
 		}
 
 		EventDispatcher::~EventDispatcher() {
@@ -110,11 +110,8 @@ namespace engine {
 		}
 
 		bool EventDispatcher::Dispatch(Event* event) const {
-			for (unsigned char i = PRIORITY_MONITOR; i != PRIORITY_LOWEST + 1; i++) {
-				if (Execute(m_PriorityMap->GetListeners(event->GetID(), i), event))
-					return true;
-			}
-			return false;
+			EventList listeners = m_PriorityMap->GetListenersOrdered(event->GetID());
+			return Execute(&listeners, event);
 		}
 
 		bool EventDispatcher::Execute(std::vector<const EventListener*>* listeners, Event* event) const {
