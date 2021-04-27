@@ -110,7 +110,7 @@ namespace engine {
 		}
 
 		bool EventDispatcher::Dispatch(Event* event) const {
-			EventList listeners = m_PriorityMap->GetListenersOrdered(event->GetID());
+			EventList listeners = std::move(m_PriorityMap->GetListenersOrdered(event->GetID()));
 			return Execute(&listeners, event);
 		}
 
