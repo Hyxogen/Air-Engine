@@ -12,7 +12,8 @@ namespace engine {
 		class EventListener;
 
 		typedef std::vector<const EventListener*> EventList;
-		typedef std::unordered_map<long long, EventList*> PriorityMap;
+		//Probeer dit eens met een template te maken
+		typedef std::map<long long, EventList*> PriorityMap;
 
 		class EventPriorityMap {
 		protected:
@@ -27,7 +28,7 @@ namespace engine {
 
 			void Remove(unsigned int event, const EventListener* listener);
 
-			std::vector<const EventListener*>* GetListeners(unsigned int event, unsigned char priority) const;
+			EventList* GetListeners(unsigned int event, unsigned char priority) const;
 
 			EventList GetListenersOrdered(unsigned int event);
 
@@ -61,7 +62,7 @@ namespace engine {
 			bool Dispatch(Event* event) const;
 
 		protected:
-			bool Execute(std::vector<const EventListener*>* listeners, Event* event) const;
+			bool Execute(EventList* listeners, Event* event) const;
 		};
 
 	}

@@ -40,7 +40,7 @@ namespace engine {
 			}
 		}
 
-		std::vector<const EventListener*>* EventPriorityMap::GetListeners(unsigned int event, unsigned char priority) const {
+		EventList* EventPriorityMap::GetListeners(unsigned int event, unsigned char priority) const {
 			PriorityMap::iterator it = m_PrioMap->find(GetKeyMask(event, priority));
 
 			if (it == m_PrioMap->end())
@@ -114,9 +114,9 @@ namespace engine {
 			return Execute(&listeners, event);
 		}
 
-		bool EventDispatcher::Execute(std::vector<const EventListener*>* listeners, Event* event) const {
+		bool EventDispatcher::Execute(EventList* listeners, Event* event) const {
 			if (listeners == nullptr) return false;
-			std::vector<const EventListener*>::iterator it;
+			EventList::iterator it;
 
 			for (it = listeners->begin(); it != listeners->end(); ++it) {
 				if (((EventListener*)*it)->OnEvent(event))
