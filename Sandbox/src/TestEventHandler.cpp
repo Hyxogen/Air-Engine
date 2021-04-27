@@ -8,6 +8,10 @@ bool TestEventHandler::OnEvent(engine::events::Event* event) {
 	return false;
 }
 
+unsigned char TestEventHandler::GetPriority() const {
+	return engine::events::PRIORITY_HIGHEST;
+}
+
 bool SuperImportantHandler::OnEvent(engine::events::Event* event) {
 	AIR_CORE_LOG_INFO("Superimportant event is handled");
 	return false;
