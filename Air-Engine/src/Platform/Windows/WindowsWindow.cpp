@@ -46,8 +46,10 @@ namespace platform {
 				AIR_CORE_LOG_ERROR("Failed to create window handle");
 				return 1;
 			}
+			SetWindowLongPtr(mWindow, GWLP_USERDATA, (LONG_PTR)this);
 
 			m_DeviceContext = GetDC(mWindow);
+			m_EventHandler = new WindowsWindowEventHandler(this);
 
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;
