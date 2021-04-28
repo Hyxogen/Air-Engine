@@ -16,6 +16,7 @@ namespace engine {
 			Mouse* m_Mouse;
 
 		public:
+			//Returns false if no errors
 			bool Initialize();
 
 			inline Keyboard* GetKeyboard() const { return m_Keyboard; }

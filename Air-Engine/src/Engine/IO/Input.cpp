@@ -13,6 +13,7 @@ namespace engine {
 		bool Input::Initialize() {
 			m_Keyboard = Keyboard::Create(core::Application::GetApplication()->GetWindow());
 			m_Mouse = Mouse::Create(core::Application::GetApplication()->GetWindow());
+			return false;
 		}
 
 		Input* Input::GetInstance() {
