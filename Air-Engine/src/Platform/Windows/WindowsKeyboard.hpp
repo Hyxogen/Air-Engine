@@ -1,6 +1,6 @@
 #pragma once
 
-#include <unordered_set>
+#include <set>
 
 //Ik ben benieuwd of het mij lukt om dit ook forward te declaren
 #include "../../Engine/IO/Keyboard.hpp"
@@ -22,7 +22,7 @@ namespace platform {
 
 		class WindowsKeyboard : public engine::io::Keyboard, public engine::events::EventListener {
 		protected:
-			std::unordered_set<unsigned int> m_PressedKeys;
+			std::set<unsigned int> m_PressedKeys;
 		public:
 			WindowsKeyboard(engine::io::Window* window);
 

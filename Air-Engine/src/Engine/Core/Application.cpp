@@ -16,6 +16,9 @@
 
 #include <glad\gl.h>
 
+#include <chrono>
+#include <iostream>
+
 namespace engine {
 	namespace core {
 
@@ -31,6 +34,7 @@ namespace engine {
 			delete mWindow;
 			delete mDispatcher;
 			delete m_ContextAdapter;
+			delete mConsole;
 			delete io::Input::GetInstance();
 		}
 
@@ -56,16 +60,28 @@ namespace engine {
 
 		bool Application::Run() {
 			while (!mWindow->ShouldClose()) {
+				auto beg = std::chrono::system_clock::now();
 				Update();
+				auto end = std::chrono::system_clock::now();
+				std::chrono::duration<float> diff = end - beg;
+
+				//std::chrono::milliseconds mic = std::chrono::duration_cast<std::chrono::microseconds>(diff);
+				
+				printf("Took %f\n", diff.count());
 			}
 			return true;
 		}
 
+		static float red = 0.0f;
 		void Application::Update() {
 			mWindow->Update();
 			mWindow->Draw();
+
 			glClear(GL_COLOR_BUFFER_BIT);
-			glClearColor(0.2f, 0.5f, 0.5f, 1.0f);
+			glClearColor(red, 0.5f, 0.5f, 1.0f);
+			red += 0.01f;
+			if (red >= 1.0f)
+				red = 0.0f;
 		}
 
 	}

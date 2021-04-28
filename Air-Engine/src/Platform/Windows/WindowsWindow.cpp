@@ -57,18 +57,15 @@ namespace platform {
 
 		void WindowsWindow::Update() {
 			MSG msg;
-			if (GetMessage(&msg, mWindow, 0, 0) > 0) {
+			while (PeekMessageW(&msg, mWindow, 0, 0, PM_REMOVE)) {
 				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			} else {
-				mShouldClose = true;
+				DispatchMessageW(&msg);
 			}
-
 			return;
 		}
 
 		void WindowsWindow::Draw() {
-			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
+			//SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 		}
 
 		void WindowsWindow::SetVisibility(short visibility) {
@@ -85,10 +82,7 @@ namespace platform {
 				window->Close();
 				PostQuitMessage(0);
 				return 0;
-			} if (uMsg == WM_GETICON) {
-				return 0;
-			} 
-			else {
+			} else {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 				if (window != nullptr) {
 					WindowsWindowEvent event(window, uMsg, wParam, lParam);
