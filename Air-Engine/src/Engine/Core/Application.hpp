@@ -50,6 +50,8 @@ namespace engine {
 			inline events::EventDispatcher* GetDispatcher() const { return mDispatcher; }
 
 			inline platform::windows::GLContextAdapter* GetContextAdapter() const { return m_ContextAdapter; }
+
+			static Application* GetApplication() { return s_Application; }
 		};
 
 		Application* CreateApplication();
