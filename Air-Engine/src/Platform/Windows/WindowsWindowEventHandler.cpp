@@ -39,10 +39,7 @@ namespace platform {
 				|| message == WM_LBUTTONUP || message == WM_MBUTTONUP || message == WM_RBUTTONUP || message == WM_XBUTTONUP) {
 				return HandleMouseEvent(event);
 			}
-			else if (message == WM_MOUSEMOVE) {
-				return HandleMouseEvent(event);
-			}
-			else if (message == WM_MOUSEWHEEL) {
+			else if (message == WM_MOUSEMOVE || message == WM_MOUSEWHEEL) {
 				return HandleMouseEvent(event);
 			}
 			return false;
