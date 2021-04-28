@@ -60,28 +60,17 @@ namespace engine {
 
 		bool Application::Run() {
 			while (!mWindow->ShouldClose()) {
-				auto beg = std::chrono::system_clock::now();
 				Update();
-				auto end = std::chrono::system_clock::now();
-				std::chrono::duration<float> diff = end - beg;
-
-				//std::chrono::milliseconds mic = std::chrono::duration_cast<std::chrono::microseconds>(diff);
-				
-				printf("Took %f\n", diff.count());
 			}
 			return true;
 		}
 
-		static float red = 0.0f;
 		void Application::Update() {
 			mWindow->Update();
 			mWindow->Draw();
 
 			glClear(GL_COLOR_BUFFER_BIT);
-			glClearColor(red, 0.5f, 0.5f, 1.0f);
-			red += 0.01f;
-			if (red >= 1.0f)
-				red = 0.0f;
+			glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
 		}
 
 	}
