@@ -15,8 +15,6 @@ namespace engine {
 
 	namespace io {
 		class Window;
-		class Keyboard;
-		class Mouse;
 	}
 
 	namespace core {
@@ -29,9 +27,6 @@ namespace engine {
 			events::EventDispatcher* mDispatcher;
 			platform::windows::Console* mConsole;
 			platform::windows::GLContextAdapter* m_ContextAdapter;
-
-			io::Keyboard* m_Keyboard;
-			io::Mouse* m_Mouse;
 
 		public:
 			Application();

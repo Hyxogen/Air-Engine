@@ -3,6 +3,8 @@
 
 #include "../Events/EventDispatcher.hpp"
 
+#include "../IO/Input.hpp"
+
 #include "../../Platform/Windows/WindowsKeyboard.hpp"
 #include "../../Platform/Windows/WindowsMouse.hpp"
 
@@ -29,6 +31,7 @@ namespace engine {
 			delete mWindow;
 			delete mDispatcher;
 			delete m_ContextAdapter;
+			delete io::Input::GetInstance();
 		}
 
 		bool Application::Initialize() {
@@ -44,11 +47,10 @@ namespace engine {
 			mWindow->Initialize();
 			m_ContextAdapter->Initialize();
 
+			io::Input::GetInstance()->Initialize();
+
+
 			mWindow->SetVisibility(AIR_W_SHOW);
-
-			m_Keyboard = (io::Keyboard*) new platform::windows::WindowsKeyboard((platform::windows::WindowsWindow*)mWindow);
-			m_Mouse = io::Mouse::Create(mWindow);
-
 			return false;
 		}
 
