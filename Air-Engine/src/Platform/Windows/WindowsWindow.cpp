@@ -1,5 +1,3 @@
-#include <GL/glew.h>
-#include <GL/wglew.h>
 #include <stdlib.h>
 
 #include "WindowsWindow.hpp"
@@ -58,8 +56,6 @@ namespace platform {
 		}
 
 		void WindowsWindow::Update() {
-			//This for some reason makes message handling really slow
-			//SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 			MSG msg;
 			if (GetMessage(&msg, mWindow, 0, 0) > 0) {
 				TranslateMessage(&msg);
@@ -69,6 +65,10 @@ namespace platform {
 			}
 
 			return;
+		}
+
+		void WindowsWindow::Draw() {
+			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 		}
 
 		void WindowsWindow::SetVisibility(short visibility) {

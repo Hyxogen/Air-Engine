@@ -8,8 +8,11 @@
 
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
+#include "Assert.hpp"
+#include "../Events/EventDispatcher.hpp"
+#include "../../Platform/Windows/GLContextAdapter.hpp"
 
-#include "../Util/Logger/Logger.hpp"
+#include <glad\gl.h>
 
 namespace engine {
 	namespace core {
@@ -25,8 +28,7 @@ namespace engine {
 		Application::~Application() {
 			delete mWindow;
 			delete mDispatcher;
-			delete m_Keyboard;
-			delete m_Mouse;
+			delete m_ContextAdapter;
 		}
 
 		bool Application::Initialize() {
@@ -37,7 +39,10 @@ namespace engine {
 				return true;
 
 			mWindow = new platform::windows::WindowsWindow(500, 600, L"Application");
+			m_ContextAdapter = new platform::windows::GLContextAdapter((platform::windows::WindowsWindow*)mWindow, 4, 6);
+
 			mWindow->Initialize();
+			m_ContextAdapter->Initialize();
 
 			mWindow->SetVisibility(AIR_W_SHOW);
 
@@ -56,6 +61,9 @@ namespace engine {
 
 		void Application::Update() {
 			mWindow->Update();
+			mWindow->Draw();
+			glClear(GL_COLOR_BUFFER_BIT);
+			glClearColor(0.2f, 0.5f, 0.5f, 1.0f);
 		}
 
 	}

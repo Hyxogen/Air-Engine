@@ -15,7 +15,7 @@ namespace platform {
 
 			~GLContextAdapter();
 
-			//Returns 0 for no errors
+			//Returns false for no errors
 			bool Initialize();
 
 		protected:

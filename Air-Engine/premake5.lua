@@ -11,7 +11,8 @@ project "Air-Engine"
 	files {
 		"src/**.h",
 		"src/**.hpp",
-		"src/**.cpp"
+		"src/**.cpp",
+		"Dependencies/glad/src/**.c"
 	}
 
 	defines {
@@ -19,7 +20,7 @@ project "Air-Engine"
 	}
 
 	includedirs {
-		"Dependencies/glew-2.1.0/include"
+		"Dependencies/glad/include"
 	}
 
 	links {
@@ -35,15 +36,6 @@ project "Air-Engine"
 			"AIR_BUILD_DEBUG",
 			"AIR_ASSERTIONS_ENABLED"
 		}
-
-		libdirs {
-			"Dependencies/glew-2.1.0/lib/Debug"
-		}
-
-		links {
-			"glew32d.lib"
-		}
-
 	filter "configurations:Release"
 		optimize "On"
 		
@@ -51,27 +43,12 @@ project "Air-Engine"
 			"AIR_BUILD_RELEASE"
 		}
 
-		libdirs {
-			"Dependencies/glew-2.1.0/lib/RelWithDebInfo"
-		}
-
-		links {
-			"glew32.lib"
-		}
 	filter "configurations:Distribution"
 		optimize "Full"
 		symbols "Off"
 		
 		defines {
 			"AIR_BUILD_DISTR"
-		}
-
-		libdirs {
-			"Dependencies/glew-2.1.0/lib/Release"
-		}
-
-		links {
-			"glew32.lib"
 		}
 
 	filter "system:windows"

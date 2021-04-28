@@ -29,6 +29,8 @@ namespace platform {
 
 			void Update();
 			
+			void Draw();
+
 			void Close();
 			
 			bool Initialize() override;
