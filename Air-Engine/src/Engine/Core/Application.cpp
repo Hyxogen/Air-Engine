@@ -46,6 +46,7 @@ namespace engine {
 
 		void Application::Update() {
 			mWindow->Update();
+			mWindow->Draw();
 			glClear(GL_COLOR_BUFFER_BIT);
 			glClearColor(0.2f, 0.5f, 0.5f, 1.0f);
 		}

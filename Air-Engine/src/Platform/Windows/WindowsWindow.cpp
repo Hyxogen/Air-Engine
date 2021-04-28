@@ -1,5 +1,3 @@
-#include <GL/glew.h>
-#include <GL/wglew.h>
 #include <stdlib.h>
 #include "WindowsWindow.hpp"
 #include "../../Engine/Util/Logger/Logger.hpp"
@@ -47,7 +45,6 @@ namespace platform {
 		}
 
 		void WindowsWindow::Update() {
-			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 			MSG msg;
 			if (GetMessage(&msg, mWindow, 0, 0) > 0) {
 				TranslateMessage(&msg);
@@ -57,6 +54,10 @@ namespace platform {
 			}
 
 			return;
+		}
+
+		void WindowsWindow::Draw() {
+			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 		}
 
 		void WindowsWindow::SetVisibility(short visibility) {
