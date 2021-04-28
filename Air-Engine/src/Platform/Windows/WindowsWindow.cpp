@@ -88,9 +88,6 @@ namespace platform {
 			} if (uMsg == WM_GETICON) {
 				return 0;
 			} 
-			else if (uMsg == WM_KEYDOWN || uMsg == WM_KEYUP) {
-				return 0;
-			}
 			else {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 				if (window != nullptr) {
