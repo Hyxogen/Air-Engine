@@ -1,4 +1,8 @@
+/*
+This is a simple helper class for handling input. Please be aware that this will most likely be removed or changed once multiple window support gets added
+*/
 #pragma once
+
 
 namespace engine {
 	namespace io {
@@ -6,9 +10,6 @@ namespace engine {
 		class Keyboard;
 		class Mouse;
 
-		/// <summary>
-		/// This is a temporary class to allow for quick input access
-		/// </summary>
 		class Input {
 			static Input* s_Instance;
 
