@@ -3,6 +3,7 @@
 namespace platform {
 	namespace windows {
 		class Console;
+		class GLContextAdapter;
 	}
 }
 
@@ -23,6 +24,7 @@ namespace engine {
 			io::Window* mWindow;
 			events::EventDispatcher* mDispatcher;
 			platform::windows::Console* mConsole;
+			platform::windows::GLContextAdapter* m_ContextAdapter;
 
 		public:
 			Application();
@@ -39,6 +41,8 @@ namespace engine {
 			inline io::Window* GetWindow() const { return mWindow; }
 
 			inline events::EventDispatcher* GetDispatcher() const { return mDispatcher; }
+
+			inline platform::windows::GLContextAdapter* GetContextAdapter() const { return m_ContextAdapter; }
 		};
 
 		Application* CreateApplication();

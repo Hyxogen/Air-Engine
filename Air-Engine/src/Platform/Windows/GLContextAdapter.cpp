@@ -1,7 +1,7 @@
-#include <GL/glew.h>
-#include <GL/wglew.h>
-#include "GLContextAdapter.hpp"
 #include "WindowsWindow.hpp"
+#include <glad\wgl.h>
+#include <glad\gl.h>
+#include "GLContextAdapter.hpp"
 #include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
@@ -10,6 +10,7 @@ namespace platform {
 		GLContextAdapter::GLContextAdapter(WindowsWindow* window, unsigned short major, unsigned short minor) : mWindow(window), mMajorVersion(major), mMinorVersion(minor) {
 		}
 
+		//TODO replace current glad with glad that has wgl extensions
 		GLContextAdapter::~GLContextAdapter() {
 			AIR_CORE_LOG_INFO("Destroying OpenGL context");
 			wglMakeCurrent(NULL, NULL);
@@ -31,17 +32,16 @@ namespace platform {
 			mContext = wglCreateContext(hdc);
 			wglMakeCurrent(hdc, mContext);
 			
-			GLint error = glewInit();
-
-			if (error) {
-				return 1;
+			if (!gladLoaderLoadWGL(hdc)) {
+				AIR_CORE_LOG_ERROR("Failed to load wgl");
+				return true;
 			}
 
 			HGLRC check = wglGetCurrentContext();
 
 			if (wglGetCurrentContext() == NULL) {
 				AIR_CORE_LOG_ERROR("Failed to create OpenGL context");
-				return 1;
+				return true;
 			}
 
 
@@ -65,8 +65,16 @@ namespace platform {
 			mContext = advContext;
 
 			wglMakeCurrent(hdc, mContext);
+
+			if (!gladLoaderLoadGL()) {
+				AIR_CORE_LOG_ERROR("Failed to load OpenGL");
+				return true;
+
+			}
 			const char* version = (char*)glGetString(GL_VERSION);
 			
+			wglSwapIntervalEXT(0);
+
 			AIR_CORE_LOG_INFO("Succesfully created OpenGL context");
 			AIR_CORE_LOG_INFO(version);
 			return 0;
