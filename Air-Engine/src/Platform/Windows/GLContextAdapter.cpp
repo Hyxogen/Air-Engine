@@ -73,7 +73,7 @@ namespace platform {
 			}
 			const char* version = (char*)glGetString(GL_VERSION);
 			
-			//wglSwapIntervalEXT(0);
+			wglSwapIntervalEXT(0);
 
 			AIR_CORE_LOG_INFO("Succesfully created OpenGL context");
 			AIR_CORE_LOG_INFO(version);
