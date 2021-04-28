@@ -92,12 +92,12 @@ namespace platform {
 				return 0;
 			}
 			else {
-				//WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
-				//if (window != nullptr) {
-				//	WindowsWindowEvent event(window, uMsg, wParam, lParam);
-				//	/*if (engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&event))
-				//		return 0;*/
-				//}
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				if (window != nullptr) {
+					WindowsWindowEvent event(window, uMsg, wParam, lParam);
+					if (engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&event))
+						return 0;
+				}
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		}
