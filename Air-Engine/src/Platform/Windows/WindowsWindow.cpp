@@ -30,7 +30,7 @@ namespace platform {
 			wndClass.lpszClassName = mTitle;
 
 			RegisterClass(&wndClass);
-			
+
 			mWindow = CreateWindowEx(CS_OWNDC, mTitle, mTitle, WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 				NULL, NULL, instance, NULL);
@@ -40,23 +40,23 @@ namespace platform {
 				return 1;
 			}
 
+			m_DeviceContext = GetDC(mWindow);
+
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;
 		}
 
 		void WindowsWindow::Update() {
 			MSG msg;
-			if (GetMessage(&msg, mWindow, 0, 0) > 0) {
+			while (PeekMessageW(&msg, mWindow, 0, 0, PM_REMOVE)) {
 				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			} else {
-				mShouldClose = true;
+				DispatchMessageW(&msg);
 			}
-
 			return;
 		}
 
 		void WindowsWindow::Draw() {
+			if (GetHDC() == nullptr) return;
 			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 		}
 
@@ -71,15 +71,10 @@ namespace platform {
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 			switch (uMsg) {
 			case WM_CLOSE:
-				PostQuitMessage(0);
 				return 0;
 			case WM_QUIT:
-				PostQuitMessage(0);
 				return 0;
 			case WM_DESTROY:
-				PostQuitMessage(0);
-				return 0;
-			case WM_PAINT:
 				return 0;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
