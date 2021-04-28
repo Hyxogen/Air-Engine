@@ -47,9 +47,7 @@ namespace platform {
 				return 1;
 			}
 
-			SetWindowLongPtr(mWindow, GWLP_USERDATA, (LONG_PTR)this);
-
-			m_EventHandler = new WindowsWindowEventHandler(this);
+			m_DeviceContext = GetDC(mWindow);
 
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;
@@ -65,7 +63,8 @@ namespace platform {
 		}
 
 		void WindowsWindow::Draw() {
-			//SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
+			if (GetHDC() == nullptr) return;
+			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 		}
 
 		void WindowsWindow::SetVisibility(short visibility) {

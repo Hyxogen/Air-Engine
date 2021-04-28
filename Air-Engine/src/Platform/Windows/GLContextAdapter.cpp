@@ -19,7 +19,7 @@ namespace platform {
 
 		bool GLContextAdapter::Initialize() {
 			AIR_CORE_LOG_INFO("Initializing OpenGL context adapter");
-			HDC hdc = GetDC(mWindow->getWindowHandle());
+			HDC hdc = mWindow->GetHDC();
 
 			PIXELFORMATDESCRIPTOR pfd = GetPixelDescriptor();
 

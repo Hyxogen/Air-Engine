@@ -18,6 +18,7 @@ namespace platform {
 
 		protected:
 			HWND mWindow;
+			HDC m_DeviceContext;
 			bool mShouldClose = false;
 			//This should not be in this class
 			WindowsWindowEventHandler* m_EventHandler;
@@ -43,9 +44,9 @@ namespace platform {
 
 			inline bool ShouldClose() const { return mShouldClose; }
 
-			inline HDC GetHDC() const { return GetDC(mWindow); }
+			inline HDC GetHDC() const { return m_DeviceContext; }
 
-			inline HWND getWindowHandle() const { return mWindow; }
+			inline HWND GetWindowHandle() const { return mWindow; }
 			//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		};
 
