@@ -16,7 +16,7 @@ namespace platform {
 			{engine::io::BUTTON_UNKNOWN, 0x00}
 		};
 
-		unsigned int WindowsButtonMap::GetButtonCode(unsigned int button) {
+		unsigned int WindowsButtonMap::GetSysCode(unsigned int button) {
 			for (int i = 0; winButtonPairs[i].m_BtnCode != engine::io::BUTTON_UNKNOWN; i++) {
 				if (winButtonPairs[i].m_BtnCode == button)
 					return winButtonPairs[i].m_SysCode;

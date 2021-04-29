@@ -12,7 +12,7 @@ namespace platform {
 			WindowsButtonMap() {}
 
 		public:
-			static unsigned int GetButtonCode(unsigned int keyCode);
+			static unsigned int GetSysCode(unsigned int btnCode);
 
 			static unsigned int GetButtonMask(unsigned int button);
 		};

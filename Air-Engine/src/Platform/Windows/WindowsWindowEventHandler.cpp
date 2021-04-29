@@ -96,15 +96,15 @@ namespace platform {
 			unsigned int ret = 0;
 
 			if (wParam & MK_LBUTTON)
-				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_LBUTTON));
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetSysCode(MK_LBUTTON));
 			if (wParam & MK_MBUTTON)
-				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_MBUTTON));
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetSysCode(MK_MBUTTON));
 			if (wParam & MK_RBUTTON)
-				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_RBUTTON));
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetSysCode(MK_RBUTTON));
 			if (wParam & MK_XBUTTON1)
-				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_XBUTTON1));
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetSysCode(MK_XBUTTON1));
 			if (wParam & MK_XBUTTON2)
-				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetButtonCode(MK_XBUTTON2));
+				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetSysCode(MK_XBUTTON2));
 
 			return ret;
 		}
