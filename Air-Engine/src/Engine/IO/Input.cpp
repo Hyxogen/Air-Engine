@@ -18,7 +18,7 @@ namespace engine {
 
 		Input* Input::GetInstance() {
 			if (s_Instance == nullptr)
-				return new Input();
+				s_Instance = new Input();
 
 			return s_Instance;
 		}
