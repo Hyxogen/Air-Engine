@@ -110,7 +110,7 @@ namespace platform {
 		}
 
 		unsigned int WindowsWindowEventHandler::GetKeyCode(WPARAM wParam) {
-			return WindowsKeyMap::GetKeyCode(wParam);
+			return WindowsKeyMap::GetSysCode(wParam);
 		}
 	}
 }

@@ -12,7 +12,10 @@ namespace platform {
 			WindowsKeyMap() {}
 
 		public:
-			static unsigned int GetKeyCode(unsigned int keyCode);
+			//This returns the Air Engine version of the key
+			static unsigned int GetSysCode(unsigned int keyCode);
+
+			static unsigned int GetKeyCode(unsigned int sysCode);
 		};
 	}
 }
