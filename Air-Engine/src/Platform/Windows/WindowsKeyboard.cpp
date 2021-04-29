@@ -27,7 +27,7 @@ namespace platform {
 		}
 
 		bool WindowsKeyboard::GetKeyToggled(unsigned int keyCode) const {
-			return false;
+			return GetKeyState(WindowsKeyMap::GetKeyCode(keyCode)) & 0b1;
 		}
 
 		bool WindowsKeyboard::OnEvent(engine::events::Event* event) {
