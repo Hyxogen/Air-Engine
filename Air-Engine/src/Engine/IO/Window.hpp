@@ -6,10 +6,10 @@ namespace engine {
 		class Window {
 
 		protected:
-			int mWidth, mHeight;
-			const wchar_t* mTitle;
+			int m_Width, m_Height;
+			const wchar_t* m_Title;
 
-			Window(const wchar_t* title, int width, int height) : mTitle(title), mWidth(width), mHeight(height) {}
+			Window(const wchar_t* title, int width, int height) : m_Title(title), m_Width(width), m_Height(height) {}
 
 		public:
 			virtual ~Window() {};
@@ -24,9 +24,9 @@ namespace engine {
 
 			virtual void SetVisibility(short visibility) = 0;
 
-			inline int GetWidth() const { return mWidth; }
+			inline int GetWidth() const { return m_Width; }
 
-			inline int GetHeight() const { return mHeight; }
+			inline int GetHeight() const { return m_Height; }
 		};
 
 	}

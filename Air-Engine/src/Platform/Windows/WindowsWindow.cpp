@@ -14,41 +14,41 @@ namespace platform {
 
 
 		WindowsWindow::WindowsWindow(int width, int height, const wchar_t* title) : Window(title, width, height) {
-			mWindow = nullptr;
+			m_Window = nullptr;
 		}
 
 		WindowsWindow::~WindowsWindow() {
 			AIR_CORE_LOG_INFO("Destroying windows window");
-			ReleaseDC(mWindow, GetHDC());
-			DestroyWindow(mWindow);
+			ReleaseDC(m_Window, GetHDC());
+			DestroyWindow(m_Window);
 			delete m_EventHandler;
 			AIR_CORE_LOG_INFO("Succesfully destroyed window");
 		}
 
 		bool WindowsWindow::Initialize() {
 			AIR_CORE_LOG_INFO("Initializing WindowsWindow");
-			mShouldClose = false;
+			m_ShouldClose = false;
 
 			WNDCLASS wndClass = { };
 			HINSTANCE instance = GetModuleHandleA(0);
 
 			wndClass.lpfnWndProc = (WNDPROC)WindowProc;
 			wndClass.hInstance = instance;
-			wndClass.lpszClassName = mTitle;
+			wndClass.lpszClassName = m_Title;
 
 			RegisterClass(&wndClass);
 
-			mWindow = CreateWindowEx(CS_OWNDC, mTitle, mTitle, WS_OVERLAPPEDWINDOW,
+			m_Window = CreateWindowEx(CS_OWNDC, m_Title, m_Title, WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 				NULL, NULL, instance, NULL);
 
-			if (mWindow == NULL) {
+			if (m_Window == NULL) {
 				AIR_CORE_LOG_ERROR("Failed to create window handle");
 				return 1;
 			}
-			SetWindowLongPtr(mWindow, GWLP_USERDATA, (LONG_PTR)this);
+			SetWindowLongPtr(m_Window, GWLP_USERDATA, (LONG_PTR)this);
 
-			m_DeviceContext = GetDC(mWindow);
+			m_DeviceContext = GetDC(m_Window);
 			m_EventHandler = new WindowsWindowEventHandler(this);
 
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
@@ -57,7 +57,7 @@ namespace platform {
 
 		void WindowsWindow::Update() {
 			MSG msg;
-			while (PeekMessageW(&msg, mWindow, 0, 0, PM_REMOVE)) {
+			while (PeekMessageW(&msg, m_Window, 0, 0, PM_REMOVE)) {
 				TranslateMessage(&msg);
 				DispatchMessageW(&msg);
 			}
@@ -70,11 +70,11 @@ namespace platform {
 		}
 
 		void WindowsWindow::SetVisibility(short visibility) {
-			ShowWindow(mWindow, visibility);
+			ShowWindow(m_Window, visibility);
 		}
 
 		void WindowsWindow::Close() {
-			mShouldClose = true;
+			m_ShouldClose = true;
 		}
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {

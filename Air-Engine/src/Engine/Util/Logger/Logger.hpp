@@ -16,19 +16,19 @@ namespace engine {
 	namespace util {
 
 		class Logger {
-			unsigned int mVerbosity = 9999;
-			const char* mPrefix;
+			unsigned int m_Verbosity = 9999;
+			const char* m_Prefix;
 
 			static Logger* CORE_LOGGER;
 
 		public:
-			Logger(const char* mPrefix = "");
+			Logger(const char* prefix = "");
 
 			void Log(Severity severity, const char* data) const;
 
 			void SetVerbosity(unsigned int verbosity);
 
-			inline unsigned int GetVerbosity() const { return mVerbosity; }
+			inline unsigned int GetVerbosity() const { return m_Verbosity; }
 
 			static Logger* GetCoreLogger();
 		};
@@ -41,7 +41,7 @@ namespace engine {
 #define AIR_CORE_LOG_WARN(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_WARN, x)
 #define AIR_CORE_LOG_ERROR(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_ERROR, x)
 #define AIR_CORE_LOG_CRITICAL(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_CRITICAL, x)
-#define AIR_CORE_VERBOSITY(x) engine::util::Logger::GetCoreLogger()->SetVerbosity(x.mLevel)
+#define AIR_CORE_VERBOSITY(x) engine::util::Logger::GetCoreLogger()->SetVerbosity(x.m_Level)
 
 #define AIR_CORE_ERR_IF(s, x) if(s) {AIR_CORE_LOG_ERROR(x);}
 /*

@@ -23,9 +23,9 @@ namespace engine {
 			static Application* s_Application;
 
 		protected:
-			io::Window* mWindow;
-			events::EventDispatcher* mDispatcher;
-			platform::windows::Console* mConsole;
+			io::Window* m_Window;
+			events::EventDispatcher* m_Dispatcher;
+			platform::windows::Console* m_Console;
 			platform::windows::GLContextAdapter* m_ContextAdapter;
 
 		public:
@@ -40,9 +40,9 @@ namespace engine {
 
 			void Update();
 
-			inline io::Window* GetWindow() const { return mWindow; }
+			inline io::Window* GetWindow() const { return m_Window; }
 
-			inline events::EventDispatcher* GetDispatcher() const { return mDispatcher; }
+			inline events::EventDispatcher* GetDispatcher() const { return m_Dispatcher; }
 
 			inline platform::windows::GLContextAdapter* GetContextAdapter() const { return m_ContextAdapter; }
 

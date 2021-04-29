@@ -6,8 +6,8 @@ namespace platform {
 		class WindowsWindow;
 
 		class GLContextAdapter {
-			const unsigned short mMajorVersion, mMinorVersion;
-			WindowsWindow* mWindow = nullptr;
+			const unsigned short m_MajorVersion, m_MinorVersion;
+			WindowsWindow* m_Window = nullptr;
 			HGLRC mContext = 0;
 
 		public:
@@ -22,9 +22,9 @@ namespace platform {
 			//Ik denk dat deze functie toch ergens anders heen moet sinds deze class niet veranderd moet worden mocht ik een andere pixel descriptor willen
 			PIXELFORMATDESCRIPTOR GetPixelDescriptor() const;
 
-			inline unsigned short GetVersionMajor() const { return mMajorVersion; }
+			inline unsigned short GetVersionMajor() const { return m_MajorVersion; }
 
-			inline unsigned short GetVersionMinor() const { return mMinorVersion; }
+			inline unsigned short GetVersionMinor() const { return m_MinorVersion; }
 		};
 
 	}

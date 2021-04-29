@@ -6,14 +6,14 @@ namespace engine {
 
 		Logger* Logger::CORE_LOGGER = nullptr;
 
-		Logger::Logger(const char* prefix) : mPrefix(prefix) {
+		Logger::Logger(const char* prefix) : m_Prefix(prefix) {
 
 		}
 
 		void Logger::Log(Severity severity, const char* data) const {
-			if (severity.mLevel > mVerbosity) 
+			if (severity.m_Level > m_Verbosity) 
 				return;
-			printf("[%s] [%s]	%s\n", mPrefix, severity.mName, data);
+			printf("[%s] [%s]	%s\n", m_Prefix, severity.m_Name, data);
 		}
 
 		Logger* Logger::GetCoreLogger() {
@@ -25,7 +25,7 @@ namespace engine {
 		}
 
 		void Logger::SetVerbosity(unsigned int level) {
-			mVerbosity = level;
+			m_Verbosity = level;
 		}
 	}
 }

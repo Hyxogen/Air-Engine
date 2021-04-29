@@ -9,7 +9,7 @@
 namespace platform {
 	namespace windows {
 
-		Console::Console(const wchar_t* title) : mTitle(title) {
+		Console::Console(const wchar_t* title) : m_Title(title) {
 
 		}
 
@@ -20,7 +20,7 @@ namespace platform {
 		bool Console::Initialize() {
 			if (AllocConsole() == 0)
 				return true;
-			SetConsoleTitle(mTitle);
+			SetConsoleTitle(m_Title);
 
 			FILE* pCout;
 			if (freopen_s(&pCout, "CONOUT$", "w", stdout) != 0)

@@ -17,9 +17,9 @@ namespace platform {
 		class WindowsWindow : public engine::io::Window {
 
 		protected:
-			HWND mWindow;
+			HWND m_Window;
 			HDC m_DeviceContext;
-			bool mShouldClose = false;
+			bool m_ShouldClose = false;
 			//This should not be in this class
 			WindowsWindowEventHandler* m_EventHandler;
 
@@ -41,11 +41,11 @@ namespace platform {
 			/*
 			Informs the program the window should close and stops the updates
 			*/
-			inline bool ShouldClose() const { return mShouldClose; }
+			inline bool ShouldClose() const { return m_ShouldClose; }
 
 			inline HDC GetHDC() const { return m_DeviceContext; }
 
-			inline HWND GetWindowHandle() const { return mWindow; }
+			inline HWND GetWindowHandle() const { return m_Window; }
 			//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		};
 

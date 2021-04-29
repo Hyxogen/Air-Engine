@@ -7,7 +7,7 @@
 namespace platform {
 	namespace windows {
 
-		GLContextAdapter::GLContextAdapter(WindowsWindow* window, unsigned short major, unsigned short minor) : mWindow(window), mMajorVersion(major), mMinorVersion(minor) {
+		GLContextAdapter::GLContextAdapter(WindowsWindow* window, unsigned short major, unsigned short minor) : m_Window(window), m_MajorVersion(major), m_MinorVersion(minor) {
 		}
 
 		//TODO replace current glad with glad that has wgl extensions
@@ -19,7 +19,7 @@ namespace platform {
 
 		bool GLContextAdapter::Initialize() {
 			AIR_CORE_LOG_INFO("Initializing OpenGL context adapter");
-			HDC hdc = mWindow->GetHDC();
+			HDC hdc = m_Window->GetHDC();
 
 			PIXELFORMATDESCRIPTOR pfd = GetPixelDescriptor();
 

@@ -9,7 +9,7 @@ namespace engine {
 		const Severity Severity::SV_ERROR = Severity("ERROR", 1);
 		const Severity Severity::SV_CRITICAL = Severity("CRITICAL", 0);
 
-		Severity::Severity(const char* name, unsigned int level) : mName(name), mLevel(level) {
+		Severity::Severity(const char* name, unsigned int level) : m_Name(name), m_Level(level) {
 
 		}
 

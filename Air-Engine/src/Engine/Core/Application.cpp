@@ -28,42 +28,42 @@ namespace engine {
 		}
 
 		Application::~Application() {
-			delete mWindow;
-			delete mDispatcher;
+			delete m_Window;
+			delete m_Dispatcher;
 			delete m_ContextAdapter;
-			delete mConsole;
+			delete m_Console;
 			delete io::Input::GetInstance();
 		}
 
 		bool Application::Initialize() {
-			mDispatcher = new events::EventDispatcher();
+			m_Dispatcher = new events::EventDispatcher();
 
-			mConsole = new platform::windows::Console();
-			if (mConsole->Initialize())
+			m_Console = new platform::windows::Console();
+			if (m_Console->Initialize())
 				return true;
 
-			mWindow = new platform::windows::WindowsWindow(500, 600, L"Application");
-			m_ContextAdapter = new platform::windows::GLContextAdapter((platform::windows::WindowsWindow*)mWindow, 4, 6);
+			m_Window = new platform::windows::WindowsWindow(500, 600, L"Application");
+			m_ContextAdapter = new platform::windows::GLContextAdapter((platform::windows::WindowsWindow*)m_Window, 4, 6);
 
-			mWindow->Initialize();
+			m_Window->Initialize();
 			m_ContextAdapter->Initialize();
 
 			io::Input::GetInstance()->Initialize();
 
-			mWindow->SetVisibility(AIR_W_SHOW);
+			m_Window->SetVisibility(AIR_W_SHOW);
 			return false;
 		}
 
 		bool Application::Run() {
-			while (!mWindow->ShouldClose()) {
+			while (!m_Window->ShouldClose()) {
 				Update();
 			}
 			return true;
 		}
 
 		void Application::Update() {
-			mWindow->Update();
-			mWindow->Draw();
+			m_Window->Update();
+			m_Window->Draw();
 
 			glClear(GL_COLOR_BUFFER_BIT);
 			glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
