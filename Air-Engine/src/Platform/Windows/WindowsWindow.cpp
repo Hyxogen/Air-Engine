@@ -1,5 +1,11 @@
 #include <stdlib.h>
+
 #include "WindowsWindow.hpp"
+#include "WindowsWindowEventHandler.hpp"
+#include "Events/WindowsWindowEvent.hpp"
+
+#include "../../Engine/Core/Application.hpp"
+#include "../../Engine/Events/EventDispatcher.hpp"
 #include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
@@ -15,6 +21,7 @@ namespace platform {
 			AIR_CORE_LOG_INFO("Destroying windows window");
 			ReleaseDC(mWindow, GetHDC());
 			DestroyWindow(mWindow);
+			delete m_EventHandler;
 			AIR_CORE_LOG_INFO("Succesfully destroyed window");
 		}
 
@@ -39,8 +46,10 @@ namespace platform {
 				AIR_CORE_LOG_ERROR("Failed to create window handle");
 				return 1;
 			}
+			SetWindowLongPtr(mWindow, GWLP_USERDATA, (LONG_PTR)this);
 
 			m_DeviceContext = GetDC(mWindow);
+			m_EventHandler = new WindowsWindowEventHandler(this);
 
 			AIR_CORE_LOG_INFO("Succesfully created a windows window");
 			return 0;
@@ -69,13 +78,18 @@ namespace platform {
 		}
 
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-			switch (uMsg) {
-			case WM_CLOSE:
+			if (uMsg == WM_CLOSE || uMsg == WM_QUIT || uMsg == WM_DESTROY) {
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				window->Close();
+				PostQuitMessage(0);
 				return 0;
-			case WM_QUIT:
-				return 0;
-			case WM_DESTROY:
-				return 0;
+			} else {
+				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+				if (window != nullptr) {
+					WindowsWindowEvent event(window, uMsg, wParam, lParam);
+					if (engine::core::Application::GetApplication()->GetDispatcher()->Dispatch(&event))
+						return 0;
+				}
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		}

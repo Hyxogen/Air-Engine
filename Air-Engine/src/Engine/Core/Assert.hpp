@@ -5,7 +5,7 @@
 #define ASSERT(expr) \
 	if (expr) {} \
 	else {\
-		DebugBreak();\
+		__debugbreak();\
 	}
 #else
 #define ASSERT(expr)

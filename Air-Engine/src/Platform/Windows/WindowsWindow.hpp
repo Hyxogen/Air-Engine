@@ -12,12 +12,16 @@ SetVisibility() values
 namespace platform {
 	namespace windows {
 
+		class WindowsWindowEventHandler;
+
 		class WindowsWindow : public engine::io::Window {
 
 		protected:
 			HWND mWindow;
 			HDC m_DeviceContext;
 			bool mShouldClose = false;
+			//This should not be in this class
+			WindowsWindowEventHandler* m_EventHandler;
 
 		public:
 			WindowsWindow(int width, int height, const wchar_t* title);
@@ -37,7 +41,6 @@ namespace platform {
 			/*
 			Informs the program the window should close and stops the updates
 			*/
-
 			inline bool ShouldClose() const { return mShouldClose; }
 
 			inline HDC GetHDC() const { return m_DeviceContext; }
