@@ -24,6 +24,14 @@ namespace platform {
 			return engine::io::BUTTON_UNKNOWN;
 		}
 
+		unsigned int platform::windows::WindowsButtonMap::GetButtonCode(unsigned int sysCode) {
+			for (int i = 0; winButtonPairs[i].m_BtnCode != engine::io::BUTTON_UNKNOWN; i++) {
+				if (winButtonPairs[i].m_SysCode == sysCode)
+					return winButtonPairs[i].m_BtnCode;
+			}
+			return engine::io::BUTTON_UNKNOWN;
+		}
+
 		unsigned int WindowsButtonMap::GetButtonMask(unsigned int button) {
 			return 1 << button;
 		}

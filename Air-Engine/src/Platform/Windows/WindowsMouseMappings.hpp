@@ -14,6 +14,8 @@ namespace platform {
 		public:
 			static unsigned int GetSysCode(unsigned int btnCode);
 
+			static unsigned int GetButtonCode(unsigned int sysCode);
+
 			static unsigned int GetButtonMask(unsigned int button);
 		};
 	}
