@@ -1,6 +1,7 @@
 #include "Application.hpp"
 #include "Assert.hpp"
 
+#include "Assert.hpp"
 #include "../Events/EventDispatcher.hpp"
 
 #include "../IO/Input.hpp"
@@ -10,14 +11,10 @@
 
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
-#include "Assert.hpp"
-#include "../Events/EventDispatcher.hpp"
 #include "../../Platform/Windows/GLContextAdapter.hpp"
+#include "../Events/EventDispatcher.hpp"
 
 #include <glad\gl.h>
-
-#include <chrono>
-#include <iostream>
 
 namespace engine {
 	namespace core {
@@ -52,7 +49,6 @@ namespace engine {
 			m_ContextAdapter->Initialize();
 
 			io::Input::GetInstance()->Initialize();
-
 
 			mWindow->SetVisibility(AIR_W_SHOW);
 			return false;
