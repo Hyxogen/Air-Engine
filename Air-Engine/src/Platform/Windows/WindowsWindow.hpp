@@ -41,7 +41,6 @@ namespace platform {
 			/*
 			Informs the program the window should close and stops the updates
 			*/
-
 			inline bool ShouldClose() const { return mShouldClose; }
 
 			inline HDC GetHDC() const { return m_DeviceContext; }
