@@ -1,32 +1,26 @@
 #include "Logger.hpp"
-#include <cstdio>
+
+#include <iostream>
 
 namespace engine {
 	namespace util {
+		
+		Logger* Logger::s_CoreLogger = nullptr;
 
-		Logger* Logger::CORE_LOGGER = nullptr;
-
-		Logger::Logger(const char* prefix) : m_Prefix(prefix) {
-
+		Logger::Logger(const char* name) : m_Name(name) {
+		
 		}
+		
+		Logger::~Logger() {
 
-		void Logger::Log(Severity severity, const char* data) const {
-			if (severity.m_Level > m_Verbosity) 
-				return;
-			printf("[%s] [%s]	%s\n", m_Prefix, severity.m_Name, data);
 		}
 
 		Logger* Logger::GetCoreLogger() {
-			if (CORE_LOGGER == nullptr) {
-				CORE_LOGGER = new Logger("CORE");
+			if (s_CoreLogger == nullptr) {
+				s_CoreLogger = new Logger("CORE");
 			}
 
-			return CORE_LOGGER;
-		}
-
-		void Logger::SetVerbosity(unsigned int level) {
-			m_Verbosity = level;
+			return s_CoreLogger;
 		}
 	}
 }
-

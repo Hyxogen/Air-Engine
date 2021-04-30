@@ -1,53 +1,74 @@
 #pragma once
-#include "Severity.hpp"
 
-/*
-Wat wil ik bereiken?
+#include <unordered_set>
+#include "Sink.hpp"
 
-Ik wil gewoon simpelweg in de code iets zoals dit doen:
-AIR_CORE_WARN("Variable was not initialzed!")
-Zodat in de console dit komt te staan:
-"[CORE][WARN] Variable was not initialzed!"
-
-En ervoor kunnen zorgen dat ik verbosity levels eruit kan filteren en relatief makkelijk nieuwe kan toevoegen
-*/
+#include <iostream>
+#include <string>
 
 namespace engine {
 	namespace util {
 
-		class Logger {
-			unsigned int m_Verbosity = 9999;
-			const char* m_Prefix;
 
-			static Logger* CORE_LOGGER;
+
+
+		class Logger {
+		protected:
+			const char* m_Name;
+
+			static Logger* s_CoreLogger;
 
 		public:
-			Logger(const char* prefix = "");
+			Logger(const char* name);
 
-			void Log(Severity severity, const char* data) const;
+			~Logger();
 
-			void SetVerbosity(unsigned int verbosity);
+			template<typename... Ts>
+			void Log(unsigned char severity, const char* format, Ts... ts) {
+				const char* ckstring = "Hallo";
+				LogInternal(severity, "Hallo", " dit", " is" , " mijn", " logger");
+				return;
+			}
 
-			inline unsigned int GetVerbosity() const { return m_Verbosity; }
+			template<typename T>
+			const char* ToString(T t) {
+				return ToString(t);
+			}
+
+			template<>
+			const char* ToString(const char* t) {
+				return t;
+			}
 
 			static Logger* GetCoreLogger();
+
+		protected:
+			template<typename First>
+			void LogInternal(First&& first) {
+				printf(ToString(first));
+			}
+
+			template<typename First, typename... Args>
+			void LogInternal(First&& first, Args&&... args) {
+				printf(ToString(first));
+				if (sizeof...(Args))
+					LogInternal(args...);
+			}
+
+			template<typename... Args>
+			void LogInternal(unsigned char severity, Args... args) {
+				return LogInternal(std::forward<Args>(args)...);
+			}
 		};
 
 	}
 }
 
-#define AIR_CORE_LOG_TRACE(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_TRACE, x)
-#define AIR_CORE_LOG_INFO(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_INFO, x)
-#define AIR_CORE_LOG_WARN(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_WARN, x)
-#define AIR_CORE_LOG_ERROR(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_ERROR, x)
-#define AIR_CORE_LOG_CRITICAL(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_CRITICAL, x)
-#define AIR_CORE_VERBOSITY(x) engine::util::Logger::GetCoreLogger()->SetVerbosity(x.m_Level)
+#define AIR_CORE_LOG_TRACE(x)
+#define AIR_CORE_LOG_INFO(x) 
+#define AIR_CORE_LOG_WARN(x)
+#define AIR_CORE_LOG_ERROR(x)
+#define AIR_CORE_LOG_CRITICAL(x)
+#define AIR_CORE_VERBOSITY(x)
 
-#define AIR_CORE_ERR_IF(s, x) if(s) {AIR_CORE_LOG_ERROR(x);}
-/*
-#define AIR_CORE_TRACE(...) engine::util::Logger::GetCoreLogger().Log(AIR_TRACE, 0, __VA_ARGS__);
-#define AIR_CORE_INFO(...) engine::util::Logger::GetCoreLogger().Log(AIR_INFO, 0, __VA_ARGS__);
-#define AIR_CORE_WARN(...) engine::util::Logger::GetCoreLogger().Log(AIR_WARN, 0, __VA_ARGS__);
-#define AIR_CORE_ERROR(...) engine::util::Logger::GetCoreLogger().Log(AIR_ERROR, 0, __VA_ARGS__);
-#define AIR_CORE_CRITICAL(...) engine::util::Logger::GetCoreLogger().Log(AIR_CRITICAL, 0, __VA_ARGS__);
-*/
+#define AIR_CORE_ERR_IF(s, x)

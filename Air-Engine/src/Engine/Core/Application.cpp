@@ -6,6 +6,8 @@
 
 #include "../IO/Input.hpp"
 
+#include "../Util/Logger/Logger.hpp"
+
 #include "../../Platform/Windows/WindowsKeyboard.hpp"
 #include "../../Platform/Windows/WindowsMouse.hpp"
 
@@ -49,6 +51,7 @@ namespace engine {
 			m_ContextAdapter->Initialize();
 
 			io::Input::GetInstance()->Initialize();
+			util::Logger::GetCoreLogger()->Log(5, "Hallo");
 
 			m_Window->SetVisibility(AIR_W_SHOW);
 			return false;
