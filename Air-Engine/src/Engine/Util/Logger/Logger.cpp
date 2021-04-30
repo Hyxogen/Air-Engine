@@ -22,5 +22,9 @@ namespace engine {
 
 			return s_CoreLogger;
 		}
+
+		void Logger::ClearBuffer() {
+			memset(m_Buffer, 0, sizeof(char*) * 1024);
+		}
 	}
 }

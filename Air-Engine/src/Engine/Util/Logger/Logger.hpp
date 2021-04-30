@@ -3,18 +3,13 @@
 #include <unordered_set>
 #include "Sink.hpp"
 
-#include <iostream>
-#include <string>
-
 namespace engine {
 	namespace util {
-
-
-
 
 		class Logger {
 		protected:
 			const char* m_Name;
+			char m_Buffer[1024];
 
 			static Logger* s_CoreLogger;
 
@@ -26,7 +21,7 @@ namespace engine {
 			template<typename... Ts>
 			void Log(unsigned char severity, const char* format, Ts... ts) {
 				const char* ckstring = "Hallo";
-				LogInternal(severity, "Hallo", " dit", " is" , " mijn", " logger");
+				LogInternal(true, "Test", "Appels");
 				return;
 			}
 
@@ -43,21 +38,29 @@ namespace engine {
 			static Logger* GetCoreLogger();
 
 		protected:
+			void ClearBuffer();
+
 			template<typename First>
-			void LogInternal(First&& first) {
-				printf(ToString(first));
+			void LogInternalS(unsigned int& position, First&& first) {
+				const char* string = ToString(first);
+				unsigned int length = strnlen_s(string, 1024);
+				memcpy(&m_Buffer[position], string, length);
+				position += length;
 			}
 
 			template<typename First, typename... Args>
-			void LogInternal(First&& first, Args&&... args) {
-				printf(ToString(first));
+			void LogInternalS(unsigned int& position, First&& first, Args&&... args) {
+				LogInternalS(position,first);
 				if (sizeof...(Args))
-					LogInternal(args...);
+					LogInternalS(position, args...);
 			}
 
 			template<typename... Args>
-			void LogInternal(unsigned char severity, Args... args) {
-				return LogInternal(std::forward<Args>(args)...);
+			void LogInternal(bool safety, Args... args) {
+				ClearBuffer();
+				unsigned int position = 0;
+				LogInternalS(position, std::forward<Args>(args)...);
+				printf("%s", m_Buffer);
 			}
 		};
 
