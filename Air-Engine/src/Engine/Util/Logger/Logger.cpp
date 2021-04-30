@@ -1,18 +1,22 @@
 #include "Logger.hpp"
 
-#include <iostream>
 
 namespace engine {
 	namespace util {
-		
+
 		Logger* Logger::s_CoreLogger = nullptr;
 
-		Logger::Logger(const char* name) : m_Name(name) {
-		
+		Logger::Logger(const char* name) : m_Name(name), m_CurrentSev(0) {
+
 		}
-		
+
 		Logger::~Logger() {
 
+		}
+
+		bool Logger::AddSink(Sink* sink) {
+			m_Sinks.insert(sink);
+			return false;
 		}
 
 		Logger* Logger::GetCoreLogger() {
@@ -24,7 +28,33 @@ namespace engine {
 		}
 
 		void Logger::ClearBuffer() {
-			memset(m_Buffer, 0, sizeof(char*) * 1024);
+			m_Output.str("");
+		}
+		void Logger::Flush() {
+			SinkList::iterator it;
+
+			std::string string = m_Output.str();
+
+			for (it = m_Sinks.begin(); it != m_Sinks.end(); ++it) {
+				((Sink*)*it)->Print(m_CurrentSev, string.c_str());
+			}
+		}
+
+		const char* Logger::GetSeverityString(unsigned char severity) {
+			switch (severity) {
+			case SE_TRACE:
+				return "[TRACE] ";
+			case SE_INFO:
+				return "[INFO] ";
+			case SE_WARN:
+				return "[WARN] ";
+			case SE_ERROR:
+				return "[ERROR] ";
+			case SE_CRITICAL:
+				return "[CRITICAL] ";
+			default:
+				return "[UNK] ";
+			}
 		}
 	}
 }

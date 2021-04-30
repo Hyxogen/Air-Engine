@@ -14,6 +14,8 @@
 #include "../../Platform/Windows/WindowsWindow.hpp"
 #include "../../Platform/Windows/Console.hpp"
 #include "../../Platform/Windows/GLContextAdapter.hpp"
+#include "../../Platform/Windows/ConsoleSink.h"
+
 #include "../Events/EventDispatcher.hpp"
 
 #include <glad\gl.h>
@@ -51,7 +53,12 @@ namespace engine {
 			m_ContextAdapter->Initialize();
 
 			io::Input::GetInstance()->Initialize();
-			util::Logger::GetCoreLogger()->Log(5, "Hallo");
+			platform::windows::ConsoleSink sink;
+
+			util::Logger::GetCoreLogger()->AddSink(&sink);
+			util::Logger::GetCoreLogger()->Log(util::SE_ERROR, "Failed succesfully!");
+			
+
 
 			m_Window->SetVisibility(AIR_W_SHOW);
 			return false;

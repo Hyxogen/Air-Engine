@@ -3,13 +3,29 @@
 #include <unordered_set>
 #include "Sink.hpp"
 
+#include <iostream>
+#include <sstream>
+
 namespace engine {
 	namespace util {
+
+		typedef std::unordered_set<Sink*> SinkList;
+
+		enum Severity : unsigned char {
+			SE_TRACE = 0,
+			SE_INFO = 1,
+			SE_WARN = 2,
+			SE_ERROR = 3,
+			SE_CRITICAL = 4
+		};
 
 		class Logger {
 		protected:
 			const char* m_Name;
-			char m_Buffer[1024];
+			unsigned char m_CurrentSev;
+			std::ostringstream m_Output;
+
+			SinkList m_Sinks;
 
 			static Logger* s_CoreLogger;
 
@@ -19,21 +35,13 @@ namespace engine {
 			~Logger();
 
 			template<typename... Ts>
-			void Log(unsigned char severity, const char* format, Ts... ts) {
-				const char* ckstring = "Hallo";
-				LogInternal(true, "Test", "Appels");
-				return;
+			void Log(unsigned char severity, Ts... ts) {
+				m_CurrentSev = severity;
+				LogInternal(true, ts...);
+				Flush();
 			}
 
-			template<typename T>
-			const char* ToString(T t) {
-				return ToString(t);
-			}
-
-			template<>
-			const char* ToString(const char* t) {
-				return t;
-			}
+			bool AddSink(Sink* sink);
 
 			static Logger* GetCoreLogger();
 
@@ -41,27 +49,33 @@ namespace engine {
 			void ClearBuffer();
 
 			template<typename First>
-			void LogInternalS(unsigned int& position, First&& first) {
-				const char* string = ToString(first);
-				unsigned int length = strnlen_s(string, 1024);
-				memcpy(&m_Buffer[position], string, length);
-				position += length;
+			void LogInternalS(First&& first) {
+				m_Output << first;
 			}
 
 			template<typename First, typename... Args>
-			void LogInternalS(unsigned int& position, First&& first, Args&&... args) {
-				LogInternalS(position,first);
+			void LogInternalS(First&& first, Args&&... args) {
+				LogInternalS(first);
 				if (sizeof...(Args))
-					LogInternalS(position, args...);
+					LogInternalS(args...);
 			}
 
 			template<typename... Args>
-			void LogInternal(bool safety, Args... args) {
+			void LogInternal(bool newLine, Args... args) {
 				ClearBuffer();
-				unsigned int position = 0;
-				LogInternalS(position, std::forward<Args>(args)...);
-				printf("%s", m_Buffer);
+
+				m_Output << "[" << m_Name << "]" << GetSeverityString(m_CurrentSev);
+
+				LogInternalS(std::forward<Args>(args)...);
+
+				if (newLine)
+					m_Output << "\n";
 			}
+
+			void Flush();
+
+		public:
+			static const char* GetSeverityString(unsigned char severity);
 		};
 
 	}

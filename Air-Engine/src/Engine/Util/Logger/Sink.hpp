@@ -10,12 +10,8 @@ namespace engine {
 		public:
 			Sink(const char* name) : m_Name(name) {}
 
-			virtual ~Sink() = 0;
 
-			template<typename... Ts>
-			bool Print(unsigned char severity, const char* format, Ts... ts) {
-				return Print(severity, format, ts...);
-			}
+			virtual bool Print(unsigned char severity, const char* str) = 0;
 		};
 
 	}
