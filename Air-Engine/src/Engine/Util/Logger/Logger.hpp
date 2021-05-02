@@ -39,17 +39,28 @@ namespace engine {
 
 			template<typename... Ts>
 			void Log(unsigned char severity, bool newLine, Ts... ts) {
+				if (!ShouldPrint(severity)) return;
 				LogInternal(severity, newLine, ts...);
 				Flush(severity);
 			}
 
 			bool AddSink(Sink* sink);
 
+			bool ShouldPrint(unsigned char severity);
+
+			void SetVerbosity(unsigned char verbosity);
+
+			unsigned char GetVerbosity() const { return m_Verbosity; }
+
 			static Logger* GetCoreLogger();
 
 		protected:
 			void ClearBuffer();
 
+			void Destroy();
+
+			void Flush(unsigned char severity);
+			
 			template<typename First>
 			void LogInternal(First&& first) {
 				m_Output << first;

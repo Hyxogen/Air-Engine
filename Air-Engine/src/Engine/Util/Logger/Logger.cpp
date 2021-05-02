@@ -1,12 +1,13 @@
 #include "Logger.hpp"
 
+#include "../../../Platform/Windows/ConsoleSink.h"
 
 namespace engine {
 	namespace util {
 
 		Logger* Logger::s_CoreLogger = nullptr;
 
-		Logger::Logger(const char* name) : m_Name(name) {
+		Logger::Logger(const char* name) : m_Name(name), m_Verbosity(0) {
 
 		}
 
@@ -19,9 +20,22 @@ namespace engine {
 			return false;
 		}
 
+		bool Logger::ShouldPrint(unsigned char severity) {
+			return severity >= m_Verbosity;
+		}
+
+		void Logger::SetVerbosity(unsigned char verbosity) {
+			if (verbosity > SE_CRITICAL) {
+				m_Verbosity = SE_CRITICAL;
+				return;
+			}
+			m_Verbosity = verbosity;
+		}
+
 		Logger* Logger::GetCoreLogger() {
 			if (s_CoreLogger == nullptr) {
 				s_CoreLogger = new Logger("CORE");
+				s_CoreLogger->AddSink(new platform::windows::ConsoleSink());
 			}
 
 			return s_CoreLogger;
