@@ -22,13 +22,11 @@ namespace engine {
 		class Logger {
 		protected:
 			const char* m_Name;
-			unsigned char m_CurrentSev;
 			std::ostringstream m_Output;
 
 			SinkList m_Sinks;
 
 			static Logger* s_CoreLogger;
-
 		public:
 			Logger(const char* name);
 
@@ -36,9 +34,13 @@ namespace engine {
 
 			template<typename... Ts>
 			void Log(unsigned char severity, Ts... ts) {
-				m_CurrentSev = severity;
-				LogInternal(true, ts...);
-				Flush();
+				Log(severity, true, ts...);
+			}
+
+			template<typename... Ts>
+			void Log(unsigned char severity, bool newLine, Ts... ts) {
+				LogInternal(severity, newLine, ts...);
+				Flush(severity);
 			}
 
 			bool AddSink(Sink* sink);
@@ -49,30 +51,28 @@ namespace engine {
 			void ClearBuffer();
 
 			template<typename First>
-			void LogInternalS(First&& first) {
+			void LogInternal(First&& first) {
 				m_Output << first;
 			}
 
 			template<typename First, typename... Args>
-			void LogInternalS(First&& first, Args&&... args) {
-				LogInternalS(first);
+			void LogInternal(First&& first, Args&&... args) {
+				LogInternal(first);
 				if (sizeof...(Args))
-					LogInternalS(args...);
+					LogInternal(args...);
 			}
 
 			template<typename... Args>
-			void LogInternal(bool newLine, Args... args) {
-				ClearBuffer();
+			void LogInternal(unsigned char severity, bool newLine, Args... args) {
+				m_Output << "[" << m_Name << "]" << GetSeverityString(severity) << " ";
 
-				m_Output << "[" << m_Name << "]" << GetSeverityString(m_CurrentSev);
-
-				LogInternalS(std::forward<Args>(args)...);
+				LogInternal(std::forward<Args>(args)...);
 
 				if (newLine)
 					m_Output << "\n";
 			}
 
-			void Flush();
+			void Flush(unsigned char severity);
 
 		public:
 			static const char* GetSeverityString(unsigned char severity);
@@ -81,11 +81,11 @@ namespace engine {
 	}
 }
 
-#define AIR_CORE_LOG_TRACE(x)
-#define AIR_CORE_LOG_INFO(x) 
-#define AIR_CORE_LOG_WARN(x)
-#define AIR_CORE_LOG_ERROR(x)
-#define AIR_CORE_LOG_CRITICAL(x)
+#define AIR_CORE_LOG_TRACE(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_TRACE, __VA_ARGS__);
+#define AIR_CORE_LOG_INFO(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_INFO, __VA_ARGS__);
+#define AIR_CORE_LOG_WARN(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_WARN, __VA_ARGS__);
+#define AIR_CORE_LOG_ERROR(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_ERROR, __VA_ARGS__);
+#define AIR_CORE_LOG_CRITICAL(...)	engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_CRITICAL, __VA_ARGS__);
 #define AIR_CORE_VERBOSITY(x)
 
 #define AIR_CORE_ERR_IF(s, x)

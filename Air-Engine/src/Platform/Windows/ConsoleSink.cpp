@@ -1,10 +1,20 @@
 #include "ConsoleSink.h"
 
+#include "../../Engine/Util/Logger/Logger.hpp"
+
 #include <iostream>
 
 namespace platform {
 	namespace windows {
 	
+		PriorityColorPair defaultColorPair[] = {
+			{engine::util::SE_TRACE, COLOR_DARK_MAGENTA},
+			{engine::util::SE_INFO, COLOR_GREEN},
+			{engine::util::SE_WARN, COLOR_YELLOW},
+			{engine::util::SE_ERROR, COLOR_RED},
+			{engine::util::SE_CRITICAL, COLOR_RED | BACKGROUND_RED}
+		};
+
 		ConsoleSink::ConsoleSink() : Sink("WinConsole"), m_ConsoleHandle(GetStdHandle(STD_OUTPUT_HANDLE)){
 			
 		}
@@ -14,13 +24,22 @@ namespace platform {
 		}
 
 		bool ConsoleSink::Print(unsigned char severity, const char* str) {
-			SetColor(FOREGROUND_RED | FOREGROUND_GREEN);
+			SetColor(severity);
 			std::cout << str;
+			SetColor(COLOR_GREY);
 			return false;
 		}
 
 		void ConsoleSink::SetColor(unsigned char color) {
-			SetConsoleTextAttribute(m_ConsoleHandle, color);
+			SetConsoleTextAttribute(m_ConsoleHandle, GetColor(color));
+		}
+
+		unsigned char ConsoleSink::GetColor(unsigned char priority) {
+			for (int i = 0; i != engine::util::SE_CRITICAL + 1; i++) {
+				if (defaultColorPair[i].m_Priority == priority)
+					return defaultColorPair[i].m_Color;
+			}
+			return COLOR_WHITE;
 		}
 	}
 }
