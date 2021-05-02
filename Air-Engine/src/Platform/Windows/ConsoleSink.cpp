@@ -12,7 +12,8 @@ namespace platform {
 			{engine::util::SE_INFO, COLOR_GREEN},
 			{engine::util::SE_WARN, COLOR_YELLOW},
 			{engine::util::SE_ERROR, COLOR_RED},
-			{engine::util::SE_CRITICAL, COLOR_RED | BACKGROUND_RED}
+			{engine::util::SE_CRITICAL, COLOR_RED | BACKGROUND_RED},
+			{engine::util::SE_UNKNOWN, 0x00}
 		};
 
 		ConsoleSink::ConsoleSink() : Sink("WinConsole"), m_ConsoleHandle(GetStdHandle(STD_OUTPUT_HANDLE)){
@@ -35,7 +36,7 @@ namespace platform {
 		}
 
 		unsigned char ConsoleSink::GetColor(unsigned char priority) {
-			for (int i = 0; i != engine::util::SE_CRITICAL + 1; i++) {
+			for (int i = 0; defaultColorPair[i].m_Priority != engine::util::SE_UNKNOWN; i++) {
 				if (defaultColorPair[i].m_Priority == priority)
 					return defaultColorPair[i].m_Color;
 			}
