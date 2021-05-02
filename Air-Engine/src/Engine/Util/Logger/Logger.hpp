@@ -12,16 +12,19 @@ namespace engine {
 		typedef std::unordered_set<Sink*> SinkList;
 
 		enum Severity : unsigned char {
-			SE_TRACE = 0,
-			SE_INFO = 1,
-			SE_WARN = 2,
-			SE_ERROR = 3,
-			SE_CRITICAL = 4
+			SE_TRACE = 1,
+			SE_INFO = 2,
+			SE_WARN = 3,
+			SE_ERROR = 4,
+			SE_CRITICAL = 5,
+
+			SE_UNKNOWN = 0
 		};
 
 		class Logger {
 		protected:
 			const char* m_Name;
+			unsigned char m_Verbosity;
 			std::ostringstream m_Output;
 
 			SinkList m_Sinks;
@@ -82,9 +85,6 @@ namespace engine {
 				if (newLine)
 					m_Output << "\n";
 			}
-
-			void Flush(unsigned char severity);
-
 		public:
 			static const char* GetSeverityString(unsigned char severity);
 		};

@@ -12,7 +12,7 @@ namespace engine {
 		}
 
 		Logger::~Logger() {
-
+			Destroy();
 		}
 
 		bool Logger::AddSink(Sink* sink) {
@@ -43,6 +43,14 @@ namespace engine {
 
 		void Logger::ClearBuffer() {
 			m_Output.str("");
+		}
+
+		void Logger::Destroy() {
+			SinkList::iterator it;
+
+			for (it = m_Sinks.begin(); it != m_Sinks.end(); ++it) {
+				delete *it;
+			}
 		}
 
 		void Logger::Flush(unsigned char severity) {
