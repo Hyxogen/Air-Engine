@@ -62,6 +62,8 @@ namespace engine {
 
 			void Destroy();
 
+			void InsertTimeString();
+
 			void Flush(unsigned char severity);
 			
 			template<typename First>
@@ -78,6 +80,7 @@ namespace engine {
 
 			template<typename... Args>
 			void LogInternal(unsigned char severity, bool newLine, Args... args) {
+				InsertTimeString();
 				m_Output << "[" << m_Name << "]" << GetSeverityString(severity) << " ";
 
 				LogInternal(std::forward<Args>(args)...);

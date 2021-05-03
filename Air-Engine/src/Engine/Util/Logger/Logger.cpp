@@ -1,5 +1,7 @@
 #include "Logger.hpp"
 
+#include <chrono>
+
 #ifdef AIR_PLATFORM_WINDOWS
 #include "../../../Platform/Windows/ConsoleSink.h"
 #endif
@@ -55,6 +57,12 @@ namespace engine {
 			for (it = m_Sinks.begin(); it != m_Sinks.end(); ++it) {
 				delete *it;
 			}
+		}
+
+		void Logger::InsertTimeString() {
+			std::time_t now = std::time(0);
+			std::tm* time = std::localtime(&now);
+			m_Output << "[" << time->tm_hour << ":" << time->tm_min << ":" << time->tm_sec << "]";
 		}
 
 		void Logger::Flush(unsigned char severity) {
