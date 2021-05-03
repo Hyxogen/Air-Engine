@@ -1,3 +1,4 @@
+#include "airpch.h"
 #include "Mouse.hpp"
 
 #ifdef AIR_PLATFORM_WINDOWS

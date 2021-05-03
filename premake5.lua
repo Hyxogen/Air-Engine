@@ -9,6 +9,11 @@ workspace "Air-Engine"
 
 outputdir = "%{cfg.buildcfg}/%{cfg.system}/%{cfg.architecture}/"
 
+group "Dependencies"
+	include "Air-Engine/Dependencies/glad"
+
+group ""
+
 filter {}
 include "Sandbox"
 include "Air-Engine"

@@ -11,8 +11,7 @@ project "Air-Engine"
 	files {
 		"src/**.h",
 		"src/**.hpp",
-		"src/**.cpp",
-		"Dependencies/glad/src/**.c"
+		"src/**.cpp"
 	}
 
 	defines {
@@ -20,12 +19,17 @@ project "Air-Engine"
 	}
 
 	includedirs {
-		"Dependencies/glad/include"
+		"Dependencies/glad/include",
+		"src"
 	}
 
 	links {
-		"opengl32"
+		"opengl32",
+		"glad"
 	}
+
+	pchheader "airpch.h"
+	pchsource "src/airpch.cpp"
 
 	filter "configurations:Debug"
 		optimize "Off"

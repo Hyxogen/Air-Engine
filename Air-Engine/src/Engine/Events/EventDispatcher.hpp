@@ -1,9 +1,5 @@
+#include "airpch.h"
 #pragma once
-
-#include <map>
-#include <unordered_map>
-#include <vector>
-
 
 namespace engine {
 	namespace events {

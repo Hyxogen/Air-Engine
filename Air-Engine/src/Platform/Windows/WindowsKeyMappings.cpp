@@ -1,7 +1,7 @@
+#include "airpch.h"
 #include "WindowsKeyMappings.hpp"
 
 #include "../../Engine/IO/KeyCodes.hpp"
-#include <windows.h>
 
 namespace platform {
 	namespace windows {

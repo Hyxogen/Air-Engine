@@ -1,3 +1,4 @@
+#include "airpch.h"
 #include "ConsoleSink.h"
 
 namespace platform {

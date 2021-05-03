@@ -1,12 +1,11 @@
+#include "airpch.h"
 #include "WindowsKeyboard.hpp"
 
-#include "../../Engine/Core/Assert.hpp"
 #include "../../Engine/Util/HashUtils.hpp"
 #include "../../Engine/Core/Application.hpp"
 #include "../../Engine/Events/EventDispatcher.hpp"
 #include "../../Engine/Events/KeyEvent.hpp"
 
-#include "../../Engine/Util/Logger/Logger.hpp"
 #include "WindowsKeyMappings.hpp"
 
 #include <windows.h>

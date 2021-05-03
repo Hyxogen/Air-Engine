@@ -1,7 +1,7 @@
+#include "airpch.h"
 #pragma once
 
 #include "..\..\Engine\IO\Window.hpp"
-#include <windows.h>
 
 /*
 SetVisibility() values

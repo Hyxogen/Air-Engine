@@ -1,4 +1,5 @@
-#include <windows.h>
+#include "airpch.h"
+#pragma once
 
 namespace platform {
 	namespace windows {

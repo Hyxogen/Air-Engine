@@ -1,7 +1,7 @@
+#include "airpch.h"
 #pragma once
 
 #ifdef AIR_PLATFORM_WINDOWS
-#include <windows.h>
 
 engine::core::Application* CreateApplication();
 

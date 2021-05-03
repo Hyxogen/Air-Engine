@@ -1,6 +1,5 @@
+#include "airpch.h"
 #include "WindowsMouse.hpp"
-
-#include <windows.h>
 
 #include "WindowsMouseMappings.hpp"
 

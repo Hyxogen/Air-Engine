@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace engine {
 	namespace io {
 

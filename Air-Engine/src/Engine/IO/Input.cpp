@@ -1,10 +1,10 @@
+#include "airpch.h"
 #include "Input.hpp"
 
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
 
 #include "../Core/Application.hpp"
-#include "../Util/Logger/Logger.hpp"
 
 namespace engine {
 	namespace io {

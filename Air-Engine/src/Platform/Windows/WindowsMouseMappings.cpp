@@ -1,7 +1,7 @@
+#include "airpch.h"
 #include "WindowsMouseMappings.hpp"
 
 #include "../../Engine/IO/MouseCodes.hpp"
-#include <windows.h>
 
 namespace platform {
 	namespace windows {

@@ -1,12 +1,10 @@
-#include "Application.hpp"
-#include "Assert.hpp"
+#include "airpch.h"
 
-#include "Assert.hpp"
+#include "Application.hpp"
 #include "../Events/EventDispatcher.hpp"
 
 #include "../IO/Input.hpp"
 
-#include "../Util/Logger/Logger.hpp"
 
 #include "../../Platform/Windows/WindowsKeyboard.hpp"
 #include "../../Platform/Windows/WindowsMouse.hpp"
@@ -18,6 +16,7 @@
 
 #include "../Events/EventDispatcher.hpp"
 
+#include <glad\wgl.h>
 #include <glad\gl.h>
 
 namespace engine {

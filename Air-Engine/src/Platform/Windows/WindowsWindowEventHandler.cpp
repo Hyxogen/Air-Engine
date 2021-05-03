@@ -1,3 +1,4 @@
+#include "airpch.h"
 #include "WindowsWindowEventHandler.hpp"
 
 #include "Events/WindowsWindowEvent.hpp"
@@ -12,8 +13,6 @@
 
 #include "WindowsKeyMappings.hpp"
 #include "WindowsMouseMappings.hpp"
-
-#include <windows.h>
 
 namespace platform {
 	namespace windows {

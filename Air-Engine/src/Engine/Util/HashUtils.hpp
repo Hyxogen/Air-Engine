@@ -1,5 +1,5 @@
+#include "airpch.h"
 #pragma once
-#include <cstdint>
 
 #ifndef AIR_HASH_CUSTOM
 #define AIR_HASH_FNV1A

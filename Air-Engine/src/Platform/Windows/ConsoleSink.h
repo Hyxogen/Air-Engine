@@ -1,7 +1,5 @@
+#include "airpch.h"
 #pragma once
-
-#include <windows.h>
-#include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
 	namespace windows {

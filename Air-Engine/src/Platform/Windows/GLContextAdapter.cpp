@@ -1,8 +1,10 @@
+#include "airpch.h"
 #include "WindowsWindow.hpp"
+
 #include <glad\wgl.h>
 #include <glad\gl.h>
+
 #include "GLContextAdapter.hpp"
-#include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
 	namespace windows {

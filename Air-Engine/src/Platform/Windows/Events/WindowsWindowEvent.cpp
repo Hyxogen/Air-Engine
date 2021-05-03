@@ -1,11 +1,10 @@
+#include "airpch.h"
 #include "WindowsWindowEvent.hpp"
 
 #include "../../../Engine/Core/Application.hpp"
 #include "../../../Engine/Events/EventDispatcher.hpp"
 #include "../../../Engine/IO/Window.hpp"
 #include "../../../Engine/Util/HashUtils.hpp"
-
-#include <windows.h>
 
 namespace platform {
 	namespace windows {

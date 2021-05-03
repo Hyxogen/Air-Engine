@@ -1,6 +1,5 @@
+#include "airpch.h"
 #include "Logger.hpp"
-
-#include <time.h>
 
 #ifdef AIR_PLATFORM_WINDOWS
 #include "../../../Platform/Windows/ConsoleSink.h"
