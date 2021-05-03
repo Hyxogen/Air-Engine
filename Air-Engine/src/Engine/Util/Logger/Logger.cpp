@@ -1,6 +1,8 @@
 #include "Logger.hpp"
 
+#ifdef AIR_PLATFORM_WINDOWS
 #include "../../../Platform/Windows/ConsoleSink.h"
+#endif
 
 namespace engine {
 	namespace util {
@@ -35,7 +37,9 @@ namespace engine {
 		Logger* Logger::GetCoreLogger() {
 			if (s_CoreLogger == nullptr) {
 				s_CoreLogger = new Logger("CORE");
+				#ifdef AIR_PLATFORM_WINDOWS
 				s_CoreLogger->AddSink(new platform::windows::ConsoleSink());
+				#endif
 			}
 
 			return s_CoreLogger;
