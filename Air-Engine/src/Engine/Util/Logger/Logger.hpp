@@ -49,20 +49,17 @@ namespace engine {
 
 			bool AddSink(Sink* sink);
 
-			bool ShouldPrint(unsigned char severity);
-
 			void SetVerbosity(unsigned char verbosity);
 
 			unsigned char GetVerbosity() const { return m_Verbosity; }
-
-			static Logger* GetCoreLogger();
-
 		protected:
 			void ClearBuffer();
 
 			void Destroy();
 
 			void InsertTimeString();
+
+			bool ShouldPrint(unsigned char severity);
 
 			void Flush(unsigned char severity);
 			
@@ -89,6 +86,8 @@ namespace engine {
 					m_Output << "\n";
 			}
 		public:
+			static Logger* GetCoreLogger();
+
 			static const char* GetSeverityString(unsigned char severity);
 		};
 
