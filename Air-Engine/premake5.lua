@@ -34,13 +34,15 @@ project "Air-Engine"
 		defines {
 			"_DEBUG",
 			"AIR_BUILD_DEBUG",
-			"AIR_ASSERTIONS_ENABLED"
+			"AIR_ASSERTIONS_ENABLED",
+			"AIR_ENABLE_LOGGING"
 		}
 	filter "configurations:Release"
 		optimize "On"
 		
 		defines {
-			"AIR_BUILD_RELEASE"
+			"AIR_BUILD_RELEASE",
+			"AIR_ENABLE_LOGGING"
 		}
 
 	filter "configurations:Distribution"
