@@ -85,6 +85,7 @@ namespace engine {
 					LogInternal(args...);
 			}
 
+			//It is posible that naming this function the same as the other internal functions will cause weird behaviour
 			template<typename... Args>
 			void LogInternal(unsigned char severity, bool newLine, Args&&... args) {
 				InsertTimeString();
