@@ -50,13 +50,16 @@ namespace engine {
 
 			m_Dispatcher = new events::EventDispatcher();
 
-			AIR_CORE_ERROR_IF(io::Input::GetInstance()->Initialize(), "Failed to initialize input helper class");
+			if (io::Input::GetInstance()->Initialize())
+				return true;
 
 			m_Window = new platform::windows::WindowsWindow(500, 600, L"Application");
 			m_ContextAdapter = new platform::windows::GLContextAdapter((platform::windows::WindowsWindow*)m_Window, 4, 6);
 
-			AIR_CORE_ERROR_IF(m_Window->Initialize(), "Failed to initialize window");
-			AIR_CORE_ERROR_IF(m_ContextAdapter->Initialize(), "Failed to initialize a OpenGL context");
+			if (m_Window->Initialize())
+				return true;
+			if (m_ContextAdapter->Initialize())
+				return true;
 
 			m_Window->SetVisibility(AIR_W_SHOW);
 			
