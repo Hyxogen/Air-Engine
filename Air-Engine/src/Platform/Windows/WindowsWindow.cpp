@@ -13,20 +13,20 @@ namespace platform {
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
-		WindowsWindow::WindowsWindow(int width, int height, const wchar_t* title) : Window(title, width, height) {
+		WindowsWindow::WindowsWindow(int width, int height, const wchar_t* title) : Window(title, width, height), m_DeviceContext(nullptr), m_EventHandler(nullptr) {
 			m_Window = nullptr;
 		}
 
 		WindowsWindow::~WindowsWindow() {
-			AIR_CORE_LOG_INFO("Destroying windows window");
+			AIR_CORE_INFO("Destroying windows window");
 			ReleaseDC(m_Window, GetHDC());
 			DestroyWindow(m_Window);
 			delete m_EventHandler;
-			AIR_CORE_LOG_INFO("Succesfully destroyed window");
+			AIR_CORE_INFO("Succesfully destroyed window");
 		}
 
 		bool WindowsWindow::Initialize() {
-			AIR_CORE_LOG_INFO("Initializing WindowsWindow");
+			AIR_CORE_INFO("Initializing WindowsWindow");
 			m_ShouldClose = false;
 
 			WNDCLASS wndClass = { };
@@ -43,7 +43,7 @@ namespace platform {
 				NULL, NULL, instance, NULL);
 
 			if (m_Window == NULL) {
-				AIR_CORE_LOG_ERROR("Failed to create window handle");
+				AIR_CORE_ERROR("Failed to create window handle");
 				return 1;
 			}
 			SetWindowLongPtr(m_Window, GWLP_USERDATA, (LONG_PTR)this);
@@ -51,7 +51,7 @@ namespace platform {
 			m_DeviceContext = GetDC(m_Window);
 			m_EventHandler = new WindowsWindowEventHandler(this);
 
-			AIR_CORE_LOG_INFO("Succesfully created a windows window");
+			AIR_CORE_INFO("Succesfully created a windows window");
 			return 0;
 		}
 

@@ -12,20 +12,25 @@ namespace platform {
 
 		//TODO replace current glad with glad that has wgl extensions
 		GLContextAdapter::~GLContextAdapter() {
-			AIR_CORE_LOG_INFO("Destroying OpenGL context");
+			AIR_CORE_INFO("Destroying OpenGL context");
 			wglMakeCurrent(NULL, NULL);
 			wglDeleteContext(mContext);
 		}
 
 		bool GLContextAdapter::Initialize() {
-			AIR_CORE_LOG_INFO("Initializing OpenGL context adapter");
+			AIR_CORE_INFO("Initializing OpenGL context adapter");
 			HDC hdc = m_Window->GetHDC();
+
+			if (hdc == nullptr) {
+				AIR_CORE_ERROR("Window HDC not found! Did you initialize your window?");
+				return true;
+			}
 
 			PIXELFORMATDESCRIPTOR pfd = GetPixelDescriptor();
 
 			int pixelFormat = ChoosePixelFormat(hdc, &pfd);
 			if (pixelFormat == 0) {
-				AIR_CORE_LOG_ERROR("Failed to find pixel format");
+				AIR_CORE_ERROR("Failed to find pixel format");
 				return 1;
 			}
 			SetPixelFormat(hdc, pixelFormat, &pfd);
@@ -33,14 +38,14 @@ namespace platform {
 			wglMakeCurrent(hdc, mContext);
 			
 			if (!gladLoaderLoadWGL(hdc)) {
-				AIR_CORE_LOG_ERROR("Failed to load wgl");
+				AIR_CORE_ERROR("Failed to load wgl");
 				return true;
 			}
 
 			HGLRC check = wglGetCurrentContext();
 
 			if (wglGetCurrentContext() == NULL) {
-				AIR_CORE_LOG_ERROR("Failed to create OpenGL context");
+				AIR_CORE_ERROR("Failed to create OpenGL context");
 				return true;
 			}
 
@@ -67,7 +72,7 @@ namespace platform {
 			wglMakeCurrent(hdc, mContext);
 
 			if (!gladLoaderLoadGL()) {
-				AIR_CORE_LOG_ERROR("Failed to load OpenGL");
+				AIR_CORE_ERROR("Failed to load OpenGL");
 				return true;
 
 			}
@@ -75,8 +80,8 @@ namespace platform {
 			
 			wglSwapIntervalEXT(0);
 
-			AIR_CORE_LOG_INFO("Succesfully created OpenGL context");
-			AIR_CORE_LOG_INFO(version);
+			AIR_CORE_INFO("Succesfully created OpenGL context");
+			AIR_CORE_INFO("OpenGL version: ", version);
 			return 0;
 		}
 

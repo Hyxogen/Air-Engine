@@ -1,53 +1,132 @@
 #pragma once
-#include "Severity.hpp"
 
-/*
-Wat wil ik bereiken?
+#include <unordered_set>
+#include "Sink.hpp"
 
-Ik wil gewoon simpelweg in de code iets zoals dit doen:
-AIR_CORE_WARN("Variable was not initialzed!")
-Zodat in de console dit komt te staan:
-"[CORE][WARN] Variable was not initialzed!"
-
-En ervoor kunnen zorgen dat ik verbosity levels eruit kan filteren en relatief makkelijk nieuwe kan toevoegen
-*/
+#include <iostream>
+#include <sstream>
 
 namespace engine {
 	namespace util {
 
+		typedef std::unordered_set<Sink*> SinkList;
+
+		enum Severity : unsigned char {
+			SE_TRACE = 1,
+			SE_INFO = 2,
+			SE_WARN = 3,
+			SE_ERROR = 4,
+			SE_CRITICAL = 5,
+
+			SE_UNKNOWN = 0
+		};
+
 		class Logger {
-			unsigned int m_Verbosity = 9999;
-			const char* m_Prefix;
+		protected:
+			const char* m_Name;
+			unsigned char m_Verbosity;
+			std::ostringstream m_Output;
 
-			static Logger* CORE_LOGGER;
+			SinkList m_Sinks;
 
+			static Logger* s_CoreLogger;
 		public:
-			Logger(const char* prefix = "");
+			Logger(const char* name);
 
-			void Log(Severity severity, const char* data) const;
+			~Logger();
 
-			void SetVerbosity(unsigned int verbosity);
+			template<typename... Ts>
+			void Log(unsigned char severity, Ts&... ts) {
+				Log(severity, true, ts...);
+			}
 
-			inline unsigned int GetVerbosity() const { return m_Verbosity; }
+			template<typename... Ts>
+			void Log(unsigned char severity, bool newLine, Ts&... ts) {
+				Log(severity, newLine, std::move(ts)...);
+			}
+			
+			template<typename... Ts>
+			void Log(unsigned char severity, Ts&&... ts) {
+				Log(severity, true, ts...);
+			}
 
+			template<typename... Ts>
+			void Log(unsigned char severity, bool newLine, Ts&&... ts) {
+				if (!ShouldPrint(severity)) return;
+				LogInternal(severity, newLine, ts...);
+				Flush(severity);
+			}
+
+			bool AddSink(Sink* sink);
+
+			void SetVerbosity(unsigned char verbosity);
+
+			unsigned char GetVerbosity() const { return m_Verbosity; }
+		protected:
+			void ClearBuffer();
+
+			void Destroy();
+
+			void InsertTimeString();
+
+			bool ShouldPrint(unsigned char severity);
+
+			void Flush(unsigned char severity);
+			
+			template<typename First>
+			void LogInternal(First&& first) {
+				m_Output << first;
+			}
+
+			template<typename First, typename... Args>
+			void LogInternal(First&& first, Args&&... args) {
+				LogInternal(first);
+				if (sizeof...(Args))
+					LogInternal(args...);
+			}
+
+			//It is posible that naming this function the same as the other internal functions will cause weird behaviour
+			template<typename... Args>
+			void LogInternal(unsigned char severity, bool newLine, Args&&... args) {
+				InsertTimeString();
+				m_Output << "[" << m_Name << "]" << GetSeverityString(severity) << " ";
+
+				LogInternal(std::forward<Args>(args)...);
+
+				if (newLine)
+					m_Output << "\n";
+			}
+		public:
 			static Logger* GetCoreLogger();
+
+			static const char* GetSeverityString(unsigned char severity);
 		};
 
 	}
 }
 
-#define AIR_CORE_LOG_TRACE(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_TRACE, x)
-#define AIR_CORE_LOG_INFO(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_INFO, x)
-#define AIR_CORE_LOG_WARN(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_WARN, x)
-#define AIR_CORE_LOG_ERROR(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_ERROR, x)
-#define AIR_CORE_LOG_CRITICAL(x) engine::util::Logger::GetCoreLogger()->Log(AIR_LOG_CRITICAL, x)
-#define AIR_CORE_VERBOSITY(x) engine::util::Logger::GetCoreLogger()->SetVerbosity(x.m_Level)
+#ifdef AIR_ENABLE_LOGGING
+#define AIR_CORE_TRACE(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_TRACE, __VA_ARGS__);
+#define AIR_CORE_INFO(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_INFO, __VA_ARGS__);
+#define AIR_CORE_WARN(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_WARN, __VA_ARGS__);
+#define AIR_CORE_ERROR(...)		engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_ERROR, __VA_ARGS__);
+#define AIR_CORE_CRITICAL(...)	engine::util::Logger::GetCoreLogger()->Log(engine::util::SE_CRITICAL, __VA_ARGS__);
 
-#define AIR_CORE_ERR_IF(s, x) if(s) {AIR_CORE_LOG_ERROR(x);}
-/*
-#define AIR_CORE_TRACE(...) engine::util::Logger::GetCoreLogger().Log(AIR_TRACE, 0, __VA_ARGS__);
-#define AIR_CORE_INFO(...) engine::util::Logger::GetCoreLogger().Log(AIR_INFO, 0, __VA_ARGS__);
-#define AIR_CORE_WARN(...) engine::util::Logger::GetCoreLogger().Log(AIR_WARN, 0, __VA_ARGS__);
-#define AIR_CORE_ERROR(...) engine::util::Logger::GetCoreLogger().Log(AIR_ERROR, 0, __VA_ARGS__);
-#define AIR_CORE_CRITICAL(...) engine::util::Logger::GetCoreLogger().Log(AIR_CRITICAL, 0, __VA_ARGS__);
-*/
+#define AIR_CORE_TRACE_IF(s, ...) if(s) { AIR_CORE_TRACE(__VA_ARGS__)} else {}
+#define AIR_CORE_INFO_IF(s, ...) if(s) { AIR_CORE_INFO(__VA_ARGS__)} else {}
+#define AIR_CORE_WARN_IF(s, ...) if(s) { AIR_CORE_WARN(__VA_ARGS__)} else {}
+#define AIR_CORE_ERROR_IF(s, ...) if(s) { AIR_CORE_ERROR(__VA_ARGS__)} else {}
+#define AIR_CORE_CRITICAL_IF(s, ...) if(s) { AIR_CORE_CRITICAL(__VA_ARGS__)} else {}
+#else
+#define AIR_CORE_TRACE(...)
+#define AIR_CORE_INFO(...)
+#define AIR_CORE_WARN(...)
+#define AIR_CORE_ERROR(...)
+#define AIR_CORE_CRITICAL(...)
+
+#define AIR_CORE_TRACE_IF(s, ...) s
+#define AIR_CORE_INFO_IF(s, ...) s
+#define AIR_CORE_WARN_IF(s, ...) s
+#define AIR_CORE_ERROR_IF(s, ...) s
+#define AIR_CORE_CRITICAL_IF(s, ...) s
+#endif
