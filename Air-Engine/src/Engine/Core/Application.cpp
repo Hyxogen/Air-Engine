@@ -32,35 +32,35 @@ namespace engine {
 		}
 
 		Application::~Application() {
+			AIR_CORE_INFO("Shutting down Air Engine...")
 			delete m_Window;
 			delete m_Dispatcher;
 			delete m_ContextAdapter;
 			delete m_Console;
 			delete io::Input::GetInstance();
+			delete util::Logger::GetCoreLogger();
 		}
 
 		bool Application::Initialize() {
-			m_Dispatcher = new events::EventDispatcher();
-
 			m_Console = new platform::windows::Console();
 			if (m_Console->Initialize())
 				return true;
 
+			AIR_CORE_INFO("Starting Air Engine...");
+
+			m_Dispatcher = new events::EventDispatcher();
+
+			AIR_CORE_ERROR_IF(io::Input::GetInstance()->Initialize(), "Failed to initialize input helper class");
+
 			m_Window = new platform::windows::WindowsWindow(500, 600, L"Application");
 			m_ContextAdapter = new platform::windows::GLContextAdapter((platform::windows::WindowsWindow*)m_Window, 4, 6);
 
-			m_Window->Initialize();
-			m_ContextAdapter->Initialize();
-
-			io::Input::GetInstance()->Initialize();
-			platform::windows::ConsoleSink sink;
-
-			util::Logger::GetCoreLogger()->AddSink(&sink);
-			util::Logger::GetCoreLogger()->Log(util::SE_ERROR, "Failed succesfully!");
-			
-
+			AIR_CORE_ERROR_IF(m_Window->Initialize(), "Failed to initialize window");
+			AIR_CORE_ERROR_IF(m_ContextAdapter->Initialize(), "Failed to initialize a OpenGL context");
 
 			m_Window->SetVisibility(AIR_W_SHOW);
+			
+			AIR_CORE_INFO("Finished initializing");
 			return false;
 		}
 

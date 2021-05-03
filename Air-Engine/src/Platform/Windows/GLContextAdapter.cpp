@@ -76,7 +76,7 @@ namespace platform {
 			wglSwapIntervalEXT(0);
 
 			AIR_CORE_INFO("Succesfully created OpenGL context");
-			AIR_CORE_INFO(version);
+			AIR_CORE_INFO("OpenGL version: ", version);
 			return 0;
 		}
 
