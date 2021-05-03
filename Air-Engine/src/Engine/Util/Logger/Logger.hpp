@@ -36,12 +36,22 @@ namespace engine {
 			~Logger();
 
 			template<typename... Ts>
-			void Log(unsigned char severity, Ts... ts) {
+			void Log(unsigned char severity, Ts&... ts) {
 				Log(severity, true, ts...);
 			}
 
 			template<typename... Ts>
-			void Log(unsigned char severity, bool newLine, Ts... ts) {
+			void Log(unsigned char severity, bool newLine, Ts&... ts) {
+				Log(severity, newLine, std::move(ts)...);
+			}
+			
+			template<typename... Ts>
+			void Log(unsigned char severity, Ts&&... ts) {
+				Log(severity, true, ts...);
+			}
+
+			template<typename... Ts>
+			void Log(unsigned char severity, bool newLine, Ts&&... ts) {
 				if (!ShouldPrint(severity)) return;
 				LogInternal(severity, newLine, ts...);
 				Flush(severity);
@@ -76,7 +86,7 @@ namespace engine {
 			}
 
 			template<typename... Args>
-			void LogInternal(unsigned char severity, bool newLine, Args... args) {
+			void LogInternal(unsigned char severity, bool newLine, Args&&... args) {
 				InsertTimeString();
 				m_Output << "[" << m_Name << "]" << GetSeverityString(severity) << " ";
 
