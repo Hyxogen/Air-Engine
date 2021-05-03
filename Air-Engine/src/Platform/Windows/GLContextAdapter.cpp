@@ -21,6 +21,11 @@ namespace platform {
 			AIR_CORE_INFO("Initializing OpenGL context adapter");
 			HDC hdc = m_Window->GetHDC();
 
+			if (hdc == nullptr) {
+				AIR_CORE_ERROR("Window HDC not found! Did you initialize your window?");
+				return true;
+			}
+
 			PIXELFORMATDESCRIPTOR pfd = GetPixelDescriptor();
 
 			int pixelFormat = ChoosePixelFormat(hdc, &pfd);

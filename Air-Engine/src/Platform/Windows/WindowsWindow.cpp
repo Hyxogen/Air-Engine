@@ -13,7 +13,7 @@ namespace platform {
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
-		WindowsWindow::WindowsWindow(int width, int height, const wchar_t* title) : Window(title, width, height) {
+		WindowsWindow::WindowsWindow(int width, int height, const wchar_t* title) : Window(title, width, height), m_DeviceContext(nullptr), m_EventHandler(nullptr) {
 			m_Window = nullptr;
 		}
 
