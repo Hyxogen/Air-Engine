@@ -1,9 +1,5 @@
 #include "ConsoleSink.h"
 
-#include "../../Engine/Util/Logger/Logger.hpp"
-
-#include <iostream>
-
 namespace platform {
 	namespace windows {
 	
@@ -16,29 +12,38 @@ namespace platform {
 			{engine::util::SE_UNKNOWN, 0x00}
 		};
 
-		ConsoleSink::ConsoleSink() : Sink("WinConsole"), m_ConsoleHandle(GetStdHandle(STD_OUTPUT_HANDLE)){
-			
+		ConsoleSink::ConsoleSink() : ConsoleSink(defaultColorPair) {
+
 		}
+
+		ConsoleSink::ConsoleSink(PriorityColorPair* colors) : Sink("WinConsole"), m_Colors(colors), m_ConsoleHandle(GetStdHandle(STD_OUTPUT_HANDLE)) {
+
+		}
+
 
 		ConsoleSink::~ConsoleSink() {
 			
 		}
 
 		bool ConsoleSink::Print(unsigned char severity, const char* str) {
-			SetColor(severity);
+			SetColor(GetColor(severity));
 			std::cout << str;
-			SetColor(COLOR_GREY);
+			ResetColor();
 			return false;
 		}
 
+		void ConsoleSink::ResetColor() {
+			SetColor(COLOR_GREY);
+		}
+
 		void ConsoleSink::SetColor(unsigned char color) {
-			SetConsoleTextAttribute(m_ConsoleHandle, GetColor(color));
+			SetConsoleTextAttribute(m_ConsoleHandle, color);
 		}
 
 		unsigned char ConsoleSink::GetColor(unsigned char priority) {
-			for (int i = 0; defaultColorPair[i].m_Priority != engine::util::SE_UNKNOWN; i++) {
-				if (defaultColorPair[i].m_Priority == priority)
-					return defaultColorPair[i].m_Color;
+			for (int i = 0; m_Colors[i].m_Priority != engine::util::SE_UNKNOWN; i++) {
+				if (m_Colors[i].m_Priority == priority)
+					return m_Colors[i].m_Color;
 			}
 			return COLOR_WHITE;
 		}

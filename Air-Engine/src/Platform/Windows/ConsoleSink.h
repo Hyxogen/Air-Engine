@@ -1,8 +1,7 @@
 #pragma once
 
 #include <windows.h>
-
-#include "../../Engine/Util/Logger/Sink.hpp"
+#include "../../Engine/Util/Logger/Logger.hpp"
 
 namespace platform {
 	namespace windows {
@@ -33,18 +32,24 @@ namespace platform {
 		class ConsoleSink : public engine::util::Sink {
 		protected:
 			HANDLE m_ConsoleHandle;
+			PriorityColorPair* m_Colors;
 		public:
 			ConsoleSink();
+
+			ConsoleSink(PriorityColorPair* colors);
 
 			virtual ~ConsoleSink();
 
 			virtual bool Print(unsigned char severity, const char* str);
 
-			void SetColor(unsigned char color);
-
 			inline HANDLE GetConsoleHandle() const { return m_ConsoleHandle; }
 
-			static unsigned char GetColor(unsigned char priority);
+		protected:
+			void ResetColor();
+
+			void SetColor(unsigned char color);
+
+			unsigned char GetColor(unsigned char priority);
 		};
 	}
 }
