@@ -4,6 +4,9 @@
 namespace engine {
 	namespace math {
 
+		//TODO Check if inlining is allowed
+		//TODO make < <= >= > operators use the member functions provided
+
 		template<typename T>
 		struct Vector2 {
 			union {
@@ -35,11 +38,11 @@ namespace engine {
 				
 			}
 
-			T Magnitude() const {
+			inline T Magnitude() const {
 				sqrt(std::move((double)MagnitudeSquared()));
 			}
 
-			T MagnitudeSquared() const {
+			inline T MagnitudeSquared() const {
 				return (m_X * m_X) + (m_Y * m_Y);
 			}
 
@@ -72,7 +75,39 @@ namespace engine {
 			}
 
 			T Dot(Vector2<T>&& other) const {
-				return Dot(other);
+				return std::move(Dot(other));
+			}
+
+			inline bool SmallerThan(const Vector2<T>& other) const {
+				return std::move(MagnitudeSquared()) < std::move(other.MagnitudeSquared());
+			}
+
+			inline bool SmallerThan(Vector2<T>&& other) const {
+				return std::move(SmallerThan(other));
+			}
+
+			inline bool SmallerThanOrEqual(const Vector2<T>& other) const {
+				return std::move(MagnitudeSquared()) <= std::move(other.MagnitudeSquared());
+			}
+
+			inline bool SmallerThanOrEqual(Vector2<T>&& other) const {
+				return std::move(SmallerThanOrEqual(other));
+			}
+
+			inline bool LargerThan(const Vector2<T>& other) const {
+				return std::move(MagnitudeSquared()) > std::move(other.MagnitudeSquared());
+			}
+
+			inline bool LargerThan(Vector2<T>&& other) const {
+				return std::move(LargerThan(other));
+			}
+
+			inline bool LargerThanOrEqual(const Vector2<T>& other) const {
+				return std::move(MagnitudeSquared()) >= std::move(other.MagnitudeSquared());
+			}
+
+			inline bool LargerThanOrEqual(Vector2<T>&& other) const {
+				return std::move(LargerThanOrEqual(other));
 			}
 
 			Vector2<T>& Set(const Vector2<T>& other) {
