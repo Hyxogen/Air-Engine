@@ -108,11 +108,11 @@ namespace engine {
 				return a.Subtract(b);
 			}
 
-			friend Vector2<T>& operator*(Vector2<T> vector, const T& scalar) {
+			friend Vector2<T>& operator*(Vector2<T>& vector, const T& scalar) {
 				return vector.Multiply(scalar);
 			}
 
-			friend Vector2<T>& operator*(Vector2<T> vector, const T&& scalar) {
+			friend Vector2<T>& operator*(Vector2<T>& vector, const T&& scalar) {
 				return vector.Multiply(scalar);
 			}
 
