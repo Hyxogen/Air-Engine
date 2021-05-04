@@ -145,6 +145,10 @@ namespace engine {
 				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
 			}
+
+			static Vector2<T> Zero() {
+				return Vector2();
+			}
 		};
 
 		typedef Vector2<float> Vector2f;
