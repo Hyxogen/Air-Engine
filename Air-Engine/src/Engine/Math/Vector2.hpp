@@ -95,27 +95,27 @@ namespace engine {
 				return Invert();
 			}
 
-			friend Vector2<T>& operator-(const Vector2<T>& vector) {
+			friend Vector2<T>& operator-(Vector2<T>& vector) {
 				return vector.Invert();
 			}
 
-			friend Vector2<T>& operator+(const Vector2<T>& a, const Vector2<T>& b) {
+			friend Vector2<T>& operator+(Vector2<T>& a, const Vector2<T>& b) {
 				return a.Add(b);
 			}
 
-			friend Vector2<T>& operator-(const Vector2<T>& a, const Vector2<T>& b) {
+			friend Vector2<T>& operator-(Vector2<T>& a, const Vector2<T>& b) {
 				return a.Subtract(b);
 			}
 
-			friend Vector2<T>& operator*(const Vector2<T> vector, const T& scalar) {
+			friend Vector2<T>& operator*(Vector2<T> vector, const T& scalar) {
 				return vector.Multiply(scalar);
 			}
 
-			friend Vector2<T>& operator*(const Vector2<T> vector, const T&& scalar) {
+			friend Vector2<T>& operator*(Vector2<T> vector, const T&& scalar) {
 				return vector.Multiply(scalar);
 			}
 
-			friend float operator*(const Vector2<T>& a, const Vector2<T>& b) {
+			friend float operator*(Vector2<T>& a, const Vector2<T>& b) {
 				return std::move(a.Dot(b));
 			}
 
