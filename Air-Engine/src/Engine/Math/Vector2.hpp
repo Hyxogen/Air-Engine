@@ -69,7 +69,7 @@ namespace engine {
 				return *this;
 			}
 
-			Vector2<T>& Dot(const Vector2<T>& other) {
+			T Dot(const Vector2<T>& other) const {
 				return (m_X * other.m_X) + (m_Y * other.m_Y);
 			}
 
@@ -121,7 +121,7 @@ namespace engine {
 				return vector.Multiply(scalar);
 			}
 
-			friend float operator*(const Vector2<T>& a, const Vector2<T>& b) {
+			friend T operator*(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.Dot(b);
 			}
 
