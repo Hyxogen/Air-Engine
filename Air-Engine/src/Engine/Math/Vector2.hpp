@@ -31,13 +31,12 @@ namespace engine {
 
 			}
 
-			Vector2(Vector2<T>&& vector) noexcept : m_X(vector.m_X), m_Y(vector.m_Y) {
-				vector.m_Y = (T)0;
-				vector.m_Y = (T)0;
+			Vector2(Vector2<T>&& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
+				
 			}
 
 			T Magnitude() const {
-				sqrt((double)MagnitudeSquared());
+				sqrt(std::move((double)MagnitudeSquared()));
 			}
 
 			T MagnitudeSquared() const {
@@ -65,9 +64,7 @@ namespace engine {
 			}
 
 			Vector2<T>& Multiply(T&& scalar) {
-				m_X = m_X * scalar;
-				m_Y = m_Y * scalar;
-				return *this;
+				return Multiply(scalar);
 			}
 
 			T Dot(const Vector2<T>& other) const {
@@ -75,7 +72,16 @@ namespace engine {
 			}
 
 			T Dot(Vector2<T>&& other) const {
-				return (m_X * other.m_X) + (m_Y * other.m_Y);
+				return Dot(other);
+			}
+
+			Vector2<T>& Set(const Vector2<T>& other) {
+				m_X = other.m_X;
+				m_Y = other.m_Y;
+			}
+
+			Vector2<T>& Set(Vector2<T>&& other) {
+				return Set(other);
 			}
 
 			Vector2<T>& Add(const Vector2<T>& other) {
@@ -85,9 +91,7 @@ namespace engine {
 			}
 
 			Vector2<T>& Add(Vector2<T>&& other) {
-				m_X += other.m_X;
-				m_Y += other.m_Y;
-				return *this;
+				return Add(other);
 			}
 
 			Vector2<T>& Subtract(const Vector2<T>& other) {
@@ -97,9 +101,7 @@ namespace engine {
 			}
 
 			Vector2<T>& Subtract(Vector2<T>&& other) {
-				m_X -= other.m_X;
-				m_Y -= other.m_Y;
-				return *this;
+				return Subtract(other);
 			}
 
 			Vector2<T>& Clamp(const T& min, const T& max) {
@@ -109,9 +111,7 @@ namespace engine {
 			}
 
 			Vector2<T>& Clamp(T&& min, T&& max) {
-				m_X = m_X < min ? : min : (m_X > max ? max : m_X);
-				m_Y = m_Y < min ? : min : (m_Y > max ? max : m_Y);
-				return *this;
+				return Clamp(min, max);
 			}
 
 			//------	Member operators	------
