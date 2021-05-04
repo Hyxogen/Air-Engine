@@ -18,8 +18,13 @@ namespace engine {
 
 			}
 
-			Vector2(T x, T y) : m_X(x), m_Y(y) {
+			Vector2(const T& x, const T& y) : m_X(x), m_Y(y) {
 
+			}
+
+			Vector2(T&& x, T&& y) : m_X(x), m_Y(y) {
+				x = 0;
+				y = 0;
 			}
 
 			Vector2(const Vector2<T>& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
