@@ -53,9 +53,11 @@ namespace engine {
 			}
 
 			Vector2<T>& Invert() {
-				return Multiply((T)-1);
+				m_X = -m_X;
+				m_Y = -m_Y;
+				return *this;
 			}
-			
+
 			Vector2<T>& Multiply(const T& scalar) {
 				m_X = m_X * scalar;
 				m_Y = m_Y * scalar;
@@ -93,7 +95,7 @@ namespace engine {
 				m_Y -= other.m_Y;
 				return *this;
 			}
-			
+
 			Vector2<T>& Subtract(Vector2<T>&& other) {
 				m_X -= other.m_X;
 				m_Y -= other.m_Y;
@@ -112,22 +114,37 @@ namespace engine {
 				return *this;
 			}
 
-			T operator[](std::size_t idx) const {
+			//------	Member operators	------
+			//--- operator[] ---
+			T operator[](const std::size_t& idx) const {
 				return m_Coords[idx];
 			}
-			
-			Vector2<T>& operator-() {
-				return Invert();
-			}
 
+			T operator[](std::size_t&& idx) const {
+				return m_Coords[idx];
+			}
+			//--- operator[] ---
+
+			//--- operator- ---
+			Vector2<T> operator-() {
+				Vector2<T> ret(*this);
+				return ret.Invert();
+			}
+			//--- operator- ---
+			//------	Member operators	------
+
+			//------	Non-Member operators	------
+			//--- operator= ---
 			Vector2<T> operator=(const Vector2<T>& other) {
-				return std::move(Vector2<T>(other));
+				return Vector2<T>(other);
 			}
 
 			Vector2<T> operator=(Vector2<T>&& other) {
-				return std::move(Vector2<T>(other));
+				return Vector2<T>(other);
 			}
+			//--- operator= ---
 
+			//--- operator+= ---
 			Vector2<T>& operator+=(const Vector2<T>& other) {
 				return Add(other);
 			}
@@ -135,7 +152,19 @@ namespace engine {
 			Vector2<T>& operator+=(Vector2<T>&& other) {
 				return Add(other);
 			}
+			//---operator+= ---
 
+			//--- operator-= ---
+			Vector2<T>& operator-=(const Vector2<T>& other) {
+				return Subtract(other);
+			}
+
+			Vector2<T>& operator-=(Vector2<T>&& other) {
+				return Subtract(other);
+			}
+			//---operator-= ---
+
+			//--- operator*= ---
 			Vector2<T>& operator*=(const T& scalar) {
 				return Multiply(scalar);
 			}
@@ -143,21 +172,47 @@ namespace engine {
 			Vector2<T>& operator*=(T&& scalar) {
 				return Multiply(scalar);
 			}
+			//--- operator*= ---
 
-			friend Vector2<T>& operator-(Vector2<T>& vector) {
-				return vector.Invert();
-			}
-
+			///--- operator+ ---
 			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
 				Vector2<T> ret(a);
-				return std::move(ret.Add(b));
+				return ret.Add(b);
 			}
 
+			friend Vector2<T> operator+(const Vector2<T>& a, Vector2<T>&& b) {
+				return b.Add(a);
+			}
+
+			friend Vector2<T> operator+(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.Add(b);
+			}
+
+			friend Vector2<T> operator+(Vector2<T>&& a, Vector2<T>&& b) {
+				return a.Add(b);
+			}
+			//--- operator+ ---
+
+			//--- operator- ---
 			friend Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
-				Vector2<T> ret(a)
-				return std::move(ret.Subtract(b));
+				Vector2<T> ret(a);
+				return ret.Subtract(b);
 			}
 
+			friend Vector2<T> operator-(const Vector2<T>& a, Vector2<T>&& b) {
+				return b.Invert().Add(a);
+			}
+
+			friend Vector2<T> operator-(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.Subtract(b);
+			}
+
+			friend Vector2<T> operator-(Vector2<T>&& a, Vector2<T>&& b) {
+				return a.Subtract(b);
+			}
+			//--- operator- ---
+
+			//--- operator* ---
 			friend Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
 				Vector2<T> ret(vector);
 				return ret.Multiply(scalar);
@@ -177,33 +232,98 @@ namespace engine {
 			}
 
 			friend T operator*(Vector2<T>&& a, const Vector2<T>& b) {
-				return b.Dot(a);
+				return a.Dot(b);
 			}
 
 			friend T operator*(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.Dot(b);
 			}
+			//--- operator* ---
 
+			//--- operator< ---
 			friend bool operator<(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() < b.MagnitudeSquared();
 			}
 
+			friend bool operator<(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() < b.MagnitudeSquared();
+			}
+
+			friend bool operator<(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.MagnitudeSquared() < b.MagnitudeSquared();
+			}
+
+			friend bool operator<(Vector2<T>&& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() < b.MagnitudeSquared();
+			}
+			//--- operator< ---
+
+			//--- operator<= ---
 			friend bool operator<=(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() <= b.MagnitudeSquared();
 			}
+			
+			friend bool operator<=(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+			}
+			
+			friend bool operator<=(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+			}
 
+			friend bool operator<=(Vector2<T>&& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+			}
+			//--- operator<= ---
+
+			//--- operator>= ---
 			friend bool operator>=(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() >= b.MagnitudeSquared();
 			}
 
+			friend bool operator>=(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+			}
+
+			friend bool operator>=(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+			}
+
+			friend bool operator>=(Vector2<T>&& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+			}
+			//--- operator>= ---
+
+			//--- operator> ---
 			friend bool operator>(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() > b.MagnitudeSquared();
 			}
+			
+			friend bool operator>(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() > b.MagnitudeSquared();
+			}
+			
+			friend bool operator>(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.MagnitudeSquared() > b.MagnitudeSquared();
+			}
+			
+			friend bool operator>(Vector2<T>&& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() > b.MagnitudeSquared();
+			}
+			//--- operator> ---
 
+			//--- operator<< ---
 			friend std::ostream& operator<<(std::ostream& stream, const Vector2<T>& vector) {
 				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
 			}
+			
+			friend std::ostream& operator<<(std::ostream& stream, Vector2<T>&& vector) {
+				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
+				return stream;
+			}
+			//--- operator<< ---
+			//------	Non-Member operators	------
 
 			static Vector2<T> Zero() {
 				return Vector2();
