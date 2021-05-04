@@ -136,7 +136,7 @@ namespace engine {
 			}
 
 			friend std::ostream& operator<<(std::ostream& stream, const Vector2<T>& vector) {
-				stream << "[" << vector.m_X << "," << vector.m_Y;
+				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
 			}
 		};
