@@ -1,8 +1,8 @@
+#include "airpch.h"
 #pragma once
 
 #include "Event.hpp"
 #include "../IO/MouseCodes.hpp"
-#include "../Util/HashUtils.hpp"
 
 namespace engine {
 

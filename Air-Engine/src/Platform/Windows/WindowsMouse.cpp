@@ -5,7 +5,6 @@
 
 #include "Events/WindowsWindowEvent.hpp"
 
-#include "../../Engine/Util/HashUtils.hpp"
 #include "../../Engine/Core/Application.hpp"
 #include "../../Engine/Events/EventDispatcher.hpp"
 #include "../../Engine/Events/MouseEvent.hpp"

@@ -5,7 +5,6 @@
 
 #include "../IO/Input.hpp"
 
-
 #include "../../Platform/Windows/WindowsKeyboard.hpp"
 #include "../../Platform/Windows/WindowsMouse.hpp"
 

@@ -4,7 +4,6 @@
 #include "Events/WindowsWindowEvent.hpp"
 
 #include "../../Engine/Core/Application.hpp"
-#include "../../Engine/Util/HashUtils.hpp"
 
 #include "../../Engine/Events/Event.hpp"
 #include "../../Engine/Events/KeyEvent.hpp"
