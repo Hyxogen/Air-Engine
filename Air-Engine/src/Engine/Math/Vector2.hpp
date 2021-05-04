@@ -29,6 +29,7 @@ namespace engine {
 			Vector2(Vector2<T>&& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
 				vector.m_Y = (T)0;
 				vector.m_Y = (T)0;
+				vector.m_Coords == nullptr;
 			}
 
 			T Magnitude() const {
