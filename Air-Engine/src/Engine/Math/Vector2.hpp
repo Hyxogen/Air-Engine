@@ -115,8 +115,8 @@ namespace engine {
 				return vector.Multiply(scalar);
 			}
 
-			friend float operator*(Vector2<T>& a, const Vector2<T>& b) {
-				return std::move(a.Dot(b));
+			friend float operator*(const Vector2<T>& a, const Vector2<T>& b) {
+				return a.Dot(b);
 			}
 
 			friend bool operator<(const Vector2<T>& a, const Vector2<T>& b) {
