@@ -22,7 +22,7 @@ namespace engine {
 
 			}
 
-			Vector2(Vector2<T>& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
+			Vector2(const Vector2<T>& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
 
 			}
 
