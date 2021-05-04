@@ -175,150 +175,150 @@ namespace engine {
 			//--- operator*= ---
 
 			///--- operator+ ---
-			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
+			Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
 				Vector2<T> ret(a);
 				return ret.Add(b);
 			}
 
-			friend Vector2<T> operator+(const Vector2<T>& a, Vector2<T>&& b) {
+			Vector2<T> operator+(const Vector2<T>& a, Vector2<T>&& b) {
 				return b.Add(a);
 			}
 
-			friend Vector2<T> operator+(Vector2<T>&& a, const Vector2<T>& b) {
+			Vector2<T> operator+(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.Add(b);
 			}
 
-			friend Vector2<T> operator+(Vector2<T>&& a, Vector2<T>&& b) {
+			Vector2<T> operator+(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.Add(b);
 			}
 			//--- operator+ ---
 
 			//--- operator- ---
-			friend Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
+			Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
 				Vector2<T> ret(a);
 				return ret.Subtract(b);
 			}
 
-			friend Vector2<T> operator-(const Vector2<T>& a, Vector2<T>&& b) {
+			Vector2<T> operator-(const Vector2<T>& a, Vector2<T>&& b) {
 				return b.Invert().Add(a);
 			}
 
-			friend Vector2<T> operator-(Vector2<T>&& a, const Vector2<T>& b) {
+			Vector2<T> operator-(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.Subtract(b);
 			}
 
-			friend Vector2<T> operator-(Vector2<T>&& a, Vector2<T>&& b) {
+			Vector2<T> operator-(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.Subtract(b);
 			}
 			//--- operator- ---
 
 			//--- operator* ---
-			friend Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
+			Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
 				Vector2<T> ret(vector);
 				return ret.Multiply(scalar);
 			}
 
-			friend Vector2<T> operator*(const Vector2<T>& vector, T&& scalar) {
+			Vector2<T> operator*(const Vector2<T>& vector, T&& scalar) {
 				Vector2<T> ret(vector);
 				return ret.Multiply(scalar);
 			}
 
-			friend T operator*(const Vector2<T>& a, const Vector2<T>& b) {
+			T operator*(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.Dot(b);
 			}
 
-			friend T operator*(const Vector2<T>& a, Vector2<T>&& b) {
+			T operator*(const Vector2<T>& a, Vector2<T>&& b) {
 				return a.Dot(b);
 			}
 
-			friend T operator*(Vector2<T>&& a, const Vector2<T>& b) {
+			T operator*(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.Dot(b);
 			}
 
-			friend T operator*(Vector2<T>&& a, Vector2<T>&& b) {
+			T operator*(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.Dot(b);
 			}
 			//--- operator* ---
 
 			//--- operator< ---
-			friend bool operator<(const Vector2<T>& a, const Vector2<T>& b) {
+			bool operator<(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() < b.MagnitudeSquared();
 			}
 
-			friend bool operator<(const Vector2<T>& a, Vector2<T>&& b) {
+			bool operator<(const Vector2<T>& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() < b.MagnitudeSquared();
 			}
 
-			friend bool operator<(Vector2<T>&& a, const Vector2<T>& b) {
+			bool operator<(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() < b.MagnitudeSquared();
 			}
 
-			friend bool operator<(Vector2<T>&& a, Vector2<T>&& b) {
+			bool operator<(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() < b.MagnitudeSquared();
 			}
 			//--- operator< ---
 
 			//--- operator<= ---
-			friend bool operator<=(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() <= b.MagnitudeSquared();
-			}
-			
-			friend bool operator<=(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() <= b.MagnitudeSquared();
-			}
-			
-			friend bool operator<=(Vector2<T>&& a, const Vector2<T>& b) {
+			bool operator<=(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() <= b.MagnitudeSquared();
 			}
 
-			friend bool operator<=(Vector2<T>&& a, Vector2<T>&& b) {
+			bool operator<=(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+			}
+
+			bool operator<=(Vector2<T>&& a, const Vector2<T>& b) {
+				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+			}
+
+			bool operator<=(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() <= b.MagnitudeSquared();
 			}
 			//--- operator<= ---
 
 			//--- operator>= ---
-			friend bool operator>=(const Vector2<T>& a, const Vector2<T>& b) {
+			bool operator>=(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() >= b.MagnitudeSquared();
 			}
 
-			friend bool operator>=(const Vector2<T>& a, Vector2<T>&& b) {
+			bool operator>=(const Vector2<T>& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() >= b.MagnitudeSquared();
 			}
 
-			friend bool operator>=(Vector2<T>&& a, const Vector2<T>& b) {
+			bool operator>=(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() >= b.MagnitudeSquared();
 			}
 
-			friend bool operator>=(Vector2<T>&& a, Vector2<T>&& b) {
+			bool operator>=(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() >= b.MagnitudeSquared();
 			}
 			//--- operator>= ---
 
 			//--- operator> ---
-			friend bool operator>(const Vector2<T>& a, const Vector2<T>& b) {
+			bool operator>(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() > b.MagnitudeSquared();
 			}
-			
-			friend bool operator>(const Vector2<T>& a, Vector2<T>&& b) {
+
+			bool operator>(const Vector2<T>& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() > b.MagnitudeSquared();
 			}
-			
-			friend bool operator>(Vector2<T>&& a, const Vector2<T>& b) {
+
+			bool operator>(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.MagnitudeSquared() > b.MagnitudeSquared();
 			}
-			
-			friend bool operator>(Vector2<T>&& a, Vector2<T>&& b) {
+
+			bool operator>(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.MagnitudeSquared() > b.MagnitudeSquared();
 			}
 			//--- operator> ---
 
 			//--- operator<< ---
-			friend std::ostream& operator<<(std::ostream& stream, const Vector2<T>& vector) {
+			std::ostream& operator<<(std::ostream& stream, const Vector2<T>& vector) {
 				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
 			}
-			
-			friend std::ostream& operator<<(std::ostream& stream, Vector2<T>&& vector) {
+
+			std::ostream& operator<<(std::ostream& stream, Vector2<T>&& vector) {
 				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
 			}
