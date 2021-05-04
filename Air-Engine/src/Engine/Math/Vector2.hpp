@@ -31,10 +31,9 @@ namespace engine {
 
 			}
 
-			Vector2(Vector2<T>&& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
+			Vector2(Vector2<T>&& vector) noexcept : m_X(vector.m_X), m_Y(vector.m_Y) {
 				vector.m_Y = (T)0;
 				vector.m_Y = (T)0;
-				vector.m_Coords = nullptr;
 			}
 
 			T Magnitude() const {
@@ -63,7 +62,7 @@ namespace engine {
 				return *this;
 			}
 
-			Vector2<T>& Multiply(const T&& scalar) {
+			Vector2<T>& Multiply(T&& scalar) {
 				m_X = m_X * scalar;
 				m_Y = m_Y * scalar;
 				return *this;
@@ -73,7 +72,17 @@ namespace engine {
 				return (m_X * other.m_X) + (m_Y * other.m_Y);
 			}
 
+			T Dot(Vector2<T>&& other) const {
+				return (m_X * other.m_X) + (m_Y * other.m_Y);
+			}
+
 			Vector2<T>& Add(const Vector2<T>& other) {
+				m_X += other.m_X;
+				m_Y += other.m_Y;
+				return *this;
+			}
+
+			Vector2<T>& Add(Vector2<T>&& other) {
 				m_X += other.m_X;
 				m_Y += other.m_Y;
 				return *this;
@@ -85,43 +94,93 @@ namespace engine {
 				return *this;
 			}
 			
+			Vector2<T>& Subtract(Vector2<T>&& other) {
+				m_X -= other.m_X;
+				m_Y -= other.m_Y;
+				return *this;
+			}
+
 			Vector2<T>& Clamp(const T& min, const T& max) {
 				m_X = m_X < min ? : min : (m_X > max ? max : m_X);
 				m_Y = m_Y < min ? : min : (m_Y > max ? max : m_Y);
 				return *this;
 			}
 
-			Vector2<T>& Clamp(const T&& min, const T&& max) {
+			Vector2<T>& Clamp(T&& min, T&& max) {
 				m_X = m_X < min ? : min : (m_X > max ? max : m_X);
 				m_Y = m_Y < min ? : min : (m_Y > max ? max : m_Y);
 				return *this;
 			}
 
+			T operator[](std::size_t idx) const {
+				return m_Coords[idx];
+			}
+			
 			Vector2<T>& operator-() {
 				return Invert();
+			}
+
+			Vector2<T> operator=(const Vector2<T>& other) {
+				return std::move(Vector2<T>(other));
+			}
+
+			Vector2<T> operator=(Vector2<T>&& other) {
+				return std::move(Vector2<T>(other));
+			}
+
+			Vector2<T>& operator+=(const Vector2<T>& other) {
+				return Add(other);
+			}
+
+			Vector2<T>& operator+=(Vector2<T>&& other) {
+				return Add(other);
+			}
+
+			Vector2<T>& operator*=(const T& scalar) {
+				return Multiply(scalar);
+			}
+
+			Vector2<T>& operator*=(T&& scalar) {
+				return Multiply(scalar);
 			}
 
 			friend Vector2<T>& operator-(Vector2<T>& vector) {
 				return vector.Invert();
 			}
 
-			friend Vector2<T>& operator+(Vector2<T>& a, const Vector2<T>& b) {
-				return a.Add(b);
+			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
+				Vector2<T> ret(a);
+				return std::move(ret.Add(b));
 			}
 
-			friend Vector2<T>& operator-(Vector2<T>& a, const Vector2<T>& b) {
-				return a.Subtract(b);
+			friend Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
+				Vector2<T> ret(a)
+				return std::move(ret.Subtract(b));
 			}
 
-			friend Vector2<T>& operator*(Vector2<T>& vector, const T& scalar) {
-				return vector.Multiply(scalar);
+			friend Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
+				Vector2<T> ret(vector);
+				return ret.Multiply(scalar);
 			}
 
-			friend Vector2<T>& operator*(Vector2<T>& vector, const T&& scalar) {
-				return vector.Multiply(scalar);
+			friend Vector2<T> operator*(const Vector2<T>& vector, T&& scalar) {
+				Vector2<T> ret(vector);
+				return ret.Multiply(scalar);
 			}
 
 			friend T operator*(const Vector2<T>& a, const Vector2<T>& b) {
+				return a.Dot(b);
+			}
+
+			friend T operator*(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.Dot(b);
+			}
+
+			friend T operator*(Vector2<T>&& a, const Vector2<T>& b) {
+				return b.Dot(a);
+			}
+
+			friend T operator*(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.Dot(b);
 			}
 
