@@ -27,7 +27,7 @@ project "Sandbox"
     }
 
 	filter "configurations:Debug"
-		optimize "Off"
+		optimize "Debug"
 		symbols "Full"
 
 		defines {

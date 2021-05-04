@@ -32,7 +32,7 @@ project "Air-Engine"
 	pchsource "src/airpch.cpp"
 
 	filter "configurations:Debug"
-		optimize "Off"
+		optimize "Debug"
 		symbols "Full"
 
 		defines {
