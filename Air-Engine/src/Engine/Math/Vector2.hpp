@@ -211,8 +211,7 @@ namespace engine {
 
 			///--- operator+ ---
 			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
-				Vector2<T> ret(a);
-				return ret.Add(b);
+				return Vector2<T>(a).Add(b);
 			}
 
 			friend Vector2<T> operator+(const Vector2<T>& a, Vector2<T>&& b) {
@@ -230,8 +229,7 @@ namespace engine {
 
 			//--- operator- ---
 			friend Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
-				Vector2<T> ret(a);
-				return ret.Subtract(b);
+				return Vector2<T>(a).Subtract(b);
 			}
 
 			friend Vector2<T> operator-(const Vector2<T>& a, Vector2<T>&& b) {
@@ -249,13 +247,11 @@ namespace engine {
 
 			//--- operator* ---
 			friend Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
-				Vector2<T> ret(vector);
-				return ret.Multiply(scalar);
+				return Vector2<T>(vector).Multiply(scalar);
 			}
 
 			friend Vector2<T> operator*(const Vector2<T>& vector, T&& scalar) {
-				Vector2<T> ret(vector);
-				return ret.Multiply(scalar);
+				return Vector2<T>(vector).Multiply(scalar);
 			}
 
 			friend T operator*(const Vector2<T>& a, const Vector2<T>& b) {
