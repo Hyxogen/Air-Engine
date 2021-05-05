@@ -235,6 +235,24 @@ namespace engine {
 			}
 			//--- operator== ---
 
+			//--- operator!= ---
+			friend bool operator!=(const Vector2<T>& a, const Vector2<T>& b) {
+				return !a.Equal(b);
+			}
+
+			friend bool operator!=(const Vector2<T>& a, Vector2<T>&& b) {
+				return !a.Equal(b);
+			}
+
+			friend bool operator!=(Vector2<T>&& a, const Vector2<T>* b) {
+				return !a.Equal(b);
+			}
+
+			friend bool operator!=(Vector2<T>&& a, const Vector2<T>&& b) {
+				return !a.Equal(b);
+			}
+			//--- operator!= ---
+
 			///--- operator+ ---
 			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
 				return Vector2<T>(a).Add(b);
