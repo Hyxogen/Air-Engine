@@ -277,73 +277,73 @@ namespace engine {
 
 			//--- operator< ---
 			friend bool operator<(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() < b.MagnitudeSquared();
+				return a.SmallerThan(b);
 			}
 
 			friend bool operator<(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() < b.MagnitudeSquared();
+				return a.SmallerThan(b);
 			}
 
 			friend bool operator<(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() < b.MagnitudeSquared();
+				return a.SmallerThan(b);
 			}
 
 			friend bool operator<(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() < b.MagnitudeSquared();
+				return a.SmallerThan(b);
 			}
 			//--- operator< ---
 
 			//--- operator<= ---
 			friend bool operator<=(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+				return a.SmallerThanOrEqual(b);
 			}
 			
 			friend bool operator<=(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+				return a.SmallerThanOrEqual(b);
 			}
 			
 			friend bool operator<=(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+				return a.SmallerThanOrEqual(b);
 			}
 
 			friend bool operator<=(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() <= b.MagnitudeSquared();
+				return a.SmallerThanOrEqual(b);
 			}
 			//--- operator<= ---
 
 			//--- operator>= ---
 			friend bool operator>=(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+				return a.LargerThanOrEqual(b);
 			}
 
 			friend bool operator>=(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+				return a.LargerThanOrEqual(b);
 			}
 
 			friend bool operator>=(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+				return a.LargerThanOrEqual(b);
 			}
 
 			friend bool operator>=(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() >= b.MagnitudeSquared();
+				return a.LargerThanOrEqual(b);
 			}
 			//--- operator>= ---
 
 			//--- operator> ---
 			friend bool operator>(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() > b.MagnitudeSquared();
+				return a.LargerThan(b);
 			}
 			
 			friend bool operator>(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() > b.MagnitudeSquared();
+				return a.LargerThan(b);
 			}
 			
 			friend bool operator>(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.MagnitudeSquared() > b.MagnitudeSquared();
+				return a.LargerThan(b);
 			}
 			
 			friend bool operator>(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.MagnitudeSquared() > b.MagnitudeSquared();
+				return a.LargerThan(b);
 			}
 			//--- operator> ---
 
