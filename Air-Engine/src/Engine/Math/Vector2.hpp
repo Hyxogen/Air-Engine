@@ -38,8 +38,8 @@ namespace engine {
 				
 			}
 
-			inline T Magnitude() const {
-				sqrt(std::move((double)MagnitudeSquared()));
+			inline double Magnitude() const {
+				return sqrt(std::move((double)MagnitudeSquared()));
 			}
 
 			inline T MagnitudeSquared() const {
