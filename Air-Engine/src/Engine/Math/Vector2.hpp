@@ -34,8 +34,8 @@ namespace engine {
 
 			}
 
-			Vector2(Vector2<T>&& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
-				
+			Vector2(Vector2<T>&& vector) noexcept : m_X(std::exchange(vector.m_X, 0)), m_Y(std::exchange(vector.m_Y, 0)) {
+
 			}
 
 			inline double Magnitude() const {
@@ -67,7 +67,9 @@ namespace engine {
 			}
 
 			Vector2<T>& Multiply(T&& scalar) {
-				return Multiply(scalar);
+				m_X = m_X * scalar;
+				m_Y = m_Y * scalar;
+				return *this;
 			}
 
 			T Dot(const Vector2<T>& other) const {
@@ -119,13 +121,17 @@ namespace engine {
 			}
 
 			Vector2<T>& Set(const Vector2<T>& other) {
+				if (this == &other) return *this;
 				m_X = other.m_X;
 				m_Y = other.m_Y;
 				return *this;
 			}
 
-			Vector2<T>& Set(Vector2<T>&& other) {
-				return Set(other);
+			Vector2<T>& Set(Vector2<T>&& other) noexcept {
+				if (this == &other) return *this;
+				m_X = std::exchange(other.m_X, 0);
+				m_Y = std::exchange(other.m_Y, 0);
+				return *this;
 			}
 
 			Vector2<T>& Add(const Vector2<T>& other) {
@@ -135,7 +141,9 @@ namespace engine {
 			}
 
 			Vector2<T>& Add(Vector2<T>&& other) {
-				return Add(other);
+				m_X += other.m_X;
+				m_Y += other.m_Y;
+				return *this;
 			}
 
 			Vector2<T>& Subtract(const Vector2<T>& other) {
@@ -165,7 +173,7 @@ namespace engine {
 			}
 
 			T operator[](std::size_t&& idx) const {
-				return m_Coords[idx];
+				return m_Coords[std::move(idx)];
 			}
 			//--- operator[] ---
 
@@ -182,8 +190,8 @@ namespace engine {
 				return Set(other);
 			}
 
-			Vector2<T>& operator=(Vector2<T>&& other) {
-				return Set(other);
+			Vector2<T>& operator=(Vector2<T>&& other) noexcept {
+				return Set(std::move(other));
 			}
 			//--- operator= ---
 
@@ -193,7 +201,7 @@ namespace engine {
 			}
 
 			Vector2<T>& operator+=(Vector2<T>&& other) {
-				return Add(other);
+				return Add(std::move(other));
 			}
 			//---operator+= ---
 
@@ -285,7 +293,7 @@ namespace engine {
 			}
 
 			friend Vector2<T> operator-(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.Subtract(b);
+				return a.Subtract(std::move(b));
 			}
 			//--- operator- ---
 
@@ -295,7 +303,7 @@ namespace engine {
 			}
 
 			friend Vector2<T> operator*(const Vector2<T>& vector, T&& scalar) {
-				return Vector2<T>(vector).Multiply(scalar);
+				return Vector2<T>(vector).Multiply(std::move(scalar));
 			}
 
 			friend T operator*(const Vector2<T>& a, const Vector2<T>& b) {
@@ -337,11 +345,11 @@ namespace engine {
 			friend bool operator<=(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.SmallerThanOrEqual(b);
 			}
-			
+
 			friend bool operator<=(const Vector2<T>& a, Vector2<T>&& b) {
 				return a.SmallerThanOrEqual(b);
 			}
-			
+
 			friend bool operator<=(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.SmallerThanOrEqual(b);
 			}
@@ -373,15 +381,15 @@ namespace engine {
 			friend bool operator>(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.LargerThan(b);
 			}
-			
+
 			friend bool operator>(const Vector2<T>& a, Vector2<T>&& b) {
 				return a.LargerThan(b);
 			}
-			
+
 			friend bool operator>(Vector2<T>&& a, const Vector2<T>& b) {
 				return a.LargerThan(b);
 			}
-			
+
 			friend bool operator>(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.LargerThan(b);
 			}
@@ -392,7 +400,7 @@ namespace engine {
 				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
 			}
-			
+
 			friend std::ostream& operator<<(std::ostream& stream, Vector2<T>&& vector) {
 				stream << "[" << vector.m_X << "," << vector.m_Y << "]";
 				return stream;
