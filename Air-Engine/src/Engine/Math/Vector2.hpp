@@ -5,7 +5,6 @@ namespace engine {
 	namespace math {
 
 		//TODO Check if inlining is allowed
-		//TODO make < <= >= > operators use the member functions provided
 
 		template<typename T>
 		struct Vector2 {
@@ -247,6 +246,11 @@ namespace engine {
 
 			static Vector2<T> Zero() {
 				return Vector2();
+			}
+
+			//c should be a float from 0-1, where 0 means 100% a and 1 mean 100% b
+			static Vector2<T> Lerp(const Vector2<T>& a, const Vector2<T>& b, float c) {
+				return (((1.0f - c) * a) + (c * b));
 			}
 		};
 
