@@ -163,8 +163,7 @@ namespace engine {
 
 			//--- operator- ---
 			Vector2<T> operator-() {
-				Vector2<T> ret(*this);
-				return ret.Invert();
+				return Vector2<T>(*this).Invert();
 			}
 			//--- operator- ---
 			//------	Member operators	------
