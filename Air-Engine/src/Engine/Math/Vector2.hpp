@@ -30,11 +30,11 @@ namespace engine {
 			}
 
 			Vector2(const Vector2<T>& vector) : m_X(vector.m_X), m_Y(vector.m_Y) {
-			
+
 			}
 
 			Vector2(Vector2<T>&& vector) noexcept : m_X(std::exchange(vector.m_X, 0)), m_Y(std::exchange(vector.m_Y, 0)) {
-			
+
 			}
 
 			inline double Magnitude() const {
@@ -134,7 +134,7 @@ namespace engine {
 				return std::move(Vector2<T>(*this).Invert());
 			}
 			//--- operator- ---
-			
+
 			// //--- operator= ---
 			Vector2<T>& operator=(const Vector2<T>& other) {
 				return Set(other);
@@ -198,7 +198,7 @@ namespace engine {
 			friend Vector2<T> operator*(Vector2<T>&& vector, const T& scalar) noexcept {
 				return std::move(vector.Multiply(scalar));
 			}
-			
+
 			friend Vector2<T> operator*(const T& scalar, const Vector2<T>& vector) {
 				return std::move(Vector2<T>(vector).Multiply(scalar));
 			}
