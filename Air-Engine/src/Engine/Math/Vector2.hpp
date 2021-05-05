@@ -113,6 +113,7 @@ namespace engine {
 			Vector2<T>& Set(const Vector2<T>& other) {
 				m_X = other.m_X;
 				m_Y = other.m_Y;
+				return *this;
 			}
 
 			Vector2<T>& Set(Vector2<T>&& other) {
