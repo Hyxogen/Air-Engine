@@ -180,29 +180,13 @@ namespace engine {
 			//--- operator!= ---
 
 			///--- operator+ ---
-			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
-				return std::move(Vector2<T>(a).Add(b));
-			}
-
-			friend Vector2<T> operator+(const Vector2<T>& a, Vector2<T>&& b) noexcept {
-				return std::move(b.Add(a));
-			}
-
-			friend Vector2<T> operator+(Vector2<T>&& a, const Vector2<T>& b) noexcept {
+			friend Vector2<T> operator+(Vector2<T> a, const Vector2<T>& b) {
 				return std::move(a.Add(b));
 			}
 			//--- operator+ ---
 
 			//--- operator- ---
-			friend Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
-				return std::move(Vector2<T>(a).Subtract(b));
-			}
-
-			friend Vector2<T> operator-(const Vector2<T>& a, Vector2<T>&& b) noexcept {
-				return std::move(b.Invert().Add(a));
-			}
-
-			friend Vector2<T> operator-(Vector2<T>&& a, const Vector2<T>& b) noexcept {
+			friend Vector2<T> operator-(Vector2<T> a, const Vector2<T>& b) {
 				return std::move(a.Subtract(b));
 			}
 			//--- operator- ---
