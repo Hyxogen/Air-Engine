@@ -110,6 +110,14 @@ namespace engine {
 				return std::move(LargerThanOrEqual(other));
 			}
 
+			inline bool Equal(const Vector2<T>& other) const {
+				return (m_X == other.m_X) && (m_Y == other.m_Y);
+			}
+
+			inline bool Equal(Vector2<T>&& other) const {
+				return Equal(other);
+			}
+
 			Vector2<T>& Set(const Vector2<T>& other) {
 				m_X = other.m_X;
 				m_Y = other.m_Y;
@@ -208,6 +216,24 @@ namespace engine {
 				return Multiply(scalar);
 			}
 			//--- operator*= ---
+
+			//--- operator== ---
+			friend bool operator==(const Vector2<T>& a, const Vector2<T>& b) {
+				return a.Equal(b);
+			}
+
+			friend bool operator==(const Vector2<T>& a, Vector2<T>&& b) {
+				return a.Equal(b);
+			}
+
+			friend bool operator==(Vector2<T>&& a, const Vector2<T>* b) {
+				return a.Equal(b);
+			}
+
+			friend bool operator==(Vector2<T>&& a, const Vector2<T>&& b) {
+				return a.Equal(b);
+			}
+			//--- operator== ---
 
 			///--- operator+ ---
 			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
