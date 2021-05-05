@@ -65,7 +65,7 @@ namespace engine {
 				return *this;
 			}
 
-			T Dot(const Vector2<T>& other) const {
+			inline T Dot(const Vector2<T>& other) const {
 				return (m_X * other.m_X) + (m_Y * other.m_Y);
 			}
 
