@@ -66,58 +66,28 @@ namespace engine {
 				return *this;
 			}
 
-			Vector2<T>& Multiply(T&& scalar) {
-				m_X = m_X * scalar;
-				m_Y = m_Y * scalar;
-				return *this;
-			}
-
 			T Dot(const Vector2<T>& other) const {
 				return (m_X * other.m_X) + (m_Y * other.m_Y);
-			}
-
-			T Dot(Vector2<T>&& other) const {
-				return std::move(Dot(other));
 			}
 
 			inline bool SmallerThan(const Vector2<T>& other) const {
 				return std::move(MagnitudeSquared()) < std::move(other.MagnitudeSquared());
 			}
 
-			inline bool SmallerThan(Vector2<T>&& other) const {
-				return std::move(SmallerThan(other));
-			}
-
 			inline bool SmallerThanOrEqual(const Vector2<T>& other) const {
 				return std::move(MagnitudeSquared()) <= std::move(other.MagnitudeSquared());
-			}
-
-			inline bool SmallerThanOrEqual(Vector2<T>&& other) const {
-				return std::move(SmallerThanOrEqual(other));
 			}
 
 			inline bool LargerThan(const Vector2<T>& other) const {
 				return std::move(MagnitudeSquared()) > std::move(other.MagnitudeSquared());
 			}
 
-			inline bool LargerThan(Vector2<T>&& other) const {
-				return std::move(LargerThan(other));
-			}
-
 			inline bool LargerThanOrEqual(const Vector2<T>& other) const {
 				return std::move(MagnitudeSquared()) >= std::move(other.MagnitudeSquared());
 			}
 
-			inline bool LargerThanOrEqual(Vector2<T>&& other) const {
-				return std::move(LargerThanOrEqual(other));
-			}
-
 			inline bool Equal(const Vector2<T>& other) const {
 				return (m_X == other.m_X) && (m_Y == other.m_Y);
-			}
-
-			inline bool Equal(Vector2<T>&& other) const {
-				return Equal(other);
 			}
 
 			Vector2<T>& Set(const Vector2<T>& other) {
@@ -140,30 +110,16 @@ namespace engine {
 				return *this;
 			}
 
-			Vector2<T>& Add(Vector2<T>&& other) {
-				m_X += other.m_X;
-				m_Y += other.m_Y;
-				return *this;
-			}
-
 			Vector2<T>& Subtract(const Vector2<T>& other) {
 				m_X -= other.m_X;
 				m_Y -= other.m_Y;
 				return *this;
 			}
 
-			Vector2<T>& Subtract(Vector2<T>&& other) {
-				return Subtract(other);
-			}
-
 			Vector2<T>& Clamp(const T& min, const T& max) {
 				m_X = m_X < min ? : min : (m_X > max ? max : m_X);
 				m_Y = m_Y < min ? : min : (m_Y > max ? max : m_Y);
 				return *this;
-			}
-
-			Vector2<T>& Clamp(T&& min, T&& max) {
-				return Clamp(min, max);
 			}
 
 			//------	Member operators	------
@@ -199,18 +155,10 @@ namespace engine {
 			Vector2<T>& operator+=(const Vector2<T>& other) {
 				return Add(other);
 			}
-
-			Vector2<T>& operator+=(Vector2<T>&& other) {
-				return Add(std::move(other));
-			}
 			//---operator+= ---
 
 			//--- operator-= ---
 			Vector2<T>& operator-=(const Vector2<T>& other) {
-				return Subtract(other);
-			}
-
-			Vector2<T>& operator-=(Vector2<T>&& other) {
 				return Subtract(other);
 			}
 			//---operator-= ---
@@ -219,26 +167,10 @@ namespace engine {
 			Vector2<T>& operator*=(const T& scalar) {
 				return Multiply(scalar);
 			}
-
-			Vector2<T>& operator*=(T&& scalar) {
-				return Multiply(scalar);
-			}
 			//--- operator*= ---
 
 			//--- operator== ---
 			friend bool operator==(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.Equal(b);
-			}
-
-			friend bool operator==(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.Equal(b);
-			}
-
-			friend bool operator==(Vector2<T>&& a, const Vector2<T>* b) {
-				return a.Equal(b);
-			}
-
-			friend bool operator==(Vector2<T>&& a, const Vector2<T>&& b) {
 				return a.Equal(b);
 			}
 			//--- operator== ---
@@ -247,23 +179,11 @@ namespace engine {
 			friend bool operator!=(const Vector2<T>& a, const Vector2<T>& b) {
 				return !a.Equal(b);
 			}
-
-			friend bool operator!=(const Vector2<T>& a, Vector2<T>&& b) {
-				return !a.Equal(b);
-			}
-
-			friend bool operator!=(Vector2<T>&& a, const Vector2<T>* b) {
-				return !a.Equal(b);
-			}
-
-			friend bool operator!=(Vector2<T>&& a, const Vector2<T>&& b) {
-				return !a.Equal(b);
-			}
 			//--- operator!= ---
 
 			///--- operator+ ---
-			friend Vector2<T> operator+(const Vector2<T>& a, const Vector2<T>& b) {
-				return Vector2<T>(a).Add(b);
+			friend Vector2<T> operator+(const Vector2<T> a, const Vector2<T>& b) {
+				return a.Add(b);
 			}
 
 			friend Vector2<T> operator+(const Vector2<T>& a, Vector2<T>&& b) {
@@ -280,8 +200,8 @@ namespace engine {
 			//--- operator+ ---
 
 			//--- operator- ---
-			friend Vector2<T> operator-(const Vector2<T>& a, const Vector2<T>& b) {
-				return Vector2<T>(a).Subtract(b);
+			friend Vector2<T> operator-(const Vector2<T> a, const Vector2<T>& b) {
+				return a.Subtract(b);
 			}
 
 			friend Vector2<T> operator-(const Vector2<T>& a, Vector2<T>&& b) {
@@ -293,32 +213,16 @@ namespace engine {
 			}
 
 			friend Vector2<T> operator-(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.Subtract(std::move(b));
+				return a.Subtract(b);
 			}
 			//--- operator- ---
 
 			//--- operator* ---
-			friend Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
-				return Vector2<T>(vector).Multiply(scalar);
-			}
-
-			friend Vector2<T> operator*(const Vector2<T>& vector, T&& scalar) {
-				return Vector2<T>(vector).Multiply(std::move(scalar));
+			friend Vector2<T> operator*(const Vector2<T> vector, const T& scalar) {
+				return vector.Multiply(scalar);
 			}
 
 			friend T operator*(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.Dot(b);
-			}
-
-			friend T operator*(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.Dot(b);
-			}
-
-			friend T operator*(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.Dot(b);
-			}
-
-			friend T operator*(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.Dot(b);
 			}
 			//--- operator* ---
@@ -327,34 +231,10 @@ namespace engine {
 			friend bool operator<(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.SmallerThan(b);
 			}
-
-			friend bool operator<(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.SmallerThan(b);
-			}
-
-			friend bool operator<(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.SmallerThan(b);
-			}
-
-			friend bool operator<(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.SmallerThan(b);
-			}
 			//--- operator< ---
 
 			//--- operator<= ---
 			friend bool operator<=(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.SmallerThanOrEqual(b);
-			}
-
-			friend bool operator<=(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.SmallerThanOrEqual(b);
-			}
-
-			friend bool operator<=(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.SmallerThanOrEqual(b);
-			}
-
-			friend bool operator<=(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.SmallerThanOrEqual(b);
 			}
 			//--- operator<= ---
@@ -363,34 +243,10 @@ namespace engine {
 			friend bool operator>=(const Vector2<T>& a, const Vector2<T>& b) {
 				return a.LargerThanOrEqual(b);
 			}
-
-			friend bool operator>=(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.LargerThanOrEqual(b);
-			}
-
-			friend bool operator>=(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.LargerThanOrEqual(b);
-			}
-
-			friend bool operator>=(Vector2<T>&& a, Vector2<T>&& b) {
-				return a.LargerThanOrEqual(b);
-			}
 			//--- operator>= ---
 
 			//--- operator> ---
 			friend bool operator>(const Vector2<T>& a, const Vector2<T>& b) {
-				return a.LargerThan(b);
-			}
-
-			friend bool operator>(const Vector2<T>& a, Vector2<T>&& b) {
-				return a.LargerThan(b);
-			}
-
-			friend bool operator>(Vector2<T>&& a, const Vector2<T>& b) {
-				return a.LargerThan(b);
-			}
-
-			friend bool operator>(Vector2<T>&& a, Vector2<T>&& b) {
 				return a.LargerThan(b);
 			}
 			//--- operator> ---
