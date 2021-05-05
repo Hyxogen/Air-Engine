@@ -172,11 +172,11 @@ namespace engine {
 			//------	Non-Member operators	------
 			//--- operator= ---
 			Vector2<T>& operator=(const Vector2<T>& other) {
-				return Vector2<T>(other);
+				return Set(other);
 			}
 
 			Vector2<T>& operator=(Vector2<T>&& other) {
-				return Vector2<T>(other);
+				return Set(other);
 			}
 			//--- operator= ---
 
