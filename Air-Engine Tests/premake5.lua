@@ -19,6 +19,7 @@ project "Air-Engine Tests"
     }
 
     includedirs {
+		"src/",
         "%{wks.location}/Air-Engine/src/",
         "Dependencies/googletest/googlemock/include",
         "Dependencies/googletest/googletest/include"
