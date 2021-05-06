@@ -46,7 +46,7 @@ namespace engine {
 			}
 
 			Vector2<T>& Normalize() {
-				float length = std::move(Magnitude());
+				double length = std::move(Magnitude());
 
 				m_X = m_X / length;
 				m_Y = m_Y / length;
