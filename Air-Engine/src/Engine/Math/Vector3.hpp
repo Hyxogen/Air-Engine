@@ -23,7 +23,7 @@ namespace engine {
 
 			}
 
-			Vector3(Vector3<T>&& vector) noexcept : m_X(std::exchange(vector.m_X, 0)), m_Y(std::exchange(vector.m_Y, 0)), m_Z(std::exchange(vector.m_X, 0)) {
+			Vector3(Vector3<T>&& vector) noexcept : m_X(std::exchange(vector.m_X, 0)), m_Y(std::exchange(vector.m_Y, 0)), m_Z(std::exchange(vector.m_Z, 0)) {
 
 			}
 
