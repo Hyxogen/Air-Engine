@@ -19,7 +19,7 @@ namespace engine {
 
 			}
 
-			Vector3(const Vector3<T>& vector) : Vector3(vector.m_X, vector.m_Y, vector.m_Y) {
+			Vector3(const Vector3<T>& vector) : Vector3(vector.m_X, vector.m_Y, vector.m_Z) {
 
 			}
 
