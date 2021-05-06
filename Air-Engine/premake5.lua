@@ -54,7 +54,8 @@ project "Air-Engine"
 		symbols "Off"
 		
 		defines {
-			"AIR_BUILD_DISTR"
+			"AIR_BUILD_DISTR",
+			"AIR_ENABLE_LOGGING"
 		}
 
 	filter "system:windows"
