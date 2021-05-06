@@ -80,7 +80,7 @@ namespace engine {
 			}
 
 			inline bool Equal(const Vector3<T>& other) const {
-				return this == &other ? *this : ((m_X == other.m_X) && (m_Y == other.m_Y) && (m_Z == other.m_Z));
+				return this == &other ? true : ((m_X == other.m_X) && (m_Y == other.m_Y) && (m_Z == other.m_Z));
 			}
 
 			Vector3<T>& Set(const Vector3<T>& other) {
