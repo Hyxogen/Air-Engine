@@ -92,7 +92,7 @@ namespace engine {
 			}
 
 			Vector3<T>& Set(Vector3<T>&& other) noexcept {
-				if (Equal(&other)) return *this;
+				if (Equal(other)) return *this;
 				m_X = std::exchange(other.m_X, 0);
 				m_Y = std::exchange(other.m_Y, 0);
 				m_Z = std::exchange(other.m_Z, 0);
