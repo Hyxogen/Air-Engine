@@ -1,8 +1,31 @@
 #include "pch.h"
 #include "Engine\Math\Vector3.hpp"
 
+#define AIR_TESTS_COORDS 5
+
 namespace engine {
 	namespace math {
+
+		struct Coord {
+			float m_X, m_Y, m_Z;
+		};
+
+		Coord coords[] = {
+			{0.0f, 0.0f, 0.0f},
+			{5.0f, 6.0f, 7.0f},
+			{5.542f, 6.3413f, 6321.5f},
+			{-5.542f, 6.3413f, -6321.5f},
+			{500000.0f, 600000.0f, 70000.0f}
+		};
+
+		float extra[] = {
+			8.4f,
+			-54.341f,
+			5.0f,
+			0.0f,
+			9413.545f
+		};
+
 		TEST(Vector3Test, EmptyConstructor) {
 			Vector3f vector;
 			EXPECT_EQ(vector.m_X, 0.0f);
@@ -11,10 +34,13 @@ namespace engine {
 		}
 
 		TEST(Vector3Test, FilledConstructor) {
-			Vector3f vector(1.8f, -6.35423f, 5.0f);
-			EXPECT_EQ(vector.m_X, 1.8f);
-			EXPECT_EQ(vector.m_Y, -6.35423f);
-			EXPECT_EQ(vector.m_Z, 5.0f);
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				EXPECT_EQ(vector.m_X, coord.m_X);
+				EXPECT_EQ(vector.m_Y, coord.m_Y);
+				EXPECT_EQ(vector.m_Z, coord.m_Z);
+			}
 		}
 
 		TEST(Vector3Test, MoveConstructorEmpty) {
@@ -25,37 +51,87 @@ namespace engine {
 		}
 
 		TEST(Vector3Test, MoveConstructorFilled) {
-			Vector3f vector(Vector3f(1.8f, -6.35423f, 5.0f) * 1);
-			EXPECT_EQ(vector.m_X, 1.8f);
-			EXPECT_EQ(vector.m_Y, -6.35423f);
-			EXPECT_EQ(vector.m_Z, 5.0f);
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(Vector3f(coord.m_X, coord.m_Y, coord.m_Z) * 1);
+				EXPECT_EQ(vector.m_X, coord.m_X);
+				EXPECT_EQ(vector.m_Y, coord.m_Y);
+				EXPECT_EQ(vector.m_Z, coord.m_Z);
+			}
 		}
 
 		TEST(Vector3Test, CopyConstructor) {
-			Vector3f other = Vector3f(1.8f, -6.35423f, 5.0f);
-			Vector3f vector(other);
-			EXPECT_EQ(vector.m_X, 1.8f);
-			EXPECT_EQ(vector.m_Y, -6.35423f);
-			EXPECT_EQ(vector.m_Z, 5.0f);
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f other(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f vector(other);
+
+				EXPECT_EQ(vector.m_X, coord.m_X);
+				EXPECT_EQ(vector.m_Y, coord.m_Y);
+				EXPECT_EQ(vector.m_Z, coord.m_Z);
+			}
 		}
 
 		TEST(Vector3Test, Magnitude) {
-			Vector3f other = Vector3f(1.5f, -6.5f, 5.0f);
-			EXPECT_NEAR(other.Magnitude(), 8.33666, 0.00001);
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				double mag = vector.Magnitude();
+				double exp = sqrt((double)((coord.m_X * coord.m_X) + (coord.m_Y * coord.m_Y) + (coord.m_Z * coord.m_Z)));
+				EXPECT_NEAR(mag, exp, 0.000001);
+			}
 		}
 
 		TEST(Vector3Test, MagnitudeSq) {
-			Vector3f other = Vector3f(1.5f, -6.5f, 5.3f);
-			EXPECT_NEAR(other.MagnitudeSquared(), 72.59, 0.001);
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				double mag = vector.MagnitudeSquared();
+				double exp = (coord.m_X * coord.m_X) + (coord.m_Y * coord.m_Y) + (coord.m_Z * coord.m_Z);
+				EXPECT_EQ(mag, exp);
+			}
 		}
 
 		TEST(Vector3Test, Normalize) {
-			Vector3f vector(53.5f, -623.0f, 993.55f);
-			vector.Normalize();
-			EXPECT_LE(vector.m_X, 1.0f);
-			EXPECT_LE(vector.m_Y, 1.0f);
-			EXPECT_LE(vector.m_Y, 1.0f);
-			EXPECT_LE(vector.Magnitude(), 1.0f);
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				double mag = vector.Magnitude();
+				vector.Normalize();
+
+				if (mag == 0) {
+					EXPECT_EQ(vector.m_X, 0);
+					EXPECT_EQ(vector.m_Y, 0);
+					EXPECT_EQ(vector.m_Z, 0);
+				}
+				else {
+					EXPECT_EQ(vector.m_X, (float)(coord.m_X / mag));
+					EXPECT_EQ(vector.m_Y, (float)(coord.m_Y / mag));
+					EXPECT_EQ(vector.m_Z, (float)(coord.m_Z / mag));
+				}
+			}
+		}
+
+		TEST(Vector3Test, Invert) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				vector.Invert();
+				EXPECT_EQ(vector.m_X, -coord.m_X);
+				EXPECT_EQ(vector.m_Y, -coord.m_Y);
+				EXPECT_EQ(vector.m_Z, -coord.m_Z);
+			}
+		}
+
+		TEST(Vector3Test, MultiplyScalar) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				vector.Multiply(extra[i]);
+				EXPECT_EQ(vector.m_X, coord.m_X * extra[i]);
+				EXPECT_EQ(vector.m_Y, coord.m_Y * extra[i]);
+				EXPECT_EQ(vector.m_Z, coord.m_Z * extra[i]);
+			}
 		}
 	}
 }
