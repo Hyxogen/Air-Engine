@@ -59,7 +59,7 @@ namespace engine {
 			}
 
 			inline double Dot(const Vector3<T>& other) const {
-				return (m_X * other.m_X) + (m_Y + other.m_Y) + (m_Z + other.m_Z);
+				return (m_X * other.m_X) + (m_Y * other.m_Y) + (m_Z * other.m_Z);
 			}
 
 
