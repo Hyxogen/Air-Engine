@@ -37,7 +37,7 @@ namespace engine {
 
 			Vector3<T>& Normalize() {
 				double magnitude = std::move(Magnitude());
-
+				if (magnitude == 0) return *this;
 				m_X = m_X / magnitude;
 				m_Y = m_Y / magnitude;
 				m_Z = m_Z / magnitude;
