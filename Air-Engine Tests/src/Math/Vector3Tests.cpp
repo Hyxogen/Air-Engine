@@ -18,7 +18,15 @@ namespace engine {
 			{500000.0f, 600000.0f, 70000.0f}
 		};
 
-		float extra[] = {
+		Coord extraCoords[] = {
+			{5.542f, 6.3413f, 6321.5f},
+			{-5.542f, 6.3413f, -6321.5f},
+			{500000.0f, 600000.0f, 70000.0f},
+			{5.0f, 6.0f, 7.0f},
+			{0.0f, 0.0f, 0.0f}
+		};
+
+		float extraFloats[] = {
 			8.4f,
 			-54.341f,
 			5.0f,
@@ -127,10 +135,156 @@ namespace engine {
 			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
 				Coord coord = coords[i];
 				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
-				vector.Multiply(extra[i]);
-				EXPECT_EQ(vector.m_X, coord.m_X * extra[i]);
-				EXPECT_EQ(vector.m_Y, coord.m_Y * extra[i]);
-				EXPECT_EQ(vector.m_Z, coord.m_Z * extra[i]);
+				vector.Multiply(extraFloats[i]);
+				EXPECT_EQ(vector.m_X, coord.m_X * extraFloats[i]);
+				EXPECT_EQ(vector.m_Y, coord.m_Y * extraFloats[i]);
+				EXPECT_EQ(vector.m_Z, coord.m_Z * extraFloats[i]);
+			}
+		}
+
+		TEST(Vector3Test, Dot) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+
+				EXPECT_EQ(vector.Dot(other), (coord.m_X * extra.m_X) + (coord.m_Y * extra.m_Y) + (coord.m_Z * extra.m_Z));
+			}
+		}
+
+		TEST(Vector3Test, SmallerThan) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+
+				EXPECT_EQ(vector.MagnitudeSquared() < other.MagnitudeSquared(), vector.SmallerThan(other));
+			}
+		}
+
+		TEST(Vector3Test, SmallerThanOrEqual) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+
+				EXPECT_EQ(vector.MagnitudeSquared() <= other.MagnitudeSquared(), vector.SmallerThanOrEqual(other));
+			}
+		}
+
+		TEST(Vector3Test, LargerThanOrEqual) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+
+				EXPECT_EQ(vector.MagnitudeSquared() >= other.MagnitudeSquared(), vector.LargerThanOrEqual(other));
+			}
+		}
+
+		TEST(Vector3Test, LargerThan) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+
+				EXPECT_EQ(vector.MagnitudeSquared() > other.MagnitudeSquared(), vector.LargerThan(other));
+			}
+		}
+
+		TEST(Vector3Test, Set) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+				vector.Set(other);
+
+				EXPECT_EQ(vector.m_X, extra.m_X);
+				EXPECT_EQ(vector.m_Y, extra.m_Y);
+				EXPECT_EQ(vector.m_Z, extra.m_Z);
+			}
+		}
+
+		TEST(Vector3Test, Equal) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+
+				EXPECT_EQ(vector.m_X == extra.m_X, vector.Equal(other));
+				EXPECT_EQ(vector.m_Y == extra.m_Y, vector.Equal(other));
+				EXPECT_EQ(vector.m_Z == extra.m_Z, vector.Equal(other));
+
+				EXPECT_TRUE(vector.Equal(vector));
+				EXPECT_FALSE(vector.Equal(other));
+			}
+		}
+
+		TEST(Vector3Test, SetMove) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+				vector.Set((other * 1.0f));
+
+				EXPECT_EQ(vector.m_X, extra.m_X);
+				EXPECT_EQ(vector.m_Y, extra.m_Y);
+				EXPECT_EQ(vector.m_Z, extra.m_Z);
+			}
+		}
+
+		TEST(Vector3Test, Add) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+				vector.Add(other);
+
+				EXPECT_EQ(vector.m_X, coord.m_X + extra.m_X);
+				EXPECT_EQ(vector.m_Y, coord.m_Y + extra.m_Y);
+				EXPECT_EQ(vector.m_Z, coord.m_Z + extra.m_Z);
+			}
+		}
+
+		TEST(Vector3Test, Subtract) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Coord extra = extraCoords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				Vector3f other(extra.m_X, extra.m_Y, extra.m_Z);
+				vector.Subtract(other);
+
+				EXPECT_EQ(vector.m_X, coord.m_X - extra.m_X);
+				EXPECT_EQ(vector.m_Y, coord.m_Y - extra.m_Y);
+				EXPECT_EQ(vector.m_Z, coord.m_Z - extra.m_Z);
+			}
+		}
+
+		TEST(Vector3Test, Clamp) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				float extra = extraFloats[i];
+				if (extra < 0)
+					extra *= -1;
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				vector.Clamp(-extra, extra);
+
+				EXPECT_LE(vector.m_X, extra);
+				EXPECT_LE(vector.m_Y, extra);
+				EXPECT_LE(vector.m_Z, extra);
+
+				EXPECT_GE(vector.m_X, -extra);
+				EXPECT_GE(vector.m_Y, -extra);
+				EXPECT_GE(vector.m_Z, -extra);
 			}
 		}
 	}
