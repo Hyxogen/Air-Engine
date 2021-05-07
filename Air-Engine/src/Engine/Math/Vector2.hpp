@@ -46,10 +46,12 @@ namespace engine {
 			}
 
 			Vector2<T>& Normalize() {
-				double length = std::move(Magnitude());
+				double magnitude = std::move(Magnitude());
 
-				m_X = m_X / length;
-				m_Y = m_Y / length;
+				if (magnitude == 0) return *this;
+
+				m_X = m_X / magnitude;
+				m_Y = m_Y / magnitude;
 				return *this;
 			}
 
