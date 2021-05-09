@@ -37,9 +37,7 @@ namespace engine {
 
 			Vector3<T>& Normalize() {
 				double magnitude = std::move(Magnitude());
-
 				if (magnitude == 0) return *this;
-
 				m_X = m_X / magnitude;
 				m_Y = m_Y / magnitude;
 				m_Z = m_Z / magnitude;
@@ -61,7 +59,7 @@ namespace engine {
 			}
 
 			inline double Dot(const Vector3<T>& other) const {
-				return (m_X * other.m_X) + (m_Y + other.m_Y) + (m_Z + other.m_Z);
+				return (m_X * other.m_X) + (m_Y * other.m_Y) + (m_Z * other.m_Z);
 			}
 
 
@@ -94,7 +92,7 @@ namespace engine {
 			}
 
 			Vector3<T>& Set(Vector3<T>&& other) noexcept {
-				if (Equal(&other)) return *this;
+				if (Equal(other)) return *this;
 				m_X = std::exchange(other.m_X, 0);
 				m_Y = std::exchange(other.m_Y, 0);
 				m_Z = std::exchange(other.m_Z, 0);
