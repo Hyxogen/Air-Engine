@@ -19,7 +19,7 @@ namespace engine {
 
 			}
 
-			Vector4(const Vector4<T> other) : Vector4(other.m_X, other.m_Y, other.m_Z, other.m_W) {
+			Vector4(const Vector4<T>& other) : Vector4(other.m_X, other.m_Y, other.m_Z, other.m_W) {
 
 			}
 
@@ -83,7 +83,7 @@ namespace engine {
 				return std::move(MagnitudeSquared()) >= std::move(other.MagnitudeSquared());
 			}
 
-			inline bool IsEqual(const Vector4<T>& other) const {
+			inline bool Equal(const Vector4<T>& other) const {
 				return this == &other ? true : ((m_X == other.m_X) && (m_Y == other.m_Y) && (m_Z == other.m_Z) && (m_W == other.m_W));
 			}
 
@@ -97,11 +97,11 @@ namespace engine {
 			}
 
 			Vector4<T>& Set(Vector4<T>&& other) noexcept {
-				if (Equal(other)) return;
-				m_X = std::exchange(other.m_X);
-				m_Y = std::exchange(other.m_Y);
-				m_Z = std::exchange(other.m_Z);
-				m_W = std::exchange(other.m_W);
+				if (Equal(other)) return *this;
+				m_X = std::exchange(other.m_X, 0);
+				m_Y = std::exchange(other.m_Y, 0);
+				m_Z = std::exchange(other.m_Z, 0);
+				m_W = std::exchange(other.m_W, 0);
 				return *this;
 			}
 
