@@ -62,7 +62,6 @@ namespace engine {
 				return (m_X * other.m_X) + (m_Y * other.m_Y) + (m_Z * other.m_Z);
 			}
 
-
 			inline bool SmallerThan(const Vector3<T>& other) const {
 				return std::move(MagnitudeSquared()) < std::move(other.MagnitudeSquared());
 			}
