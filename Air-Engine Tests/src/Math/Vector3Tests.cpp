@@ -287,5 +287,15 @@ namespace engine {
 				EXPECT_GE(vector.m_Z, -extra);
 			}
 		}
+
+		TEST(Vector3Test, ArrayOperator) {
+			for (int i = 0; i < AIR_TESTS_COORDS; i++) {
+				Coord coord = coords[i];
+				Vector3f vector(coord.m_X, coord.m_Y, coord.m_Z);
+				EXPECT_EQ(vector[0], coord.m_X);
+				EXPECT_EQ(vector[1], coord.m_Y);
+				EXPECT_EQ(vector[2], coord.m_Z);
+			}
+		}
 	}
 }
