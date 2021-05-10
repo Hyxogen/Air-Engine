@@ -129,7 +129,6 @@ namespace engine {
 				return *this;
 			}
 
-
 			//------	Member operators	------
 			//--- operator[] ---
 			T operator[](const std::size_t& idx) const {
