@@ -1,5 +1,9 @@
 #pragma once
 
+#define AIR_MATH_COLUMNMAJOR
 #ifndef AIR_MATH_COLUMNMAJOR
 #define AIR_MATH_ROWMAJOR
 #endif
+
+#define AIR_MATH_MAT2_ROWS 2
+#define AIR_MATH_MAT2_COLUMNS 2

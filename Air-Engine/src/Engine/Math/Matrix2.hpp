@@ -13,24 +13,18 @@ namespace engine {
 			union {
 				#ifdef AIR_MATH_ROWMAJOR
 				struct {
-					Vector2<T> m_Rows[AIR_MATH_MAT2_ROWS];
-				};
-
-				struct {
 					T m_a11, m_a12;
 					T m_a21, m_a22;
 				};
 
+				Vector2<T> m_Rows[AIR_MATH_MAT2_ROWS];
 				#else
-
 				struct {
 					T m_a11, m_a21;
 					T m_a12, m_a22;
 				};
 
-				struct {
-					Vector2<T> m_Columns[AIR_MATH_MAT2_COLUMNS];
-				};
+				Vector2<T> m_Columns[AIR_MATH_MAT2_COLUMNS];
 				#endif
 
 				T m_Elements[MAT2_SIZE];
@@ -158,16 +152,15 @@ namespace engine {
 					m_Elements[i] -= other.m_Elements[i];
 			}
 
-			#ifdef AIR_MATH_ROWMAJOR
-			Vector2<T> Multiply(const Vector2<T>& other) {
-				Vector2<T> ret = other.Copy();
+			Vector2<T> Multiply(const Vector2<T>& other) const {
+				Vector2<T> ret;
 				for (int row = 0; row < AIR_MATH_MAT2_ROWS; row++) {
 					for (int column = 0; column < AIR_MATH_MAT2_COLUMNS; column++) {
-						ret.m_Coords[row] = other.Dot(m_Rows[row]);
+						ret.m_Coords[row] += GetElementCopy(row, column) * other.m_Coords[column];
 					}
 				}
+				return ret;
 			}
-			#endif
 
 			static constexpr Matrix2<T> Identity() {
 				return Matrix2<T>((T)1);
