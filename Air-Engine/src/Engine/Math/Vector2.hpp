@@ -37,6 +37,10 @@ namespace engine {
 
 			}
 
+			inline Vector2<T> Copy() const {
+				return Vector2<T>(*this);
+			}
+
 			inline double Magnitude() const {
 				return sqrt(std::move((double)MagnitudeSquared()));
 			}
@@ -194,7 +198,7 @@ namespace engine {
 
 			//--- operator* ---
 			friend Vector2<T> operator*(const Vector2<T>& vector, const T& scalar) {
-				return std::move(Vector2<T>(vector).Multiply(scalar));
+				return std::move(vector.Copy().Multiply(scalar));
 			}
 
 			friend Vector2<T> operator*(Vector2<T>&& vector, const T& scalar) noexcept {
@@ -202,7 +206,7 @@ namespace engine {
 			}
 
 			friend Vector2<T> operator*(const T& scalar, const Vector2<T>& vector) {
-				return std::move(Vector2<T>(vector).Multiply(scalar));
+				return std::move(vector.Copy().Multiply(scalar));
 			}
 
 			friend Vector2<T> operator*(const T& scalar, Vector2<T>&& vector) noexcept {
