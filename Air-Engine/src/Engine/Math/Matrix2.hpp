@@ -216,7 +216,7 @@ namespace engine {
 			}
 
 			friend std::ostream& operator<<(std::ostream& stream, const Matrix2<T>& mat) {
-				for (int i = 0; i < AIR_MATH_MAT2_ROWS)
+				for (int i = 0; i < AIR_MATH_MAT2_ROWS; i++)
 					stream << mat.m_Rows[i];
 				return stream;
 			}
