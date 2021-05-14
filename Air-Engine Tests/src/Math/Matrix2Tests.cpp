@@ -168,6 +168,63 @@ namespace engine {
 				EXPECT_FLOAT_EQ(mat[1][0], 5.0f);
 				EXPECT_FLOAT_EQ(mat[0][1], 9.0f);
 			}
+
+			TEST(Matrix2Tests, OperatorTimesVector) {
+				Matrix2f mat(2.0f);
+				Vector2f vec(9.0f, 13.5f);
+				Vector2f vecCopy;
+				mat.m_a11 = 5.0f;
+				mat.m_a12 = 7.0f;
+
+				mat.m_a21 = 3.0f;
+				mat.m_a22 = 8.0f;
+
+				Vector2f out = mat * vec;
+				
+				for (int row = 0; row < 2; row++) {
+					for (int column = 0; column < 2; column++) {
+						vecCopy.m_Coords[row] += mat.GetElement(row, column) * vec.m_Coords[column];
+						if (column == 1)
+							EXPECT_FLOAT_EQ(out.m_Coords[row], vecCopy.m_Coords[row]);
+					}
+				}
+			}
+
+			TEST(Matrix2Tests, OperatorTimesMatrix) {
+				Matrix2f mat(2.0f);
+				mat.m_a11 = 5.0f;
+				mat.m_a12 = 7.0f;
+
+				mat.m_a21 = 3.0f;
+				mat.m_a22 = 5.0f;
+
+				Matrix2f inv = mat.Copy().Inverse();
+
+				EXPECT_EQ(inv * mat, Matrix2f::Identity());
+			}
+
+			TEST(Matrix2Tests, Equal) {
+				Matrix2f mat(2.0f);
+				mat.m_a11 = 5.0f;
+				mat.m_a12 = 7.0f;
+
+				mat.m_a21 = 3.0f;
+				mat.m_a22 = 5.0f;
+
+				EXPECT_TRUE(mat.Equal(mat));
+				EXPECT_TRUE(mat == mat);
+				EXPECT_FALSE(mat != mat);
+
+				Matrix2f test(2.0f);
+				test.m_a11 = 5.0f;
+				test.m_a12 = 7.0f;
+
+				test.m_a21 = 3.0f;
+				test.m_a22 = 5.0f;
+
+				EXPECT_TRUE(mat.Equal(test));
+				EXPECT_FALSE(mat.Equal(Matrix2f()));
+			}
 		}
 
 	}
