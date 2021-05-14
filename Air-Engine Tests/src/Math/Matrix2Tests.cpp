@@ -101,6 +101,73 @@ namespace engine {
 					}
 				}
 			}
+
+			TEST(Matrix2Tests, MoveConstructor) {
+				Matrix2f mat(2.0f);
+				mat.m_a12 = 5.0f;
+				mat.m_a21 = 9.0f;
+				mat.Transpose();
+
+				Matrix2f copy(std::move(mat));
+
+				EXPECT_FLOAT_EQ(copy.m_a11, 2.0f);
+				EXPECT_FLOAT_EQ(copy.m_a22, 2.0f);
+				EXPECT_FLOAT_EQ(copy.m_a21, 5.0f);
+				EXPECT_FLOAT_EQ(copy.m_a12, 9.0f);
+
+				EXPECT_FLOAT_EQ(mat.m_a11, 0.0f);
+				EXPECT_FLOAT_EQ(mat.m_a22, 0.0f);
+				EXPECT_FLOAT_EQ(mat.m_a21, 0.0f);
+				EXPECT_FLOAT_EQ(mat.m_a12, 0.0f);
+			}
+
+			TEST(Matrix2Tests, MoveSet) {
+				Matrix2f mat(2.0f);
+				mat.m_a12 = 5.0f;
+				mat.m_a21 = 9.0f;
+				mat.Transpose();
+
+				Matrix2f copy;
+				copy.Set(std::move(mat));
+
+				EXPECT_FLOAT_EQ(copy.m_a11, 2.0f);
+				EXPECT_FLOAT_EQ(copy.m_a22, 2.0f);
+				EXPECT_FLOAT_EQ(copy.m_a21, 5.0f);
+				EXPECT_FLOAT_EQ(copy.m_a12, 9.0f);
+
+				EXPECT_FLOAT_EQ(mat.m_a11, 0.0f);
+				EXPECT_FLOAT_EQ(mat.m_a22, 0.0f);
+				EXPECT_FLOAT_EQ(mat.m_a21, 0.0f);
+				EXPECT_FLOAT_EQ(mat.m_a12, 0.0f);
+			}
+
+			TEST(Matrix2Tests, Set) {
+				Matrix2f mat(2.0f);
+				mat.m_a12 = 5.0f;
+				mat.m_a21 = 9.0f;
+				mat.Transpose();
+
+				Matrix2f copy;
+				copy.Set(mat);
+
+				EXPECT_FLOAT_EQ(copy.m_a11, 2.0f);
+				EXPECT_FLOAT_EQ(copy.m_a22, 2.0f);
+				EXPECT_FLOAT_EQ(copy.m_a21, 5.0f);
+				EXPECT_FLOAT_EQ(copy.m_a12, 9.0f);
+			}
+
+			TEST(Matrix2Tests, ArrayOperator) {
+				Matrix2f mat(2.0f);
+				mat.m_a12 = 5.0f;
+				mat.m_a21 = 9.0f;
+
+				mat.Transpose();
+
+				EXPECT_FLOAT_EQ(mat[0][0], 2.0f);
+				EXPECT_FLOAT_EQ(mat[1][1], 2.0f);
+				EXPECT_FLOAT_EQ(mat[1][0], 5.0f);
+				EXPECT_FLOAT_EQ(mat[0][1], 9.0f);
+			}
 		}
 
 	}
