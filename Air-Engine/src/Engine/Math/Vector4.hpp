@@ -131,7 +131,7 @@ namespace engine {
 
 			//------	Member operators	------
 			//--- operator[] ---
-			T operator[](const std::size_t& idx) const {
+			T& operator[](const std::size_t& idx) {
 				return m_Coords[idx];
 			}
 			//--- operator[] ---
