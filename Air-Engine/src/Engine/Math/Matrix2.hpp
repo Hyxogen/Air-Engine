@@ -122,6 +122,12 @@ namespace engine {
 				return *this;
 			}
 
+			Matrix2<T>& Set(const Matrix2<T>& other) {
+				if (this == &other) return *this;
+				memcpy_s(&m_Elements, sizeof(T) * MAT2_SIZE, &other.m_Elements, sizeof(T) * MAT2_SIZE);
+				return *this;
+			}
+
 			Matrix2<T>& Multiply(const T& scalar) {
 				for (int i = 0; i < MAT2_SIZE; i++)
 					m_Elements[i] *= scalar;
