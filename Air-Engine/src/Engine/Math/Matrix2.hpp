@@ -42,6 +42,10 @@ namespace engine {
 				memcpy_s(&m_Elements, sizeof(T) * MAT2_SIZE, &other.m_Elements, sizeof(T) * MAT2_SIZE);
 			}
 
+			Matrix2(Matrix2<T>&& other) {
+				Set(std::move(other));
+			}
+
 			inline T& GetElement(unsigned char row, unsigned char column) {
 				#ifdef AIR_MATH_ROWMAJOR
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
@@ -121,6 +125,13 @@ namespace engine {
 				for (int i = 0; i < MAT2_SIZE; i++)
 					if (m_Elements[i] != other.m_Elements[i]) return false;
 				return true;
+			}
+
+			Matrix2<T>& Set(Matrix2<T>&& other) {
+				if (this == &other) return *this;
+				memcpy_s(&m_Elements, sizeof(T) * MAT2_SIZE, &other.m_Elements, sizeof(T) * MAT2_SIZE);
+				memset(&other.m_Elements, 0, sizeof(T) * MAT2_SIZE);
+				return *this;
 			}
 
 			Matrix2<T>& Multiply(const T& scalar) {
