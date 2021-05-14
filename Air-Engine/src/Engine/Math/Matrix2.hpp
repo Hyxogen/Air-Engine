@@ -167,6 +167,60 @@ namespace engine {
 				return ret;
 			}
 
+			Vector2<T>& operator[](const std::size_t& idx) {
+				return m_Rows[idx];
+			}
+			
+			Matrix2<T>& operator=(const Matrix2<T>& other) {
+				return Set(other);
+			}
+
+			Matrix2<T>& operator=(Matrix2<T>&& other) noexcept {
+				return Set(std::move(other));
+			}
+
+			Matrix2<T>& operator+=(const Matrix2<T>& other) {
+				return Add(other);
+			}
+
+			Matrix2<T>& operator-=(const Matrix2<T>& other) {
+				return Subtract(other);
+			}
+
+			Matrix2<T>& operator*=(const Matrix2<T>& other) {
+				return Multiply(other);
+			}
+
+			friend bool operator==(const Matrix2<T>& a, const Matrix2<T>& b) {
+				return a.Equal(a);
+			}
+			
+			friend bool operator!=(const Matrix2<T>& a, const Matrix2<T>& b) {
+				return !a.Equal(b);
+			}
+
+			friend Matrix2<T> operator+(const Matrix2<T>& a, const Matrix2<T>& b) {
+				return std::move(a.Copy().Add(b));
+			}
+
+			friend Matrix2<T> operator-(const Matrix2<T>& a, const Matrix2<T>& b) {
+				return std::move(a.Copy().Subtract(b));
+			}
+
+			friend Matrix2<T> operator*(const Matrix2<T>& a, const Matrix2<T>& b) {
+				return std::move(a.Copy().Multiply(b));
+			}
+
+			friend Vector2<T> operator*(const Matrix2<T>& mat, const Vector2<T>& vec) {
+				return std::move(mat.Multiply(vec));
+			}
+
+			friend std::ostream& operator<<(std::ostream& stream, const Matrix2<T>& mat) {
+				for (int i = 0; i < AIR_MATH_MAT2_ROWS)
+					stream << mat.m_Rows[i];
+				return stream;
+			}
+
 			static constexpr Matrix2<T> Identity() {
 				return Matrix2<T>((T)1);
 			}
