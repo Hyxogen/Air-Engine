@@ -170,7 +170,7 @@ namespace engine {
 			Vector2<T>& operator[](const std::size_t& idx) {
 				return m_Rows[idx];
 			}
-			
+
 			Matrix2<T>& operator=(const Matrix2<T>& other) {
 				return Set(other);
 			}
@@ -194,7 +194,7 @@ namespace engine {
 			friend bool operator==(const Matrix2<T>& a, const Matrix2<T>& b) {
 				return a.Equal(a);
 			}
-			
+
 			friend bool operator!=(const Matrix2<T>& a, const Matrix2<T>& b) {
 				return !a.Equal(b);
 			}
