@@ -8,24 +8,20 @@ namespace engine {
 	namespace math {
 
 		static constexpr unsigned char MAT2_SIZE = AIR_MATH_MAT2_COLUMNS * AIR_MATH_MAT2_ROWS;
+
+		/// <summary>
+		/// Row major AIR_MATH_MAT2_COLUMNS x AIR_MATH_MAT2_ROWS matrix (usually 2)
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
 		template<typename T>
 		struct Matrix2 {
 			union {
-				#ifdef AIR_MATH_ROWMAJOR
 				struct {
 					T m_a11, m_a12;
 					T m_a21, m_a22;
 				};
 
 				Vector2<T> m_Rows[AIR_MATH_MAT2_ROWS];
-				#else
-				struct {
-					T m_a11, m_a21;
-					T m_a12, m_a22;
-				};
-
-				Vector2<T> m_Columns[AIR_MATH_MAT2_COLUMNS];
-				#endif
 
 				T m_Elements[MAT2_SIZE];
 			};
@@ -42,24 +38,16 @@ namespace engine {
 				memcpy_s(&m_Elements, sizeof(T) * MAT2_SIZE, &other.m_Elements, sizeof(T) * MAT2_SIZE);
 			}
 
-			Matrix2(Matrix2<T>&& other) {
+			Matrix2(Matrix2<T>&& other) noexcept {
 				Set(std::move(other));
 			}
 
 			inline T& GetElement(unsigned char row, unsigned char column) {
-				#ifdef AIR_MATH_ROWMAJOR
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
-				#else
-				return m_Elements[row + column * AIR_MATH_MAT2_COLUMNS];
-				#endif
 			}
 
 			inline T GetElementCopy(unsigned char row, unsigned char column) const {
-				#ifdef AIR_MATH_ROWMAJOR
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
-				#else
-				return m_Elements[row + column * AIR_MATH_MAT2_COLUMNS];
-				#endif
 			}
 
 			/*
