@@ -46,16 +46,10 @@ namespace engine {
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
 			}
 
-			inline T GetElementCopy(unsigned char row, unsigned char column) const {
+			inline T GetElement(unsigned char row, unsigned char column) const {
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
 			}
 
-			/*
-			[x][o][o][o]
-			[o][x][o][o]
-			[o][o][x][o]
-			[o][o][o][x]
-			*/
 			Matrix2<T>& Transpose() {
 				for (int c = 0; c < AIR_MATH_MAT2_COLUMNS; c++) {
 					for (int r = c + 1; r < AIR_MATH_MAT2_ROWS; r++) {
@@ -65,11 +59,8 @@ namespace engine {
 				return *this;
 			}
 
-			/*
-			m11 * m22 - m12 * m21
-			*/
 			inline T Determinant() const {
-				return ((GetElementCopy(0, 0) * GetElementCopy(1, 1)) - (GetElementCopy(0, 1) * GetElementCopy(1, 0)));
+				return ((GetElement(0, 0) * GetElement(1, 1)) - (GetElement(0, 1) * GetElement(1, 0)));
 			}
 
 			Matrix2<T>& Inverse() {
@@ -140,7 +131,7 @@ namespace engine {
 				for (int row = 0; row < AIR_MATH_MAT2_ROWS; row++) {
 					for (int column = 0; column < AIR_MATH_MAT2_COLUMNS; column++) {
 						for (int c = 0; c < AIR_MATH_MAT2_COLUMNS; c++) {
-							GetElement(row, column) += copy.GetElement(row, c) * other.GetElementCopy(c, column);
+							GetElement(row, column) += copy.GetElement(row, c) * other.GetElement(c, column);
 						}
 					}
 				}
@@ -161,13 +152,17 @@ namespace engine {
 				Vector2<T> ret;
 				for (int row = 0; row < AIR_MATH_MAT2_ROWS; row++) {
 					for (int column = 0; column < AIR_MATH_MAT2_COLUMNS; column++) {
-						ret.m_Coords[row] += GetElementCopy(row, column) * other.m_Coords[column];
+						ret.m_Coords[row] += GetElement(row, column) * other.m_Coords[column];
 					}
 				}
 				return ret;
 			}
 
 			Vector2<T>& operator[](const std::size_t& idx) {
+				return m_Rows[idx];
+			}
+
+			Vector2<T>& operator[](const std::size_t& idx) const {
 				return m_Rows[idx];
 			}
 
