@@ -139,8 +139,8 @@ namespace engine {
 					m_Elements[i] -= other.m_Elements[i];
 			}
 
-			Vector3<T> Multiply(const Vector3<T>& other) const {
-				Vector3<T> ret;
+			Vector4<T> Multiply(const Vector4<T>& other) const {
+				Vector4<T> ret;
 				for (int row = 0; row < AIR_MATH_MAT4_ROWS; row++) {
 					for (int column = 0; column < AIR_MATH_MAT4_COLUMNS; column++) {
 						ret.m_Coords[row] += GetElement(row, column) * other.m_Coords[column];
@@ -149,11 +149,11 @@ namespace engine {
 				return ret;
 			}
 
-			Vector3<T>& operator[](const std::size_t& idx) {
+			Vector4<T>& operator[](const std::size_t& idx) {
 				return m_Rows[idx];
 			}
 
-			Vector3<T> operator[](const std::size_t& idx) const {
+			Vector4<T> operator[](const std::size_t& idx) const {
 				return m_Rows[idx];
 			}
 
@@ -197,7 +197,7 @@ namespace engine {
 				return std::move(a.Copy().Multiply(b));
 			}
 
-			friend Vector3<T> operator*(const Matrix4<T>& mat, const Vector3<T>& vec) {
+			friend Vector4<T> operator*(const Matrix4<T>& mat, const Vector4<T>& vec) {
 				return std::move(mat.Multiply(vec));
 			}
 
