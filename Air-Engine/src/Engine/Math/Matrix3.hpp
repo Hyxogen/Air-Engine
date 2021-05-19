@@ -79,14 +79,13 @@ namespace engine {
 				T detInv = (T)1 / det;
 				Matrix3<T> copy = Copy();
 				GetElement(0, 0) = copy.GetElement(1, 1) * copy.GetElement(2, 2) - copy.GetElement(1, 2) * copy.GetElement(2, 1);
-				GetElement(0, 1) = -copy.GetElement(0, 1) * copy.GetElement(2, 2) + copy.GetElement(0, 2) * copy.GetElement(2, 1);//Deze
+				GetElement(0, 1) = -copy.GetElement(0, 1) * copy.GetElement(2, 2) + copy.GetElement(0, 2) * copy.GetElement(2, 1);
 				GetElement(0, 2) = copy.GetElement(0, 1) * copy.GetElement(1, 2) - copy.GetElement(0, 2) * copy.GetElement(1, 1);
 
 				GetElement(1, 0) = -copy.GetElement(1, 0) * copy.GetElement(2, 2) + copy.GetElement(1, 2) * copy.GetElement(2, 0);
 				GetElement(1, 1) = copy.GetElement(0, 0) * copy.GetElement(2, 2) - copy.GetElement(0, 2) * copy.GetElement(2, 0);
 				GetElement(1, 2) = -copy.GetElement(0, 0) * copy.GetElement(1, 2) + copy.GetElement(0, 2) * copy.GetElement(1, 0);
 
-				//((e * a) - (b * d)) / (((a * e) * i) - ((a * f) * h) - ((e * g) * c) - ((b * d) * i) + ((b * f) * g) + ((d * h) * c))
 				GetElement(2, 0) = copy.GetElement(1, 0) * copy.GetElement(2, 1) - copy.GetElement(1, 1) * copy.GetElement(2, 0);
 				GetElement(2, 1) = -copy.GetElement(0, 0) * copy.GetElement(2, 1) + copy.GetElement(0, 1) * copy.GetElement(2, 0);
 				GetElement(2, 2) = copy.GetElement(1, 1) * copy.GetElement(0, 0) - copy.GetElement(0, 1) * copy.GetElement(1, 0);
