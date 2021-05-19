@@ -109,7 +109,7 @@ namespace engine {
 				Matrix3f out = mat.Copy().Multiply(9.5f);
 
 				for (int i = 0; i < MAT3_SIZE; i++) {
-					//EXPECT_FLOAT_EQ(mat.m_Elements[i] * 9.5f, out.m_Elements[i]);
+					EXPECT_FLOAT_EQ(mat.m_Elements[i] * 9.5f, out.m_Elements[i]);
 				}
 			}
 
