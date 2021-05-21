@@ -52,21 +52,7 @@ namespace engine {
 			*/
 			//i_{i}:=(a * ((a * e) - (b * d)) / ((((a * e) - (b * d)) * ((a * i) - (c * g))) - (((a * f) - (c * d)) * ((a * h) - (b * g)))))
 			TEST(Matrix4Tests, Determinant) {
-				Matrix4f mat(2.0f);
-				mat.m_a12 = 5.0f;
-				mat.m_a21 = 9.0f;
 
-				float det = mat.Determinant();
-
-				float testDet =
-					mat[0][0] * mat[1][1] * mat[2][2] -
-					mat[0][0] * mat[1][2] * mat[2][1] -
-					mat[0][1] * mat[1][0] * mat[2][2] +
-					mat[0][1] * mat[1][2] * mat[2][0] +
-					mat[0][2] * mat[1][0] * mat[2][1] -
-					mat[0][2] * mat[1][1] * mat[2][0];
-
-				EXPECT_FLOAT_EQ(det, testDet);
 			}
 
 			TEST(Matrix4Tests, InverseAndMultiply) {
@@ -74,29 +60,45 @@ namespace engine {
 				mat.m_a11 = 5.0f;
 				mat.m_a12 = 7.0f;
 				mat.m_a13 = 8.0f;
+				mat.m_a14 = 9.0f;
 
 				mat.m_a21 = 3.0f;
 				mat.m_a22 = 5.0f;
 				mat.m_a23 = 1.0f;
+				mat.m_a24 = 2.0f;
 
 				mat.m_a31 = 10.0f;
 				mat.m_a32 = 5.75f;
 				mat.m_a33 = 4.9f;
+				mat.m_a34 = 6.3f;
+
+				mat.m_a41 = 11.0f;
+				mat.m_a42 = 1.0f;
+				mat.m_a43 = 4.6f;
+				mat.m_a44 = 9.3;
 
 				Matrix4f inv = mat.Copy().Inverse();
 
 				inv.Multiply(mat);
-				EXPECT_NEAR(inv[0][0], 1, 0.0000001);
-				EXPECT_NEAR(inv[0][1], 0, 0.0000001);
-				EXPECT_NEAR(inv[0][2], 0, 0.0000001);
+				EXPECT_NEAR(inv[0][0], 1, 0.00001);
+				EXPECT_NEAR(inv[0][1], 0, 0.00001);
+				EXPECT_NEAR(inv[0][2], 0, 0.00001);
+				EXPECT_NEAR(inv[0][3], 0, 0.00001);
 
-				EXPECT_NEAR(inv[1][0], 0, 0.0000001);
-				EXPECT_NEAR(inv[1][1], 1, 0.0000001);
-				EXPECT_NEAR(inv[1][2], 0, 0.0000001);
+				EXPECT_NEAR(inv[1][0], 0, 0.00001);
+				EXPECT_NEAR(inv[1][1], 1, 0.00001);
+				EXPECT_NEAR(inv[1][2], 0, 0.00001);
+				EXPECT_NEAR(inv[1][3], 0, 0.00001);
 
-				EXPECT_NEAR(inv[2][0], 0, 0.0000001);
-				EXPECT_NEAR(inv[2][1], 0, 0.0000001);
-				EXPECT_NEAR(inv[2][2], 1, 0.0000001);
+				EXPECT_NEAR(inv[2][0], 0, 0.00001);
+				EXPECT_NEAR(inv[2][1], 0, 0.00001);
+				EXPECT_NEAR(inv[2][2], 1, 0.00001);
+				EXPECT_NEAR(inv[2][3], 0, 0.00001);
+
+				EXPECT_NEAR(inv[3][0], 0, 0.00001);
+				EXPECT_NEAR(inv[3][1], 0, 0.00001);
+				EXPECT_NEAR(inv[3][2], 0, 0.00001);
+				EXPECT_NEAR(inv[3][3], 1, 0.00001);
 			}
 
 			TEST(Matrix4Tests, MultiplyScalar) {
