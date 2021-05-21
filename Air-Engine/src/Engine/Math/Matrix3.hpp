@@ -70,28 +70,28 @@ namespace engine {
 					GetElement(0, 2) * GetElement(1, 1) * GetElement(2, 0);
 			}
 
-			Matrix3<T>& Inverse() {
+			Matrix3<T> Inverse() const {
+				Matrix3<T> out;
 				T det = std::move(Determinant());
 
 				if (det == 0)
-					return MakeIdentity();
+					return Identity();
 
 				T detInv = (T)1 / det;
-				Matrix3<T> copy = Copy();
-				GetElement(0, 0) = copy.GetElement(1, 1) * copy.GetElement(2, 2) - copy.GetElement(1, 2) * copy.GetElement(2, 1);
-				GetElement(0, 1) = -copy.GetElement(0, 1) * copy.GetElement(2, 2) + copy.GetElement(0, 2) * copy.GetElement(2, 1);
-				GetElement(0, 2) = copy.GetElement(0, 1) * copy.GetElement(1, 2) - copy.GetElement(0, 2) * copy.GetElement(1, 1);
+				out.GetElement(0, 0) = GetElement(1, 1) * GetElement(2, 2) - GetElement(1, 2) * GetElement(2, 1);
+				out.GetElement(0, 1) = -GetElement(0, 1) * GetElement(2, 2) + GetElement(0, 2) * GetElement(2, 1);
+				out.GetElement(0, 2) = GetElement(0, 1) * GetElement(1, 2) - GetElement(0, 2) * GetElement(1, 1);
+				
+				out.GetElement(1, 0) = -GetElement(1, 0) * GetElement(2, 2) + GetElement(1, 2) * GetElement(2, 0);
+				out.GetElement(1, 1) = GetElement(0, 0) * GetElement(2, 2) - GetElement(0, 2) * GetElement(2, 0);
+				out.GetElement(1, 2) = -GetElement(0, 0) * GetElement(1, 2) + GetElement(0, 2) * GetElement(1, 0);
+				
+				out.GetElement(2, 0) = GetElement(1, 0) * GetElement(2, 1) - GetElement(1, 1) * GetElement(2, 0);
+				out.GetElement(2, 1) = -GetElement(0, 0) * GetElement(2, 1) + GetElement(0, 1) * GetElement(2, 0);
+				out.GetElement(2, 2) = GetElement(1, 1) * GetElement(0, 0) - GetElement(0, 1) * GetElement(1, 0);
 
-				GetElement(1, 0) = -copy.GetElement(1, 0) * copy.GetElement(2, 2) + copy.GetElement(1, 2) * copy.GetElement(2, 0);
-				GetElement(1, 1) = copy.GetElement(0, 0) * copy.GetElement(2, 2) - copy.GetElement(0, 2) * copy.GetElement(2, 0);
-				GetElement(1, 2) = -copy.GetElement(0, 0) * copy.GetElement(1, 2) + copy.GetElement(0, 2) * copy.GetElement(1, 0);
-
-				GetElement(2, 0) = copy.GetElement(1, 0) * copy.GetElement(2, 1) - copy.GetElement(1, 1) * copy.GetElement(2, 0);
-				GetElement(2, 1) = -copy.GetElement(0, 0) * copy.GetElement(2, 1) + copy.GetElement(0, 1) * copy.GetElement(2, 0);
-				GetElement(2, 2) = copy.GetElement(1, 1) * copy.GetElement(0, 0) - copy.GetElement(0, 1) * copy.GetElement(1, 0);
-
-				Multiply(detInv);
-				return *this;
+				out.Multiply(detInv);
+				return out;
 			}
 
 			Matrix3<T>& MakeIdentity() {

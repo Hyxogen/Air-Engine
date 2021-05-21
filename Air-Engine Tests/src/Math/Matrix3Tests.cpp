@@ -82,7 +82,7 @@ namespace engine {
 				mat.m_a32 = 5.75f;
 				mat.m_a33 = 4.9f;
 
-				Matrix3f inv = mat.Copy().Inverse();
+				Matrix3f inv = mat.Inverse();
 
 				inv.Multiply(mat);
 				EXPECT_NEAR(inv[0][0], 1, 0.0000001);
