@@ -227,11 +227,6 @@ namespace engine {
 				return out;
 			}
 
-			Matrix4<T>& MakeIdentity() {
-				SetDiagonal((T)1);
-				return *this;
-			}
-
 			Matrix4<T>& Clear() {
 				memset(m_Elements, 0, sizeof(T) * MAT4_SIZE);
 				return *this;

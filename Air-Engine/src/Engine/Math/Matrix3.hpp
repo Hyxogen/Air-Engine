@@ -94,11 +94,6 @@ namespace engine {
 				return out;
 			}
 
-			Matrix3<T>& MakeIdentity() {
-				SetDiagonal((T)1);
-				return *this;
-			}
-
 			Matrix3<T>& Clear() {
 				memset(m_Elements, 0, sizeof(T) * MAT3_SIZE);
 				return *this;

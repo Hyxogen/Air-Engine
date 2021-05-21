@@ -78,11 +78,6 @@ namespace engine {
 				return out;
 			}
 
-			Matrix2<T>& MakeIdentity() {
-				SetDiagonal((T)1);
-				return *this;
-			}
-
 			Matrix2<T>& Clear() {
 				memset(m_Elements, 0, sizeof(T) * MAT2_SIZE);
 				return *this;
