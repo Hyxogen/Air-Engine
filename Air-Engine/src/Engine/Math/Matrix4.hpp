@@ -88,140 +88,140 @@ namespace engine {
 					GetElement(0, 0) * GetElement(1, 1) * GetElement(2, 2) * GetElement(3, 3);
 			}
 
-			Matrix4<T> Inverse() {
+			Matrix4<T> Inverse() const {
 				Matrix4<T> out;
 
 				T det = Determinant();
 				if (det == 0) return Identity();
 				T invDet = (T)1 / det;
 
-				out.m_Elements[0 + 0 * 4] =
-					m_Elements[1 + 2 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[1 + 3 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[1 + 3 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[1 + 1 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[1 + 2 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 3 * 4] +
-					m_Elements[1 + 1 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(0, 0) =
+					GetElement(2, 1) * GetElement(3, 2) * GetElement(1, 3) -
+					GetElement(3, 1) * GetElement(2, 2) * GetElement(1, 3) +
+					GetElement(3, 1) * GetElement(1, 2) * GetElement(2, 3) -
+					GetElement(1, 1) * GetElement(3, 2) * GetElement(2, 3) -
+					GetElement(2, 1) * GetElement(1, 2) * GetElement(3, 3) +
+					GetElement(1, 1) * GetElement(2, 2) * GetElement(3, 3);
 
-				out.m_Elements[0 + 1 * 4] =
-					m_Elements[0 + 3 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[0 + 1 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[0 + 2 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 3 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(1, 0) =
+					GetElement(3, 0) * GetElement(2, 2) * GetElement(1, 3) -
+					GetElement(2, 0) * GetElement(3, 2) * GetElement(1, 3) -
+					GetElement(3, 0) * GetElement(1, 2) * GetElement(2, 3) +
+					GetElement(1, 0) * GetElement(3, 2) * GetElement(2, 3) +
+					GetElement(2, 0) * GetElement(1, 2) * GetElement(3, 3) -
+					GetElement(1, 0) * GetElement(2, 2) * GetElement(3, 3);
 
-				out.m_Elements[0 + 2 * 4] =
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 3 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 2 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 1 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 3 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 1 * 4] * m_Elements[3 + 3 * 4] +
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 2 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(2, 0) =
+					GetElement(2, 0) * GetElement(3, 1) * GetElement(1, 3) -
+					GetElement(3, 0) * GetElement(2, 1) * GetElement(1, 3) +
+					GetElement(3, 0) * GetElement(1, 1) * GetElement(2, 3) -
+					GetElement(1, 0) * GetElement(3, 1) * GetElement(2, 3) -
+					GetElement(2, 0) * GetElement(1, 1) * GetElement(3, 3) +
+					GetElement(1, 0) * GetElement(2, 1) * GetElement(3, 3);
 
-				out.m_Elements[0 + 3 * 4] =
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 2 * 4] * m_Elements[2 + 1 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 3 * 4] * m_Elements[2 + 1 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 1 * 4] * m_Elements[2 + 2 * 4] +
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 3 * 4] * m_Elements[2 + 2 * 4] +
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 1 * 4] * m_Elements[2 + 3 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 2 * 4] * m_Elements[2 + 3 * 4];
+				out.GetElement(3, 0) =
+					GetElement(3, 0) * GetElement(2, 1) * GetElement(1, 2) -
+					GetElement(2, 0) * GetElement(3, 1) * GetElement(1, 2) -
+					GetElement(3, 0) * GetElement(1, 1) * GetElement(2, 2) +
+					GetElement(1, 0) * GetElement(3, 1) * GetElement(2, 2) +
+					GetElement(2, 0) * GetElement(1, 1) * GetElement(3, 2) -
+					GetElement(1, 0) * GetElement(2, 1) * GetElement(3, 2);
 
-				out.m_Elements[1 + 0 * 4] =
-					m_Elements[1 + 3 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[1 + 2 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[1 + 3 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[1 + 0 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[1 + 2 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 3 * 4] -
-					m_Elements[1 + 0 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(0, 1) =
+					GetElement(3, 1) * GetElement(2, 2) * GetElement(0, 3) -
+					GetElement(2, 1) * GetElement(3, 2) * GetElement(0, 3) -
+					GetElement(3, 1) * GetElement(0, 2) * GetElement(2, 3) +
+					GetElement(0, 1) * GetElement(3, 2) * GetElement(2, 3) +
+					GetElement(2, 1) * GetElement(0, 2) * GetElement(3, 3) -
+					GetElement(0, 1) * GetElement(2, 2) * GetElement(3, 3);
 
-				out.m_Elements[1 + 1 * 4] =
-					m_Elements[0 + 2 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 0 * 4] +
-					m_Elements[0 + 3 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 3 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(1, 1) =
+					GetElement(2, 0) * GetElement(3, 2) * GetElement(0, 3) -
+					GetElement(3, 0) * GetElement(2, 2) * GetElement(0, 3) +
+					GetElement(3, 0) * GetElement(0, 2) * GetElement(2, 3) -
+					GetElement(0, 0) * GetElement(3, 2) * GetElement(2, 3) -
+					GetElement(2, 0) * GetElement(0, 2) * GetElement(3, 3) +
+					GetElement(0, 0) * GetElement(2, 2) * GetElement(3, 3);
 
-				out.m_Elements[1 + 2 * 4] =
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 2 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 3 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 0 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 3 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 0 * 4] * m_Elements[3 + 3 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 2 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(2, 1) =
+					GetElement(3, 0) * GetElement(2, 1) * GetElement(0, 3) -
+					GetElement(2, 0) * GetElement(3, 1) * GetElement(0, 3) -
+					GetElement(3, 0) * GetElement(0, 1) * GetElement(2, 3) +
+					GetElement(0, 0) * GetElement(3, 1) * GetElement(2, 3) +
+					GetElement(2, 0) * GetElement(0, 1) * GetElement(3, 3) -
+					GetElement(0, 0) * GetElement(2, 1) * GetElement(3, 3);
 
-				out.m_Elements[1 + 3 * 4] =
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 3 * 4] * m_Elements[2 + 0 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 2 * 4] * m_Elements[2 + 0 * 4] +
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 0 * 4] * m_Elements[2 + 2 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 3 * 4] * m_Elements[2 + 2 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 0 * 4] * m_Elements[2 + 3 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 2 * 4] * m_Elements[2 + 3 * 4];
+				out.GetElement(3, 1) =
+					GetElement(2, 0) * GetElement(3, 1) * GetElement(0, 2) -
+					GetElement(3, 0) * GetElement(2, 1) * GetElement(0, 2) +
+					GetElement(3, 0) * GetElement(0, 1) * GetElement(2, 2) -
+					GetElement(0, 0) * GetElement(3, 1) * GetElement(2, 2) -
+					GetElement(2, 0) * GetElement(0, 1) * GetElement(3, 2) +
+					GetElement(0, 0) * GetElement(2, 1) * GetElement(3, 2);
 
-				out.m_Elements[2 + 0 * 4] =
-					m_Elements[1 + 1 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[1 + 3 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 0 * 4] +
-					m_Elements[1 + 3 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[1 + 0 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[1 + 1 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 3 * 4] +
-					m_Elements[1 + 0 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(0, 2) =
+					GetElement(1, 1) * GetElement(3, 2) * GetElement(0, 3) -
+					GetElement(3, 1) * GetElement(1, 2) * GetElement(0, 3) +
+					GetElement(3, 1) * GetElement(0, 2) * GetElement(1, 3) -
+					GetElement(0, 1) * GetElement(3, 2) * GetElement(1, 3) -
+					GetElement(1, 1) * GetElement(0, 2) * GetElement(3, 3) +
+					GetElement(0, 1) * GetElement(1, 2) * GetElement(3, 3);
 
-				out.m_Elements[2 + 1 * 4] =
-					m_Elements[0 + 3 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[2 + 3 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[0 + 1 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 3 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(1, 2) =
+					GetElement(3, 0) * GetElement(1, 2) * GetElement(0, 3) -
+					GetElement(1, 0) * GetElement(3, 2) * GetElement(0, 3) -
+					GetElement(3, 0) * GetElement(0, 2) * GetElement(1, 3) +
+					GetElement(0, 0) * GetElement(3, 2) * GetElement(1, 3) +
+					GetElement(1, 0) * GetElement(0, 2) * GetElement(3, 3) -
+					GetElement(0, 0) * GetElement(1, 2) * GetElement(3, 3);
 
-				out.m_Elements[2 + 2 * 4] =
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 3 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 1 * 4] * m_Elements[3 + 0 * 4] +
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 0 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 3 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 0 * 4] * m_Elements[3 + 3 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 1 * 4] * m_Elements[3 + 3 * 4];
+				out.GetElement(2, 2) =
+					GetElement(1, 0) * GetElement(3, 1) * GetElement(0, 3) -
+					GetElement(3, 0) * GetElement(1, 1) * GetElement(0, 3) +
+					GetElement(3, 0) * GetElement(0, 1) * GetElement(1, 3) -
+					GetElement(0, 0) * GetElement(3, 1) * GetElement(1, 3) -
+					GetElement(1, 0) * GetElement(0, 1) * GetElement(3, 3) +
+					GetElement(0, 0) * GetElement(1, 1) * GetElement(3, 3);
 
-				out.m_Elements[2 + 3 * 4] =
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 1 * 4] * m_Elements[2 + 0 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 3 * 4] * m_Elements[2 + 0 * 4] -
-					m_Elements[0 + 3 * 4] * m_Elements[1 + 0 * 4] * m_Elements[2 + 1 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 3 * 4] * m_Elements[2 + 1 * 4] +
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 0 * 4] * m_Elements[2 + 3 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 1 * 4] * m_Elements[2 + 3 * 4];
+				out.GetElement(3, 2) =
+					GetElement(3, 0) * GetElement(1, 1) * GetElement(0, 2) -
+					GetElement(1, 0) * GetElement(3, 1) * GetElement(0, 2) -
+					GetElement(3, 0) * GetElement(0, 1) * GetElement(1, 2) +
+					GetElement(0, 0) * GetElement(3, 1) * GetElement(1, 2) +
+					GetElement(1, 0) * GetElement(0, 1) * GetElement(3, 2) -
+					GetElement(0, 0) * GetElement(1, 1) * GetElement(3, 2);
 
-				out.m_Elements[3 + 0 * 4] =
-					m_Elements[1 + 2 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[1 + 1 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[1 + 2 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[1 + 0 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[1 + 1 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[1 + 0 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 2 * 4];
+				out.GetElement(0, 3) =
+					GetElement(2, 1) * GetElement(1, 2) * GetElement(0, 3) -
+					GetElement(1, 1) * GetElement(2, 2) * GetElement(0, 3) -
+					GetElement(2, 1) * GetElement(0, 2) * GetElement(1, 3) +
+					GetElement(0, 1) * GetElement(2, 2) * GetElement(1, 3) +
+					GetElement(1, 1) * GetElement(0, 2) * GetElement(2, 3) -
+					GetElement(0, 1) * GetElement(1, 2) * GetElement(2, 3);
 
-				out.m_Elements[3 + 1 * 4] =
-					m_Elements[0 + 1 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 0 * 4] +
-					m_Elements[0 + 2 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[2 + 2 * 4] * m_Elements[3 + 1 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[2 + 0 * 4] * m_Elements[3 + 2 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[2 + 1 * 4] * m_Elements[3 + 2 * 4];
+				out.GetElement(1, 3) =
+					GetElement(1, 0) * GetElement(2, 2) * GetElement(0, 3) -
+					GetElement(2, 0) * GetElement(1, 2) * GetElement(0, 3) +
+					GetElement(2, 0) * GetElement(0, 2) * GetElement(1, 3) -
+					GetElement(0, 0) * GetElement(2, 2) * GetElement(1, 3) -
+					GetElement(1, 0) * GetElement(0, 2) * GetElement(2, 3) +
+					GetElement(0, 0) * GetElement(1, 2) * GetElement(2, 3);
 
-				out.m_Elements[3 + 2 * 4] =
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 1 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 2 * 4] * m_Elements[3 + 0 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 0 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 2 * 4] * m_Elements[3 + 1 * 4] +
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 0 * 4] * m_Elements[3 + 2 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 1 * 4] * m_Elements[3 + 2 * 4];
+				out.GetElement(2, 3) =
+					GetElement(2, 0) * GetElement(1, 1) * GetElement(0, 3) -
+					GetElement(1, 0) * GetElement(2, 1) * GetElement(0, 3) -
+					GetElement(2, 0) * GetElement(0, 1) * GetElement(1, 3) +
+					GetElement(0, 0) * GetElement(2, 1) * GetElement(1, 3) +
+					GetElement(1, 0) * GetElement(0, 1) * GetElement(2, 3) -
+					GetElement(0, 0) * GetElement(1, 1) * GetElement(2, 3);
 
-				out.m_Elements[3 + 3 * 4] =
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 2 * 4] * m_Elements[2 + 0 * 4] -
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 1 * 4] * m_Elements[2 + 0 * 4] +
-					m_Elements[0 + 2 * 4] * m_Elements[1 + 0 * 4] * m_Elements[2 + 1 * 4] -
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 2 * 4] * m_Elements[2 + 1 * 4] -
-					m_Elements[0 + 1 * 4] * m_Elements[1 + 0 * 4] * m_Elements[2 + 2 * 4] +
-					m_Elements[0 + 0 * 4] * m_Elements[1 + 1 * 4] * m_Elements[2 + 2 * 4];
+				out.GetElement(3, 3) =
+					GetElement(1, 0) * GetElement(2, 1) * GetElement(0, 2) -
+					GetElement(2, 0) * GetElement(1, 1) * GetElement(0, 2) +
+					GetElement(2, 0) * GetElement(0, 1) * GetElement(1, 2) -
+					GetElement(0, 0) * GetElement(2, 1) * GetElement(1, 2) -
+					GetElement(1, 0) * GetElement(0, 1) * GetElement(2, 2) +
+					GetElement(0, 0) * GetElement(1, 1) * GetElement(2, 2);
 
 				out = out.Multiply(invDet);
 				return out;
