@@ -63,20 +63,19 @@ namespace engine {
 				return ((GetElement(0, 0) * GetElement(1, 1)) - (GetElement(0, 1) * GetElement(1, 0)));
 			}
 
-			Matrix2<T>& Inverse() {
+			Matrix2<T> Inverse() const {
+				Matrix2<T> out;
 				T det = std::move(Determinant());
 
 				if (det == 0)
-					return MakeIdentity();
+					return Identity();
 
-				T temp = GetElement(1, 1) / det;
+				out.GetElement(1, 1) = GetElement(0, 0) / det;
+				out.GetElement(0, 0) = GetElement(1, 1) / det;
 
-				GetElement(1, 1) = GetElement(0, 0) / det;
-				GetElement(0, 0) = temp;
-
-				GetElement(0, 1) = -GetElement(0, 1) / det;
-				GetElement(1, 0) = -GetElement(1, 0) / det;
-				return *this;
+				out.GetElement(0, 1) = -GetElement(0, 1) / det;
+				out.GetElement(1, 0) = -GetElement(1, 0) / det;
+				return out;
 			}
 
 			Matrix2<T>& MakeIdentity() {
