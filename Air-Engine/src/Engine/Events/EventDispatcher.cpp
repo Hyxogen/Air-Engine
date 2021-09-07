@@ -41,7 +41,7 @@ namespace engine {
 			}
 		}
 
-		EventList* EventPriorityMap::GetListeners(uint32 event, unsigned char priority) const {
+		EventList* EventPriorityMap::GetListeners(uint32 event, uint8 priority) const {
 			PriorityMap::iterator it = m_PrioMap->find(GetKeyMask(event, priority));
 
 			if (it == m_PrioMap->end())
@@ -76,7 +76,7 @@ namespace engine {
 			return ret;
 		}
 
-		int64 EventPriorityMap::GetKeyMask(uint32 event, unsigned char priority) {
+		int64 EventPriorityMap::GetKeyMask(uint32 event, uint8 priority) {
 			return (((int64)0 | priority) << ((sizeof(int64) - sizeof(priority)) << 3)) | event;
 		}
 
@@ -84,11 +84,11 @@ namespace engine {
 			return key & static_cast<int64>(UINT_MAX);
 		}
 
-		unsigned char EventPriorityMap::GetPriority(int64 key) {
-			return key & (static_cast<int64>(0xff)) << ((sizeof(int64) - sizeof(unsigned char)) << 3);
+		uint8 EventPriorityMap::GetPriority(int64 key) {
+			return key & (static_cast<int64>(0xff)) << ((sizeof(int64) - sizeof(uint8)) << 3);
 		}
 
-		EventList* EventPriorityMap::CreateEntry(uint32 event, unsigned char priority) {
+		EventList* EventPriorityMap::CreateEntry(uint32 event, uint8 priority) {
 			EventList* ret = new EventList();
 			m_PrioMap->emplace(GetKeyMask(event, priority), ret);
 			return ret;

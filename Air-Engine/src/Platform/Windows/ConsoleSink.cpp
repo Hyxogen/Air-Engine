@@ -26,7 +26,7 @@ namespace platform {
 			
 		}
 
-		bool ConsoleSink::Print(unsigned char severity, const char* str) {
+		bool ConsoleSink::Print(uint8 severity, const char* str) {
 			SetColor(GetColor(severity));
 			std::cout << str;
 			ResetColor();
@@ -37,11 +37,11 @@ namespace platform {
 			SetColor(COLOR_GREY);
 		}
 
-		void ConsoleSink::SetColor(unsigned char color) {
+		void ConsoleSink::SetColor(uint8 color) {
 			SetConsoleTextAttribute(m_ConsoleHandle, color);
 		}
 
-		unsigned char ConsoleSink::GetColor(unsigned char priority) {
+		uint8 ConsoleSink::GetColor(uint8 priority) {
 			for (int32 i = 0; m_Colors[i].m_Priority != engine::util::SE_UNKNOWN; i++) {
 				if (m_Colors[i].m_Priority == priority)
 					return m_Colors[i].m_Color;

@@ -43,11 +43,11 @@ namespace engine {
 				Set(std::move(other));
 			}
 
-			inline T& GetElement(unsigned char row, unsigned char column) {
+			inline T& GetElement(uint8 row, uint8 column) {
 				return m_Elements[column + row * AIR_MATH_MAT4_COLUMNS];
 			}
 			//TODO checken of de bovenste en onderste geen problemen gaan opleveren vanwege dezelfde naam
-			inline T GetElement(unsigned char row, unsigned char column) const {
+			inline T GetElement(uint8 row, uint8 column) const {
 				return m_Elements[column + row * AIR_MATH_MAT4_COLUMNS];
 			}
 

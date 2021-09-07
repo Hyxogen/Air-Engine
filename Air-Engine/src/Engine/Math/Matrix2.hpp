@@ -42,11 +42,11 @@ namespace engine {
 				Set(std::move(other));
 			}
 
-			inline T& GetElement(unsigned char row, unsigned char column) {
+			inline T& GetElement(uint8 row, uint8 column) {
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
 			}
 
-			inline T GetElement(unsigned char row, unsigned char column) const {
+			inline T GetElement(uint8 row, uint8 column) const {
 				return m_Elements[column + row * AIR_MATH_MAT2_COLUMNS];
 			}
 

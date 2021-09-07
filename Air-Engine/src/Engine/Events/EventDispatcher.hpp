@@ -24,7 +24,7 @@ namespace engine {
 
 			void Remove(uint32 event, const EventListener* listener);
 
-			EventList* GetListeners(uint32 event, unsigned char priority) const;
+			EventList* GetListeners(uint32 event, uint8 priority) const;
 
 			EventList GetListenersOrdered(uint32 event);
 
@@ -34,13 +34,13 @@ namespace engine {
 			/// <param name="event">uint32 representing the event</param>
 			/// <param name="priority">a byte representing the priority, see Priority in EventListener.h</param>
 			/// <returns>A int64 with priority in the highest byte and event in the lowest 4 bytes</returns>
-			static int64 GetKeyMask(uint32 event, unsigned char priority);
+			static int64 GetKeyMask(uint32 event, uint8 priority);
 
-			static unsigned char GetPriority(int64 key);
+			static uint8 GetPriority(int64 key);
 
 			static uint32 GetEvent(int64 key);
 		protected:
-			EventList* CreateEntry(uint32 event, unsigned char priority);
+			EventList* CreateEntry(uint32 event, uint8 priority);
 		};
 
 		class EventDispatcher {
