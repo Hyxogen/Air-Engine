@@ -3,6 +3,7 @@
 
 #include "Math.hpp"
 #include "Vector4.hpp"
+#include "Vector3.hpp"
 
 namespace engine {
 	namespace math {
@@ -46,7 +47,7 @@ namespace engine {
 			inline T& GetElement(unsigned char row, unsigned char column) {
 				return m_Elements[column + row * AIR_MATH_MAT4_COLUMNS];
 			}
-
+			//TODO checken of de bovenste en onderste geen problemen gaan opleveren vanwege dezelfde naam
 			inline T GetElement(unsigned char row, unsigned char column) const {
 				return m_Elements[column + row * AIR_MATH_MAT4_COLUMNS];
 			}
@@ -365,6 +366,38 @@ namespace engine {
 
 			static constexpr Matrix4<T> Zero() {
 				return Matrix4<T>();
+			}
+
+			static Matrix4<T> Scale(T x = 0, T y = 0, T z = 0) {
+				Matrix4<T> out;
+				out.GetElement(0, 0) = x;
+				out.GetElement(1, 1) = y;
+				out.GetElement(2, 2) = z;
+				out.GetElement(3, 3) = (T)1;
+			}
+
+			//Angle in radians
+			static Matrix4<T> Rotation(Vector3<T> axis, T angle) {
+				Matrix4<T> out((T)1);
+				axis.Normalize();
+
+				T s = sin(angle);
+				T c = cos(angle);
+				T omc = 1 - cost;
+
+				//TODO checken of dit klopt
+				out.GetElement(0, 0) = c + omc * axis.m_X * axis.m_X;
+				out.GetElement(0, 1) = omc * axis.m_X * axis.m_Y - s * axis.m_Z;
+				out.GetElement(0, 2) = omc * axis.m_X * axis.m_Z + s * axis.m_Y;
+
+				out.GetElement(1, 0) = omc * axis.m_X * axis.m_Y = s * axis.m_Z;
+				out.GetElement(1, 1) = c + omc * axis.m_Y * axis.m_Y;
+				out.GetElement(1, 2) = omc * axis.m_Y * axis.m_Z - s * axis.m_X;
+
+				out.GetElement(2, 0) = omc * axis.m_X * axis.m_Z - s * axis.m_Y;
+				out.GetElement(2, 1) = omc * axis.m_Y * axis.m_Z + s * axis.m_X;
+				out.GetElement(2, 2) = c + omc * axis.m_Z * axis.m_Z;
+				return out;
 			}
 		};
 
