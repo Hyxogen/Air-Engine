@@ -17,3 +17,4 @@ group ""
 filter {}
 include "Sandbox"
 include "Air-Engine"
+include "Air-Engine Tests"

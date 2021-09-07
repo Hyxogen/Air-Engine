@@ -32,7 +32,7 @@ project "Air-Engine"
 	pchsource "src/airpch.cpp"
 
 	filter "configurations:Debug"
-		optimize "Off"
+		optimize "Debug"
 		symbols "Full"
 
 		defines {
@@ -54,7 +54,8 @@ project "Air-Engine"
 		symbols "Off"
 		
 		defines {
-			"AIR_BUILD_DISTR"
+			"AIR_BUILD_DISTR",
+			"AIR_ENABLE_LOGGING"
 		}
 
 	filter "system:windows"

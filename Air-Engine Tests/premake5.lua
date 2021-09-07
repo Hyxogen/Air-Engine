@@ -1,17 +1,17 @@
-project "Sandbox"
-    language "C++"
-    kind "WindowedApp"
+project "Air-Engine Tests"
+	kind "ConsoleApp"
+	language "C++"
 	cppdialect "C++17"
-	staticruntime "On"
-    systemversion "latest"
-
+	systemversion "latest"
+    staticruntime "On"
+    
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}")
 	objdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}/int")
 
     files {
-		"**.h",
-		"**.hpp",
-		"**.cpp"
+		"src/**.h",
+		"src/**.hpp",
+		"src/**.cpp"
 	}
 
     defines {
@@ -19,12 +19,18 @@ project "Sandbox"
     }
 
     includedirs {
-        "%{wks.location}/Air-Engine/src/"
+		"src/",
+        "%{wks.location}/Air-Engine/src/",
+        "Dependencies/googletest/googlemock/include",
+        "Dependencies/googletest/googletest/include"
     }
 
     links {
         "Air-Engine"
     }
+
+    pchheader "pch.h"
+    pchsource "src/pch.cpp"
 
 	filter "configurations:Debug"
 		optimize "Debug"
@@ -36,6 +42,10 @@ project "Sandbox"
             "AIR_ASSERTIONS_ENABLED",
 			"AIR_ENABLE_LOGGING"
 		}
+
+		links {
+            "Dependencies/googletest/lib/Debug/gtestd.lib"
+        }
 
 	filter "configurations:Release"
 		optimize "On"

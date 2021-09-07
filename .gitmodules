@@ -1,0 +1,3 @@
+[submodule "Air-Engine Tests/Dependencies/googletest"]
+	path = Air-Engine Tests/Dependencies/googletest
+	url = git@github.com:Hyxogen/googletest.git
