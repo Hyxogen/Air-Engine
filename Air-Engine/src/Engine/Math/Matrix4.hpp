@@ -5,11 +5,10 @@
 #include "Vector4.hpp"
 #include "Vector3.hpp"
 
+#define MAT4_SIZE AIR_MATH_MAT4_COLUMNS * AIR_MATH_MAT4_ROWS
+
 namespace engine {
 	namespace math {
-
-		static constexpr unsigned char MAT4_SIZE = AIR_MATH_MAT4_COLUMNS * AIR_MATH_MAT4_ROWS;
-
 
 		template<typename T>
 		struct Matrix4 {

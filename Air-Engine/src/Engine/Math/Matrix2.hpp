@@ -4,10 +4,10 @@
 #include "Math.hpp"
 #include "Vector2.hpp"
 
+#define MAT2_SIZE AIR_MATH_MAT2_COLUMNS * AIR_MATH_MAT2_ROWS
+
 namespace engine {
 	namespace math {
-
-		static constexpr unsigned char MAT2_SIZE = AIR_MATH_MAT2_COLUMNS * AIR_MATH_MAT2_ROWS;
 
 		/// <summary>
 		/// Row major AIR_MATH_MAT2_COLUMNS x AIR_MATH_MAT2_ROWS matrix (usually 2)

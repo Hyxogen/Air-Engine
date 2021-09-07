@@ -4,10 +4,10 @@
 #include "Math.hpp"
 #include "Vector3.hpp"
 
+#define MAT3_SIZE AIR_MATH_MAT3_COLUMNS * AIR_MATH_MAT3_ROWS
+
 namespace engine {
 	namespace math {
-
-		static constexpr unsigned char MAT3_SIZE = AIR_MATH_MAT3_COLUMNS * AIR_MATH_MAT3_ROWS;
 
 		/// <summary>
 		/// Row major AIR_MATH_MAT3_COLUMNS x AIR_MATH_MAT3_ROWS matrix (usually 3)
