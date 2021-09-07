@@ -15,13 +15,13 @@ namespace engine {
 
 			virtual bool HasScrollWheel() const = 0;
 
-			virtual int GetScrollDelta() const = 0;
+			virtual int32 GetScrollDelta() const = 0;
 
-			virtual int GetXCoord() const = 0;
+			virtual int32 GetXCoord() const = 0;
 
-			virtual int GetYCoord() const = 0;
+			virtual int32 GetYCoord() const = 0;
 
-			virtual bool GetButtonDown(unsigned int button) const = 0;
+			virtual bool GetButtonDown(uint32 button) const = 0;
 
 			inline Window* GetWindow() const { return m_Window; }
 

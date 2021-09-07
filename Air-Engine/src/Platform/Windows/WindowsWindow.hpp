@@ -24,7 +24,7 @@ namespace platform {
 			WindowsWindowEventHandler* m_EventHandler;
 
 		public:
-			WindowsWindow(int width, int height, const wchar_t* title);
+			WindowsWindow(int32 width, int32 height, const wchar_t* title);
 
 			virtual ~WindowsWindow();
 
@@ -36,7 +36,7 @@ namespace platform {
 			
 			bool Initialize() override;
 
-			void SetVisibility(short visibilty);
+			void SetVisibility(int16 visibilty);
 
 			/*
 			Informs the program the window should close and stops the updates

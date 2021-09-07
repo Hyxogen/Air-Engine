@@ -21,15 +21,15 @@ namespace platform {
 
 		class WindowsKeyboard : public engine::io::Keyboard, public engine::events::EventListener {
 		protected:
-			std::unordered_set<unsigned int> m_PressedKeys;
+			std::unordered_set<uint32> m_PressedKeys;
 		public:
 			WindowsKeyboard(engine::io::Window* window);
 
 			virtual ~WindowsKeyboard();
 
-			virtual bool GetKeyDown(unsigned int keyCode) const;
+			virtual bool GetKeyDown(uint32 keyCode) const;
 
-			virtual bool GetKeyToggled(unsigned int keyCode) const;
+			virtual bool GetKeyToggled(uint32 keyCode) const;
 
 			virtual bool OnEvent(engine::events::Event* event);
 		};

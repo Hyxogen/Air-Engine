@@ -24,7 +24,7 @@ namespace platform {
 			return GetSystemMetrics(SM_MOUSEWHEELPRESENT);
 		}
 
-		bool WindowsMouse::GetButtonDown(unsigned int button) const {
+		bool WindowsMouse::GetButtonDown(uint32 button) const {
 			return (m_ButtonsMask & WindowsButtonMap::GetButtonMask(button)) != 0;
 		}
 

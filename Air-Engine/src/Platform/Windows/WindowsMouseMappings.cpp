@@ -16,23 +16,23 @@ namespace platform {
 			{engine::io::BUTTON_UNKNOWN, 0x00}
 		};
 
-		unsigned int WindowsButtonMap::GetSysCode(unsigned int button) {
-			for (int i = 0; winButtonPairs[i].m_BtnCode != engine::io::BUTTON_UNKNOWN; i++) {
+		uint32 WindowsButtonMap::GetSysCode(uint32 button) {
+			for (int32 i = 0; winButtonPairs[i].m_BtnCode != engine::io::BUTTON_UNKNOWN; i++) {
 				if (winButtonPairs[i].m_BtnCode == button)
 					return winButtonPairs[i].m_SysCode;
 			}
 			return engine::io::BUTTON_UNKNOWN;
 		}
 
-		unsigned int platform::windows::WindowsButtonMap::GetButtonCode(unsigned int sysCode) {
-			for (int i = 0; winButtonPairs[i].m_BtnCode != engine::io::BUTTON_UNKNOWN; i++) {
+		uint32 platform::windows::WindowsButtonMap::GetButtonCode(uint32 sysCode) {
+			for (int32 i = 0; winButtonPairs[i].m_BtnCode != engine::io::BUTTON_UNKNOWN; i++) {
 				if (winButtonPairs[i].m_SysCode == sysCode)
 					return winButtonPairs[i].m_BtnCode;
 			}
 			return engine::io::BUTTON_UNKNOWN;
 		}
 
-		unsigned int WindowsButtonMap::GetButtonMask(unsigned int button) {
+		uint32 WindowsButtonMap::GetButtonMask(uint32 button) {
 			return 1 << button;
 		}
 

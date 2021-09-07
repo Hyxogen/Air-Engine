@@ -9,7 +9,7 @@ namespace engine {
 
 		typedef std::vector<const EventListener*> EventList;
 		//Probeer dit eens met een template te maken
-		typedef std::map<long long, EventList*> PriorityMap;
+		typedef std::map<int64, EventList*> PriorityMap;
 
 		class EventPriorityMap {
 		protected:
@@ -20,27 +20,27 @@ namespace engine {
 
 			~EventPriorityMap();
 
-			void Add(unsigned int event, const EventListener* listener);
+			void Add(uint32 event, const EventListener* listener);
 
-			void Remove(unsigned int event, const EventListener* listener);
+			void Remove(uint32 event, const EventListener* listener);
 
-			EventList* GetListeners(unsigned int event, unsigned char priority) const;
+			EventList* GetListeners(uint32 event, unsigned char priority) const;
 
-			EventList GetListenersOrdered(unsigned int event);
+			EventList GetListenersOrdered(uint32 event);
 
 			/// <summary>
-			/// Creates a long long of the event id together with a bitmask for the priority
+			/// Creates a int64 of the event id together with a bitmask for the priority
 			/// </summary>
-			/// <param name="event">unsigned int representing the event</param>
+			/// <param name="event">uint32 representing the event</param>
 			/// <param name="priority">a byte representing the priority, see Priority in EventListener.h</param>
-			/// <returns>A long long with priority in the highest byte and event in the lowest 4 bytes</returns>
-			static long long GetKeyMask(unsigned int event, unsigned char priority);
+			/// <returns>A int64 with priority in the highest byte and event in the lowest 4 bytes</returns>
+			static int64 GetKeyMask(uint32 event, unsigned char priority);
 
-			static unsigned char GetPriority(long long key);
+			static unsigned char GetPriority(int64 key);
 
-			static unsigned int GetEvent(long long key);
+			static uint32 GetEvent(int64 key);
 		protected:
-			EventList* CreateEntry(unsigned int event, unsigned char priority);
+			EventList* CreateEntry(uint32 event, unsigned char priority);
 		};
 
 		class EventDispatcher {
@@ -51,9 +51,9 @@ namespace engine {
 
 			~EventDispatcher();
 
-			void Register(unsigned int event, const EventListener* listener);
+			void Register(uint32 event, const EventListener* listener);
 
-			void Remove(unsigned int event, const EventListener* listener);
+			void Remove(uint32 event, const EventListener* listener);
 
 			bool Dispatch(Event* event) const;
 

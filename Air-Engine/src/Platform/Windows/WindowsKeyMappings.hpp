@@ -5,9 +5,9 @@ namespace platform {
 
 		struct WinKeyPair {
 			//Code used by the Air Engine
-			unsigned int m_SysCode;
+			uint32 m_SysCode;
 			//Code used by the platform
-			unsigned int m_KeyCode;
+			uint32 m_KeyCode;
 		};
 
 		class WindowsKeyMap {
@@ -15,10 +15,10 @@ namespace platform {
 
 		public:
 			//Returns code that Air Engine uses that corresponds to the passed platform keycode
-			static unsigned int GetSysCode(unsigned int keyCode);
+			static uint32 GetSysCode(uint32 keyCode);
 
 			//Returns keycode that the platform uses that corresponds to the passed Air Engine code
-			static unsigned int GetKeyCode(unsigned int sysCode);
+			static uint32 GetKeyCode(uint32 sysCode);
 		};
 	}
 }

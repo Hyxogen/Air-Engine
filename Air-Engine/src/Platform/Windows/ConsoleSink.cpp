@@ -42,7 +42,7 @@ namespace platform {
 		}
 
 		unsigned char ConsoleSink::GetColor(unsigned char priority) {
-			for (int i = 0; m_Colors[i].m_Priority != engine::util::SE_UNKNOWN; i++) {
+			for (int32 i = 0; m_Colors[i].m_Priority != engine::util::SE_UNKNOWN; i++) {
 				if (m_Colors[i].m_Priority == priority)
 					return m_Colors[i].m_Color;
 			}
