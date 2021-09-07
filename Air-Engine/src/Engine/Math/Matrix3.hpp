@@ -81,11 +81,11 @@ namespace engine {
 				out.GetElement(0, 0) = GetElement(1, 1) * GetElement(2, 2) - GetElement(1, 2) * GetElement(2, 1);
 				out.GetElement(0, 1) = -GetElement(0, 1) * GetElement(2, 2) + GetElement(0, 2) * GetElement(2, 1);
 				out.GetElement(0, 2) = GetElement(0, 1) * GetElement(1, 2) - GetElement(0, 2) * GetElement(1, 1);
-				
+
 				out.GetElement(1, 0) = -GetElement(1, 0) * GetElement(2, 2) + GetElement(1, 2) * GetElement(2, 0);
 				out.GetElement(1, 1) = GetElement(0, 0) * GetElement(2, 2) - GetElement(0, 2) * GetElement(2, 0);
 				out.GetElement(1, 2) = -GetElement(0, 0) * GetElement(1, 2) + GetElement(0, 2) * GetElement(1, 0);
-				
+
 				out.GetElement(2, 0) = GetElement(1, 0) * GetElement(2, 1) - GetElement(1, 1) * GetElement(2, 0);
 				out.GetElement(2, 1) = -GetElement(0, 0) * GetElement(2, 1) + GetElement(0, 1) * GetElement(2, 0);
 				out.GetElement(2, 2) = GetElement(1, 1) * GetElement(0, 0) - GetElement(0, 1) * GetElement(1, 0);
