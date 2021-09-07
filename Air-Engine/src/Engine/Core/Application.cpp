@@ -51,11 +51,11 @@ namespace engine {
 
 			m_Dispatcher = new events::EventDispatcher();
 
-			if (io::Input::GetInstance()->Initialize())
-				return true;
-
 			m_Window = new platform::windows::WindowsWindow(500, 600, L"Application");
 			m_ContextAdapter = new platform::windows::GLContextAdapter((platform::windows::WindowsWindow*)m_Window, 4, 6);
+
+			if (io::Input::GetInstance()->Initialize())
+				return true;
 
 			math::Vector3f vector(std::move(math::Vector3f(4.0f, 5.0f, 6.0f)));
 			math::Vector3f zero = math::Vector3f(6.0f, 5.0f, 4.0f);
