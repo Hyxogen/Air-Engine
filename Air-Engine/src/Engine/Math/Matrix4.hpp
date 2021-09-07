@@ -398,6 +398,16 @@ namespace engine {
 				out.GetElement(2, 2) = c + omc * axis.m_Z * axis.m_Z;
 				return out;
 			}
+
+			//TODO Check if correct
+			static Matrix4<T> Translation(const Vector3<T>& translation) {
+				Matrix4<T> out((T)1);
+
+				out.GetElement(3, 0) = translation.m_X;
+				out.GetElement(3, 1) = translation.m_Y;
+				out.GetElement(3, 2) = translation.m_Z;
+				return out;
+			}
 		};
 
 		typedef Matrix4<float> Matrix4f;
