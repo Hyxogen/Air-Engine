@@ -9,4 +9,5 @@ namespace engine {
 			virtual uint32 GetID() const = 0;
 		};
 
-} }
+	}
+}

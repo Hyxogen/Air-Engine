@@ -34,7 +34,7 @@ namespace engine {
 
 		Application::~Application() {
 			AIR_CORE_INFO("Shutting down Air Engine...")
-			delete m_Window;
+				delete m_Window;
 			delete m_Dispatcher;
 			delete m_ContextAdapter;
 			delete m_Console;

@@ -41,7 +41,7 @@ namespace engine {
 			void Log(uint8 severity, bool newLine, Ts&... ts) {
 				Log(severity, newLine, std::move(ts)...);
 			}
-			
+
 			template<typename... Ts>
 			void Log(uint8 severity, Ts&&... ts) {
 				Log(severity, true, ts...);
@@ -69,7 +69,7 @@ namespace engine {
 			bool ShouldPrint(uint8 severity);
 
 			void Flush(uint8 severity);
-			
+
 			template<typename First>
 			void LogInternal(First&& first) {
 				m_Output << first;

@@ -40,7 +40,7 @@ namespace engine {
 		public:
 			MouseScrollEvent(io::Window* window, uint32 buttonMask, int32 x, int32 y, int32 scrollDelta) : MouseEvent(window, buttonMask, x, y), m_ScrollDelta(scrollDelta) {}
 
-			inline int32 GetScrollDelta() const { return m_ScrollDelta; }	
+			inline int32 GetScrollDelta() const { return m_ScrollDelta; }
 
 			virtual uint32 GetID() const { return Hash("EVENT_MOUSE_SCROLL", 19); }
 		};

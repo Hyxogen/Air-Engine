@@ -8,7 +8,7 @@ namespace platform {
 
 		public:
 			Console(const wchar_t* title = L"Console");
-			
+
 			~Console();
 
 			//Returns false on no errors

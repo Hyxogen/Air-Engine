@@ -38,7 +38,7 @@ namespace platform {
 			SetPixelFormat(hdc, pixelFormat, &pfd);
 			mContext = wglCreateContext(hdc);
 			wglMakeCurrent(hdc, mContext);
-			
+
 			if (!gladLoaderLoadWGL(hdc)) {
 				AIR_CORE_ERROR("Failed to load wgl");
 				return true;
@@ -64,7 +64,7 @@ namespace platform {
 				WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
 				0
 			};
-			
+
 			HGLRC advContext = wglCreateContextAttribsARB(hdc, NULL, contextAttribs);
 
 			wglDeleteContext(mContext);
@@ -79,7 +79,7 @@ namespace platform {
 
 			}
 			const char* version = (char*)glGetString(GL_VERSION);
-			
+
 			wglSwapIntervalEXT(0);
 
 			AIR_CORE_INFO("Succesfully created OpenGL context");

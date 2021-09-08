@@ -3,7 +3,7 @@
 
 namespace platform {
 	namespace windows {
-	
+
 		PriorityColorPair defaultColorPair[] = {
 			{engine::util::SE_TRACE, COLOR_DARK_MAGENTA},
 			{engine::util::SE_INFO, COLOR_GREEN},
@@ -23,7 +23,7 @@ namespace platform {
 
 
 		ConsoleSink::~ConsoleSink() {
-			
+
 		}
 
 		bool ConsoleSink::Print(uint8 severity, const char* str) {

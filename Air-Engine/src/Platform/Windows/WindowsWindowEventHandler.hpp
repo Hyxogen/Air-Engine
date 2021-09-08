@@ -5,10 +5,10 @@
 
 namespace platform {
 	namespace windows {
-		
+
 		class WindowsWindow;
 		class WindowsWindowEvent;
-		
+
 		class WindowsWindowEventHandler : public engine::events::EventListener {
 		protected:
 			WindowsWindow* m_Window;

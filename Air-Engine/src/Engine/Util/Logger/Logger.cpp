@@ -54,7 +54,7 @@ namespace engine {
 			SinkList::iterator it;
 
 			for (it = m_Sinks.begin(); it != m_Sinks.end(); ++it) {
-				delete *it;
+				delete* it;
 			}
 		}
 

@@ -29,11 +29,11 @@ namespace platform {
 			virtual ~WindowsWindow();
 
 			void Update();
-			
+
 			void Draw();
 
 			void Close();
-			
+
 			bool Initialize() override;
 
 			void SetVisibility(int16 visibilty);

@@ -82,7 +82,8 @@ namespace platform {
 				window->Close();
 				PostQuitMessage(0);
 				return 0;
-			} else {
+			}
+			else {
 				WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 				if (window != nullptr) {
 					WindowsWindowEvent event(window, uMsg, wParam, lParam);
