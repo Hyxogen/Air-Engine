@@ -26,7 +26,7 @@ namespace engine {
 
 		Application* Application::s_Application = nullptr;
 
-		Application::Application() {
+		Application::Application() : m_Window(nullptr), m_Dispatcher(nullptr), m_ContextAdapter(nullptr), m_Console(nullptr) {
 			ASSERT(s_Application == nullptr);
 			s_Application = this;
 			ASSERT(!Initialize());
