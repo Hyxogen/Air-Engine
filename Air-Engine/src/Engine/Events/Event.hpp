@@ -1,11 +1,12 @@
 #pragma once
+#include "Engine\Core\DataTypes.hpp"
 
 namespace engine {
 	namespace events {
 
 		class Event {
 		public:
-			virtual unsigned int GetID() const = 0;
+			virtual uint32 GetID() const = 0;
 		};
 
 } }

@@ -106,16 +106,16 @@ namespace platform {
 		{engine::io::KeyCode::KEY_UNKNOWN, 0x00}//Used for undefined keys
 		};
 
-		unsigned int WindowsKeyMap::GetSysCode(unsigned int keyCode) {
-			for (unsigned int i = 0; winKeyPairs[i].m_SysCode != engine::io::KEY_UNKNOWN; i++) {
+		uint32 WindowsKeyMap::GetSysCode(uint32 keyCode) {
+			for (uint32 i = 0; winKeyPairs[i].m_SysCode != engine::io::KEY_UNKNOWN; i++) {
 				if (winKeyPairs[i].m_KeyCode == keyCode)
 					return winKeyPairs[i].m_SysCode;
 			}
 			return engine::io::KeyCode::KEY_UNKNOWN;
 		}
 
-		unsigned int WindowsKeyMap::GetKeyCode(unsigned int sysCode) {
-			for (unsigned int i = 0; winKeyPairs[i].m_SysCode != engine::io::KEY_UNKNOWN; i++) {
+		uint32 WindowsKeyMap::GetKeyCode(uint32 sysCode) {
+			for (uint32 i = 0; winKeyPairs[i].m_SysCode != engine::io::KEY_UNKNOWN; i++) {
 				if (winKeyPairs[i].m_SysCode == sysCode)
 					return winKeyPairs[i].m_KeyCode;
 			}

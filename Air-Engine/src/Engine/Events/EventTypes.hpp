@@ -3,7 +3,7 @@
 namespace engine {
 	namespace events {
 
-		enum class EventType : unsigned int {
+		enum class EventType : uint32 {
 			None = 0
 		};
 

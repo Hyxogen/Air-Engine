@@ -8,7 +8,7 @@ namespace engine {
 
 		typedef std::unordered_set<Sink*> SinkList;
 
-		enum Severity : unsigned char {
+		enum Severity : uint8 {
 			SE_TRACE = 1,
 			SE_INFO = 2,
 			SE_WARN = 3,
@@ -21,7 +21,7 @@ namespace engine {
 		class Logger {
 		protected:
 			const char* m_Name;
-			unsigned char m_Verbosity;
+			uint8 m_Verbosity;
 			std::ostringstream m_Output;
 
 			SinkList m_Sinks;
@@ -33,22 +33,22 @@ namespace engine {
 			~Logger();
 
 			template<typename... Ts>
-			void Log(unsigned char severity, Ts&... ts) {
+			void Log(uint8 severity, Ts&... ts) {
 				Log(severity, true, ts...);
 			}
 
 			template<typename... Ts>
-			void Log(unsigned char severity, bool newLine, Ts&... ts) {
+			void Log(uint8 severity, bool newLine, Ts&... ts) {
 				Log(severity, newLine, std::move(ts)...);
 			}
 			
 			template<typename... Ts>
-			void Log(unsigned char severity, Ts&&... ts) {
+			void Log(uint8 severity, Ts&&... ts) {
 				Log(severity, true, ts...);
 			}
 
 			template<typename... Ts>
-			void Log(unsigned char severity, bool newLine, Ts&&... ts) {
+			void Log(uint8 severity, bool newLine, Ts&&... ts) {
 				if (!ShouldPrint(severity)) return;
 				LogInternal(severity, newLine, ts...);
 				Flush(severity);
@@ -56,9 +56,9 @@ namespace engine {
 
 			bool AddSink(Sink* sink);
 
-			void SetVerbosity(unsigned char verbosity);
+			void SetVerbosity(uint8 verbosity);
 
-			unsigned char GetVerbosity() const { return m_Verbosity; }
+			uint8 GetVerbosity() const { return m_Verbosity; }
 		protected:
 			void ClearBuffer();
 
@@ -66,9 +66,9 @@ namespace engine {
 
 			void InsertTimeString();
 
-			bool ShouldPrint(unsigned char severity);
+			bool ShouldPrint(uint8 severity);
 
-			void Flush(unsigned char severity);
+			void Flush(uint8 severity);
 			
 			template<typename First>
 			void LogInternal(First&& first) {
@@ -84,7 +84,7 @@ namespace engine {
 
 			//It is posible that naming this function the same as the other internal functions will cause weird behaviour
 			template<typename... Args>
-			void LogInternal(unsigned char severity, bool newLine, Args&&... args) {
+			void LogInternal(uint8 severity, bool newLine, Args&&... args) {
 				InsertTimeString();
 				m_Output << "[" << m_Name << "]" << GetSeverityString(severity) << " ";
 
@@ -96,7 +96,7 @@ namespace engine {
 		public:
 			static Logger* GetCoreLogger();
 
-			static const char* GetSeverityString(unsigned char severity);
+			static const char* GetSeverityString(uint8 severity);
 		};
 
 	}

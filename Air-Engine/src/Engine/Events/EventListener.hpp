@@ -5,7 +5,7 @@ namespace engine {
 
 		class Event;
 		
-		enum Priority : unsigned char {
+		enum Priority : uint8 {
 			PRIORITY_MONITOR		= 0x00,			//Listeners with this priority will be called very first, should only be used when not manipulating data and/or handling the event (i.e. OnEvent returns true)
 			PRIORITY_HIGHEST		= 0x01,			//Highest priority, listeners with this priority will be called after PRIORITY_MONITOR
 			PRIORITY_HIGH			= 0x02,			//Second highest priority, listeners with this priority will be called after PRIORITY_HIGHEST
@@ -19,7 +19,7 @@ namespace engine {
 			//If the function returns true, the event dispatcher will stop with passing the current event to other listeners
 			virtual bool OnEvent(Event* event) = 0;
 
-			virtual unsigned char GetPriority() const { return PRIORITY_NORMAL; };
+			virtual uint8 GetPriority() const { return PRIORITY_NORMAL; };
 		};
 
 	}

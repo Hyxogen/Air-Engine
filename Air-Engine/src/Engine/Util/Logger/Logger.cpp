@@ -23,11 +23,11 @@ namespace engine {
 			return false;
 		}
 
-		bool Logger::ShouldPrint(unsigned char severity) {
+		bool Logger::ShouldPrint(uint8 severity) {
 			return severity >= m_Verbosity;
 		}
 
-		void Logger::SetVerbosity(unsigned char verbosity) {
+		void Logger::SetVerbosity(uint8 verbosity) {
 			if (verbosity > SE_CRITICAL) {
 				m_Verbosity = SE_CRITICAL;
 				return;
@@ -65,7 +65,7 @@ namespace engine {
 			m_Output << "[" << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec << "]";
 		}
 
-		void Logger::Flush(unsigned char severity) {
+		void Logger::Flush(uint8 severity) {
 			SinkList::iterator it;
 
 			std::string string = m_Output.str();
@@ -76,7 +76,7 @@ namespace engine {
 			ClearBuffer();
 		}
 
-		const char* Logger::GetSeverityString(unsigned char severity) {
+		const char* Logger::GetSeverityString(uint8 severity) {
 			switch (severity) {
 			case SE_TRACE:
 				return "[TRACE]";

@@ -18,17 +18,17 @@ namespace platform {
 
 			virtual bool OnEvent(engine::events::Event* event);
 
-			static int GetXCoord(LPARAM lParam);
+			static int32 GetXCoord(LPARAM lParam);
 
-			static int GetYCoord(LPARAM lParam);
+			static int32 GetYCoord(LPARAM lParam);
 
 			static bool IsRepeat(LPARAM lParam);
 
-			static int GetScrollDelta(WPARAM wParam);
+			static int32 GetScrollDelta(WPARAM wParam);
 
-			static unsigned int GetButtonMask(WPARAM wParam);
+			static uint32 GetButtonMask(WPARAM wParam);
 
-			static unsigned int GetKeyCode(WPARAM wParam);
+			static uint32 GetKeyCode(WPARAM wParam);
 
 		protected:
 			bool HandleEvent(WindowsWindowEvent* event);

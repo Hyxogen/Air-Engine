@@ -29,7 +29,7 @@ namespace platform {
 		}
 
 		bool WindowsWindowEventHandler::HandleEvent(WindowsWindowEvent* event) {
-			unsigned int message = event->GetEvent();
+			uint32 message = event->GetEvent();
 			if (message == WM_KEYDOWN || message == WM_KEYUP) {
 				return HandleKeyEvent(event);
 			}
@@ -74,11 +74,11 @@ namespace platform {
 			return false;
 		}
 
-		int WindowsWindowEventHandler::GetXCoord(LPARAM lParam) {
+		int32 WindowsWindowEventHandler::GetXCoord(LPARAM lParam) {
 			return LOWORD(lParam);
 		}
 
-		int WindowsWindowEventHandler::GetYCoord(LPARAM lParam) {
+		int32 WindowsWindowEventHandler::GetYCoord(LPARAM lParam) {
 			return HIWORD(lParam);
 		}
 
@@ -86,12 +86,12 @@ namespace platform {
 			return (lParam & (1 << 30)) == 1;
 		}
 
-		int WindowsWindowEventHandler::GetScrollDelta(WPARAM wParam) {
+		int32 WindowsWindowEventHandler::GetScrollDelta(WPARAM wParam) {
 			return GET_WHEEL_DELTA_WPARAM(wParam);
 		}
 
-		unsigned int WindowsWindowEventHandler::GetButtonMask(WPARAM wParam) {
-			unsigned int ret = 0;
+		uint32 WindowsWindowEventHandler::GetButtonMask(WPARAM wParam) {
+			uint32 ret = 0;
 
 			if (wParam & MK_LBUTTON)
 				ret = ret | WindowsButtonMap::GetButtonMask(WindowsButtonMap::GetSysCode(MK_LBUTTON));
@@ -107,7 +107,7 @@ namespace platform {
 			return ret;
 		}
 
-		unsigned int WindowsWindowEventHandler::GetKeyCode(WPARAM wParam) {
+		uint32 WindowsWindowEventHandler::GetKeyCode(WPARAM wParam) {
 			return WindowsKeyMap::GetSysCode(wParam);
 		}
 	}

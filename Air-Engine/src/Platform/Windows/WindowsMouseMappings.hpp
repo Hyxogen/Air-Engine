@@ -5,9 +5,9 @@ namespace platform {
 
 		struct WinButtonPair {
 			//Code used by the Air Engine
-			unsigned int m_SysCode;
+			uint32 m_SysCode;
 			//Code used by the platform
-			unsigned int m_BtnCode;
+			uint32 m_BtnCode;
 		};
 
 		class WindowsButtonMap {
@@ -15,12 +15,12 @@ namespace platform {
 
 		public:
 			//Returns code that Air Engine uses that corresponds to the passed platform code
-			static unsigned int GetSysCode(unsigned int btnCode);
+			static uint32 GetSysCode(uint32 btnCode);
 
 			//Returns code that the platform uses that corresponds to the passed Air Engine code
-			static unsigned int GetButtonCode(unsigned int sysCode);
+			static uint32 GetButtonCode(uint32 sysCode);
 
-			static unsigned int GetButtonMask(unsigned int button);
+			static uint32 GetButtonMask(uint32 button);
 		};
 	}
 }

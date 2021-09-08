@@ -68,7 +68,7 @@ namespace engine {
 
 			bool equal = (vector == (addition * 0));
 
-			int i = 1;
+			int32 i = 1;
 
 			//float x = vector.Dot(zero + math::Vector3f::Zero());
 			float y = addition[i];
@@ -88,6 +88,8 @@ namespace engine {
 
 		bool Application::Run() {
 			while (!m_Window->ShouldClose()) {
+				if (io::Input::GetInstance()->GetKeyboard()->GetKeyDown(io::KEY_W))
+					AIR_CORE_INFO("Key down!");
 				Update();
 			}
 			return true;

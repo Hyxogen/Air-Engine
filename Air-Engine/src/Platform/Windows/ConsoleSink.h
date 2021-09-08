@@ -23,8 +23,8 @@ namespace platform {
 		};
 		
 		struct PriorityColorPair {
-			unsigned char m_Priority;
-			unsigned char m_Color;
+			uint8 m_Priority;
+			uint8 m_Color;
 		};
 
 		class ConsoleSink : public engine::util::Sink {
@@ -38,16 +38,16 @@ namespace platform {
 
 			virtual ~ConsoleSink();
 
-			virtual bool Print(unsigned char severity, const char* str);
+			virtual bool Print(uint8 severity, const char* str);
 
 			inline HANDLE GetConsoleHandle() const { return m_ConsoleHandle; }
 
 		protected:
 			void ResetColor();
 
-			void SetColor(unsigned char color);
+			void SetColor(uint8 color);
 
-			unsigned char GetColor(unsigned char priority);
+			uint8 GetColor(uint8 priority);
 		};
 	}
 }

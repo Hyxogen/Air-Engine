@@ -7,6 +7,8 @@
 
 #include <time.h>
 
+#include <stdint.h>
+
 #include <math.h>
 
 #include <io.h>
@@ -17,6 +19,7 @@
 #include <iostream>
 
 #include "Engine\Core\Base.hpp"
+#include "Engine\Core\DataTypes.hpp"
 #include "Engine\Util\HashUtils.hpp"
 #include "Engine\Util\Logger\Logger.hpp"
 

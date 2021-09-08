@@ -12,7 +12,7 @@ namespace platform {
 		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
-		WindowsWindow::WindowsWindow(int width, int height, const wchar_t* title) : Window(title, width, height), m_DeviceContext(nullptr), m_EventHandler(nullptr) {
+		WindowsWindow::WindowsWindow(int32 width, int32 height, const wchar_t* title) : Window(title, width, height), m_DeviceContext(nullptr), m_EventHandler(nullptr) {
 			m_Window = nullptr;
 		}
 
@@ -68,7 +68,7 @@ namespace platform {
 			SwapBuffers(GetHDC()); //Dit moet in theorie alleen gebeuren als het dual buffers zijn
 		}
 
-		void WindowsWindow::SetVisibility(short visibility) {
+		void WindowsWindow::SetVisibility(int16 visibility) {
 			ShowWindow(m_Window, visibility);
 		}
 

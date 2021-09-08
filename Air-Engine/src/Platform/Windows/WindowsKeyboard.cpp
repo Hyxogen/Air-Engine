@@ -20,11 +20,11 @@ namespace platform {
 		WindowsKeyboard::~WindowsKeyboard() {
 		}
 
-		bool WindowsKeyboard::GetKeyDown(unsigned int keyCode) const {
+		bool WindowsKeyboard::GetKeyDown(uint32 keyCode) const {
 			return m_PressedKeys.find(keyCode) != m_PressedKeys.end();
 		}
 
-		bool WindowsKeyboard::GetKeyToggled(unsigned int keyCode) const {
+		bool WindowsKeyboard::GetKeyToggled(uint32 keyCode) const {
 			return GetKeyState(WindowsKeyMap::GetKeyCode(keyCode)) & 0b1;
 		}
 
@@ -35,7 +35,7 @@ namespace platform {
 
 			if (keyEvent->GetWindow() != m_Window) return false;
 
-			unsigned int id = keyEvent->GetID();
+			uint32 id = keyEvent->GetID();
 
 			if (keyEvent->GetID() == Hash("EVENT_KEY_DOWN", 15)) {
 				m_PressedKeys.insert(keyEvent->GetKeyCode());

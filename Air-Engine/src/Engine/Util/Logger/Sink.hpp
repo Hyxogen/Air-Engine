@@ -11,7 +11,7 @@ namespace engine {
 			Sink(const char* name) : m_Name(name) {}
 
 
-			virtual bool Print(unsigned char severity, const char* str) = 0;
+			virtual bool Print(uint8 severity, const char* str) = 0;
 		};
 
 	}

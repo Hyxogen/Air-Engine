@@ -43,17 +43,17 @@ namespace engine {
 				Set(std::move(other));
 			}
 
-			inline T& GetElement(unsigned char row, unsigned char column) {
+			inline T& GetElement(uint8 row, uint8 column) {
 				return m_Elements[column + row * AIR_MATH_MAT4_COLUMNS];
 			}
 			//TODO checken of de bovenste en onderste geen problemen gaan opleveren vanwege dezelfde naam
-			inline T GetElement(unsigned char row, unsigned char column) const {
+			inline T GetElement(uint8 row, uint8 column) const {
 				return m_Elements[column + row * AIR_MATH_MAT4_COLUMNS];
 			}
 
 			Matrix4<T>& Transpose() {
-				for (int c = 0; c < AIR_MATH_MAT4_COLUMNS; c++) {
-					for (int r = c + 1; r < AIR_MATH_MAT4_ROWS; r++) {
+				for (int32 c = 0; c < AIR_MATH_MAT4_COLUMNS; c++) {
+					for (int32 r = c + 1; r < AIR_MATH_MAT4_ROWS; r++) {
 						std::swap(GetElement(r, c), GetElement(c, r));
 					}
 				}
@@ -237,14 +237,14 @@ namespace engine {
 			}
 
 			Matrix4<T>& SetDiagonal(const T& val) {
-				for (int i = 0; i < AIR_MATH_MAT4_COLUMNS; i++)
+				for (int32 i = 0; i < AIR_MATH_MAT4_COLUMNS; i++)
 					GetElement(i, i) = val;
 				return *this;
 			}
 
 			bool Equal(const Matrix4<T>& other) const {
 				if (this == &other) return true;
-				for (int i = 0; i < MAT4_SIZE; i++)
+				for (int32 i = 0; i < MAT4_SIZE; i++)
 					if (m_Elements[i] != other.m_Elements[i]) return false;
 				return true;
 			}
@@ -263,7 +263,7 @@ namespace engine {
 			}
 
 			Matrix4<T>& Multiply(const T& scalar) {
-				for (int i = 0; i < MAT4_SIZE; i++)
+				for (int32 i = 0; i < MAT4_SIZE; i++)
 					m_Elements[i] *= scalar;
 				return *this;
 			}
@@ -271,9 +271,9 @@ namespace engine {
 			Matrix4<T>& Multiply(const Matrix4<T>& other) {
 				Matrix4<T> copy = std::move(Copy());
 				Clear();
-				for (int row = 0; row < AIR_MATH_MAT4_ROWS; row++) {
-					for (int column = 0; column < AIR_MATH_MAT4_COLUMNS; column++) {
-						for (int c = 0; c < AIR_MATH_MAT4_COLUMNS; c++) {
+				for (int32 row = 0; row < AIR_MATH_MAT4_ROWS; row++) {
+					for (int32 column = 0; column < AIR_MATH_MAT4_COLUMNS; column++) {
+						for (int32 c = 0; c < AIR_MATH_MAT4_COLUMNS; c++) {
 							GetElement(row, column) += copy.GetElement(row, c) * other.GetElement(c, column);
 						}
 					}
@@ -282,19 +282,19 @@ namespace engine {
 			}
 
 			Matrix4<T>& Add(const Matrix4<T>& other) {
-				for (int i = 0; i < MAT4_SIZE; i++)
+				for (int32 i = 0; i < MAT4_SIZE; i++)
 					m_Elements[i] += other.m_Elements[i];
 			}
 
 			Matrix4<T>& Subtract(const Matrix4<T>& other) {
-				for (int i = 0; i < MAT4_SIZE; i++)
+				for (int32 i = 0; i < MAT4_SIZE; i++)
 					m_Elements[i] -= other.m_Elements[i];
 			}
 
 			Vector4<T> Multiply(const Vector4<T>& other) const {
 				Vector4<T> ret;
-				for (int row = 0; row < AIR_MATH_MAT4_ROWS; row++) {
-					for (int column = 0; column < AIR_MATH_MAT4_COLUMNS; column++) {
+				for (int32 row = 0; row < AIR_MATH_MAT4_ROWS; row++) {
+					for (int32 column = 0; column < AIR_MATH_MAT4_COLUMNS; column++) {
 						ret.m_Coords[row] += GetElement(row, column) * other.m_Coords[column];
 					}
 				}
@@ -354,7 +354,7 @@ namespace engine {
 			}
 
 			friend std::ostream& operator<<(std::ostream& stream, const Matrix4<T>& mat) {
-				for (int i = 0; i < AIR_MATH_MAT4_ROWS; i++)
+				for (int32 i = 0; i < AIR_MATH_MAT4_ROWS; i++)
 					stream << mat.m_Rows[i];
 				return stream;
 			}

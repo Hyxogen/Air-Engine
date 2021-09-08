@@ -8,11 +8,11 @@
 namespace platform {
 	namespace windows {
 
-		WindowsWindowEvent::WindowsWindowEvent(WindowsWindow* window, unsigned int event, WPARAM wParam, LPARAM lParam)
+		WindowsWindowEvent::WindowsWindowEvent(WindowsWindow* window, uint32 event, WPARAM wParam, LPARAM lParam)
 			: m_Window(window), m_Event(event), m_WParam(wParam), m_LParam(lParam) {
 		}
 
-		unsigned int WindowsWindowEvent::GetID() const {
+		uint32 WindowsWindowEvent::GetID() const {
 			return Hash("EVENT_WINDOWS_WINDOW", 21);
 		}
 	}

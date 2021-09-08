@@ -17,32 +17,32 @@ namespace engine {
 		class MouseEvent : public Event {
 		protected:
 			io::Window* m_Window;
-			unsigned int m_ButtonMask;
-			unsigned int m_X, m_Y;
+			uint32 m_ButtonMask;
+			uint32 m_X, m_Y;
 
 		public:
-			MouseEvent(io::Window* window, unsigned int buttonMask, int x, int y) : m_Window(window), m_ButtonMask(buttonMask), m_X(x), m_Y(y) {}
+			MouseEvent(io::Window* window, uint32 buttonMask, int32 x, int32 y) : m_Window(window), m_ButtonMask(buttonMask), m_X(x), m_Y(y) {}
 
 			inline io::Window* GetWindow() const { return m_Window; }
 
-			inline unsigned int GetX() const { return m_X; }
+			inline uint32 GetX() const { return m_X; }
 
-			inline unsigned int GetY() const { return m_Y; }
+			inline uint32 GetY() const { return m_Y; }
 
-			inline unsigned int GetButtonMask() const { return m_ButtonMask; }
+			inline uint32 GetButtonMask() const { return m_ButtonMask; }
 
-			virtual unsigned int GetID() const { return Hash("EVENT_MOUSE_GENERAL", 20); }
+			virtual uint32 GetID() const { return Hash("EVENT_MOUSE_GENERAL", 20); }
 		};
 
 		class MouseScrollEvent : public MouseEvent {
 		protected:
-			int m_ScrollDelta;
+			int32 m_ScrollDelta;
 		public:
-			MouseScrollEvent(io::Window* window, unsigned int buttonMask, int x, int y, int scrollDelta) : MouseEvent(window, buttonMask, x, y), m_ScrollDelta(scrollDelta) {}
+			MouseScrollEvent(io::Window* window, uint32 buttonMask, int32 x, int32 y, int32 scrollDelta) : MouseEvent(window, buttonMask, x, y), m_ScrollDelta(scrollDelta) {}
 
-			inline int GetScrollDelta() const { return m_ScrollDelta; }	
+			inline int32 GetScrollDelta() const { return m_ScrollDelta; }	
 
-			virtual unsigned int GetID() const { return Hash("EVENT_MOUSE_SCROLL", 19); }
+			virtual uint32 GetID() const { return Hash("EVENT_MOUSE_SCROLL", 19); }
 		};
 	}
 }

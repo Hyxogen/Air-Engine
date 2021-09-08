@@ -9,7 +9,7 @@
 namespace platform {
 	namespace windows {
 
-		GLContextAdapter::GLContextAdapter(WindowsWindow* window, unsigned short major, unsigned short minor) : m_Window(window), m_MajorVersion(major), m_MinorVersion(minor) {
+		GLContextAdapter::GLContextAdapter(WindowsWindow* window, uint16 major, uint16 minor) : m_Window(window), m_MajorVersion(major), m_MinorVersion(minor) {
 		}
 
 		//TODO replace current glad with glad that has wgl extensions
@@ -30,7 +30,7 @@ namespace platform {
 
 			PIXELFORMATDESCRIPTOR pfd = GetPixelDescriptor();
 
-			int pixelFormat = ChoosePixelFormat(hdc, &pfd);
+			int32 pixelFormat = ChoosePixelFormat(hdc, &pfd);
 			if (pixelFormat == 0) {
 				AIR_CORE_ERROR("Failed to find pixel format");
 				return 1;
@@ -64,7 +64,7 @@ namespace platform {
 				WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
 				0
 			};
-
+			
 			HGLRC advContext = wglCreateContextAttribsARB(hdc, NULL, contextAttribs);
 
 			wglDeleteContext(mContext);
@@ -103,7 +103,6 @@ namespace platform {
 			pfd.cColorBits = 32;
 			pfd.cDepthBits = 24;
 			pfd.cStencilBits = 8;
-			pfd.iLayerType = PFD_MAIN_PLANE;
 
 			return pfd;
 		}
