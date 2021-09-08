@@ -57,39 +57,19 @@ namespace engine {
 			if (io::Input::GetInstance()->Initialize())
 				return true;
 
-			math::Vector3f vector(std::move(math::Vector3f(4.0f, 5.0f, 6.0f)));
-			math::Vector3f zero = math::Vector3f(6.0f, 5.0f, 4.0f);
-
-			math::Vector3f invert = -vector;
-			math::Vector3f addition(vector);
-			//math::Vector3f between = ((0.5f * vector) - (0.5f * zero));
-			math::Vector3f between = math::Vector3f::Lerp(vector, zero, 0.3f);
-			bool check = invert < (addition);
-
-			bool equal = (vector == (addition * 0));
-
-			int32 i = 1;
-
-			//float x = vector.Dot(zero + math::Vector3f::Zero());
-			float y = addition[i];
-
-			//AIR_CORE_INFO((addition + math::Vector3f::Zero()));
-
 			if (m_Window->Initialize())
 				return true;
 			if (m_ContextAdapter->Initialize())
 				return true;
 
 			m_Window->SetVisibility(AIR_W_SHOW);
-			
+
 			AIR_CORE_INFO("Finished initializing");
 			return false;
 		}
 
 		bool Application::Run() {
 			while (!m_Window->ShouldClose()) {
-				if (io::Input::GetInstance()->GetKeyboard()->GetKeyDown(io::KEY_W))
-					AIR_CORE_INFO("Key down!");
 				Update();
 			}
 			return true;
