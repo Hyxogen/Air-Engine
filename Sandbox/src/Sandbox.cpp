@@ -1,5 +1,7 @@
 #include <Air.h>
 #include <Engine\Core\Entrypoint.hpp>
+#include <glad\wgl.h>
+#include <glad\gl.h>
 
 class Sandbox : public engine::core::Application {
 public:
@@ -10,6 +12,10 @@ public:
 
 	~Sandbox() {
 
+	}
+
+	void Update() {
+		Application::Update();
 	}
 };
 

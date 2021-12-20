@@ -1,20 +1,24 @@
 workspace "Air-Engine"
 	architecture  "x86_64"
 
+	platforms {
+		"Win64",
+		"OSX",
+		"Linux"
+	}
+
 	configurations {
 		"Debug",
 		"Release",
 		"Distribution"
 	}
 
+
 outputdir = "%{cfg.buildcfg}/%{cfg.system}/%{cfg.architecture}/"
 
 group "Dependencies"
-	include "Air-Engine/Dependencies/glad"
-
 group ""
 
 filter {}
 include "Sandbox"
 include "Air-Engine"
-include "Air-Engine Tests"

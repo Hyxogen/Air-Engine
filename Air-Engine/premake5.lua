@@ -1,35 +1,38 @@
 project "Air-Engine"
-	kind "StaticLib"
+	kind "WindowedApp"
 	language "C++"
-	cppdialect "C++17"
+	cppdialect "C++20"
 	staticruntime "On"
 	systemversion "latest"
 
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}")
 	objdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}/int")
 
-	files {
-		"src/**.h",
-		"src/**.hpp",
-		"src/**.cpp"
-	}
-
-	defines {
-		"GLEW_STATIC"
-	}
-
 	includedirs {
-		"Dependencies/glad/include",
 		"src"
 	}
 
 	links {
-		"opengl32",
-		"glad"
+		"opengl32"
 	}
 
-	pchheader "airpch.h"
-	pchsource "src/airpch.cpp"
+	-- pchheader "airpch.h"
+	-- pchsource "src/airpch.cpp"
+
+	filter "platforms:Win64"
+		defines {
+			"AIR_PLATFORM_WINDOWS"
+		}
+
+	filter "platforms:OSX"
+		defines {
+			"AIR_PLATFORM_OSX"
+		}
+
+	filter "platforms:Linux"
+		defines {
+			"AIR_PLATFORM_LINUX"
+		}
 
 	filter "configurations:Debug"
 		optimize "Debug"
@@ -58,7 +61,5 @@ project "Air-Engine"
 			"AIR_ENABLE_LOGGING"
 		}
 
-	filter "system:windows"
-		defines {
-			"AIR_PLATFORM_WINDOWS"
-		}
+filter {}
+include "src"

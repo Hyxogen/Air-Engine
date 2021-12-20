@@ -1,0 +1,9 @@
+Engine startup:
+ - Loading of platform specific systems and setting up interface
+	- Rendering library
+	- Window
+	- I/O
+	- Platform detection
+	- Hi res timer
+	- Threading library?
+- Setting up engine systems with the previous interfaces
