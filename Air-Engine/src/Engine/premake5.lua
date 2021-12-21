@@ -5,5 +5,6 @@ files {
 	"*.h"
 }
 
+include "Util"
 include "Launch"
 include "PlatformCore"
