@@ -3,8 +3,6 @@
 
 namespace core {
 
-	LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
 	WindowsWindow::WindowsWindow(HINSTANCE instance, std::wstring name,
 		GenericWindow* parent, int32 width, int32 height) : GenericWindow(name, parent, width, height), m_HInstance(instance), m_Handle(0) {
 	}
