@@ -13,7 +13,7 @@ project "Air-Engine"
 	}
 
 	links {
-		"opengl32"
+	--	"opengl32"
 	}
 
 	-- pchheader "airpch.h"
