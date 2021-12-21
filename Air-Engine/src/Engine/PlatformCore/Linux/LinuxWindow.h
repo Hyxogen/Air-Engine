@@ -15,7 +15,9 @@ namespace core {
 		Window root;
 
 	public:
-		LinuxWindow(GenericApplication owning, std::wstring name, LinuxWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT);
+		LinuxWindow(GenericApplication* owning, std::wstring name, LinuxWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT);
+
+		virtual ~LinuxWindow() override;
 
 		virtual bool Init() override;
 

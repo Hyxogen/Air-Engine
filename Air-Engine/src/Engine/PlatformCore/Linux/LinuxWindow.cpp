@@ -2,7 +2,7 @@
 
 namespace core {
 
-	LinuxWindow::LinuxWindow(GenericApplication owning, std::wstring name, LinuxWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT)
+	LinuxWindow::LinuxWindow(GenericApplication* owning, std::wstring name, LinuxWindow* parent, int32 width, int32 height)
 		: GenericWindow(owning, name, parent, width, height) {
 		
 	}
@@ -12,7 +12,7 @@ namespace core {
 	}
 
 	bool LinuxWindow::Init() {
-		root = DefaultRootWindow()
+		return true;
 	}
 
 	void LinuxWindow::Update() {
@@ -20,7 +20,7 @@ namespace core {
 	}
 
 	bool LinuxWindow::ShouldClose() const {
-
+		return false;
 	}
 
 	void LinuxWindow::ShowWindow() {
