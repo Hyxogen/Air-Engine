@@ -16,7 +16,7 @@ namespace core {
 		m_Display = XOpenDisplay(0);
 
 		ASSERT(m_Display);
-		return true0;
+		return true;
 	}
 
 	GenericWindow* LinuxApplication::MakeWindow() {
