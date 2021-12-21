@@ -11,27 +11,27 @@ namespace core {
 		Destroy();
 	}
 
-	bool LinuxWindow::Init() override {
+	bool LinuxWindow::Init() {
 		root = DefaultRootWindow()
 	}
 
-	void LinuxWindow::Update() override {
+	void LinuxWindow::Update() {
 
 	}
 
-	bool LinuxWindow::ShouldClose() const override {
+	bool LinuxWindow::ShouldClose() const {
 
 	}
 
-	void LinuxWindow::ShowWindow() override {
+	void LinuxWindow::ShowWindow() {
 
 	}
 
-	void LinuxWindow::HideWindow() override {
+	void LinuxWindow::HideWindow() {
 
 	}
 
-	void LinuxWindow::SetTitle(std::wstring title) override {
+	void LinuxWindow::SetTitle(std::wstring title) {
 
 	}
 
