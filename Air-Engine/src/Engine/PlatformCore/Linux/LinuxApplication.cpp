@@ -18,7 +18,7 @@ namespace core {
 		ASSERT(m_Display);
 	}
 
-	LinuxApplication::MakeWindow() {
+	GenericWindow* LinuxApplication::MakeWindow() {
 
 	}
 
