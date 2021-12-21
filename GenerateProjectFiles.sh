@@ -45,7 +45,7 @@ then
 		GenerateLinuxFiles
 	else
 		make -C "$PREMAKE_DIR" -f Bootstrap.mak linux
-		GenerateLinuxFiless
+		GenerateLinuxFiles
 	fi
 else
 	echo "Unkown platform!"
