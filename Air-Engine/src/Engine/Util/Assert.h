@@ -7,7 +7,7 @@
 
 #elif AIR_PLATFORM_LINUX
 #include <signal.h>
-#define ASSERT(x) if (x) { } else { signal(SIGTRAP); }
+#define ASSERT(x) if (x) { } else { raise(SIGTRAP); }
 #else
 #define ASSERT(x) x
 #endif
