@@ -1,10 +1,14 @@
 #include "WindowsWindow.h"
 #include "../../Util/Assert.h"
 
+#include "WindowsApplication.h"
+
 namespace core {
 
-	WindowsWindow::WindowsWindow(HINSTANCE instance, std::wstring name,
-		GenericWindow* parent, int32 width, int32 height) : GenericWindow(name, parent, width, height), m_HInstance(instance), m_Handle(0) {
+	WindowsWindow::WindowsWindow(WindowsApplication* owning, HINSTANCE instance, std::wstring name, GenericWindow* parent, int32 width, int32 height) : GenericWindow(owning, name, parent, width, height), m_HInstance(instance), m_Handle(0) {
+	}
+
+	WindowsWindow::WindowsWindow(WindowsApplication* owning, std::wstring name, GenericWindow* parent, int32 width, int32 height) : WindowsWindow(owning, owning->GetHInstance(), name, parent, width, height) {
 	}
 
 	WindowsWindow::~WindowsWindow() {
@@ -18,7 +22,7 @@ namespace core {
 		else
 			m_Handle = CreateWindowExW(CS_OWNDC, L"DEFAULT", L"DEFAULT", WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, GetHInstance(), 0);
-		if (m_Handle)
+		if (m_Handle == 0)
 			return false;
 		return true;
 	}

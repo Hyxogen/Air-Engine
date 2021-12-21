@@ -27,7 +27,7 @@ namespace core {
 	}
 
 	GenericWindow* WindowsApplication::MakeWindow() {
-		return new WindowsWindow(m_HInstance, L"Test", nullptr);
+		return new WindowsWindow(this, L"Test", nullptr);
 	}
 
 	bool WindowsApplication::RegisterWindowClass() {

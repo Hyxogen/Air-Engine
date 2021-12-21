@@ -7,6 +7,7 @@ namespace core {
 	}
 
 	bool GenericApplication::Init() {
+		return true;
 	}
 
 	GenericApplication::~GenericApplication() {
