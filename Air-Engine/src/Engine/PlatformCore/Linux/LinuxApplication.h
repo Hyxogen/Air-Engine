@@ -4,15 +4,13 @@
 
 #include <X11/X.h>
 #include <X11/Xlib.h>
-#include <GL/gl.h>
-#include <GL/glx.h>
 
 namespace core {
 
 	class LinuxApplication : public GenericApplication {
 
 	protected:
-		Display m_Display;
+		Display* m_Display;
 
 	public:
 		LinuxApplication();
