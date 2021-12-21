@@ -20,8 +20,10 @@ namespace core {
 
 	}
 
-	void WindowsApplication::Init() {
-		RegisterWindowClass();
+	bool WindowsApplication::Init() {
+		if (RegisterWindowClass() == false)
+			return false;
+		return true;
 	}
 
 	GenericWindow* WindowsApplication::MakeWindow() {

@@ -11,7 +11,7 @@ namespace core {
 
 	public:
 
-		virtual void Init();
+		virtual bool Init();
 
 		virtual ~GenericApplication() = 0;
 

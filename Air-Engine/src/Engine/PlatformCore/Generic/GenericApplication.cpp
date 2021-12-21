@@ -6,7 +6,7 @@ namespace core {
 
 	}
 
-	void GenericApplication::Init() {
+	bool GenericApplication::Init() {
 	}
 
 	GenericApplication::~GenericApplication() {

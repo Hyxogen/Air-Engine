@@ -16,7 +16,7 @@ namespace core {
 
 		virtual ~WindowsApplication() override;
 
-		virtual void Init() override;
+		virtual bool Init() override;
 
 		virtual GenericWindow* MakeWindow() override;
 
