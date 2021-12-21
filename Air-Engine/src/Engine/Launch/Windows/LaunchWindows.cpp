@@ -12,7 +12,7 @@ int32 WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, PWSTR cmdLine,
 	std::cout << "LaunchWIndows" << std::endl;
 
 	core::GenericApplication* app = new core::WindowsApplication(instance);
-	app->Init();
+	ASSERT(app->Init());
 	core::GenericWindow* window = app->MakeWindow();
 	ASSERT(window->Init())
 	window->ShowWindow();
