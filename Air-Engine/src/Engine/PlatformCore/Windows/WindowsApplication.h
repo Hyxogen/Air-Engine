@@ -20,6 +20,8 @@ namespace core {
 
 		virtual GenericWindow* MakeWindow() override;
 
+		inline HINSTANCE GetHInstance() const { return m_HInstance; }
+
 	protected:
 		bool RegisterWindowClass();
 	};

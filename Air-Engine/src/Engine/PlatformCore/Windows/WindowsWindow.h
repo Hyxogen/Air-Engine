@@ -7,13 +7,17 @@
 
 namespace core {
 
+	class WindowsApplication;
+
 	class WindowsWindow : public GenericWindow {
 
 		HINSTANCE m_HInstance;
 		HWND m_Handle;
 
 	public:
-		WindowsWindow(HINSTANCE instance, std::wstring name, GenericWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT);
+		WindowsWindow(WindowsApplication* owning, HINSTANCE instance, std::wstring name, GenericWindow* parent, int32 width, int32 height);
+
+		WindowsWindow(WindowsApplication* owning, std::wstring name, GenericWindow* parent = 0, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT);
 
 		virtual ~WindowsWindow();
 

@@ -8,6 +8,8 @@
 
 namespace core {
 
+	class GenericApplication;
+
 	class GenericWindow {
 
 	protected:
@@ -15,9 +17,10 @@ namespace core {
 		int32 m_Width, m_Height;
 
 		GenericWindow* m_Parent;
+		GenericApplication* m_OwningApplication;
 
 	public:
-		GenericWindow(std::wstring name, GenericWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT);
+		GenericWindow(GenericApplication* owning, std::wstring name, GenericWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT);
 
 		virtual ~GenericWindow();
 
@@ -36,6 +39,8 @@ namespace core {
 		inline std::wstring GetTitle() const { return m_Title; }
 
 		inline const GenericWindow* GetParent() const { return m_Parent; }
+
+		inline GenericApplication* GetOwningApplication() const { return m_OwningApplication; }
 
 		inline int32 GetWidth() const { return m_Width; }
 
