@@ -2,8 +2,8 @@
 
 namespace core {
 
-	LinuxWindow::LinuxWindow(std::wstring name, LinuxWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT)
-		: GenericWindow(name, parent, widht, height) {
+	LinuxWindow::LinuxWindow(GenericApplication owning, std::wstring name, LinuxWindow* parent, int32 width = AIR_WINDOW_DEFAULT_WIDTH, int32 height = AIR_WINDOW_DEFAULT_HEIGHT)
+		: GenericWindow(owning, name, parent, width, height) {
 		
 	}
 
