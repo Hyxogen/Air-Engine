@@ -42,10 +42,6 @@ project "Air-Engine"
 			"X11"
 		}
 
-		buildoptions {
-			"-lX11"
-		}
-
 	filter "configurations:Debug"
 		optimize "Debug"
 		symbols "Full"
