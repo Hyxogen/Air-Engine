@@ -34,6 +34,14 @@ project "Air-Engine"
 			"AIR_PLATFORM_LINUX"
 		}
 
+		libdirs {
+			os.findlib("X11")
+		}
+
+		links {
+			"X11"
+		}
+
 		buildoptions {
 			"-lX11"
 		}
