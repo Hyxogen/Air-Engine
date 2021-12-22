@@ -34,6 +34,10 @@ project "Air-Engine"
 			"AIR_PLATFORM_LINUX"
 		}
 
+		buildoptions {
+			"-lX11"
+		}
+
 	filter "configurations:Debug"
 		optimize "Debug"
 		symbols "Full"
