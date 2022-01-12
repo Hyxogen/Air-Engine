@@ -14,10 +14,6 @@ project "Sandbox"
 		"**.cpp"
 	}
 
-    defines {
-        "GLEW_STATIC"
-    }
-
     includedirs {
         "%{wks.location}/Air-Engine/src/"
     }
@@ -26,6 +22,21 @@ project "Sandbox"
         "Air-Engine"
     }
 
+	filter "platforms:Win64"
+		defines {
+			"AIR_PLATFORM_WINDOWS"
+		}
+
+	filter "platforms:OSX"
+		defines {
+			"AIR_PLATFORM_OSX"
+		}
+
+	filter "platforms:Linux"
+		defines {
+			"AIR_PLATFORM_LINUX"
+		}
+
 	filter "configurations:Debug"
 		optimize "Debug"
 		symbols "Full"
@@ -33,10 +44,9 @@ project "Sandbox"
 		defines {
 			"_DEBUG",
 			"AIR_BUILD_DEBUG",
-            "AIR_ASSERTIONS_ENABLED",
+			"AIR_ASSERTIONS_ENABLED",
 			"AIR_ENABLE_LOGGING"
 		}
-
 	filter "configurations:Release"
 		optimize "On"
 		
@@ -50,10 +60,6 @@ project "Sandbox"
 		symbols "Off"
 		
 		defines {
-			"AIR_BUILD_DISTR"
+			"AIR_BUILD_DISTR",
+			"AIR_ENABLE_LOGGING"
 		}
-
-    filter "system:windows"
-        defines {
-            "AIR_PLATFORM_WINDOWS"
-        }

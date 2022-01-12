@@ -5,6 +5,11 @@ files {
 	"*.h"
 }
 
+includedirs {
+	"./"
+}
+
 include "Util"
 include "Launch"
 include "PlatformCore"
+include "EngineCore"

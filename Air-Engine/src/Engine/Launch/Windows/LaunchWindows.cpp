@@ -1,7 +1,6 @@
 #include <Windows.h>
 
 #include "../../DataTypes.h"
-#include "../Launch.h"
 
 #include "../../PlatformCore/Windows/WindowsApplication.h"
 #include "../../Util/Assert.h"

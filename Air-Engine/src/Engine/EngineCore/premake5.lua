@@ -1,0 +1,6 @@
+filter {}
+
+files {
+	"*.h",
+	"*.cpp"
+}

@@ -1,9 +1,6 @@
-#include <Air.h>
-#include <Engine\Core\Entrypoint.hpp>
-#include <glad\wgl.h>
-#include <glad\gl.h>
+#include <Engine\EngineCore\GameInstance.h>
 
-class Sandbox : public engine::core::Application {
+class Sandbox : public air::GameInstance {
 public:
 
 	Sandbox() {
@@ -19,6 +16,6 @@ public:
 	}
 };
 
-engine::core::Application* CreateApplication() {
+core::GameInstance* CreateGameInstance() {
 	return new Sandbox();
 }

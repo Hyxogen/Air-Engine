@@ -1,5 +1,5 @@
 project "Air-Engine"
-	kind "WindowedApp"
+	kind "staticlib"
 	language "C++"
 	cppdialect "C++20"
 	staticruntime "On"
